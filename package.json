@@ -1,0 +1,17 @@
+{
+  "name": "billing-cms",
+  "version": "0.0.1",
+  "description": "Billing CMS",
+  "main": "app.js",
+  "repository": "git@github.com:bubundas17/billing-cms.git",
+  "author": "Bubun Das <bubundas17@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "type":"module",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.15",
+    "needle": "^3.0.0"
+  }
+}
