@@ -26,7 +26,9 @@ app.use((_req, _res, next) => {
 app.use((error, _req, res, _next) => {
   if (!error.statusCode) error.statusCode = 500;
   if (!error.message) error.message = 'Something went wrong';
-  res.render('error', { error });
+  res
+    .status(error.statusCode)
+    .render('error', { error, pageTitle: error.message });
 });
 
 app.listen(port, async () => {
