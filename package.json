@@ -9,19 +9,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon"
+    "start": "cross-env NODE_ENV=production node app.js",
+    "dev": "cross-env NODE_ENV=development nodemon"
   },
   "engines": {
-    "node": "^14.8.0"
+    "node": ">=14.8.0"
   },
   "dependencies": {
     "ejs": "^3.1.6",
+    "env-schema": "^3.5.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.15",
     "needle": "^3.0.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
