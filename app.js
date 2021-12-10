@@ -4,6 +4,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import createError from 'http-errors';
+import session from 'express-session';
+import flash from 'connect-flash';
 
 import env from './configs/env.config.js';
 import authRoute from './routes/auth.route.js';
@@ -15,6 +17,16 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(process.cwd(), 'views'));
 
 if (env.NODE_ENV === 'development') app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: false }));
+app.use('/public', express.static(path.join(process.cwd(), 'public')));
+app.use(
+  session({
+    secret: 'lol',
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+app.use(flash());
 
 app.use('/auth', authRoute);
 

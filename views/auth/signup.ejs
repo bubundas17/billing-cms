@@ -4,8 +4,20 @@
 <%- include('../includes/navigation.ejs') %>
 <h1>Signup</h1>
 <form action="/auth/signup" method="post">
-  <input type="text" name="name" id="name" placeholder="Name" />
-  <input type="email" name="email" id="email" placeholder="Email" />
+  <input
+    type="text"
+    name="name"
+    id="name"
+    value="<% if (locals.name) { %><%= name %><% } %>"
+    placeholder="Name"
+  />
+  <input
+    type="email"
+    name="email"
+    id="email"
+    value="<% if (locals.email) { %><%= email %><% } %>"
+    placeholder="Email"
+  />
   <input type="password" name="password" id="password" placeholder="Password" />
   <input
     type="password"
@@ -13,6 +25,6 @@
     id="confirmPassword"
     placeholder="Confirm Password"
   />
-  <button type="submit">Signup</button>
+  <input type="submit" value="Sign Up">
 </form>
 <%- include('../includes/end.ejs') %>
