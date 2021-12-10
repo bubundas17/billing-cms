@@ -1,22 +1,17 @@
 import express from 'express';
-import envSchema from 'env-schema';
 import mongoose from 'mongoose';
+import envSchema from 'env-schema';
 
 envSchema({
   dotenv: true,
   schema: {
     type: 'object',
     properties: {
-      PORT: {
-        type: 'number',
-        default: 3000,
-      },
-      MONGO_URI: {
-        type: 'string',
-        default: 'mongodb://localhost:27017/test',
-      },
+      NODE_ENV: { type: 'string', enum: ['development', 'production'] },
+      PORT: { type: 'number' },
+      MONGO_URI: { type: 'string' },
     },
-    required: ['PORT', 'MONGO_URI'],
+    required: ['NODE_ENV', 'PORT', 'MONGO_URI'],
   },
 });
 
