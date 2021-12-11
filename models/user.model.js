@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
+import createError from 'http-errors';
 
 const UserSchema = new mongoose.Schema(
   {
@@ -19,5 +20,13 @@ UserSchema.pre('save', async function (next) {
     next(error);
   }
 });
+
+UserSchema.methods.isValidPassword = async function (password) {
+  try {
+    return await compare(password, this.password);
+  } catch (error) {
+    throw createError.InternalServerError(error.message);
+  }
+};
 
 export default mongoose.model('User', UserSchema);
