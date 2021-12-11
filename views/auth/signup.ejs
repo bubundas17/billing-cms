@@ -3,30 +3,40 @@
 <body>
 <%- include('../includes/navigation.ejs') %>
 <h1>Signup</h1>
-<% if (locals.messages) { %>
-  <% Object.keys(messages).forEach(key => { %>
-    <% messages[key].forEach(message => { %>
-      <div class="text-<%= key %>"><%= message %></div>  
-    <% }) %> 
+
+<% if (locals.errorMessages) { %>
+  <% Object.keys(errorMessages).forEach(key => { %>
+    <div class="text-error"><%= errorMessages[key] %></div>
   <% }) %> 
 <% } %>
+
 <form action="/auth/signup" method="post">
   <input
+    class="<%= locals.errorMessages && locals.errorMessages.name ? 'invalid-input' : '' %>"
     type="text"
     name="name"
     id="name"
-    value="<% if (locals.name) { %><%= name %><% } %>"
+    value="<%= locals.name ?  name : '' %>"
     placeholder="Name"
   />
   <input
+  class="<%= locals.errorMessages && locals.errorMessages.email ? 'invalid-input' : '' %>"
     type="email"
     name="email"
     id="email"
-    value="<% if (locals.email) { %><%= email %><% } %>"
+    value="<%= locals.email ? email : '' %>"
     placeholder="Email"
   />
-  <input type="password" name="password" id="password" placeholder="Password" />
   <input
+  class="<%= locals.errorMessages && locals.errorMessages.password ? 'invalid-input' : '' %>"
+    type="password"
+    name="password"
+    id="password"
+    value="<%= locals.password ? password : ''%>"
+    placeholder="Password"
+  />
+  <input
+    class="<%= locals.errorMessages && locals.errorMessages.confirmPassword ? 'invalid-input' : '' %>"
     type="password"
     name="confirmPassword"
     id="confirmPassword"

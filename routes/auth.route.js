@@ -58,14 +58,16 @@ router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        errors.array().forEach((error) => {
-          req.flash('error', error.msg);
-        });
+        const errorMessages = errors.array().reduce((obj, err) => {
+          obj[err.param] = err.msg;
+          return obj;
+        }, {});
         return res.render('auth/signup', {
           pageTitle: 'Sign Up',
           name,
           email,
-          messages: req.flash(),
+          password,
+          errorMessages,
         });
       }
       const user = new User({ name, email, password });

@@ -1,3 +1,8 @@
 .text-error {
-  color: #b94745;
+  color: tomato;
+}
+
+.invalid-input {
+  border: 2px solid tomato;
+  outline: none;
 }
