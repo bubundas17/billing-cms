@@ -38,6 +38,7 @@ router.post(
       .custom(async (value) => {
         const user = await User.findOne({ email: value });
         if (user) throw new Error('Email already exists');
+        return true;
       }),
     body('password')
       .notEmpty()
@@ -64,6 +65,7 @@ router.post(
           pageTitle: 'Sign Up',
           name,
           email,
+          messages: req.flash(),
         });
       }
       const user = new User({ name, email, password });

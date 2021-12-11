@@ -3,6 +3,13 @@
 <body>
 <%- include('../includes/navigation.ejs') %>
 <h1>Signup</h1>
+<% if (locals.messages) { %>
+  <% Object.keys(messages).forEach(key => { %>
+    <% messages[key].forEach(message => { %>
+      <div class="text-<%= key %>"><%= message %></div>  
+    <% }) %> 
+  <% }) %> 
+<% } %>
 <form action="/auth/signup" method="post">
   <input
     type="text"

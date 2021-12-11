@@ -12,6 +12,7 @@ const env = envSchema({
       },
       PORT: { type: 'number', default: 3000 },
       MONGO_URI: { type: 'string', default: 'mongodb://localhost:27017/test' },
+      SESSION_SECRET: { type: 'string', default: 'secret' },
     },
   },
 });

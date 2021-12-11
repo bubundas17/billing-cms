@@ -18,6 +18,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
+    "desm": "^1.2.0",
     "ejs": "^3.1.6",
     "env-schema": "^3.5.0",
     "express": "^4.17.1",
