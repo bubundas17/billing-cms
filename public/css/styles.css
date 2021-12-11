@@ -2,6 +2,10 @@
   color: tomato;
 }
 
+.text-success {
+  color: limegreen;
+}
+
 .invalid-input {
   border: 2px solid tomato;
   outline: none;

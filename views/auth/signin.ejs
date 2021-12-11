@@ -3,6 +3,7 @@
 <body>
 <%- include('../includes/navigation.ejs') %>
 <h1>Sign In</h1>
+<%- include('../includes/flash-messages.ejs') %>
 <form action="/auth/signin" method="post">
   <input type="email" name="email" id="email" placeholder="Email" />
   <input type="password" name="password" id="password" placeholder="Password" />

@@ -27,6 +27,11 @@ app.use(
 );
 app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
+
 app.use('/auth', authRoute);
 
 app.get('/', (_req, res) => res.render('index', { ping: 'pong' }));

@@ -1,0 +1,7 @@
+<% if (locals.messages) { %>
+    <% Object.keys(messages).forEach(key => { %>
+        <% messages[key].forEach(message => { %>
+            <div class="text-<%= key %>"><%= message %></div>
+        <% }) %>
+    <% }) %>
+<% } %>
