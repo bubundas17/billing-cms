@@ -4,7 +4,7 @@ import createError from 'http-errors';
 import User from '../models/user.model.js';
 
 const authControllers = {
-  getSignUp: async (_req, res) => {
+  getSignUp:  (_req, res) => {
     res.render('auth/signup', {
       pageTitle: 'Sign Up',
     });

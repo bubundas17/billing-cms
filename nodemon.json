@@ -1,4 +1,5 @@
 {
-  "ext": "js",
-  "exec": "node app.js"
+    "watch": ["src"],
+    "ext": "js",
+    "exec": "babel-node src/index.js"
 }
