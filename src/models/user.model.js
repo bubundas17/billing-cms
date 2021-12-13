@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     address: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
-    adminRole: { type: String }, // admin, superAdmin, seelsOperator 
+    adminRole: { type: String }, // admin, superAdmin, seelsOperator
   },
   { timestamps: true },
 );
