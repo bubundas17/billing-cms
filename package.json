@@ -1,14 +1,13 @@
 {
   "name": "billing-cms",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "src/index.js",
   "repository": "git@github.com:bubundas17/billing-cms.git",
   "author": "Bubun Das <bubundas17@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "babel src -d dist",
-    "start": "npm run build && nodemon dist/index.js",
-    "serve": "npm run build && node dist/index.js",
+    "build": "rimraf dist && babel src -d dist",
+    "start": "npm run build && node dist/index.js",
     "dev": "nodemon"
   },
   "devDependencies": {
@@ -16,15 +15,13 @@
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
-    "@babel/register": "^7.16.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
-    "core-js": "^3.19.3",
-    "desm": "^1.2.0",
     "ejs": "^3.1.6",
     "env-schema": "^3.5.0",
     "express": "^4.17.1",
@@ -35,7 +32,6 @@
     "mongoose": "^6.0.15",
     "needle": "^3.0.0",
     "passport": "^0.5.0",
-    "passport-local": "^1.0.0",
-    "regenerator-runtime": "^0.13.9"
+    "passport-local": "^1.0.0"
   }
 }
