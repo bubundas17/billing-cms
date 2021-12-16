@@ -10,6 +10,12 @@ const UserSchema = new mongoose.Schema(
     address: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     adminRole: { type: String }, // admin, superAdmin, seelsOperator
+    /*
+    Only let user log in to admin panel if they have admin role,
+    we can use this permissions to allow/denay access to admin panel
+    for example: sells operaters should not get any access to system settings.
+    */
+    permissions: [{ type: String }], // admin, admin-all, banned, ...
   },
   { timestamps: true },
 );
