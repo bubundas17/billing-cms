@@ -4,6 +4,7 @@ import { cwd, exit } from 'process';
 import express from 'express';
 import mongoose from 'mongoose';
 import { create } from 'express-handlebars';
+import morgan from 'morgan';
 
 import env from './configs/env.config';
 import routes from './routes';
@@ -20,6 +21,8 @@ app.set('view engine', 'hbs');
 app.set('views', join(cwd(), 'views'));
 
 app.use('/public', express.static(join(cwd(), 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 app.get('/', (_req, res) => {
   res.render('index');

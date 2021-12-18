@@ -1,0 +1,21 @@
+.rw {
+    max-width: 100%;
+}
+
+@media (min-width: 640px) {
+    .rw {
+        max-width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .rw {
+        max-width: 75%;
+    }
+}
+
+@media (min-width: 1040px) {
+    .rw {
+        max-width: 50%;
+    }
+}

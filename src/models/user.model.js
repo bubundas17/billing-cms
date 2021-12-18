@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { compare, hash } from 'bcrypt';
 import createError from 'http-errors';
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, lowercase: true, unique: true },
@@ -39,4 +39,4 @@ UserSchema.methods.isValidPassword = async function (password) {
   }
 };
 
-export default mongoose.model('User', UserSchema);
+export default model('User', UserSchema);
