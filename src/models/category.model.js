@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const Schema = new mongoose.Schema(
+const categorySchema = new Schema(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
@@ -9,10 +9,9 @@ const Schema = new mongoose.Schema(
     children: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
     isPublished: { type: Boolean, default: false },
     addedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },    
+    lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true },
 );
 
-
-export default mongoose.model('Category', Schema);
+export default model('Category', categorySchema);

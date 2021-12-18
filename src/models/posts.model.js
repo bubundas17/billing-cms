@@ -1,11 +1,11 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const Schema = new mongoose.Schema(
+const postsSchema = new Schema(
   {
     title: { type: String, required: true },
     body: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
-    tags: [{ type: String, required: true, }],
+    tags: [{ type: String, required: true }],
     categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
     isPublished: { type: Boolean, default: false },
     postedBy: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -15,5 +15,4 @@ const Schema = new mongoose.Schema(
   { timestamps: true },
 );
 
-
-export default mongoose.model('Post', Schema);
+export default model('Post', postsSchema);

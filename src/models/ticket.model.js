@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const Schema = new mongoose.Schema(
+const ticketSchema = new Schema(
   {
     title: { type: String, required: true },
     body: { type: String, required: true },
@@ -15,5 +15,4 @@ const Schema = new mongoose.Schema(
   { timestamps: true },
 );
 
-
-export default mongoose.model('Ticket', Schema);
+export default model('Ticket', ticketSchema);

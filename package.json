@@ -1,13 +1,13 @@
 {
   "name": "billing-cms",
   "version": "0.0.1",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "repository": "git@github.com:bubundas17/billing-cms.git",
   "author": "Bubun Das <bubundas17@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && babel src -d dist",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/app.js",
     "dev": "nodemon"
   },
   "devDependencies": {

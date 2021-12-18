@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema(
     we can use this permissions to allow/denay access to admin panel
     for example: sells operaters should not get any access to system settings.
     */
+    // TODO Don't forget to implement permissions emum types in permissions field
     permissions: [{ type: String }], // admin, admin-all, banned, ...
   },
   { timestamps: true },

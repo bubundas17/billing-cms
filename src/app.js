@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { cwd, exit } from 'process';
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -16,7 +17,9 @@ const app = express();
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-app.set('views', join(__dirname, 'views'));
+app.set('views', join(cwd(), 'views'));
+
+app.use('/public', express.static(join(cwd(), 'public')));
 
 app.get('/', (_req, res) => {
   res.render('index');
@@ -32,6 +35,6 @@ app.listen(env.PORT, async () => {
     console.log('Database connected');
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    exit(1);
   }
 });

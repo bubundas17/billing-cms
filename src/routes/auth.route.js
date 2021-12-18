@@ -1,10 +1,9 @@
 import { Router } from 'express';
 
-import authControllers from '../controllers/auth.controller';
-
 const router = Router();
 
-router.get('/signup', authControllers.getSignUp);
+router.get('/signup', async (req, res) => {
+  res.render('auth/signup');
+});
 
-// export
 export default router;
