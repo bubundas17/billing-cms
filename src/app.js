@@ -5,10 +5,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { create } from 'express-handlebars';
 import morgan from 'morgan';
-import createError from 'http-errors';
 
 import env from './configs/env.config';
 import routes from './routes';
+import { get4xx, get5xx } from './controllers/error.controller';
 
 const hbs = create({
   extname: 'hbs',
@@ -30,16 +30,8 @@ app.get('/', (_req, res) => {
 });
 
 app.use(routes);
-
-app.use((_req, _res, next) => {
-  const error = createError.NotFound();
-  next(error);
-});
-
-app.use((error, _req, res, _next) => {
-  const { status = 500, message = 'Something went wrong' } = error;
-  res.status(status).render('error', { message, status });
-});
+app.use(get4xx);
+app.use(get5xx);
 
 app.listen(env.PORT, async () => {
   console.log(`Server started on port ${env.PORT}`);
