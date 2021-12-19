@@ -1,47 +1,54 @@
 import { validationResult } from 'express-validator';
-import createError from 'http-errors';
 
-import User from '../models/user.model.js';
+import User from '../models/user.model';
+import { mappedErrors } from '../utils/mapped-errors';
 
-export const getSignUp = (_req, res) => {
+export const getSignUp = (req, res) => {
   res.render('auth/signup', {
-    pageTitle: 'Sign Up',
+    pathName: 'signup',
+  });
+};
+
+export const getSignIn = (req, res) => {
+  res.render('auth/signin', {
+    pathName: 'signin',
   });
 };
 
 export const postSignUp = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, address, password, confirmPassword } = req.body;
 
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorMessages = errors.array().reduce((obj, err) => {
-        obj[err.param] = err.msg;
-        return obj;
-      }, {});
       return res.render('auth/signup', {
-        pageTitle: 'Sign Up',
         name,
         email,
+        address,
         password,
-        errorMessages,
+        confirmPassword,
+        errors: mappedErrors(errors.array()),
       });
     }
-    const user = new User({ name, email, password });
-    const savedUser = await user.save();
-    if (!savedUser) throw createError.InternalServerError('User not saved');
-    req.flash(
-      'success',
-      `${savedUser.name} successfully signed up, please login`,
-    );
+
+    const user = new User({ name, email, password, address });
+    await user.save();
     res.redirect('/auth/signin');
   } catch (error) {
     next(error);
   }
 };
 
-export const getSignIn = (_req, res) => {
+export const postSignIn = (req, res, next) => {
+  const { email, password } = req.body;
+  const errors = validationResult(req);
+
+  if (errors.isEmpty()) return next();
+
   res.render('auth/signin', {
-    pageTitle: 'Sign In',
+    pathName: 'Sign Up',
+    email,
+    password,
+    errors: mappedErrors(errors.array()),
   });
 };

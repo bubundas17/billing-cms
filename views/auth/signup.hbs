@@ -1,30 +1,64 @@
-<div class="rw mx-auto mt-4">
-  <div class="card py-4 px-3">
-    <h1 class="text-center">Sign Up</h1>
+<div class='rw mx-auto mt-3'>
+  <div class='card py-4 px-3'>
+    <h1 class='text-center'>Sign Up</h1>
     <hr />
-    <form class="row g-3" action="/auth/signup" method="post">
-      <div class="col-md-6">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" name="name" />
+    <form class='row g-3' action='/auth/signup' method='post'>
+      <div class='col-md-6'>
+        <label for='name' class='form-label'>Name</label>
+        <input
+          type='text'
+          class='form-control {{errorInput errors "name"}}'
+          id='name'
+          name='name'
+          value='{{name}}'
+        />
+        {{{errorMessage errors 'name'}}}
       </div>
-      <div class="col-md-6">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" />
+      <div class='col-md-6'>
+        <label for='email' class='form-label'>Email</label>
+        <input
+          type='email'
+          class='form-control {{errorInput errors "email"}}'
+          id='email'
+          name='email'
+          value='{{email}}'
+        />
+        {{{errorMessage errors 'email'}}}
       </div>
-      <div class="col-md-6">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" />
+      <div class='col-md-6'>
+        <label for='password' class='form-label'>Password</label>
+        <input
+          type='password'
+          class='form-control {{errorInput errors "password"}}'
+          id='password'
+          name='password'
+          value='{{password}}'
+        />
+        {{{errorMessage errors 'password'}}}
       </div>
-      <div class="col-md-6">
-        <label for="confirmPassword" class="form-label">Confirm password</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" />
+      <div class='col-md-6'>
+        <label for='confirmPassword' class='form-label'>Confirm password</label>
+        <input
+          type='password'
+          class='form-control {{errorInput errors "confirmPassword"}}'
+          id='confirmPassword'
+          name='confirmPassword'
+          value='{{confirmPassword}}'
+        />
+        {{{errorMessage errors 'confirmPassword'}}}
       </div>
-      <div class="col-12">
-        <label for="address" class="form-label">Address</label>
-        <textarea class="form-control" id="address" rows="3" name="address"></textarea>
+      <div class='col-12'>
+        <label for='address' class='form-label'>Address</label>
+        <textarea
+          class='form-control {{errorInput errors "address"}}'
+          id='address'
+          rows='3'
+          name='address'
+        >{{address}}</textarea>
+        {{{errorMessage errors 'address'}}}
       </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Sign up</button>
+      <div class='col-12'>
+        <button type='submit' class='btn btn-primary'>Sign up</button>
       </div>
     </form>
   </div>

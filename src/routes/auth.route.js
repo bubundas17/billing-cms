@@ -1,24 +1,31 @@
 import { Router } from 'express';
+import passport from 'passport';
 
-import User from '../models/user.model';
-import { registerValidator } from '../utils/validator';
+import {
+  getSignIn,
+  getSignUp,
+  postSignIn,
+  postSignUp,
+} from '../controllers/auth.controller';
+import { signUpValidator, signInValidator } from '../utils/validator';
 
 const router = Router();
 
-router.get('/signup', async (req, res) => {
-  res.render('auth/signup');
-});
+router.get('/signup', getSignUp);
 
-router.post('/signup', registerValidator, async (req, res, next) => {
-  const { name, email, password, address } = req.body;
+router.get('/signin', getSignIn);
 
-  try {
-    const user = new User({ name, email, password, address });
-    await user.save();
-    res.redirect('/');
-  } catch (error) {
-    next(error);
-  }
-});
+router.post('/signup', signUpValidator, postSignUp);
+
+router.post(
+  '/signin',
+  signInValidator,
+  postSignIn,
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/auth/signin',
+    failureFlash: true,
+  }),
+);
 
 export default router;

@@ -5,14 +5,19 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { create } from 'express-handlebars';
 import morgan from 'morgan';
+import session from 'express-session';
+import passport from 'passport';
 
 import env from './configs/env.config';
 import routes from './routes';
 import { get4xx, get5xx } from './controllers/error.controller';
+import handlebarsHelpers from './helpers/handlebars-helpers';
+import passportHelper from './helpers/passport.helper';
 
 const hbs = create({
   extname: 'hbs',
   defaultLayout: 'main',
+  helpers: handlebarsHelpers,
 });
 
 const app = express();
@@ -23,13 +28,33 @@ app.set('views', join(cwd(), 'views'));
 
 app.use('/public', express.static(join(cwd(), 'public')));
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: env.SESSION_SECRET,
+  }),
+);
+if (env.NODE_ENV === 'development') app.use(morgan('dev'));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passportHelper(passport);
+
+app.use((req, res, next) => {
+  res.locals.flash = req.session.flash || {};
+  delete req.session.flash;
+  next();
+});
 
 app.get('/', (_req, res) => {
-  res.render('index');
+  res.render('index', {
+    pathName: 'home',
+  });
 });
 
 app.use(routes);
+
 app.use(get4xx);
 app.use(get5xx);
 
