@@ -9,56 +9,11 @@
   </head>
   <body>
     <div>
-      <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-        <div class='container-fluid'>
-          <a class='navbar-brand' href='/'>BillingCMS</a>
-          <button
-            class='navbar-toggler'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarNav'
-            aria-controls='navbarNav'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span class='navbar-toggler-icon'></span>
-          </button>
-          <div class='collapse navbar-collapse' id='navbarNav'>
-            <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-              <li class='nav-item'>
-                <a
-                  class='nav-link {{activeClass pathName "dashboard"}}'
-                  aria-current='page'
-                  href='/dashboard'
-                >Dashboard</a>
-              </li>
-            </ul>
-            <ul class='navbar-nav mb-2 mb-lg-0'>
-              <li class='nav-item'>
-                <a
-                  class='nav-link {{activeClass pathName "signin"}}'
-                  href='/auth/signin'
-                >Sign In</a>
-              </li>
-              <li class='nav-item'>
-                <a
-                  class='nav-link {{activeClass pathName "signup"}}'
-                  href='/auth/signup'
-                >Sign Up</a>
-              </li>
-              <li class='nav-item'>
-                <a class='nav-link' href='/auth/logout'>Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <div class='container'>
-        {{{body}}}
+      {{> navigation }}
+      <div class='container my-4'>
+        {{{ body }}}
       </div>
     </div>
-
     <script src='/public/js/bootstrap.min.js'></script>
   </body>
 </html>

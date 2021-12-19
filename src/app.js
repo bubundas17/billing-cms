@@ -3,19 +3,22 @@ import { cwd, exit } from 'process';
 
 import express from 'express';
 import mongoose from 'mongoose';
+import Handlebars from 'handlebars';
 import { create } from 'express-handlebars';
 import morgan from 'morgan';
 import session from 'express-session';
 import passport from 'passport';
+import MongoStore from 'connect-mongo';
 
 import env from './configs/env.config';
 import routes from './routes';
-import { get4xx, get5xx } from './controllers/error.controller';
+import { get4xx, get5xx } from './controllers';
 import handlebarsHelpers from './helpers/handlebars-helpers';
 import passportHelper from './helpers/passport.helper';
 
 const hbs = create({
   extname: 'hbs',
+  handlebars: Handlebars,
   defaultLayout: 'main',
   helpers: handlebarsHelpers,
 });
@@ -33,6 +36,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     secret: env.SESSION_SECRET,
+    store: new MongoStore({
+      mongoUrl: env.MONGO_URI,
+    }),
   }),
 );
 if (env.NODE_ENV === 'development') app.use(morgan('dev'));
@@ -44,6 +50,12 @@ passportHelper(passport);
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash || {};
   delete req.session.flash;
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });
 

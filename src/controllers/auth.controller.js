@@ -28,6 +28,7 @@ export const postSignUp = async (req, res, next) => {
         password,
         confirmPassword,
         errors: mappedErrors(errors.array()),
+        pathName: 'signup',
       });
     }
 
@@ -46,7 +47,7 @@ export const postSignIn = (req, res, next) => {
   if (errors.isEmpty()) return next();
 
   res.render('auth/signin', {
-    pathName: 'Sign Up',
+    pathName: 'signin',
     email,
     password,
     errors: mappedErrors(errors.array()),

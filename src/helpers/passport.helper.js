@@ -33,7 +33,8 @@ export default function (passport) {
     try {
       const user = await User.findById(id);
       if (!user) return done(null, false);
-      done(null, user);
+      const { password, ...rest } = user._doc;
+      done(null, rest);
     } catch (error) {
       done(error);
     }

@@ -1,12 +1,7 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-import {
-  getSignIn,
-  getSignUp,
-  postSignIn,
-  postSignUp,
-} from '../controllers/auth.controller';
+import { getSignIn, getSignUp, postSignIn, postSignUp } from '../controllers';
 import { signUpValidator, signInValidator } from '../utils/validator';
 
 const router = Router();
@@ -27,5 +22,10 @@ router.post(
     failureFlash: true,
   }),
 );
+
+router.get('/signout', (req, res) => {
+  req.logout();
+  res.redirect('/auth/signin');
+});
 
 export default router;

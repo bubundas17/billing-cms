@@ -1,8 +1,12 @@
 import { Router } from 'express';
 
-import auth from './auth.route';
+import authRoute from './auth.route';
+import adminRoute from './admin/dashboard.route';
 
 const router = Router();
-router.use('/auth', auth);
+
+router.use('/auth', authRoute);
+
+router.use('/admin', adminRoute);
 
 export default router;
