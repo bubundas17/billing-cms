@@ -3,11 +3,11 @@ import { Router } from 'express';
 class AppRoute {
     constructor() {
         this.router = Router();
-        this.baseUrl = '/ticket';
+        this.baseUrl = '/posts';
         this.init();
     }
     init() {
-        this.router.get(this.baseUrl, (req, res) => {
+        this.router.get("/", (req, res) => {
             res.send('Hello World!');
         });
 

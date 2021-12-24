@@ -9,12 +9,14 @@ import morgan from 'morgan';
 import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
+import cookieParser from 'cookie-parser';
 
 import env from './configs/env.config';
 import routes from './routes';
 import { get4xx, get5xx } from './controllers';
 import handlebarsHelpers from './helpers/handlebars-helpers';
 import passportHelper from './helpers/passport.helper';
+import {flash} from './helpers/flash.helper';
 
 const hbs = create({
   extname: 'hbs',
@@ -31,6 +33,7 @@ app.set('views', join(cwd(), 'views'));
 
 app.use('/public', express.static(join(cwd(), 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
   session({
     resave: false,
@@ -41,6 +44,8 @@ app.use(
     }),
   }),
 );
+// flash
+app.use(flash);
 if (env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use(passport.initialize());

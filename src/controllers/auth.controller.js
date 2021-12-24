@@ -10,6 +10,8 @@ export const getSignUp = (req, res) => {
 };
 
 export const getSignIn = (req, res) => {
+  console.log(req.cookies);
+
   res.render('auth/signin', {
     pathName: 'signin',
   });
@@ -45,6 +47,7 @@ export const postSignIn = (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) return next();
+  // console session
 
   res.render('auth/signin', {
     pathName: 'signin',

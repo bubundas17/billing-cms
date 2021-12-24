@@ -7,5 +7,6 @@ export const get4xx = (_req, _res, next) => {
 
 export const get5xx = (error, _req, res, _next) => {
   const { status = 500, message = 'Something went wrong' } = error;
+  console.error(error);
   res.status(status).render('error', { message, status });
 };

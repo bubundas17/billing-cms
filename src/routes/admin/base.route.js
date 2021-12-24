@@ -1,13 +1,18 @@
 import { Router } from 'express';
 
+
+/*
+    * The base route class for all routes
+    * It must have a baseUrl and a router property
+*/
 class AppRoute {
     constructor() {
         this.router = Router();
-        this.baseUrl = '/ticket';
+        this.baseUrl = '/posts';
         this.init();
     }
     init() {
-        this.router.get(this.baseUrl, (req, res) => {
+        this.router.get("/", (req, res) => {
             res.send('Hello World!');
         });
 

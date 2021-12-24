@@ -2,8 +2,16 @@ import { Router } from 'express';
 
 import { getDashboard } from '../../controllers';
 
-const router = Router();
+class AppRoute {
+    constructor() {
+        this.router = Router();
+        this.baseUrl = '/admin/dashboard';
+        this.init();
+    }
+    init() {
+        this.router.get("/", getDashboard);
+    }
+}
 
-router.get('/dashboard', getDashboard);
-
-export default router;
+export default AppRoute;
+module.exports = AppRoute;
