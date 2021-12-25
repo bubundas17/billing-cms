@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { getDashboard } from '../../controllers';
+import { getDashboard } from '../../controllers/admin';
 
 class AppRoute {
     constructor() {

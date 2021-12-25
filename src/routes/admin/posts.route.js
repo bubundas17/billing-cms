@@ -1,15 +1,14 @@
 import { Router } from 'express';
+import { getAllPosts } from '../../controllers/admin';
 
 class AppRoute {
     constructor() {
         this.router = Router();
-        this.baseUrl = '/posts';
+        this.baseUrl = '/admin/posts';
         this.init();
     }
     init() {
-        this.router.get("/", (req, res) => {
-            res.send('Hello World!');
-        });
+        this.router.get("/", getAllPosts);
 
     }
 }
