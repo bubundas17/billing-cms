@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 import User from '../models/user.model';
 import { mappedErrors } from '../utils/mapped-errors';
 
-export const getSignUp = (req, res) => {
+export const getSignUp = (_req, res) => {
   res.render('auth/signup', {
     pathName: 'signup',
   });
@@ -47,7 +47,6 @@ export const postSignIn = (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) return next();
-  // console session
 
   res.render('auth/signin', {
     pathName: 'signin',

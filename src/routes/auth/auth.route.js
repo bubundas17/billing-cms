@@ -9,7 +9,7 @@ import {
 } from '../../controllers';
 import { signUpValidator, signInValidator } from '../../utils/validator';
 
-class AppRoute {
+class AuthRoute {
   constructor() {
     this.router = Router();
     this.baseUrl = '/auth';
@@ -36,4 +36,4 @@ class AppRoute {
   }
 }
 
-export default AppRoute;
+export default AuthRoute;
