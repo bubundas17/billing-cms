@@ -16,7 +16,7 @@ import routes from './routes';
 import { get4xx, get5xx } from './controllers';
 import handlebarsHelpers from './helpers/handlebars-helpers';
 import passportHelper from './helpers/passport.helper';
-import {flash} from './helpers/flash.helper';
+import { flash } from './helpers/flash.helper';
 
 const hbs = create({
   extname: 'hbs',
@@ -44,19 +44,13 @@ app.use(
     }),
   }),
 );
-// flash
+
 app.use(flash);
 if (env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use(passport.initialize());
 app.use(passport.session());
 passportHelper(passport);
-
-app.use((req, res, next) => {
-  res.locals.flash = req.session.flash || {};
-  delete req.session.flash;
-  next();
-});
 
 app.use((req, res, next) => {
   res.locals.user = req.user;

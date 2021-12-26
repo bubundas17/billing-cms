@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-import { getSignIn, getSignUp, postSignIn, postSignUp } from '../../controllers';
+import {
+  getSignIn,
+  getSignUp,
+  postSignIn,
+  postSignUp,
+} from '../../controllers';
 import { signUpValidator, signInValidator } from '../../utils/validator';
-
 
 class AppRoute {
   constructor() {
@@ -15,18 +19,21 @@ class AppRoute {
     this.router.get(`/signup`, getSignUp);
     this.router.get(`/signin`, getSignIn);
     this.router.post(`/signup`, signUpValidator, postSignUp);
-    this.router.post(`/signin`, signInValidator, postSignIn, passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/auth/signin',
-      failureFlash: true,
-    }));
+    this.router.post(
+      `/signin`,
+      signInValidator,
+      postSignIn,
+      passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/auth/signin',
+        failureFlash: true,
+      }),
+    );
     this.router.post(`/signout`, (req, res) => {
       req.logout();
       res.redirect('/auth/signin');
     });
-
   }
 }
 
 export default AppRoute;
-module.exports = AppRoute;
