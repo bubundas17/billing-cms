@@ -1,1 +1,17 @@
-Test
+<a href="/admin/posts/new"><button class="btn  btn-primary mb-2">Add Post</button></a>
+
+{{#if posts.length}}
+
+{{#each posts}}
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{body}}</p>
+    <a href="/admin/posts/{{_id}}" class="btn btn-primary">Edit</a>
+    <a href="/admin/posts/{{_id}}/delete" class="btn btn-danger">Delete</a>
+  </div>
+{{/each}}
+
+{{else}}
+<p>No posts found</p>
+{{/if}}
