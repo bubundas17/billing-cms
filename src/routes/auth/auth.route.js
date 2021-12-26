@@ -15,6 +15,7 @@ class AuthRoute {
     this.baseUrl = '/auth';
     this.init();
   }
+
   init() {
     this.router.get(`/signup`, getSignUp);
     this.router.get(`/signin`, getSignIn);
@@ -29,7 +30,7 @@ class AuthRoute {
         failureFlash: true,
       }),
     );
-    this.router.post(`/signout`, (req, res) => {
+    this.router.get(`/signout`, (req, res) => {
       req.logout();
       res.redirect('/auth/signin');
     });
