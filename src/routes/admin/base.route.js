@@ -4,7 +4,7 @@ import { Router } from 'express';
  * The base route class for all routes
  * It must have a baseUrl and a router property
  */
-class AppRoute {
+class BaseRoute {
   constructor() {
     this.router = Router();
     this.baseUrl = '/posts';
@@ -18,4 +18,4 @@ class AppRoute {
   }
 }
 
-export default AppRoute;
+export default BaseRoute;

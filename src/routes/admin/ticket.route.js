@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-class AppRoute {
+class TicketRoute {
   constructor() {
     this.router = Router();
     this.baseUrl = '/ticket';
@@ -14,4 +14,4 @@ class AppRoute {
   }
 }
 
-export default AppRoute;
+export default TicketRoute;

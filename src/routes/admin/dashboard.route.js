@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { getDashboard } from '../../controllers/admin';
 
-class AppRoute {
+class DashboardRoute {
   constructor() {
     this.router = Router();
     this.baseUrl = '/admin/dashboard';
@@ -14,4 +14,4 @@ class AppRoute {
   }
 }
 
-export default AppRoute;
+export default DashboardRoute;

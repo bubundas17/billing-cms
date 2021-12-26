@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getAllPosts } from '../../controllers/admin';
 
-class AppRoute {
+class PostsRoute {
   constructor() {
     this.router = Router();
     this.baseUrl = '/admin/posts';
@@ -13,4 +13,4 @@ class AppRoute {
   }
 }
 
-export default AppRoute;
+export default PostsRoute;
