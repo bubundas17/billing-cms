@@ -1,0 +1,41 @@
+<form action="{{#if edit}}/admin/posts/{{post._id}}/edit{{else}}/admin/posts/new{{/if}}" method='post'>
+  <div class='form-group'>
+    <label for='title'>Title</label>
+    <input
+      type='text'
+      name='title'
+      class='form-control'
+      id='title'
+      placeholder='Post Title'
+      value='{{post.title}}'
+    />
+  </div>
+  <div class='form-group'>
+    <label for='permalink'>Slug</label>
+    <input
+      type='text'
+      name='slug'
+      class='form-control'
+      id='slug'
+      placeholder='Post permalink'
+      value='{{post.slug}}'
+    />
+  </div>
+  <div class='form-group'>
+    <label for='post-status'>Post Status</label>
+    <select class='form-control' name='status' id='post-status'>
+      <option>Draft</option>
+      <option>Published</option>
+    </select>
+  </div>
+  <div class='form-group'>
+    <label for='post-body'>Post Content</label>
+    <textarea
+      class='form-control'
+      name='body'
+      id='post-body'
+      rows='3'
+    >{{post.body}}</textarea>
+  </div>
+  <button type='submit' class='btn btn-primary mt-3'>Submit</button>
+</form>

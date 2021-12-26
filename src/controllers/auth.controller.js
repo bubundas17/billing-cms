@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator';
 
 import User from '../models/user.model';
-import { mappedErrors } from '../utils/mapped-errors';
+import mappedErrors from '../utils/mapped-errors';
 
 export const getSignUp = (_req, res) => {
   res.render('auth/signup', {
@@ -10,8 +10,6 @@ export const getSignUp = (_req, res) => {
 };
 
 export const getSignIn = (req, res) => {
-  console.log(req.cookies);
-
   res.render('auth/signin', {
     pathName: 'signin',
   });

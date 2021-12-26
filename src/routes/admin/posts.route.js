@@ -1,5 +1,13 @@
 import { Router } from 'express';
-import { getAllPosts, getNewPost, addPost, editPost } from '../../controllers/admin';
+
+import {
+  getAllPosts,
+  getCreateNewPost,
+  postCreateNewPost,
+  getEditPost,
+  postDeletePost,
+  postUpdatePost,
+} from '../../controllers/admin';
 
 class PostsRoute {
   constructor() {
@@ -9,10 +17,12 @@ class PostsRoute {
   }
 
   init() {
-    this.router.get('/', getAllPosts)
-    this.router.get('/new', getNewPost)
-    this.router.post('/', addPost)
-    this.router.get('/:postId', editPost)
+    this.router.get('/', getAllPosts);
+    this.router.get('/new', getCreateNewPost);
+    this.router.post('/new', postCreateNewPost);
+    this.router.get('/:postId/edit', getEditPost);
+    this.router.post('/:postId/edit', postUpdatePost);
+    this.router.post('/delete', postDeletePost);
   }
 }
 
