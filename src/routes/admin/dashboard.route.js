@@ -1,4 +1,4 @@
-import { getDashboard } from '../../controllers/admin';
+import { getDashboard } from '../../controllers';
 import BaseRoute from '../base.route';
 
 class DashboardRoute extends BaseRoute {
