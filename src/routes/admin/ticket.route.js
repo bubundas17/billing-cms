@@ -1,9 +1,8 @@
-import { Router } from 'express';
+import BaseRoute from '../base.route';
 
-class TicketRoute {
+class TicketRoute extends BaseRoute {
   constructor() {
-    this.router = Router();
-    this.baseUrl = '/ticket';
+    super('/ticket');
     this.init();
   }
 

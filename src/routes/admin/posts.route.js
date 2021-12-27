@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { ensureLoggedIn } from 'connect-ensure-login';
 
 import {
@@ -9,11 +8,11 @@ import {
   postDeletePost,
   postUpdatePost,
 } from '../../controllers/admin';
+import BaseRoute from '../base.route';
 
-class PostsRoute {
+class PostsRoute extends BaseRoute {
   constructor() {
-    this.router = Router();
-    this.baseUrl = '/admin/posts';
+    super('/admin/posts');
     this.init();
   }
 

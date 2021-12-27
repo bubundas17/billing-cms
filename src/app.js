@@ -58,12 +58,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (_req, res) => {
-  res.render('index', {
-    pathName: 'home',
-  });
-});
-
 app.use(routes);
 
 app.use(get4xx);
