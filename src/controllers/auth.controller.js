@@ -9,7 +9,7 @@ export const getSignUp = (_req, res) => {
   });
 };
 
-export const getSignIn = (req, res) => {
+export const getSignIn = (_req, res) => {
   res.render('auth/signin', {
     pathName: 'signin',
   });
@@ -52,4 +52,9 @@ export const postSignIn = (req, res, next) => {
     password,
     errors: mappedErrors(errors.array()),
   });
+};
+
+export const getSignOut = (req, res) => {
+  req.logout();
+  res.redirect('/auth/signin');
 };

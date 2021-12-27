@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import passport from 'passport';
+import { ensureLoggedIn, ensureLoggedOut } from 'connect-ensure-login';
 
 import {
   getSignIn,
   getSignUp,
+  getSignOut,
   postSignIn,
   postSignUp,
 } from '../../controllers';
@@ -17,23 +19,34 @@ class AuthRoute {
   }
 
   init() {
-    this.router.get(`/signup`, getSignUp);
-    this.router.get(`/signin`, getSignIn);
-    this.router.post(`/signup`, signUpValidator, postSignUp);
+    this.router.get('/signup', ensureLoggedOut({ redirectTo: '/' }), getSignUp);
+
+    this.router.get('/signin', ensureLoggedOut({ redirectTo: '/' }), getSignIn);
+
     this.router.post(
-      `/signin`,
+      '/signup',
+      ensureLoggedOut({ redirectTo: '/' }),
+      signUpValidator,
+      postSignUp,
+    );
+
+    this.router.post(
+      '/signin',
+      ensureLoggedOut({ redirectTo: '/' }),
       signInValidator,
       postSignIn,
       passport.authenticate('local', {
-        successRedirect: '/',
+        successReturnToOrRedirect: '/',
         failureRedirect: '/auth/signin',
         failureFlash: true,
       }),
     );
-    this.router.get(`/signout`, (req, res) => {
-      req.logout();
-      res.redirect('/auth/signin');
-    });
+
+    this.router.get(
+      '/signout',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      getSignOut,
+    );
   }
 }
 

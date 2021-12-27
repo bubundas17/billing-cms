@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
     "env-schema": "^3.5.0",

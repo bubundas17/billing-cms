@@ -31,7 +31,6 @@ export const postCreateNewPost = async (req, res) => {
 export const getEditPost = async (req, res) => {
   const postId = req.params.postId;
   const post = await PostsModel.findById(postId).lean();
-  console.log(post);
   res.render('admin/posts/edit-post', {
     post,
     edit: true,
@@ -50,8 +49,6 @@ export const postUpdatePost = async (req, res) => {
 
 export const postDeletePost = async (req, res) => {
   const postId = req.body.postId;
-  console.log('The body ' + req.body);
-  console.log(postId);
   await PostsModel.findByIdAndDelete(postId);
   res.redirect('/admin/posts');
 };

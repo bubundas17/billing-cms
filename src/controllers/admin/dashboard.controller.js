@@ -1,4 +1,4 @@
-export const getDashboard = (req, res) => {
+export const getDashboard = (_req, res) => {
   res.render('admin/dashboard', {
     pathName: 'dashboard',
   });
