@@ -1,7 +1,13 @@
 import PostsModel from '../../models/posts.model';
 
-// get request: get all posts
-export const getAllPosts = async (_req, res) => {
+/**
+ * @description Render all posts page
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
+export const getAllPosts = async (req, res) => {
   const posts = await PostsModel.find().lean();
   res.render('admin/posts/posts', {
     posts,
@@ -9,12 +15,23 @@ export const getAllPosts = async (_req, res) => {
   });
 };
 
-// get request: get new post form
+/**
+ * @description Render create post page
+ *
+ * @param {object} req
+ * @param {object} res
+ */
 export const getCreateNewPost = (req, res) => {
   res.render('admin/posts/edit-post');
 };
 
-// post request: add new post
+/**
+ * @description Create new post
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
 export const postCreateNewPost = async (req, res) => {
   const { title, body, slug, status } = req.body;
   const newPost = new PostsModel({
@@ -27,7 +44,13 @@ export const postCreateNewPost = async (req, res) => {
   res.redirect('/admin/posts');
 };
 
-// get request: edit post
+/**
+ * @description Render edit post page
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
 export const getEditPost = async (req, res) => {
   const postId = req.params.postId;
   const post = await PostsModel.findById(postId).lean();
@@ -37,7 +60,13 @@ export const getEditPost = async (req, res) => {
   });
 };
 
-// post request: update post
+/**
+ * @description Update post
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
 export const postUpdatePost = async (req, res) => {
   const postId = req.params.postId;
   const post = await PostsModel.findById(postId);
@@ -47,6 +76,13 @@ export const postUpdatePost = async (req, res) => {
   res.redirect('/admin/posts');
 };
 
+/**
+ * @description Delete post
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
 export const postDeletePost = async (req, res) => {
   const postId = req.body.postId;
   await PostsModel.findByIdAndDelete(postId);

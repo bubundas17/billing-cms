@@ -12,6 +12,12 @@ class BaseRoute {
   }
 
   init() {
+    /**
+     * @description Send Hello World
+     *
+     * @param {object} req
+     * @param {object} res
+     */
     this.router.get('/', (req, res) => {
       res.send('Hello World!');
     });

@@ -16,7 +16,7 @@ import routes from './routes';
 import { get4xx, get5xx } from './controllers';
 import handlebarsHelpers from './helpers/handlebars-helpers';
 import passportHelper from './helpers/passport.helper';
-import { flash } from './helpers/flash.helper';
+import flash from './helpers/flash.helper';
 
 const hbs = create({
   extname: 'hbs',
