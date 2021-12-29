@@ -10,7 +10,9 @@
     "start": "npm run build && node dist/app.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "prepare": "husky install",
+    "test": ""
   },
   "husky": {
     "hooks": {
@@ -32,7 +34,7 @@
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lint-staged": "^12.1.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
