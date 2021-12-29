@@ -11,8 +11,7 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "dev": "nodemon",
-    "prepare": "husky install",
-    "test": ""
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
