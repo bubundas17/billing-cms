@@ -1,8 +1,6 @@
 import { join } from 'path';
 import { cwd, exit } from 'process';
 
-
-
 import express from 'express';
 import mongoose from 'mongoose';
 import Handlebars from 'handlebars';
