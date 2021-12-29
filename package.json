@@ -8,7 +8,20 @@
   "scripts": {
     "build": "rimraf dist && babel src -d dist",
     "start": "npm run build && node dist/app.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
     "dev": "nodemon"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "yarn lint:fix",
+      "git add --all"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -19,6 +32,8 @@
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
