@@ -8,14 +8,14 @@
   "scripts": {
     "build": "rimraf dist && babel src -d dist",
     "start": "npm run build && node dist/app.js",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "dev": "nodemon",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint:fix",
+      "npm run lint:fix",
       "git add --all"
     ]
   },
