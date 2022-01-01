@@ -21,3 +21,6 @@ The plan is to build the functional side before the UI design is ready.
 
 [ ] Tickets
     [ ] Get List of all tickets from a user.
+
+[ ] Store
+    [ ] Multi Currency Support

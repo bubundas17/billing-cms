@@ -10,7 +10,12 @@ const postsSchema = new Schema(
     isPublished: { type: Boolean, default: false },
     postedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     lastEditedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    status: { type: String, required: true, default: 'draft' },
+    status: {
+      type: String,
+      required: true,
+      default: 'draft',
+      enum: ['draft', 'published', 'trash'],
+    },
   },
   { timestamps: true },
 );
