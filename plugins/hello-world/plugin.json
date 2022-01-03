@@ -1,0 +1,8 @@
+{
+    "name": "Hello World Plugin",
+    "description": "This is a hello world plugin",
+    "version": "0.1",
+    "author": "John Doe",
+    "url": "http://example.com",
+    "license": "MIT"
+}
