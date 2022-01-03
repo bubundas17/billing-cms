@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { cwd } from 'process';
 
-import util from './util';
+import util from '@lib/util';
 
 class Theme {
   async readEnabledTheme() {

@@ -1,6 +1,5 @@
-import { getIndex } from '../../controllers/admin/plugins.controller';
-
-import BaseRoute from '../base.route';
+import { getIndex } from '@controllers/admin/plugins.controller';
+import BaseRoute from '@routes/base.route';
 
 class PluginRoute extends BaseRoute {
   constructor() {

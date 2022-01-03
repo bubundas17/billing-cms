@@ -1,4 +1,4 @@
-import BaseRoute from '../base.route';
+import BaseRoute from '@routes/base.route';
 
 class TicketRoute extends BaseRoute {
   constructor() {

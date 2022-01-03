@@ -2,5 +2,6 @@
   "singleQuote": true,
   "bracketSpacing": true,
   "trailingComma": "all",
-  "semi": true
+  "semi": true,
+  "endOfLine": "auto"
 }

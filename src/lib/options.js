@@ -1,4 +1,4 @@
-import optionModel from '../models/option.model';
+import optionModel from '@models/option.model';
 
 let options = {};
 

@@ -1,6 +1,5 @@
-import { getIndex } from '../../controllers/admin/themes.controller';
-
-import BaseRoute from '../base.route';
+import { getIndex } from '@controllers/admin/themes.controller';
+import BaseRoute from '@routes/base.route';
 
 class ThemeRoute extends BaseRoute {
   constructor() {
