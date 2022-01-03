@@ -31,7 +31,7 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', join(cwd(), 'views'));
 
-app.use('/public', express.static(join(cwd(), 'public')));
+app.use('/assets', express.static(join(cwd(), 'assets')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
@@ -63,16 +63,11 @@ app.use(routes);
 app.use(get4xx);
 app.use(get5xx);
 
-app.listen(env.PORT, async () => {
-  console.log(`Server started on port ${env.PORT}`);
-
-  try {
-    await mongoose.connect(env.MONGO_URI);
-    console.log('Database connected');
-  } catch (error) {
-    console.error(error);
-    exit(1);
-  }
+mongoose.connect(env.MONGO_URI).then(async () => {
+  console.log('Connected to MongoDB');
+  app.listen(env.PORT, async () => {
+    console.log(`Server started on port ${env.PORT}`);
+  });
 });
 
 // import express from 'express';
