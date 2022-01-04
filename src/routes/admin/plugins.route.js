@@ -2,9 +2,9 @@ import {
   getIndex,
   enable,
   disable,
-} from '../../controllers/admin/plugins.controller';
+} from '@controllers/admin/plugins.controller';
 
-import BaseRoute from '../base.route';
+import BaseRoute from '@routes/base.route';
 
 class PluginRoute extends BaseRoute {
   constructor() {

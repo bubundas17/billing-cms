@@ -5,7 +5,10 @@ import directoryScanner from '../utils/directory-scanner';
 import { getOption, setOption } from './options';
 
 class PluginDriver {
-  constructor() {}
+  constructor() {
+    this.hooksFileName = 'hooks.js';
+    this.pluginMetaFileName = 'plugin.json';
+  }
 
   /**
    * @description Read Plugins from the plugins directory and return an array of plugin objects
@@ -13,7 +16,9 @@ class PluginDriver {
    */
   async getPluginList() {
     // read the plugins directory
-    const pluginList = directoryScanner(cwd() + '/plugins/*/plugin.json');
+    const pluginList = directoryScanner(
+      cwd() + '/plugins/*/' + this.pluginMetaFileName,
+    );
     let plugins = [];
     for (let plugin of pluginList) {
       let pluginName = this.getPluginNameFromPath(plugin);
@@ -31,7 +36,12 @@ class PluginDriver {
 
   async getPluginInfo(pluginName) {
     // read the plugin.json file
-    let pluginPath = join(cwd(), '/plugins/', pluginName, '/plugin.json');
+    let pluginPath = join(
+      cwd(),
+      '/plugins/',
+      pluginName,
+      this.pluginMetaFileName,
+    );
     let pluginInfo = JSON.parse(fs.readFileSync(pluginPath, 'utf8'));
     // check if a plugin is active
     let active = await getOption('is-active-plugin:' + pluginName);
@@ -54,13 +64,7 @@ class PluginDriver {
     // activate the plugin
     await setOption('is-active-plugin:' + pluginName, 'true');
     // run the activate script
-    let plugin = join(cwd(), '/plugins/', pluginName, '/plugin.js');
-    if (fs.existsSync(plugin)) {
-      const funcs = require(plugin);
-      if (funcs.onActive) {
-        await funcs.onActive();
-      }
-    }
+    await this.executeHook('onActive', {}, pluginName);
   }
 
   /**
@@ -71,16 +75,42 @@ class PluginDriver {
   async deactivatePlugin(pluginName) {
     // deactivate the plugin
     await setOption('is-active-plugin:' + pluginName, 'false');
-    // run the deactivate script
-    let plugin = join(cwd(), '/plugins/', pluginName, '/plugin.js');
-    if (fs.existsSync(plugin)) {
-      const funcs = require(plugin);
-      if (funcs.onDeactive) {
-        await funcs.onDeactive();
+    // run the deactivate hook
+    await this.executeHook('onDeactivate', {}, pluginName);
+  }
+
+  /**
+   * @description Execute a Plugin Hook
+   * @param {string} hookName
+   * @param {object} context
+   * @param {string} pluginName - optional
+   * @returns {Promise}
+   * @example
+   * await pluginDriver.executeHook('onActive');
+   * await pluginDriver.executeHook('onActive', { test: 'test' });
+   * await pluginDriver.executeHook('onActive', { test: 'test' }, 'test-plugin');
+   */
+  async executeHook(hookName, context, pluginName) {
+    let plugins = await this.getPluginList();
+    if (pluginName) {
+      plugins = plugins.filter((plugin) => plugin.name === pluginName);
+    }
+    for (let plugin of plugins) {
+      if (plugin.active || plugin.name === pluginName) {
+        let pluginPath = join(plugin.baseDir, this.hooksFileName);
+        if (fs.existsSync(pluginPath)) {
+          const funcs = require(pluginPath);
+          if (
+            typeof funcs === 'object' &&
+            funcs[hookName] &&
+            typeof funcs[hookName] === 'function'
+          ) {
+            await funcs[hookName](context);
+          }
+        }
       }
     }
   }
-
   getPluginNameFromPath(pluginPath) {
     // get the plugin name from the plugin path /Users/bubun/Projects/billing-cms/plugins/hello-world/plugin.json => hello-world
 
