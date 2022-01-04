@@ -1,5 +1,4 @@
 import { join } from 'path';
-import { exit } from 'process';
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -17,6 +16,9 @@ import { get4xx, get5xx } from '@controllers';
 import handlebarsHelpers from '@helpers/handlebars-helpers';
 import passportHelper from '@helpers/passport.helper';
 import flash from '@helpers/flash.helper';
+
+// import theme from '@lib/theme';
+// theme.save();
 
 const hbs = create({
   extname: 'hbs',
@@ -75,44 +77,3 @@ mongoose
     console.error(error);
     process.exit(1);
   });
-
-// import express from 'express';
-// import { create } from 'express-handlebars';
-// import handlebars from 'handlebars';
-// import { join } from 'path';
-// import { cwd } from 'process';
-
-// import util from './lib/theme';
-
-// const app = express();
-
-// const hbs = create({ extname: 'hbs', handlebars });
-
-// app.engine('hbs', hbs.engine);
-// app.set('view engine', 'hbs');
-// app.set('views', join(cwd(), 'themes', 'enabled'));
-
-// app.use(express.urlencoded({ extended: true }));
-
-// import theme from './lib/theme';
-
-// app.get('/', async (req, res) => {
-//   const themes = await theme.allThemes();
-//   res.render('index', { themes });
-// });
-
-// app.post('/enable-theme', async (req, res) => {
-//   const { identifier } = req.body;
-
-//   try {
-//     await util.themeEnabler(identifier);
-//     res.redirect('/');
-//   } catch (error) {
-//     console.error(error);
-//     res.send(error.message);
-//   }
-// });
-
-// app.listen(3000, () => {
-//   console.log('listening on port 3000');
-// });

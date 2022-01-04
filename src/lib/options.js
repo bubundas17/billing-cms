@@ -6,7 +6,6 @@ let options = {};
  * @param {string} key
  * @returns {Promise<string|null>}
  */
-
 export const getOption = async (key) => {
   if (options[key]) {
     return options[key];
@@ -27,7 +26,6 @@ export const getOption = async (key) => {
  * @param {object} options
  * @returns {Promise<string>}
  */
-
 export const setOption = async (key, value, options = { cachable: true }) => {
   if (options.cachable) {
     options[key] = value;

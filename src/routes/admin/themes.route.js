@@ -1,4 +1,8 @@
-import { getIndex } from '@controllers/admin/themes.controller';
+import {
+  getIndex,
+  postEnableTheme,
+  postDeleteTheme,
+} from '@controllers/admin/themes.controller';
 import BaseRoute from '@routes/base.route';
 
 class ThemeRoute extends BaseRoute {
@@ -9,6 +13,8 @@ class ThemeRoute extends BaseRoute {
 
   init() {
     this.router.get('/', getIndex);
+    this.router.post('/enable', postEnableTheme);
+    this.router.post('/remove', postDeleteTheme);
   }
 }
 

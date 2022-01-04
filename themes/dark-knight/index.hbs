@@ -1,0 +1,35 @@
+<div class='container my-5'>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th scope='col'>Name</th>
+        <th scope='col'>Version</th>
+        <th scope='col'>Desription</th>
+        <th scope='col'>Author</th>
+        <th scope='col'>Enabled</th>
+        <th scope='col'>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each themes}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{version}}</td>
+          <td>{{description}}</td>
+          <td>{{author}}</td>
+          <td>{{enabled}}</td>
+          <td>
+            <form action='/enable-theme' method='post'>
+              <input
+                type='hidden'
+                name='identifier'
+                value='{{uniqueIdentifier}}'
+              />
+              <button type='submit' class='btn btn-danger'>Enabled</button>
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
