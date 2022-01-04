@@ -8,6 +8,7 @@ let options = {};
  */
 
 export const getOption = async (key) => {
+  // console.log(options);
   if (options[key]) {
     return options[key];
   }
@@ -18,7 +19,7 @@ export const getOption = async (key) => {
   if (option.cachable) {
     options[key] = option.value;
   }
-  return option;
+  return option.value;
 };
 
 /**
@@ -28,8 +29,8 @@ export const getOption = async (key) => {
  * @returns {Promise<string>}
  */
 
-export const setOption = async (key, value, options = { cachable: true }) => {
-  if (options.cachable) {
+export const setOption = async (key, value, ops = { cachable: true }) => {
+  if (ops.cachable) {
     options[key] = value;
   }
   await optionModel.updateOne(

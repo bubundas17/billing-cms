@@ -1,1 +1,14 @@
 <h1>All Plugins</h1>
+{{#each plugins}}
+<div class="plugin card mt-3">
+    <h2>{{pluginInfo.name}}</h2>
+    <p>{{pluginInfo.description}}</p>
+    <p>By {{pluginInfo.author}}</p>
+    <p>{{#if active}}Enabled{{else}}Disabled{{/if}}</p>
+    <p>{{#if active}}
+        <a href="/admin/plugins/{{name}}/disable">Disable</a>
+    {{else}}
+        <a href="/admin/plugins/{{name}}/enable">Enable</a>
+    {{/if}}</p>
+</div>
+{{/each}}

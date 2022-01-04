@@ -1,0 +1,8 @@
+{
+    "name": "Test Plugin",
+    "description": "This is a test plugin",
+    "version": "0.1",
+    "author": "Bubun Das",
+    "url": "http://example.com",
+    "license": "MIT"
+}

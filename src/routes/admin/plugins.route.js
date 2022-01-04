@@ -1,4 +1,8 @@
-import { getIndex } from '../../controllers/admin/plugins.controller';
+import {
+  getIndex,
+  enable,
+  disable,
+} from '../../controllers/admin/plugins.controller';
 
 import BaseRoute from '../base.route';
 
@@ -10,6 +14,8 @@ class PluginRoute extends BaseRoute {
 
   init() {
     this.router.get('/', getIndex);
+    this.router.get('/:pluginName/enable', enable);
+    this.router.get('/:pluginName/disable', disable);
   }
 }
 
