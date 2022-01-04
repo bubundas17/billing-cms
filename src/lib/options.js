@@ -1,4 +1,4 @@
-import optionModel from '../models/option.model';
+import optionModel from '@models/option.model';
 
 let options = {};
 
@@ -6,7 +6,6 @@ let options = {};
  * @param {string} key
  * @returns {Promise<string|null>}
  */
-
 export const getOption = async (key) => {
   // console.log(options);
   if (options[key]) {

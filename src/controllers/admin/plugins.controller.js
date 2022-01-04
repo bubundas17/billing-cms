@@ -1,4 +1,4 @@
-import pluginDriver from '../../lib/plugin-driver';
+import pluginDriver from '@lib/plugin-driver';
 
 /**
  * @description Get All Plugins

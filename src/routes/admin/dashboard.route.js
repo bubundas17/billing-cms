@@ -1,5 +1,5 @@
-import { getDashboard } from '../../controllers';
-import BaseRoute from '../base.route';
+import { getDashboard } from '@controllers';
+import BaseRoute from '@routes/base.route';
 
 class DashboardRoute extends BaseRoute {
   constructor() {

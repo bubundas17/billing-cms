@@ -1,46 +1,29 @@
 import { join } from 'path';
 import { cwd } from 'process';
+import { rm } from 'fs/promises';
 
-import util from './util';
+import util from '@lib/util';
+import themeModel from '@models/theme.model';
 
 class Theme {
-  async readEnabledTheme() {
+  async save() {
     try {
-      const enabledThemeFileAndFolders = await util.readDir(
-        cwd(),
-        'themes',
-        'enabled',
-      );
-      const themeJsonFileIndex =
-        enabledThemeFileAndFolders.indexOf('theme.json');
-      if (themeJsonFileIndex <= -1) return {};
-      const themeJsonData = await util.readFile(
-        cwd(),
-        'themes',
-        'enabled',
-        enabledThemeFileAndFolders[themeJsonFileIndex],
-      );
-      const result = util.parseJsonToObject(themeJsonData);
-      return { ...result, path: join(cwd(), 'themes', 'enabled') };
+      await themeModel.insertMany(await this.allThemes());
     } catch (error) {
-      return {};
+      console.error(error);
+      throw error;
     }
   }
 
-  async readDisabledThemes() {
+  async allThemes() {
     try {
-      const disabledThemeFileAndFolders = await util.readDir(
-        cwd(),
-        'themes',
-        'disabled',
-      );
+      const disabledThemeFileAndFolders = await util.readDir(cwd(), 'themes');
       const themes = disabledThemeFileAndFolders.map(async (path) => {
-        const isDir = await util.isDir(cwd(), 'themes', 'disabled', path);
+        const isDir = await util.isDir(cwd(), 'themes', path);
         if (isDir) {
           const themeFilesAndFolders = await util.readDir(
             cwd(),
             'themes',
-            'disabled',
             path,
           );
           const themeJsonFileIndex = themeFilesAndFolders.indexOf('theme.json');
@@ -48,14 +31,13 @@ class Theme {
           const themeJsonData = await util.readFile(
             cwd(),
             'themes',
-            'disabled',
             path,
             themeFilesAndFolders[themeJsonFileIndex],
           );
           const result = util.parseJsonToObject(themeJsonData);
           return {
             ...result,
-            path: join(cwd(), 'themes', 'disabled', path),
+            path: join(cwd(), 'themes', path),
           };
         }
       });
@@ -66,45 +48,17 @@ class Theme {
     }
   }
 
-  async allThemes() {
+  async removeTheme(name) {
     try {
-      let enabledTheme = await this.readEnabledTheme();
-      let disabledThemes = await this.readDisabledThemes();
-      enabledTheme = { ...enabledTheme, enabled: true };
-      disabledThemes = disabledThemes.map((theme) => ({
-        ...theme,
-        enabled: false,
-      }));
-      return [enabledTheme, ...disabledThemes];
+      if (typeof name !== 'string' && name.trim() !== '')
+        throw new Error('Invalid theme name');
+      const theme = await themeModel.findOne({ name });
+      if (!theme) throw new Error('Theme not found');
+      await theme.remove();
+      await rm(join(cwd(), 'themes', name), { recursive: true });
+      return true;
     } catch (_) {
-      return [];
-    }
-  }
-
-  async themeEnabler(identifier) {
-    try {
-      const enabledTheme = await this.readEnabledTheme();
-      if (enabledTheme.uniqueIdentifier === identifier)
-        throw new Error('This theme is already enabled');
-
-      const disabledThemes = await this.readDisabledThemes();
-      const selectedTheme = disabledThemes.find(
-        (theme) => theme.uniqueIdentifier === identifier,
-      );
-      if (!selectedTheme) throw new Error('Selected theme not installed');
-      await util.copyFileAndFolder({
-        from: [cwd(), 'themes', 'enabled'],
-        to: [cwd(), 'themes', 'disabled', util.generateRandomString(5)],
-      });
-      await util.deleteFileAndFolder(cwd(), 'themes', 'enabled');
-      await util.copyFileAndFolder({
-        from: [selectedTheme.path],
-        to: [cwd(), 'themes', 'enabled'],
-      });
-      await util.deleteFileAndFolder(selectedTheme.path);
-      return { success: true };
-    } catch (error) {
-      throw error || new Error('Theme enabler failed');
+      return false;
     }
   }
 }

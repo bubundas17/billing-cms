@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const pagesSchema = new Schema(
+const optionSchema = new Schema(
   {
     name: { type: String, required: true, index: 1 },
     value: { type: String, required: false },
@@ -9,4 +9,4 @@ const pagesSchema = new Schema(
   { timestamps: false },
 );
 
-export default model('Option', pagesSchema);
+export default model('Option', optionSchema);

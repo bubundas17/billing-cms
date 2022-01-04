@@ -1,14 +1,18 @@
-const purgecss = require('@fullhuman/postcss-purgecss');
+import purgecss from '@fullhuman/postcss-purgecss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
-module.exports = {
+export default {
   plugins: [
     purgecss({
-      content: ['./**/*.hbs'],
+      content: ['./src/**/*.{html,hbs,js}'],
     }),
-    require('autoprefixer'),
-    require('postcss-nested'),
-    require('cssnano')({
-      preset: 'default',
+    autoprefixer(),
+    cssnano({
+      preset: [
+        'cssnano-preset-advanced',
+        { discardComments: { removeAll: true } },
+      ],
     }),
   ],
 };

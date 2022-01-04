@@ -8,5 +8,23 @@
         "targets": "> 0.25%, not dead"
       }
     ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "@": "./src",
+          "@controllers": "./src/controllers",
+          "@models": "./src/models",
+          "@routes": "./src/routes",
+          "@helpers": "./src/helpers",
+          "@configs": "./src/configs",
+          "@utils": "./src/utils",
+          "@lib": "./src/lib"
+        }
+      }
+    ]
   ]
 }

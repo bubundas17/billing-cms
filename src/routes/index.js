@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { join } from 'path';
 
-import DirScanner from '../utils/directory-scanner';
+import DirScanner from '@utils/directory-scanner';
 
 const router = Router();
 

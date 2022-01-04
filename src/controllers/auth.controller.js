@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator';
 
-import User from '../models/user.model';
-import mappedErrors from '../utils/mapped-errors';
+import User from '@models/user.model';
+import mappedErrors from '@utils/mapped-errors';
 
 /**
  * @description Render the sign up page

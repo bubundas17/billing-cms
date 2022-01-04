@@ -8,8 +8,8 @@ import {
   getSignOut,
   postSignIn,
   postSignUp,
-} from '../../controllers';
-import { signUpValidator, signInValidator } from '../../utils/validator';
+} from '@controllers';
+import { signUpValidator, signInValidator } from '@utils/validator';
 
 class AuthRoute {
   constructor() {

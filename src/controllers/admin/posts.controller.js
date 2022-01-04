@@ -1,4 +1,4 @@
-import PostsModel from '../../models/posts.model';
+import PostsModel from '@models/posts.model';
 
 /**
  * @description Render all posts page
