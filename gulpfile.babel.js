@@ -1,4 +1,3 @@
-import '@babel/register';
 import { src, dest } from 'gulp';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
