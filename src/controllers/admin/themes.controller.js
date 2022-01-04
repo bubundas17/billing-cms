@@ -1,5 +1,5 @@
+import { getOption, setOption } from '@lib/options';
 import theme from '@lib/theme';
-import themeModel from '@models/theme.model';
 
 /**
  * @description Get All Themes
@@ -9,7 +9,8 @@ import themeModel from '@models/theme.model';
  * @returns {Promise}
  */
 export const getIndex = async (req, res) => {
-  const themes = await themeModel.find({}).sort({ status: -1 }).lean();
+  const themes = await theme.allThemes();
+  console.log(themes);
   res.render('admin/themes/index', { themes });
 };
 
@@ -17,12 +18,10 @@ export const postEnableTheme = async (req, res) => {
   const { themeName } = req.body;
 
   try {
-    const themes = await themeModel.find();
-    themes.forEach(async (theme) => {
-      theme.status = theme.name === themeName;
-      await theme.save();
-    });
-    res.redirect('/admin/themes');
+    const isAvailable = await theme.isThemeAvailable(themeName);
+    if (!isAvailable) return res.send(`Theme - ${themeName} not available`);
+    await setOption('is-active-theme', themeName);
+    await res.redirect('/admin/themes');
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -35,10 +34,9 @@ export const postEnableTheme = async (req, res) => {
 
 export const postDeleteTheme = async (req, res) => {
   const { themeName } = req.body;
-
+  console.log(themeName);
   try {
     await theme.removeTheme(themeName);
-    await themeModel.deleteOne({ name: themeName });
     res.redirect('/admin/themes');
   } catch (error) {
     console.error(error);

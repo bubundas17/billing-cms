@@ -27,7 +27,6 @@ export const getOption = async (key) => {
  * @param {object} options
  * @returns {Promise<string>}
  */
-
 export const setOption = async (key, value, ops = { cachable: true }) => {
   if (ops.cachable) {
     options[key] = value;
@@ -38,4 +37,19 @@ export const setOption = async (key, value, ops = { cachable: true }) => {
     { upsert: true },
   );
   return value;
+};
+
+/**
+ * @description Delete option
+ *
+ * @param {string} key
+ * @returns {Promise<boolean>}
+ */
+export const deleteOption = async (key) => {
+  try {
+    await optionModel.deleteOne({ name: key });
+    return true;
+  } catch (_) {
+    return false;
+  }
 };

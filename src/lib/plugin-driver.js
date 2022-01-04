@@ -9,7 +9,7 @@ class PluginDriver {
 
   /**
    * @description Read Plugins from the plugins directory and return an array of plugin objects
-   * @returns {Array<Object>}
+   * @returns {Promise<Array<Object>>}
    */
   async getPluginList() {
     // read the plugins directory

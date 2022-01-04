@@ -1,6 +1,8 @@
 {
-  "name": "art-of-light",
+  "name": "Art of Light",
   "description": "Don't have a dark side.",
   "author": "Jane Doe",
-  "version": "0.0.45"
+  "version": "0.0.45",
+  "url": "http://example.com",
+  "license": "MIT"
 }

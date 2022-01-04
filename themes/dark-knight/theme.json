@@ -1,6 +1,8 @@
 {
-  "name": "dark-knight",
-  "description": "Don't look at me like that.",
-  "author": "Look your back",
-  "version": "0.0.9"
+  "name": "Dark Knight",
+  "description": "Dark ",
+  "author": "Jane Doe",
+  "version": "0.0.45",
+  "url": "http://example.com",
+  "license": "MIT"
 }
