@@ -66,6 +66,7 @@
     "mongoose": "^6.0.15",
     "morgan": "^1.10.0",
     "passport": "^0.5.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "remove": "^0.1.5"
   }
 }

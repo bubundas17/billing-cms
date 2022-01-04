@@ -1,8 +1,8 @@
-const purgecss = require('@fullhuman/postcss-purgecss');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
+import purgecss from '@fullhuman/postcss-purgecss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
-const plugins = {
+export default {
   plugins: [
     purgecss({
       content: ['./src/**/*.{html,hbs,js}'],
@@ -16,5 +16,3 @@ const plugins = {
     }),
   ],
 };
-
-export default plugins;
