@@ -5,7 +5,7 @@ import cssnano from 'cssnano';
 export default {
   plugins: [
     purgecss({
-      content: ['./src/**/*.{html,hbs,js}'],
+      content: ['./src/views/**/*.{html,hbs,js}'],
     }),
     autoprefixer(),
     cssnano({

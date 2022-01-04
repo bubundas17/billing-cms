@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator';
 
 import User from '@models/user.model';
 import mappedErrors from '@utils/mapped-errors';
+import pluginDriver from '@lib/plugin-driver';
 
 /**
  * @description Render the sign up page
@@ -67,12 +68,12 @@ export const postSignUp = async (req, res, next) => {
  * @param {object} res
  * @param {Function} next
  */
-export const postSignIn = (req, res, next) => {
+export const postSignIn = async (req, res, next) => {
   const { email, password } = req.body;
   const errors = validationResult(req);
-
+  await pluginDriver.executeHook('onSignIn', { email, password });
   if (errors.isEmpty()) return next();
-
+  pluginDriver.executeHook('onSignInError', errors);
   res.render('auth/signin', {
     pathName: 'signin',
     email,
