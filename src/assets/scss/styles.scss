@@ -1,8 +1,5 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
-
-.bg-baby-blue {
-  background-color: #0E49B5;
-}
+@import './colors';
 
 .rw {
   max-width: 100%;
@@ -24,4 +21,25 @@
   .rw {
     max-width: 50%;
   }
+}
+
+#sticky-sidebar {
+  position : fixed;
+  max-width: 14.063rem;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  overflow-y: auto;
+  background-color: $primary-bg;
+}
+
+.custom-navbar {
+  height: 4.625rem;
+  border-bottom: 1px solid #8094ae71;
+}
+.app-nav, body {
+  margin-left: 14.063rem;
+}
+.main {
+  margin-top: 5.625rem;
 }

@@ -1,5 +1,5 @@
 {
   "watch": ["src"],
-  "ext": "js scss sass",
+  "ext": "js scss",
   "exec": "npm run sass && babel-node src/app.js"
 }

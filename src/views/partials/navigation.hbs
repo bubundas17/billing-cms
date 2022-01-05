@@ -1,49 +1,50 @@
-<nav class='navbar navbar-expand-lg navbar-dark bg-baby-blue'>
+<nav class='navbar custom-navbar navbar-expand-lg navbar-dark bg-baby-blue fixed-top app-nav'>
   <div class='container-fluid'>
     <a class='navbar-brand' href='/'>BillingCMS</a>
-    <button
-      class='navbar-toggler'
-      type='button'
-      data-bs-toggle='collapse'
-      data-bs-target='#navbarNav'
-      aria-controls='navbarNav'
-      aria-expanded='false'
-      aria-label='Toggle navigation'
-    >
+    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'
+      aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
       <span class='navbar-toggler-icon'></span>
     </button>
     <div class='collapse navbar-collapse' id='navbarNav'>
       <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
         {{#if isAuthenticated}}
-          <li class='nav-item'>
-            <a
-              class='nav-link {{activeClass pathName "dashboard"}}'
-              aria-current='page'
-              href='/admin/dashboard'
-            >Dashboard</a>
-          </li>
+        <li class='nav-item'>
+          <a class='nav-link {{activeClass pathName "dashboard"}}' aria-current='page'
+            href='/admin/dashboard'>Dashboard</a>
+        </li>
         {{/if}}
       </ul>
       <ul class='navbar-nav mb-2 mb-lg-0'>
         {{#if isAuthenticated}}
-          <li class='nav-item'>
-            <a class='nav-link' href='/auth/signout'>Sign Out</a>
-          </li>
+
+        <li class='nav-item'>
+          <a class='nav-link' href='/auth/signout'><button type="button" class="btn btn-primary">Log Out <i
+                class="fas fa-sign-out-alt"></i></button></a>
+        </li>
         {{else}}
-          <li class='nav-item'>
-            <a
-              class='nav-link {{activeClass pathName "signin"}}'
-              href='/auth/signin'
-            >Sign In</a>
-          </li>
-          <li class='nav-item'>
-            <a
-              class='nav-link {{activeClass pathName "signup"}}'
-              href='/auth/signup'
-            >Sign Up</a>
-          </li>
+        <li class='nav-item'>
+          <a class='nav-link {{activeClass pathName "signin"}}' href='/auth/signin'>Sign In</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link {{activeClass pathName "signup"}}' href='/auth/signup'>Sign Up</a>
+        </li>
         {{/if}}
       </ul>
     </div>
   </div>
 </nav>
+<div>
+  <div id="sticky-sidebar">
+    <div>
+      <div class="navbar custom-navbar">
+        Dash
+      </div>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum.
+    </div>
+  </div>
+</div>
