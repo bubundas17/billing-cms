@@ -16,8 +16,10 @@ import { get4xx, get5xx } from '@controllers';
 import handlebarsHelpers from '@helpers/handlebars-helpers';
 import passportHelper from '@helpers/passport.helper';
 import flash from '@helpers/flash.helper';
+import { cwd } from 'process';
+import { compile } from 'handlebars';
 
-// import theme from '@lib/theme';
+import theme from '@lib/theme';
 // theme.save();
 
 const hbs = create({
@@ -57,6 +59,10 @@ passportHelper(passport);
 app.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.isAuthenticated = req.isAuthenticated();
+  res.load = async (file, options = {}) => {
+    const doc = await theme.loadTheme(file, { ...options, ...res.locals });
+    return res.send(doc);
+  };
   next();
 });
 

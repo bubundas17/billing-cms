@@ -2,6 +2,8 @@ import { join } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
 
+import { compile } from 'handlebars';
+
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 
@@ -70,8 +72,25 @@ class Theme {
 
   async getEnabledTheme() {
     const result = await getOption('is-active-theme');
-    console.log(result);
     return result;
+  }
+
+  async loadTheme(file, options = {}) {
+    try {
+      const enabledTheme = await this.getEnabledTheme();
+      const isThemeAvailable = await this.isThemeAvailable(enabledTheme);
+      if (!isThemeAvailable) return '';
+      const fileData = await util.readFile(
+        cwd(),
+        'themes',
+        enabledTheme,
+        `${file}.hbs`,
+      );
+      const template = compile(fileData);
+      return template({ ...options });
+    } catch (_) {
+      return '';
+    }
   }
 }
 
