@@ -27,6 +27,15 @@ class Util {
     }
   }
 
+  async isFile(...path) {
+    try {
+      const isDir = await this.isDir(...path);
+      return isDir ? false : true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   parseJsonToObject(str) {
     try {
       return JSON.parse(str);

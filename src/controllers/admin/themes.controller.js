@@ -14,8 +14,8 @@ export const getIndex = async (req, res) => {
   res.render('admin/themes/index', { themes });
 };
 
-export const postEnableTheme = async (req, res) => {
-  const { themeName } = req.body;
+export const getEnableTheme = async (req, res) => {
+  const { themeName } = req.params;
 
   try {
     const isAvailable = await theme.isThemeAvailable(themeName);
@@ -32,9 +32,9 @@ export const postEnableTheme = async (req, res) => {
   }
 };
 
-export const postDeleteTheme = async (req, res) => {
-  const { themeName } = req.body;
-  console.log(themeName);
+export const getDeleteTheme = async (req, res) => {
+  const { themeName } = req.params;
+
   try {
     await theme.removeTheme(themeName);
     res.redirect('/admin/themes');

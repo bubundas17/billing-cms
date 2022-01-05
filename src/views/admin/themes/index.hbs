@@ -1,14 +1,14 @@
 <h1>All Themes</h1>
 {{#each themes}}
-<div class="plugin card mt-3">
+  <div class='plugin card mt-3'>
     <h2>{{name}}</h2>
     <p>{{description}}</p>
     <p>By {{author}}</p>
     <p>{{#if active}}Enabled{{else}}Disabled{{/if}}</p>
     <p>{{#if active}}
-        <a href="/admin/plugins/{{name}}/disable">Disable</a>
-    {{else}}
-        <a href="/admin/plugins/{{name}}/enable">Enable</a>
-    {{/if}}</p>
-</div>
+        <a href='/admin/themes/{{path}}/remove'>Remove</a>
+      {{else}}
+        <a href='/admin/themes/{{path}}/enable'>Enable</a>
+      {{/if}}</p>
+  </div>
 {{/each}}

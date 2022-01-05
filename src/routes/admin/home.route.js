@@ -14,9 +14,10 @@ class HomeRoute extends BaseRoute {
      * @param {object} res
      */
     this.router.get('/', (req, res) => {
-      res.render('index', {
-        pathName: 'home',
-      });
+      res.load('index', { data: 'The data' });
+      // res.render('index', {
+      //   pathName: 'home',
+      // });
     });
   }
 }
