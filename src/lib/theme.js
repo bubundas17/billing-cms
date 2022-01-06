@@ -1,6 +1,7 @@
 import { join, normalize } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
+import { watch } from 'fs';
 import express from 'express';
 import { readdir } from 'fs/promises';
 
@@ -15,12 +16,24 @@ class Theme {
     this.hbs = create();
     this.hbs.logger.level = 0;
   }
+  // watch active theme partials folder for changes
+  async watchPartials() {
+    const currentTheme = await theme.getCurrentTheme();
+    const partialsFolderPath = join(currentTheme.absulutePath, 'partials');
+    watch(
+      partialsFolderPath,
+      { recursive: true },
+      async (eventType, filename) => {
+        this.registerPartials();
+      },
+    );
+  }
 
   // Register Partials from current active theme
   async registerPartials() {
     let currentTheme = await theme.getCurrentTheme();
     const files = await directoryScanner(
-      join(cwd(), 'themes', currentTheme.path, 'partials/**/*.hbs'),
+      join(currentTheme.absulutePath, 'partials/**/*.hbs'),
     );
 
     for (let file of files) {
@@ -34,6 +47,7 @@ class Theme {
         .replace(join(currentTheme.absulutePath, 'partials/'), '')
         .replace('.hbs', '')
         .replace(/\\/g, '/');
+      this.hbs.unregisterPartial(partialname);
       this.hbs.registerPartial(partialname, template);
     }
   }
@@ -169,6 +183,10 @@ class Theme {
       express.static(currentTheme.publicFolderPath),
     );
     this.registerPartials();
+    // watch partials if dev mode
+    if (process.env.NODE_ENV !== 'production') {
+      this.watchPartials();
+    }
   }
 
   // HBS helper functions

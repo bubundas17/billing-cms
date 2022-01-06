@@ -68,6 +68,7 @@
     "node-sass-middleware": "https://github.com/sass/node-sass-middleware.git",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
-    "remove": "^0.1.5"
+    "remove": "^0.1.5",
+    "walk": "^2.3.15"
   }
 }
