@@ -7,7 +7,7 @@ class HomeRoute extends BaseRoute {
   }
   init() {
     this.router.get('/', (req, res) => {
-      res.send('Hello World!');
+      res.load('index');
     });
   }
 }

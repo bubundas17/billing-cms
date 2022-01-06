@@ -9,6 +9,7 @@ import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
+import sassMiddleware from 'node-sass-middleware';
 
 import env from '@configs/env.config';
 import routes from '@routes';
@@ -34,6 +35,19 @@ const app = express();
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', join(__dirname, 'views'));
+
+// sassMiddleware
+if (env.NODE_ENV === 'development') {
+  app.use(
+    sassMiddleware({
+      src: join(__dirname, 'assets', 'scss'),
+      dest: join(__dirname, 'assets', 'css'),
+      debug: false,
+      outputStyle: 'compressed',
+      prefix: '/assets/css/',
+    }),
+  );
+}
 
 app.use('/assets', express.static(join(__dirname, 'assets')));
 app.use(express.urlencoded({ extended: true }));

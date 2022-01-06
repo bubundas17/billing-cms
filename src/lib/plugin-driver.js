@@ -38,7 +38,7 @@ class PluginDriver {
     // read the plugin.json file
     let pluginPath = join(
       cwd(),
-      '/plugins/',
+      'plugins',
       pluginName,
       this.pluginMetaFileName,
     );
@@ -49,7 +49,7 @@ class PluginDriver {
     active = active === 'true';
     return {
       name: pluginName,
-      baseDir: join(cwd(), '/plugins/', pluginName),
+      baseDir: join(cwd(), 'plugins', pluginName),
       active: active,
       pluginInfo: pluginInfo,
     };

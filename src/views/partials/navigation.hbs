@@ -39,12 +39,77 @@
       <div class="navbar custom-navbar">
         Dash
       </div>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-      of Lorem Ipsum.
+      <div class="row">
+        <div class="col-md-12">
+          <div class="container-fluid">
+
+            <input type="text" class="form-control mx-3 mt-3" placeholder="search">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <nav class="sidebar py-2 mb-4">
+        <ul class="nav flex-column" id="nav_accordion">
+          <li class="nav-item">
+            <a class="nav-link" href="#"> Link name </a>
+          </li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"> Submenu links </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="#">Submenu item 1 </a></li>
+              <li><a class="nav-link" href="#">Submenu item 2 </a></li>
+              <li><a class="nav-link" href="#">Submenu item 3 </a> </li>
+            </ul>
+          </li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"> More menus </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link" href="#">Submenu item 4 </a></li>
+              <li><a class="nav-link" href="#">Submenu item 5 </a></li>
+              <li><a class="nav-link" href="#">Submenu item 6 </a></li>
+              <li><a class="nav-link" href="#">Submenu item 7 </a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> Something </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> Other link </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.sidebar .nav-link').forEach(function (element) {
+
+      element.addEventListener('click', function (e) {
+
+        let nextEl = element.nextElementSibling;
+        let parentEl = element.parentElement;
+
+        if (nextEl) {
+          e.preventDefault();
+          let mycollapse = new bootstrap.Collapse(nextEl);
+
+          if (nextEl.classList.contains('show')) {
+            mycollapse.hide();
+          } else {
+            mycollapse.show();
+            // find other submenus with class=show
+            var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+            // if it exists, then close all of them
+            if (opened_submenu) {
+              new bootstrap.Collapse(opened_submenu);
+            }
+          }
+        }
+      }); // addEventListener
+    }) // forEach
+  }); 
+</script>

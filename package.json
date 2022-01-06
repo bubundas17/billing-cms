@@ -65,6 +65,7 @@
     "http-errors": "^1.8.1",
     "mongoose": "^6.0.15",
     "morgan": "^1.10.0",
+    "node-sass-middleware": "https://github.com/sass/node-sass-middleware.git",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "remove": "^0.1.5"
