@@ -1,13 +1,43 @@
-import { join } from 'path';
+import { join, normalize } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
+import express from 'express';
+import { readdir } from 'fs/promises';
 
-import { compile } from 'handlebars';
+import { compile, registerHelper, create } from 'handlebars';
+import directoryScanner from '@utils/directory-scanner';
 
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 
 class Theme {
+  constructor() {
+    this.hbs = create();
+    this.hbs.logger.level = 0;
+  }
+
+  // Register Partials from current active theme
+  async registerPartials() {
+    let currentTheme = await theme.getCurrentTheme();
+    const files = await directoryScanner(
+      join(cwd(), 'themes', currentTheme.path, 'partials/**/*.hbs'),
+    );
+
+    for (let file of files) {
+      const fileData = await util.readFile(file);
+      const template = compile(fileData, {
+        noEscape: true,
+        strict: true,
+      });
+      let abspath = normalize(file);
+      let partialname = abspath
+        .replace(join(currentTheme.absulutePath, 'partials/'), '')
+        .replace('.hbs', '')
+        .replace(/\\/g, '/');
+      this.hbs.registerPartial(partialname, template);
+    }
+  }
+
   async allThemes() {
     try {
       const disabledThemeFileAndFolders = await util.readDir(cwd(), 'themes');
@@ -32,6 +62,9 @@ class Theme {
           return {
             ...result,
             path,
+            absulutePath: join(cwd(), 'themes', path),
+            publicFolderPath: join(cwd(), 'themes', path, 'public'),
+            themeBaseUri: '/themes/' + path,
             active,
           };
         }
@@ -72,7 +105,29 @@ class Theme {
 
   async getEnabledTheme() {
     const result = await getOption('is-active-theme');
+    // this.currentTheme = result;
     return result;
+  }
+
+  // get theme folder path
+  async getThemePath(name) {
+    let themeFolderPath = join(cwd(), 'themes', name);
+    if (!(await util.isDir(cwd(), 'themes', name))) {
+      throw new Error(`Theme ${name} not found`);
+    }
+    return themeFolderPath;
+  }
+
+  // get current active theme
+  async getCurrentTheme() {
+    const themes = await this.allThemes();
+    return themes.find((t) => t.active);
+  }
+
+  // get current theme path
+  async getCurrentThemePath() {
+    const currentTheme = await this.getEnabledTheme();
+    return await this.getThemePath(currentTheme);
   }
 
   async loadTheme(file, options = {}) {
@@ -86,12 +141,37 @@ class Theme {
         enabledTheme,
         `${file}.hbs`,
       );
-      const template = compile(fileData);
+      const template = this.hbs.compile(fileData);
       return template({ ...options });
-    } catch (_) {
+    } catch (err) {
+      console.log(err);
       return '';
     }
   }
+
+  async registerThemeEngine(app) {
+    app.use(async (req, res, next) => {
+      let currentTheme = await theme.getCurrentTheme();
+      res.load = async (file, options = {}) => {
+        const doc = await theme.loadTheme(file, { ...options, ...res.locals });
+        return res.send(doc);
+      };
+      // console.log(currentTheme);
+      res.locals.currentThemeDir = await theme.getCurrentThemePath();
+      res.locals.themeBaseUri = currentTheme.themeBaseUri;
+
+      next();
+    });
+
+    let currentTheme = await theme.getCurrentTheme();
+    app.use(
+      currentTheme.themeBaseUri,
+      express.static(currentTheme.publicFolderPath),
+    );
+    this.registerPartials();
+  }
+
+  // HBS helper functions
 }
 
 const theme = new Theme();

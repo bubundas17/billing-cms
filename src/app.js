@@ -66,6 +66,11 @@ app.use(
 app.use(flash);
 if (env.NODE_ENV === 'development') app.use(morgan('dev'));
 
+theme.registerThemeEngine(app).then(() => {
+  app.use(get4xx);
+  app.use(get5xx);
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 passportHelper(passport);
@@ -73,17 +78,12 @@ passportHelper(passport);
 app.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.isAuthenticated = req.isAuthenticated();
-  res.load = async (file, options = {}) => {
-    const doc = await theme.loadTheme(file, { ...options, ...res.locals });
-    return res.send(doc);
-  };
   next();
 });
 
-app.use(routes);
+// app.use();
 
-app.use(get4xx);
-app.use(get5xx);
+app.use(routes);
 
 mongoose
   .connect(env.MONGO_URI)
