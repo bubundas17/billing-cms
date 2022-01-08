@@ -1,0 +1,15 @@
+<h1>General Settings</h1>
+<div class="container">
+    <form class="form-group" action="/admin/settings/general" method="post">
+        {{!-- Site Title  --}}
+        <label for="siteTitle">Site Title</label>
+        <input type="text" class="form-control" id="siteTitle" name="siteTitle" value="{{ siteTitle }}">
+        
+        {{!-- Domain Name --}}
+        <label for="urlPrifix">Url Prefix</label>
+        <input type="text" class="form-control" id="urlPrifix" name="urlPrifix" value="{{ urlPrifix }}">
+
+        {{!-- Save  --}}
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
+    </div>
+</div>

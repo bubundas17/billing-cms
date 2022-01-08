@@ -14,7 +14,8 @@ import { deleteOption, getOption } from '@lib/options';
 class Theme {
   constructor() {
     this.hbs = create();
-    this.hbs.logger.level = 0;
+    // this.hbs.logger.level = 0;
+    this.metadata = {};
   }
   // watch active theme partials folder for changes
   async watchPartials() {
@@ -50,6 +51,16 @@ class Theme {
       this.hbs.unregisterPartial(partialname);
       this.hbs.registerPartial(partialname, template);
     }
+  }
+
+  // register helpers
+  async registerHelpers(app) {
+    // TODO: Add a way of setting title for each page in clientarea
+    this.hbs.registerHelper('title', function () {
+      if (this.title) {
+        return `<title>${this.title} - ${this.siteTitle}</title>`;
+      }
+    });
   }
 
   async allThemes() {
@@ -166,6 +177,7 @@ class Theme {
   async registerThemeEngine(app) {
     app.use(async (req, res, next) => {
       let currentTheme = await theme.getCurrentTheme();
+      res.locals.siteTitle = await getOption('siteTitle');
       res.load = async (file, options = {}) => {
         const doc = await theme.loadTheme(file, { ...options, ...res.locals });
         return res.send(doc);
@@ -173,6 +185,11 @@ class Theme {
       // console.log(currentTheme);
       res.locals.currentThemeDir = await theme.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
+      // console.log("A page is requested");
+
+      res.title = async (title) => {
+        res.locals.title = title;
+      };
 
       next();
     });
@@ -187,6 +204,7 @@ class Theme {
     if (process.env.NODE_ENV !== 'production') {
       this.watchPartials();
     }
+    this.registerHelpers();
   }
 
   // HBS helper functions
