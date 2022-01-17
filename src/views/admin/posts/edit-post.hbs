@@ -1,25 +1,11 @@
 <form action="{{#if edit}}/admin/posts/{{post._id}}/edit{{else}}/admin/posts/new{{/if}}" method='post'>
   <div class='form-group'>
     <label for='title'>Title</label>
-    <input
-      type='text'
-      name='title'
-      class='form-control'
-      id='title'
-      placeholder='Post Title'
-      value='{{post.title}}'
-    />
+    <input type='text' name='title' class='form-control' id='title' placeholder='Post Title' value='{{post.title}}' />
   </div>
   <div class='form-group'>
     <label for='permalink'>Slug</label>
-    <input
-      type='text'
-      name='slug'
-      class='form-control'
-      id='slug'
-      placeholder='Post permalink'
-      value='{{post.slug}}'
-    />
+    <input type='text' name='slug' class='form-control' id='slug' placeholder='Post permalink' value='{{post.slug}}' />
   </div>
   <div class='form-group'>
     <label for='post-status'>Post Status</label>
@@ -30,12 +16,86 @@
   </div>
   <div class='form-group'>
     <label for='post-body'>Post Content</label>
-    <textarea
-      class='form-control'
-      name='body'
-      id='post-body'
-      rows='3'
-    >{{post.body}}</textarea>
+    <textarea class='form-control' name='body' id='post-body' rows='3'>{{post.body}}</textarea>
   </div>
   <button type='submit' class='btn btn-primary mt-3'>Submit</button>
 </form>
+
+
+<div class="overflow-hidden rounded-md">
+  <div class="px-4 py-2 space-x-2 bg-blue-500">
+    <div class="flex items-center justify-between">
+      <div class="space-x-2">
+        <i class="text-white fas fa-bell"></i>
+        <span class="text-base font-bold leading-none tracking-tight text-white">
+          New Post
+        </span>
+      </div>
+
+      <button class="text-xs tracking-tight text-white cursor-pointer">
+        View All
+      </button>
+    </div>
+  </div>
+  <div class="px-4 py-2 space-y-2 bg-gray-100">
+    <div class="pt-1">
+      <div class="flex items-center space-x-6">
+        <div class="flex items-center justify-center w-5 h-5 bg-orange-500 rounded-full">
+          <i class="flex items-center justify-center text-white fas fa-exclamation-triangle text-xxsm"></i>
+        </div>
+        <div class="flex-1 space-y-1">
+          <div class="font-bold tracking-wide text-gray-700 text-xsm">
+            Admin
+          </div>
+          <div class="text-gray-600 text-xsm">
+            Failed Admin Login Attempt - IP: 10.3.127.6.83
+          </div>
+        </div>
+        <div class="self-start leading-none text-gray-600 text-xxsm">
+          Today
+        </div>
+      </div>
+      <div class="mt-3 border-t"></div>
+    </div>
+
+    <div class="pt-1">
+      <div class="flex items-center space-x-6">
+        <div class="flex items-center justify-center w-5 h-5 bg-blue-500 rounded-full">
+          <i class="flex items-center justify-center text-white fas fa-file-alt text-xxsm"></i>
+        </div>
+        <div class="flex-1 space-y-1">
+          <div class="font-bold tracking-wide text-gray-700 text-xsm">
+            Admin
+          </div>
+          <div class="text-gray-600 text-xsm">
+            Created Manual Invoice - Invoice ID: 2 - User ID: 1
+          </div>
+        </div>
+        <div class="self-start leading-none text-gray-600 text-xxsm">
+          Yesterday
+        </div>
+      </div>
+      <div class="mt-3 border-t"></div>
+    </div>
+
+    <div class="pt-1">
+      <div class="flex items-center space-x-6">
+        <div class="flex items-center justify-center w-5 h-5 bg-green-500 rounded-full">
+          <i class="flex items-center justify-center text-white fas fa-medkit text-xxsm"></i>
+        </div>
+        <div class="flex-1 space-y-1">
+          <div class="font-bold tracking-wide text-gray-700 text-xsm">
+            System
+          </div>
+          <div class="text-gray-600 text-xsm">
+            Admin Password Reset Successful
+          </div>
+        </div>
+        <div class="self-start leading-none text-gray-600 text-xxsm">
+          Yesterday
+        </div>
+      </div>
+      <div class="mt-1"></div>
+    </div>
+  </div>
+</div>

@@ -5,10 +5,21 @@ import postcss from 'gulp-postcss';
 
 function buildStyles() {
   const sass = gulpSass(dartSass);
-  return src('./src/assets/scss/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss())
-    .pipe(dest('./src/assets/css'));
+  return (
+    src('./src/assets/scss/**/*.scss')
+      .pipe(
+        postcss([
+          require('tailwindcss'),
+          require('autoprefixer'),
+          // require('@tailwindcss/forms'),
+          // require('@tailwindcss/line-clamp'),
+          // require('@tailwindcss/typography')
+        ]),
+      )
+      .pipe(sass().on('error', sass.logError))
+      // .pipe(postcss())
+      .pipe(dest('./src/assets/css'))
+  );
 }
 
 export { buildStyles };

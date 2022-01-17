@@ -19,9 +19,11 @@ import passportHelper from '@helpers/passport.helper';
 import flash from '@helpers/flash.helper';
 import { cwd } from 'process';
 import { compile } from 'handlebars';
+import { watch } from 'fs';
 
 import theme from '@lib/theme';
 // theme.save();
+const { exec } = require('child_process');
 
 const hbs = create({
   extname: 'hbs',
@@ -38,15 +40,26 @@ app.set('views', join(__dirname, 'views'));
 
 // sassMiddleware
 if (env.NODE_ENV === 'development') {
-  app.use(
-    sassMiddleware({
-      src: join(__dirname, 'assets', 'scss'),
-      dest: join(__dirname, 'assets', 'css'),
-      debug: false,
-      outputStyle: 'compressed',
-      prefix: '/assets/css/',
-    }),
-  );
+  // app.use(
+  //   sassMiddleware({
+  //     src: join(__dirname, 'assets', 'scss'),
+  //     dest: join(__dirname, 'assets', 'css'),
+  //     debug: false,
+  //     outputStyle: 'compressed',
+  //     prefix: '/assets/css/',
+  //   }),
+  // );
+  watch(join(__dirname, 'views'), { recursive: true }, (event, filename) => {
+    exec('yarn build', (err, stdout, stderr) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      // console.log(stdout);
+      // console.log(stderr);
+    });
+    // console.log(filename);
+  });
 }
 
 app.use('/assets', express.static(join(__dirname, 'assets')));

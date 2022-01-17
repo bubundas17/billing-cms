@@ -1,4 +1,4 @@
-<nav class='navbar custom-navbar navbar-expand-lg navbar-dark bg-baby-blue fixed-top app-nav'>
+{{!-- <nav class='navbar custom-navbar navbar-expand-lg navbar-dark bg-baby-blue fixed-top app-nav'>
   <div class='container-fluid'>
     <a class='navbar-brand' href='/'>BillingCMS</a>
     <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'
@@ -54,7 +54,8 @@
       <nav class="sidebar py-2 mb-4">
         <ul class="nav flex-column" id="nav_accordion">
           <li class="nav-item has-submenu">
-            <a class="nav-link" href="#"><i class="fa fa-user" aria-hidden="true"></i> <span class="pl-4">Users</span> </a>
+            <a class="nav-link" href="#"><i class="fa fa-user" aria-hidden="true"></i> <span class="pl-4">Users</span>
+            </a>
             <ul class="submenu collapse">
               <li><a class="nav-link" href="#">All Users</a></li>
               <li><a class="nav-link" href="#">User List</a></li>
@@ -107,4 +108,280 @@
       }); // addEventListener
     }) // forEach
   }); 
-</script>
+</script> --}}
+
+
+<div class="flex items-center justify-between px-5 py-5 border-b">
+  <div class="flex items-center space-x-4">
+    <button class="2xl:hidden" id="open-menu-button">
+      <i class="text-lg text-blue-600 fas fa-bars"></i>
+    </button>
+    <div class="text-xl font-semibold text-blue-600">QDASH</div>
+  </div>
+  <div>
+    {{#if isAuthenticated}}
+    <div class="flex items-center space-x-4">
+      <a href="/admin/dashboard/">
+        <button
+          class="flex items-center px-2 py-1.5 space-x-3 bg-blue-600 rounded-md text-sm text-white">Dashboard</button>
+      </a>
+      <a href="/auth/signout">
+        <button class="text-sm font-semibold text-blue-600" href="">Log Out</button>
+      </a>
+    </div>
+
+    {{else}}
+    <div class="flex justify-end lg:space-x-3">
+      <button class="px-2 py-1.5">
+        <span class="text-sm">Sign Up</span>
+      </button>
+      <button class="flex items-center px-2 py-1.5 space-x-3 bg-blue-600 rounded-md">
+        <span class="text-sm text-white">Sign In</span>
+        <i class="text-white fas fa-sign-in-alt"></i>
+      </button>
+    </div>
+    {{/if}}
+  </div>
+</div>
+<!-- Side Bar -->
+<div class="fixed top-0 bottom-0 left-0 right-0 z-10 flex-col w-56 bg-gray-100 2xl:flex sidebar" id="sidenav">
+  <div class="flex items-center px-5 py-6 space-x-4 overflow-auto border-b" style="max-height: 98%">
+    <button class="cursor-pointer 2xl:hidden" id="close-menu-button">
+      <i class="text-lg text-blue-600 fas fa-bars"></i>
+    </button>
+    <div class="text-xl font-semibold tracking-tight text-blue-600">
+      QDASH
+    </div>
+  </div>
+  <div class="max-h-full overflow-auto pb-36">
+    <div class="px-5 py-4">
+      <div class="pb-4">
+        <form action="#">
+          <div class="relative flex items-center">
+            <div class="absolute ml-2">
+              <i class="text-gray-400 fas fa-search"></i>
+            </div>
+            <input
+              class="inline-block w-full py-2.5 pl-8 pr-2 text-tiny font-light leading-none tracking-tight border border-gray-300 rounded shadow text-gray-400 focus:outline-none"
+              type="text" placeholder="Search" />
+          </div>
+        </form>
+      </div>
+
+      <div class="flex flex-col space-y-4">
+        <button class="flex items-center">
+          <div class="flex w-9">
+            <i class="font-bold text-blue-600 fas fa-tachometer-alt"></i>
+          </div>
+          <div class="text-left grow">
+            <span class="text-lg font-bold tracking-tight text-blue-600">
+              Dashboard
+            </span>
+          </div>
+        </button>
+
+        <button class="dropdown-btn">
+          <div class="flex items-center mb-3">
+            <div class="flex w-9">
+              <i class="text-gray-600 fas fa-copy"></i>
+            </div>
+            <div class="text-left grow">
+              <span class="text-lg font-semibold tracking-tight text-gray-600">
+                Posts
+              </span>
+            </div>
+            <div>
+              <i class="hidden text-gray-300 fas fa-angle-up"></i>
+              <i class="text-gray-300 fas fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="hidden dropdown-item">
+            <div class="flex flex-col space-y-3">
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="/admin/posts">All
+                  Posts</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="/admin/posts/new">New
+                  Post</a>
+              </div>
+            </div>
+
+          </div>
+        </button>
+
+        <button class="dropdown-btn">
+          <div class="flex items-center mb-3">
+            <div class="flex w-9">
+              <i class="text-gray-600 fas fa-cart-shopping"></i>
+            </div>
+            <div class="text-left grow">
+              <span class="text-lg font-semibold tracking-tight text-gray-600">
+                Orders
+              </span>
+            </div>
+            <div>
+              <i class="hidden text-gray-300 fas fa-angle-up"></i>
+              <i class="text-gray-300 fas fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="hidden dropdown-item">
+            <div class="flex flex-col space-y-3">
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">All User List</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Manage User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Active User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Inactive User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Deleted User</a>
+              </div>
+            </div>
+          </div>
+        </button>
+
+        <button class="dropdown-btn">
+          <div class="flex items-center mb-3">
+            <div class="flex w-9">
+              <i class="text-gray-600 fas fa-file-alt"></i>
+            </div>
+            <div class="text-left grow">
+              <span class="text-lg font-semibold tracking-tight text-gray-600">
+                Invoice
+              </span>
+            </div>
+            <div>
+              <i class="hidden text-gray-300 fas fa-angle-up"></i>
+              <i class="text-gray-300 fas fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="hidden dropdown-item">
+            <div class="flex flex-col space-y-3">
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">All User List</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Manage User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Active User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Inactive User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Deleted User</a>
+              </div>
+            </div>
+          </div>
+        </button>
+
+        <button class="dropdown-btn">
+          <div class="flex items-center mb-3">
+            <div class="flex w-9">
+              <i class="text-gray-600 fas fa-receipt"></i>
+            </div>
+            <div class="text-left grow">
+              <span class="text-lg font-semibold tracking-tight text-gray-600">
+                Billing
+              </span>
+            </div>
+            <div>
+              <i class="hidden text-gray-300 fas fa-angle-up"></i>
+              <i class="text-gray-300 fas fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="hidden dropdown-item">
+            <div class="flex flex-col space-y-3">
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">All User List</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Manage User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Active User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Inactive User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Deleted User</a>
+              </div>
+            </div>
+          </div>
+        </button>
+
+        <button class="dropdown-btn">
+          <div class="flex items-center mb-3">
+            <div class="flex w-9">
+              <i class="text-gray-600 fas fa-envelope"></i>
+            </div>
+            <div class="text-left grow">
+              <span class="text-lg font-semibold tracking-tight text-gray-600">
+                Tickets
+              </span>
+            </div>
+            <div>
+              <i class="hidden text-gray-300 fas fa-angle-up"></i>
+              <i class="text-gray-300 fas fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="hidden dropdown-item">
+            <div class="flex flex-col space-y-3">
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">All User List</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Manage User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Active User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Inactive User</a>
+              </div>
+              <div class="inline-flex">
+                <div class="w-9"></div>
+                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="#">Deleted User</a>
+              </div>
+            </div>
+          </div>
+        </button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Side Bar End -->
+<div class="fixed w-full h-full top-0 backdrop-blur-sm hidden" id="slidbar-overlay">
+
+</div>
