@@ -1,22 +1,76 @@
-import { join, normalize } from 'path';
+import { promisify } from 'util';
+import { join, normalize, basename } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
 import { watch } from 'fs';
 import express from 'express';
-import { readdir } from 'fs/promises';
+import globAsync from 'glob';
 
-import { compile, registerHelper, create } from 'handlebars';
+import Handlebars from 'handlebars';
 import directoryScanner from '@utils/directory-scanner';
-
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 
+const glob = promisify(globAsync);
+
 class Theme {
   constructor() {
-    this.hbs = create();
+    this.hbs = Handlebars;
     // this.hbs.logger.level = 0;
     this.metadata = {};
+    this.render('index.hbs');
   }
+
+  getFileName(file, ext = '') {
+    return basename(file, ext);
+  }
+
+  async getPartials() {
+    const theme = await this.getCurrentTheme();
+
+    const dirs = await glob('**/*.hbs', {
+      cwd: join(cwd(), 'themes', theme.path, 'partials'),
+      follow: true,
+    });
+
+    const partials = await dirs.reduce(async (prev, current) => {
+      const fileData = await util.readFile(theme.partialsFolderPath, current);
+      const template = this.compileTemplate(fileData);
+      const _prev = await prev;
+      _prev[this.getFileName(current, '.hbs')] = this.renderTemplate(template);
+      return prev;
+    }, Promise.resolve({}));
+
+    return partials;
+  }
+
+  async getTemplate(filePath, options = {}) {
+    const theme = await this.getCurrentTheme();
+    const data = await util.readFile(theme.absulutePath, filePath);
+    const template = this.compileTemplate(data, options);
+    return template;
+  }
+
+  async render(filePath, context = {}, options = {}) {
+    const partials = await this.getPartials();
+    const template = await this.getTemplate(`${filePath}.hbs`, options);
+
+    const html = this.renderTemplate(template, context, { partials });
+    return html;
+  }
+
+  compileTemplate(template, options = {}) {
+    return this.hbs.compile(template, options);
+  }
+
+  precompileTemplate(template, options = {}) {
+    return this.hbs.precompile(template, options);
+  }
+
+  renderTemplate(template, context = {}, options = {}) {
+    return template(context, options).trim();
+  }
+
   // watch active theme partials folder for changes
   async watchPartials() {
     const currentTheme = await theme.getCurrentTheme();
@@ -39,7 +93,7 @@ class Theme {
 
     for (let file of files) {
       const fileData = await util.readFile(file);
-      const template = compile(fileData, {
+      const template = this.hbs.compile(fileData, {
         noEscape: true,
         strict: true,
       });
@@ -89,6 +143,7 @@ class Theme {
             path,
             absulutePath: join(cwd(), 'themes', path),
             publicFolderPath: join(cwd(), 'themes', path, 'public'),
+            partialsFolderPath: join(cwd(), 'themes', path, 'partials'),
             themeBaseUri: '/themes/' + path,
             active,
           };
@@ -179,7 +234,8 @@ class Theme {
       let currentTheme = await theme.getCurrentTheme();
       res.locals.siteTitle = await getOption('siteTitle');
       res.load = async (file, options = {}) => {
-        const doc = await theme.loadTheme(file, { ...options, ...res.locals });
+        // const doc = await theme.loadTheme(file, { ...options, ...res.locals });
+        const doc = await theme.render(file, { ...options, ...res.locals });
         return res.send(doc);
       };
       // console.log(currentTheme);
@@ -201,10 +257,10 @@ class Theme {
     );
     this.registerPartials();
     // watch partials if dev mode
-    if (process.env.NODE_ENV !== 'production') {
-      this.watchPartials();
-    }
-    this.registerHelpers();
+    // if (process.env.NODE_ENV !== 'production') {
+    //   this.watchPartials();
+    // }
+    // this.registerHelpers();
   }
 
   // HBS helper functions
