@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './_components';
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -12,27 +14,27 @@
     scrollbar-width   : none;
   }
 }
-
 @media screen and (max-width: 1440px) {
   .sidebar {
     left      : -225px;
     transition: all 0.1s ease-in-out;
-    z-index: 50;
+    z-index   : 50;
   }
 }
+
 @media screen and (min-width: 1440px) {
   .main-content {
     margin-left: 225px !important;
   }
 }
-  
+
 
 .sidebar-active {
-  left:  0;
+  left: 0;
 }
 
 #slidbar-overlay {
   transition: background-color 0.1s ease-in-out;
   transition: backdrop-filter 0.1s ease-in-out;
-  z-index: 49;
+  z-index   : 49;
 }

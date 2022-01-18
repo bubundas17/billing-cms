@@ -1,0 +1,22 @@
+@layer components {
+
+    .dashboard-summery-item {
+        @apply flex flex-col items-center justify-center p-3 rounded-md md:p-4 sm:flex-row lg:pl-5 lg:py-5;
+
+        .dashboard-summery-item-icon {
+            @apply flex items-center justify-center flex-none w-10 h-10 bg-white rounded-full;
+
+            i {
+                @apply text-xl text-blue-500;
+            }
+        }
+    }
+
+    .card {
+        @apply overflow-hidden rounded-md;
+
+        .card-title {
+            @apply text-xl text-blue-500 p-2 space-x-2;
+        }
+    }
+}

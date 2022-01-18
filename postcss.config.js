@@ -4,9 +4,10 @@ import cssnano from 'cssnano';
 
 export default {
   plugins: [
-    purgecss({
-      content: ['./src/views/**/*.{html,hbs,js}'],
-    }),
+    // purgecss({
+    //   content: ['./src/views/**/*.{html,hbs,js}'],
+    // }),
+    require('tailwindcss'),
     autoprefixer(),
     cssnano({
       preset: [
