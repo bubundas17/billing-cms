@@ -1,13 +1,11 @@
 import { promisify } from 'util';
-import { join, normalize, basename } from 'path';
+import { join, basename } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
-import { watch } from 'fs';
 import express from 'express';
 import globAsync from 'glob';
-
 import Handlebars from 'handlebars';
-import directoryScanner from '@utils/directory-scanner';
+
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 
@@ -24,6 +22,11 @@ class Theme {
   constructor() {
     this.hbs = Handlebars;
     this.metadata = {};
+
+    this._cache = {};
+
+    if (Theme._instance) return Theme._instance;
+    Theme._instance = this;
   }
 
   getFileName(file, ext = '') {
@@ -81,56 +84,10 @@ class Theme {
     return template(context, options).trim();
   }
 
-  // watch active theme partials folder for changes
-  async watchPartials() {
-    const currentTheme = await theme.getCurrentTheme();
-    const partialsFolderPath = join(currentTheme.absulutePath, 'partials');
-    watch(
-      partialsFolderPath,
-      { recursive: true },
-      async (eventType, filename) => {
-        this.registerPartials();
-      },
-    );
-  }
-
-  // Register Partials from current active theme
-  async registerPartials() {
-    let currentTheme = await theme.getCurrentTheme();
-    const files = await directoryScanner(
-      join(currentTheme.absulutePath, 'partials/**/*.hbs'),
-    );
-
-    for (let file of files) {
-      const fileData = await util.readFile(file);
-      const template = this.hbs.compile(fileData, {
-        noEscape: true,
-        strict: true,
-      });
-      let abspath = normalize(file);
-      let partialname = abspath
-        .replace(join(currentTheme.absulutePath, 'partials/'), '')
-        .replace('.hbs', '')
-        .replace(/\\/g, '/');
-      this.hbs.unregisterPartial(partialname);
-      this.hbs.registerPartial(partialname, template);
-    }
-  }
-
-  // register helpers
-  async registerHelpers(app) {
-    // TODO: Add a way of setting title for each page in clientarea
-    this.hbs.registerHelper('title', function () {
-      if (this.title) {
-        return `<title>${this.title} - ${this.siteTitle}</title>`;
-      }
-    });
-  }
-
   async allThemes() {
     try {
-      const disabledThemeFileAndFolders = await util.readDir(cwd(), 'themes');
-      const themes = disabledThemeFileAndFolders.map(async (path) => {
+      const themeFileAndFolders = await glob('*', { cwd: `${cwd()}/themes` });
+      const themes = themeFileAndFolders.map(async (path) => {
         const isDir = await util.isDir(cwd(), 'themes', path);
         if (isDir) {
           const themeFilesAndFolders = await util.readDir(
@@ -194,17 +151,18 @@ class Theme {
   }
 
   async getEnabledTheme() {
-    const result = await getOption('is-active-theme');
-    // this.currentTheme = result;
-    return result;
+    this._cache['enabledTheme'] =
+      this._cache['enabledTheme'] || (await getOption('is-active-theme'));
+    return this._cache['enabledTheme'];
   }
 
   // get theme folder path
   async getThemePath(name) {
-    let themeFolderPath = join(cwd(), 'themes', name);
-    if (!(await util.isDir(cwd(), 'themes', name))) {
+    const themeFolderPath = join(cwd(), 'themes', name);
+
+    if (!(await util.isDir(cwd(), 'themes', name)))
       throw new Error(`Theme ${name} not found`);
-    }
+
     return themeFolderPath;
   }
 
@@ -217,7 +175,8 @@ class Theme {
   // get current theme path
   async getCurrentThemePath() {
     const currentTheme = await this.getEnabledTheme();
-    return await this.getThemePath(currentTheme);
+    const result = await this.getThemePath(currentTheme);
+    return result;
   }
 
   async loadTheme(file, options = {}) {
@@ -235,7 +194,7 @@ class Theme {
       return template({ ...options });
     } catch (err) {
       console.log(err);
-      return '';
+      throw err;
     }
   }
 
@@ -265,15 +224,53 @@ class Theme {
       currentTheme.themeBaseUri,
       express.static(currentTheme.publicFolderPath),
     );
-    this.registerPartials();
-    // watch partials if dev mode
-    // if (process.env.NODE_ENV !== 'production') {
-    //   this.watchPartials();
-    // }
-    // this.registerHelpers();
   }
 
-  // HBS helper functions
+  // watch active theme partials folder for changes
+  // async watchPartials() {
+  //   const currentTheme = await theme.getCurrentTheme();
+  //   const partialsFolderPath = join(currentTheme.absulutePath, 'partials');
+  //   watch(
+  //     partialsFolderPath,
+  //     { recursive: true },
+  //     async (eventType, filename) => {
+  //       this.registerPartials();
+  //     },
+  //   );
+  // }
+
+  // Register Partials from current active theme
+  // async registerPartials() {
+  //   let currentTheme = await theme.getCurrentTheme();
+  //   const files = await directoryScanner(
+  //     join(currentTheme.absulutePath, 'partials/**/*.hbs'),
+  //   );
+
+  //   for (let file of files) {
+  //     const fileData = await util.readFile(file);
+  //     const template = this.hbs.compile(fileData, {
+  //       noEscape: true,
+  //       strict: true,
+  //     });
+  //     let abspath = normalize(file);
+  //     let partialname = abspath
+  //       .replace(join(currentTheme.absulutePath, 'partials/'), '')
+  //       .replace('.hbs', '')
+  //       .replace(/\\/g, '/');
+  //     this.hbs.unregisterPartial(partialname);
+  //     this.hbs.registerPartial(partialname, template);
+  //   }
+  // }
+
+  // register helpers
+  // async registerHelpers(app) {
+  //   // TODO: Add a way of setting title for each page in clientarea
+  //   this.hbs.registerHelper('title', function () {
+  //     if (this.title) {
+  //       return `<title>${this.title} - ${this.siteTitle}</title>`;
+  //     }
+  //   });
+  // }
 }
 
 const theme = new Theme();

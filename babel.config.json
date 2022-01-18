@@ -25,6 +25,7 @@
           "@lib": "./src/lib"
         }
       }
-    ]
+    ],
+    ["@babel/plugin-proposal-private-methods"]
   ]
 }
