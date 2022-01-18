@@ -1,5 +1,8 @@
 import { join } from 'path';
-import { access, lstat, readdir, readFile, cp, rm, unlink } from 'fs/promises';
+import { access, lstat, readdir, readFile, cp, rm } from 'fs/promises';
+
+// TODO - Add proper error handling
+// TODO - Never return empty strings, nulls or undefined from this class methods, always throw errors
 
 class Util {
   async readDir(...path) {

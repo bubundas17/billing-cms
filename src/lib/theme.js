@@ -13,12 +13,17 @@ import { deleteOption, getOption } from '@lib/options';
 
 const glob = promisify(globAsync);
 
+// TODO - Add template cache
+// TODO - Add theme cache
+// TODO - Give users the ability to add their own layouts and helpers
+// TODO - Add proper error handling
+// TODO - Reduce the amount of code in this file
+// TODO - Create perfect res.load method that will load a theme file and pass it to the template
+
 class Theme {
   constructor() {
     this.hbs = Handlebars;
-    // this.hbs.logger.level = 0;
     this.metadata = {};
-    this.render('index.hbs');
   }
 
   getFileName(file, ext = '') {
@@ -46,16 +51,21 @@ class Theme {
 
   async getTemplate(filePath, options = {}) {
     const theme = await this.getCurrentTheme();
-    const data = await util.readFile(theme.absulutePath, filePath);
-    const template = this.compileTemplate(data, options);
+    const fileData = await util.readFile(theme.absulutePath, filePath);
+    const template = this.compileTemplate(fileData, options);
     return template;
   }
 
   async render(filePath, context = {}, options = {}) {
     const partials = await this.getPartials();
     const template = await this.getTemplate(`${filePath}.hbs`, options);
-
-    const html = this.renderTemplate(template, context, { partials });
+    const layoutTemplate = await this.getTemplate('layouts/main.hbs', options);
+    let html = this.renderTemplate(template, context, options);
+    html = this.renderTemplate(
+      layoutTemplate,
+      { ...context, body: html },
+      { partials },
+    );
     return html;
   }
 

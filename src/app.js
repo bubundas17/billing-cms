@@ -1,4 +1,6 @@
 import { join } from 'path';
+import { watch } from 'fs';
+const { exec } = require('child_process');
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -9,7 +11,6 @@ import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
-import sassMiddleware from 'node-sass-middleware';
 
 import env from '@configs/env.config';
 import routes from '@routes';
@@ -17,13 +18,12 @@ import { get4xx, get5xx } from '@controllers';
 import handlebarsHelpers from '@helpers/handlebars-helpers';
 import passportHelper from '@helpers/passport.helper';
 import flash from '@helpers/flash.helper';
-import { cwd } from 'process';
-import { compile } from 'handlebars';
-import { watch } from 'fs';
 
 import theme from '@lib/theme';
-// theme.save();
-const { exec } = require('child_process');
+
+// TODO - Add proper error handling and logging to the console
+// TODO - Reduce the amount of code in this file
+// TODO - Create perfect theme.registerThemeEngine method that will register a theme engine, you can use app.set to register the engine
 
 const hbs = create({
   extname: 'hbs',
@@ -94,8 +94,6 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });
-
-// app.use();
 
 app.use(routes);
 
