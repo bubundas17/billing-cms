@@ -1,22 +1,25 @@
 @layer components {
+  .dashboard-summery-item {
+    @apply flex flex-col items-center justify-center p-3 rounded-md md:p-4 sm:flex-row lg:pl-5 lg:py-5;
 
-    .dashboard-summery-item {
-        @apply flex flex-col items-center justify-center p-3 rounded-md md:p-4 sm:flex-row lg:pl-5 lg:py-5;
+    .dashboard-summery-item-icon {
+      @apply flex items-center justify-center flex-none w-10 h-10 bg-white rounded-full;
 
-        .dashboard-summery-item-icon {
-            @apply flex items-center justify-center flex-none w-10 h-10 bg-white rounded-full;
-
-            i {
-                @apply text-xl text-blue-500;
-            }
-        }
+      i {
+        @apply text-xl text-blue-500;
+      }
     }
+  }
 
-    .card {
-        @apply overflow-hidden rounded-md;
+  .card {
+    @apply overflow-hidden rounded-md;
 
-        .card-title {
-            @apply text-xl text-blue-500 p-2 space-x-2;
-        }
+    .card-title {
+      @apply text-xl text-blue-500 p-2 space-x-2;
     }
+  }
+
+  .client-form-input {
+    @apply focus:outline-none border border-gray-400 rounded-md pr-2 pl-8 py-1 text-gray-400;
+  }
 }

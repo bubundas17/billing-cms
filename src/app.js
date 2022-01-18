@@ -49,15 +49,21 @@ if (env.NODE_ENV === 'development') {
   //     prefix: '/assets/css/',
   //   }),
   // );
+
+  let updating = false;
   watch(join(__dirname, 'views'), { recursive: true }, (event, filename) => {
-    exec('yarn build', (err, stdout, stderr) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      // console.log(stdout);
-      // console.log(stderr);
-    });
+    if (!updating) {
+      updating = true;
+      exec('yarn build', (err, stdout, stderr) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        updating = false;
+        console.log(stdout);
+        console.log(stderr);
+      });
+    }
     // console.log(filename);
   });
 }
