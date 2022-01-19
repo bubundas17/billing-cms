@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { watch } from 'fs';
+import { watch, statSync } from 'fs';
 const { exec } = require('child_process');
 
 import express from 'express';
@@ -21,6 +21,8 @@ import flash from '@helpers/flash.helper';
 
 import theme from '@lib/theme';
 
+import { build, watchBuilding } from '@lib/style-builder';
+
 // TODO - Add proper error handling and logging to the console
 // TODO - Reduce the amount of code in this file
 // TODO - Create perfect theme.registerThemeEngine method that will register a theme engine, you can use app.set to register the engine
@@ -40,25 +42,15 @@ app.set('views', join(__dirname, 'views'));
 
 // sassMiddleware
 if (env.NODE_ENV === 'development') {
-  // app.use(
-  //   sassMiddleware({
-  //     src: join(__dirname, 'assets', 'scss'),
-  //     dest: join(__dirname, 'assets', 'css'),
-  //     debug: false,
-  //     outputStyle: 'compressed',
-  //     prefix: '/assets/css/',
-  //   }),
-  // );
-  watch(join(__dirname, 'views'), { recursive: true }, (event, filename) => {
-    exec('yarn build', (err, stdout, stderr) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      // console.log(stdout);
-      // console.log(stderr);
+  watch(join(__dirname), { recursive: true }, (event, filename) => {
+    build();
+  });
+  app.use((req, res, next) => {
+    build();
+    watchBuilding(() => {
+      next();
     });
-    // console.log(filename);
+    // res.locals.env = env;
   });
 }
 

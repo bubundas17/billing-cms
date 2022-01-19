@@ -1,5 +1,7 @@
 import { getOption, setOption } from '@lib/options';
 
+// import enums
+import settings from '@enums/settings.enum';
 /**
  * @reqtype GET
  * @param {*} req
@@ -12,14 +14,14 @@ export const getIndex = (req, res) => {
 
 export const getGeneralSettings = async (req, res) => {
   res.render('admin/settings/general', {
-    siteTitle: await getOption('siteTitle'),
-    urlPrifix: await getOption('urlPrifix'),
+    siteTitle: await getOption(settings.SITE_TITLE),
+    urlPrifix: await getOption(settings.URL_PREFIX),
   });
 };
 
 export const postGeneralSettings = async (req, res) => {
   const { siteTitle, urlPrifix } = req.body;
-  await setOption('siteTitle', siteTitle);
-  await setOption('urlPrifix', urlPrifix);
+  await setOption(settings.SITE_TITLE, siteTitle);
+  await setOption(settings.URL_PREFIX, urlPrifix);
   res.redirect('/admin/settings/general');
 };

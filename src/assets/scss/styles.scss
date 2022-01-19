@@ -14,6 +14,7 @@
     scrollbar-width   : none;
   }
 }
+
 @media screen and (max-width: 1440px) {
   .sidebar {
     left      : -225px;
@@ -38,3 +39,4 @@
   transition: backdrop-filter 0.1s ease-in-out;
   z-index   : 49;
 }
+

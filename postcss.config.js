@@ -8,12 +8,12 @@ export default {
     //   content: ['./src/views/**/*.{html,hbs,js}'],
     // }),
     require('tailwindcss'),
-    autoprefixer(),
-    cssnano({
-      preset: [
-        'cssnano-preset-advanced',
-        { discardComments: { removeAll: true } },
-      ],
-    }),
+    // autoprefixer(),
+    // cssnano({
+    //   preset: [
+    //     'cssnano-preset-advanced',
+    //     { discardComments: { removeAll: true } },
+    //   ],
+    // }),
   ],
 };
