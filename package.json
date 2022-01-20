@@ -14,7 +14,7 @@
     "prepare": "husky install",
     "build:css": "cross-env NODE_ENV=production postcss ./src/assets/css/tailwind.css -o ./src/assets/css/styles.css",
     "watch:css": "postcss -w ./src/assets/css/tailwind.css -o ./src/assets/css/styles.css",
-    "dev": "concurrently -n \"App,CSS\" \"nodemon\" \"npm run watch:css\"",
+    "dev": "concurrently -c \"bold.yellow,bold.cyan\" -n \"App,CSS\" \"nodemon\" \"npm run watch:css\"",
     "build": "npm run build:css && babel ./src -d ./dist --delete-dir-on-start --copy-files",
     "start": "node ./dist/app.js"
   },
