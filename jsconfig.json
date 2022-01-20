@@ -9,7 +9,8 @@
       "@helpers/*": ["./src/helpers/*"],
       "@configs/*": ["./src/configs/*"],
       "@utils/*": ["./src/utils/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@enums/*": ["./src/enums/*"]
     }
   }
 }

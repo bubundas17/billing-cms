@@ -1,19 +1,19 @@
-import purgecss from '@fullhuman/postcss-purgecss';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
-
-export default {
-  plugins: [
-    // purgecss({
-    //   content: ['./src/views/**/*.{html,hbs,js}'],
-    // }),
-    require('tailwindcss'),
-    // autoprefixer(),
-    // cssnano({
-    //   preset: [
-    //     'cssnano-preset-advanced',
-    //     { discardComments: { removeAll: true } },
-    //   ],
-    // }),
-  ],
+module.exports = {
+  plugins: {
+    'postcss-import': {},
+    'tailwindcss/nesting': {},
+    tailwindcss: {},
+    'postcss-preset-env': {
+      features: { 'nesting-rules': false },
+    },
+    autoprefixer: {},
+    ...(process.env.NODE_ENV === 'production' && {
+      cssnano: {
+        preset: [
+          'cssnano-preset-advanced',
+          { discardComments: { removeAll: true } },
+        ],
+      },
+    }),
+  },
 };

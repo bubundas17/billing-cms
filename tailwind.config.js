@@ -1,6 +1,6 @@
 module.exports = {
-  content: ['**/*.hbs'],
-  // content: [],
+  content: ['./src/views/**/*.{html,hbs,js}'],
+  jit: true,
   theme: {
     extend: {
       fontSize: {
@@ -26,5 +26,4 @@ module.exports = {
       '2xl': '1440px',
     },
   },
-  plugins: [require('tailwindcss'), require('autoprefixer')],
 };
