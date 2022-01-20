@@ -32,17 +32,40 @@
     }
   }
 
-  /* Form Styles*/
+  form {
+    .form-label {
+      @apply relative flex items-center;
+    }
+
+    .form-control {
+      @apply text-base pl-8 pr-2 border-2 border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;
+    }
+
+    .form-input-icon {
+      @apply absolute px-2 text-gray-300;
+    }
+
+    .form-search-button {
+      @apply py-2 pl-10 pr-4 text-base text-gray-100 bg-blue-500 border-2 border-none rounded-md focus:outline-none;
+    }
+
+    .form-search-icon {
+      @apply absolute px-3 text-gray-100;
+    }
+  }
+
+  .user-search-result {
+    @apply text-base font-normal leading-tight tracking-tight text-gray-500;
+
+    & .user-search-result-count {
+      @apply font-medium text-gray-600;
+    }
+  }
+
   .form-group {
 
     .input-normal {
       @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none;
     }
-  }
-
-
-
-  .client-form {
-    @apply flex space-x-2;
   }
 }
