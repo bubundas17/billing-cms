@@ -35,6 +35,7 @@
     integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel='stylesheet' href='/assets/css/styles.css' />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 </head>
 
 <body class="lg:flex lg:flex-col lg:min-h-screen">
@@ -82,7 +83,7 @@
   }
   );
 
-  for (let i = 0; i < dropdown.length; i++) {
+  {{!-- for (let i = 0; i < dropdown.length; i++) {
     dropdown[i].addEventListener("click", () => {
       Array.from(dropdown[i].getElementsByClassName("dropdown-item"))
         .shift()
@@ -94,7 +95,7 @@
         .shift()
         .classList.toggle("hidden");
     });
-  }
+  } --}}
 </script>
 
 </html>
