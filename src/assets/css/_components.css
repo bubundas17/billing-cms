@@ -19,7 +19,7 @@
     }
   }
 
-  .client-form-input {
-    @apply py-1 pl-8 pr-2 text-gray-400 border border-gray-400 rounded-md focus:outline-none;
+  .client-form {
+    @apply flex space-x-2;
   }
 }

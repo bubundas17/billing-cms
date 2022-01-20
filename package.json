@@ -4,16 +4,18 @@
   "main": "src/app.js",
   "repository": "git@github.com:bubundas17/billing-cms.git",
   "author": "Bubun Das <bubundas17@gmail.com>",
+  "contributors": [
+    "Amit Mondal <androidone548@gmail.com>"
+  ],
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf ./dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "build:css": "cross-env NODE_ENV=production postcss ./src/assets/css/tailwind.css -o ./src/assets/css/styles.css",
     "watch:css": "postcss -w ./src/assets/css/tailwind.css -o ./src/assets/css/styles.css",
     "dev": "concurrently -n \"App,CSS\" \"nodemon\" \"npm run watch:css\"",
-    "build": "npm run clean && npm run build:css && babel ./src -d ./dist --copy-files",
+    "build": "npm run build:css && babel ./src -d ./dist --delete-dir-on-start --copy-files",
     "start": "node ./dist/app.js"
   },
   "lint-staged": {
@@ -48,7 +50,6 @@
     "postcss-nesting": "^10.1.2",
     "postcss-preset-env": "^7.2.3",
     "prettier": "^2.5.1",
-    "rimraf": "^3.0.2",
     "tailwindcss": "^3.0.15"
   },
   "dependencies": {

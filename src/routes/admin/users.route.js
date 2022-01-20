@@ -3,7 +3,7 @@ import BaseRoute from '@routes/base.route';
 
 class ClientsRoute extends BaseRoute {
   constructor() {
-    super('/admin/clients');
+    super('/admin/users');
     this.init();
   }
 

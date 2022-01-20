@@ -5,7 +5,7 @@
  * @param {object} res
  */
 export const getClients = (req, res) => {
-  res.render('admin/clients', {
-    pathName: 'Clients',
+  res.render('admin/users', {
+    pathName: 'Users',
   });
 };

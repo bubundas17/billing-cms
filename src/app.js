@@ -19,8 +19,6 @@ import flash from '@helpers/flash.helper';
 
 import theme from '@lib/theme';
 
-// import { build, watchBuilding } from '@lib/style-builder';
-
 // TODO - Add proper error handling and logging to the console
 // TODO - Reduce the amount of code in this file
 // TODO - Create perfect theme.registerThemeEngine method that will register a theme engine, you can use app.set to register the engine
@@ -37,20 +35,6 @@ const app = express();
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', join(__dirname, 'views'));
-
-// sassMiddleware
-// if (env.NODE_ENV === 'development') {
-//   watch(join(__dirname), { recursive: true }, (event, filename) => {
-//     build();
-//   });
-//   app.use((req, res, next) => {
-//     build();
-//     watchBuilding(() => {
-//       next();
-//     });
-//     // res.locals.env = env;
-//   });
-// }
 
 app.use('/assets', express.static(join(__dirname, 'assets')));
 app.use(express.urlencoded({ extended: true }));
@@ -90,7 +74,6 @@ app.use(routes);
 mongoose
   .connect(env.MONGO_URI)
   .then(() => {
-    console.log(process.env.NODE_ENV);
     console.log('Connected to MongoDB');
     app.listen(env.PORT, () =>
       console.log(`Server started on port ${env.PORT}`),
