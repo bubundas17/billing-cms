@@ -17,6 +17,9 @@ module.exports = {
       width: {
         15: '3.75rem',
       },
+      padding: {
+        0.5: '2px',
+      },
     },
     screens: {
       sm: '640px',
