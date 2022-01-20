@@ -11,13 +11,36 @@
     }
   }
 
+  /* Card Styles*/
   .card {
-    @apply overflow-hidden rounded-md;
+    @apply overflow-hidden rounded-md shadow-md border border-gray-200;
+
+    .flat {
+      @apply border-0 shadow-none;
+    }
 
     .card-title {
-      @apply p-2 space-x-2 text-xl text-blue-500;
+      @apply p-2 space-x-2 text-xl;
+    }
+
+    .primary {
+      @apply bg-blue-500 text-white text-xl leading-tight font-medium mb-2;
+    }
+
+    .card-body {
+      @apply p-2;
     }
   }
+
+  /* Form Styles*/
+  .form-group {
+
+    .input-normal {
+      @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none;
+    }
+  }
+
+
 
   .client-form {
     @apply flex space-x-2;

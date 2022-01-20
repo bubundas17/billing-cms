@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between px-5 py-5 border-b">
+<div class="flex items-center justify-between px-5 py-5 border-b bg-white shadow-sm" id="nav">
   <div class="flex items-center space-x-4">
     <button class="2xl:hidden" id="open-menu-button">
       <i class="text-lg text-blue-600 fas fa-bars"></i>
@@ -31,7 +31,7 @@
   </div>
 </div>
 <!-- Side Bar -->
-<div class="fixed top-0 bottom-0 left-0 right-0 z-10 flex-col w-56 bg-gray-100 2xl:flex sidebar" id="sidenav">
+<div class="fixed top-0 bottom-0 left-0 right-0 z-10 flex-col w-56 bg-gray-100 2xl:flex sidebar shadow-md" id="sidenav">
   <div class="flex items-center px-5 py-6 space-x-4 overflow-auto border-b" style="max-height: 98%">
     <button class="cursor-pointer 2xl:hidden" id="close-menu-button">
       <i class="text-lg text-blue-600 fas fa-bars"></i>
@@ -150,7 +150,11 @@
       children: [
         {
           name: 'General',
-          url: '/admin/settings/general'
+          url: '/admin/settings/general',
+        },
+        {
+          name: 'Email Configration',
+          url: '/admin/settings/email',
         }
       ]
     }

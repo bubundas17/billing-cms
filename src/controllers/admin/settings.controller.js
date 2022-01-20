@@ -25,3 +25,40 @@ export const postGeneralSettings = async (req, res) => {
   await setOption(settings.URL_PREFIX, urlPrifix);
   res.redirect('/admin/settings/general');
 };
+
+// get email settings
+export const getEmailSettings = async (req, res) => {
+  res.render('admin/settings/email', {
+    emailHost: await getOption(settings.EMAIL_HOST),
+    emailPort: await getOption(settings.EMAIL_PORT),
+    emailUsername: await getOption(settings.EMAIL_USERNAME),
+    emailPassword: await getOption(settings.EMAIL_PASSWORD),
+    emailFromAddress: await getOption(settings.EMAIL_FROM_ADDRESS),
+    emailFromName: await getOption(settings.EMAIL_FROM_NAME),
+    emailEnableSsl: await getOption(settings.EMAIL_ENABLE_SSL),
+    emailProvider: await getOption(settings.EMAIL_PROVIDER),
+  });
+};
+
+// post email settings
+export const postEmailSettings = async (req, res) => {
+  const {
+    emailHost,
+    emailPort,
+    emailUsername,
+    emailPassword,
+    emailFromAddress,
+    emailFromName,
+    emailEnableSsl,
+    emailProvider,
+  } = req.body;
+  await setOption(settings.EMAIL_HOST, emailHost);
+  await setOption(settings.EMAIL_PORT, emailPort);
+  await setOption(settings.EMAIL_USERNAME, emailUsername);
+  await setOption(settings.EMAIL_PASSWORD, emailPassword);
+  await setOption(settings.EMAIL_FROM_ADDRESS, emailFromAddress);
+  await setOption(settings.EMAIL_FROM_NAME, emailFromName);
+  await setOption(settings.EMAIL_ENABLE_SSL, emailEnableSsl);
+  await setOption(settings.EMAIL_PROVIDER, emailProvider);
+  res.redirect('/admin/settings/email');
+};

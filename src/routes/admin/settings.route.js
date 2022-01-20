@@ -3,6 +3,8 @@ import {
   getIndex,
   getGeneralSettings,
   postGeneralSettings,
+  postEmailSettings,
+  getEmailSettings,
 } from '@controllers/admin/settings.controller';
 class SettingsRoute extends BaseRoute {
   constructor() {
@@ -12,8 +14,12 @@ class SettingsRoute extends BaseRoute {
 
   init() {
     this.router.get('/', getIndex);
+    // general settings
     this.router.get('/general', getGeneralSettings);
     this.router.post('/general', postGeneralSettings);
+    // email settings
+    this.router.get('/email', getEmailSettings);
+    this.router.post('/email', postEmailSettings);
   }
 }
 
