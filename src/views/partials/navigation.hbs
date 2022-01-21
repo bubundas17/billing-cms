@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between px-5 py-5 bg-white border-b shadow-sm" id="nav">
+<div class="flex items-center justify-between px-5 py-5 border-b shadow-sm bg-gray-50" id="nav">
   <div class="flex items-center space-x-4">
     <button class="2xl:hidden" id="open-menu-button">
       <i class="text-lg text-blue-600 fas fa-bars"></i>
@@ -16,7 +16,6 @@
         <button class="text-sm font-semibold text-blue-600" href="">Log Out</button>
       </a>
     </div>
-
     {{else}}
     <div class="flex justify-end lg:space-x-3">
       <button class="px-2 py-1.5">
@@ -66,7 +65,6 @@
             </a>
           </div>
         </button>
-
 
         <button class="dropdown-btn" v-for="item in filteredItems">
           <div class="flex items-center mb-3" @click="toggleExpand(item.name)">
