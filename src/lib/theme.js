@@ -22,11 +22,6 @@ class Theme {
   constructor() {
     this.hbs = Handlebars;
     this.metadata = {};
-
-    this._cache = {};
-
-    if (Theme._instance) return Theme._instance;
-    Theme._instance = this;
   }
 
   getFileName(file, ext = '') {
@@ -151,9 +146,7 @@ class Theme {
   }
 
   async getEnabledTheme() {
-    this._cache['enabledTheme'] =
-      this._cache['enabledTheme'] || (await getOption('is-active-theme'));
-    return this._cache['enabledTheme'];
+    return await getOption('is-active-theme');
   }
 
   // get theme folder path
@@ -179,38 +172,17 @@ class Theme {
     return result;
   }
 
-  async loadTheme(file, options = {}) {
-    try {
-      const enabledTheme = await this.getEnabledTheme();
-      const isThemeAvailable = await this.isThemeAvailable(enabledTheme);
-      if (!isThemeAvailable) return '';
-      const fileData = await util.readFile(
-        cwd(),
-        'themes',
-        enabledTheme,
-        `${file}.hbs`,
-      );
-      const template = this.hbs.compile(fileData);
-      return template({ ...options });
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
-
   async registerThemeEngine(app) {
     app.use(async (req, res, next) => {
       let currentTheme = await theme.getCurrentTheme();
       res.locals.siteTitle = await getOption('siteTitle');
       res.load = async (file, options = {}) => {
-        // const doc = await theme.loadTheme(file, { ...options, ...res.locals });
         const doc = await theme.render(file, { ...options, ...res.locals });
         return res.send(doc);
       };
-      // console.log(currentTheme);
+
       res.locals.currentThemeDir = await theme.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
-      // console.log("A page is requested");
 
       res.title = async (title) => {
         res.locals.title = title;
@@ -225,52 +197,6 @@ class Theme {
       express.static(currentTheme.publicFolderPath),
     );
   }
-
-  // watch active theme partials folder for changes
-  // async watchPartials() {
-  //   const currentTheme = await theme.getCurrentTheme();
-  //   const partialsFolderPath = join(currentTheme.absulutePath, 'partials');
-  //   watch(
-  //     partialsFolderPath,
-  //     { recursive: true },
-  //     async (eventType, filename) => {
-  //       this.registerPartials();
-  //     },
-  //   );
-  // }
-
-  // Register Partials from current active theme
-  // async registerPartials() {
-  //   let currentTheme = await theme.getCurrentTheme();
-  //   const files = await directoryScanner(
-  //     join(currentTheme.absulutePath, 'partials/**/*.hbs'),
-  //   );
-
-  //   for (let file of files) {
-  //     const fileData = await util.readFile(file);
-  //     const template = this.hbs.compile(fileData, {
-  //       noEscape: true,
-  //       strict: true,
-  //     });
-  //     let abspath = normalize(file);
-  //     let partialname = abspath
-  //       .replace(join(currentTheme.absulutePath, 'partials/'), '')
-  //       .replace('.hbs', '')
-  //       .replace(/\\/g, '/');
-  //     this.hbs.unregisterPartial(partialname);
-  //     this.hbs.registerPartial(partialname, template);
-  //   }
-  // }
-
-  // register helpers
-  // async registerHelpers(app) {
-  //   // TODO: Add a way of setting title for each page in clientarea
-  //   this.hbs.registerHelper('title', function () {
-  //     if (this.title) {
-  //       return `<title>${this.title} - ${this.siteTitle}</title>`;
-  //     }
-  //   });
-  // }
 }
 
 const theme = new Theme();

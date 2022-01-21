@@ -19,7 +19,6 @@ function getKeyValue(key) {
  */
 export const getOption = async (key) => {
   let keyvalue = getKeyValue(key);
-  console.log(keyvalue);
 
   if (options[keyvalue]) {
     return options[keyvalue];

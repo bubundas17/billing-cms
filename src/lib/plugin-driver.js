@@ -1,8 +1,9 @@
 import { cwd } from 'process';
 import { join } from 'path';
 import fs from 'fs';
-import directoryScanner from '../utils/directory-scanner';
-import { getOption, setOption } from './options';
+
+import directoryScanner from '@utils/directory-scanner';
+import { getOption, setOption } from '@lib/options';
 
 class PluginDriver {
   constructor() {

@@ -10,10 +10,16 @@ import theme from '@lib/theme';
  */
 export const getIndex = async (req, res) => {
   const themes = await theme.allThemes();
-  console.log(themes);
   res.render('admin/themes/index', { themes });
 };
 
+/**
+ * @description Enable Theme by name
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
 export const getEnableTheme = async (req, res) => {
   const { themeName } = req.params;
 
@@ -32,6 +38,13 @@ export const getEnableTheme = async (req, res) => {
   }
 };
 
+/**
+ * @description Delete theme by name
+ *
+ * @param {object} req
+ * @param {object} res
+ * @returns {Promise}
+ */
 export const getDeleteTheme = async (req, res) => {
   const { themeName } = req.params;
 
