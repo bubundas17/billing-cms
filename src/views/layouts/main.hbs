@@ -18,39 +18,39 @@
   <div class="main-content lg:flex lg:flex-col lg:min-h-screen">
     {{{ body }}}
   </div>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => document.querySelectorAll(selector);
+
+    const sidenav = $("#sidenav");
+    const SidebarOverlay = $("#slidbar-overlay");
+    const body = $("body");
+
+    function openSlideNav() {
+      sidenav.classList.add("sidebar-active")
+      SidebarOverlay.classList.add("bg-black/80")
+      SidebarOverlay.classList.remove("hidden")
+      body.classList.add("overflow-hidden")
+    }
+
+    function closeSlideNav() {
+      sidenav.classList.remove("sidebar-active")
+      SidebarOverlay.classList.remove("bg-black/80")
+      SidebarOverlay.classList.add("hidden")
+      body.classList.remove("overflow-hidden")
+    }
+
+    const openMenuButton = $("#open-menu-button");
+    const closeMenuButton = $("#close-menu-button");
+    const dropdown = $$("#sidenav div.flex.flex-col.space-y-4 > button");
+
+    SidebarOverlay.addEventListener("click", () => closeSlideNav());
+
+    openMenuButton.addEventListener("click", () => openSlideNav());
+
+    closeMenuButton.addEventListener("click", () => closeSlideNav());
+  </script>
 </body>
-
-<script>
-  const $ = (selector) => document.querySelector(selector);
-  const $$ = (selector) => document.querySelectorAll(selector);
-
-  const sidenav = $("#sidenav");
-  const SidebarOverlay = $("#slidbar-overlay");
-  const body = $("body");
-
-  function openSlideNav() {
-    sidenav.classList.add("sidebar-active")
-    SidebarOverlay.classList.add("bg-black/80")
-    SidebarOverlay.classList.remove("hidden")
-    body.classList.add("overflow-hidden")
-  }
-
-  function closeSlideNav() {
-    sidenav.classList.remove("sidebar-active")
-    SidebarOverlay.classList.remove("bg-black/80")
-    SidebarOverlay.classList.add("hidden")
-    body.classList.remove("overflow-hidden")
-  }
-
-  const openMenuButton = $("#open-menu-button");
-  const closeMenuButton = $("#close-menu-button");
-  const dropdown = $$("#sidenav div.flex.flex-col.space-y-4 > button");
-
-  SidebarOverlay.addEventListener("click", () => closeSlideNav());
-
-  openMenuButton.addEventListener("click", () => openSlideNav());
-
-  closeMenuButton.addEventListener("click", () => closeSlideNav());
-</script>
 
 </html>
