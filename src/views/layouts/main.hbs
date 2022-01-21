@@ -1,28 +1,3 @@
-{{!-- <html lang='en'>
-
-<head>
-  <meta charset='UTF-8' />
-  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-  <title>Billing CMS</title>
-  <link rel='stylesheet' href='/assets/css/styles.css' />
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-</head>
-
-<body>
-  <div>
-    {{> navigation }}
-    <div class='container main'>
-      {{{ body }}}
-    </div>
-  </div>
-  <script src='/assets/js/bootstrap.min.js'></script>
-</body>
-
-</html> --}}
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,16 +15,19 @@
 
 <body class="lg:flex lg:flex-col lg:min-h-screen">
   {{> navigation }}
-  <div class="main-content">
+  <div class="main-content lg:flex lg:flex-col lg:min-h-screen">
     {{{ body }}}
   </div>
 </body>
+
 <script>
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => document.querySelectorAll(selector);
+
   const sidenav = $("#sidenav");
   const SidebarOverlay = $("#slidbar-overlay");
   const body = $("body");
+
   function openSlideNav() {
     sidenav.classList.add("sidebar-active")
     SidebarOverlay.classList.add("bg-black/80")
@@ -64,38 +42,15 @@
     body.classList.remove("overflow-hidden")
   }
 
-
-
   const openMenuButton = $("#open-menu-button");
   const closeMenuButton = $("#close-menu-button");
   const dropdown = $$("#sidenav div.flex.flex-col.space-y-4 > button");
-  SidebarOverlay.addEventListener("click", () => {
-    closeSlideNav()
-  });
 
-  openMenuButton.addEventListener("click", () => {
-    openSlideNav()
-  }
-  );
+  SidebarOverlay.addEventListener("click", () => closeSlideNav());
 
-  closeMenuButton.addEventListener("click", () => {
-    closeSlideNav()
-  }
-  );
+  openMenuButton.addEventListener("click", () => openSlideNav());
 
-  {{!-- for (let i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", () => {
-      Array.from(dropdown[i].getElementsByClassName("dropdown-item"))
-        .shift()
-        .classList.toggle("hidden");
-      Array.from(dropdown[i].getElementsByClassName("fa-angle-up"))
-        .shift()
-        .classList.toggle("hidden");
-      Array.from(dropdown[i].getElementsByClassName("fa-angle-down"))
-        .shift()
-        .classList.toggle("hidden");
-    });
-  } --}}
+  closeMenuButton.addEventListener("click", () => closeSlideNav());
 </script>
 
 </html>

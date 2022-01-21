@@ -1,19 +1,19 @@
 <a href='/admin/posts/new'><button class=''>Add Post</button></a>
 
 {{#if posts.length}}
-  {{#each posts}}
-    <div class='card mb-3'>
-      <div class='card-body'>
-        <h5 class='card-title'>{{title}}</h5>
-        <p class='card-text'>{{body}}</p>
-        <a href='/admin/posts/{{_id}}/edit' class='btn btn-primary'>Edit</a>
-        <form class='mt-2 d-inline' action='/admin/posts/delete' method='post'>
-          <input type='hidden' name='postId' value='{{_id}}' />
-          <input class='btn btn-danger' type='submit' value='Delete' />
-        </form>
-      </div>
-    </div>
-  {{/each}}
+{{#each posts}}
+<div class='mb-3 card'>
+  <div class='card-body'>
+    <h5 class='card-title'>{{title}}</h5>
+    <p class='card-text'>{{body}}</p>
+    <a href='/admin/posts/{{_id}}/edit' class='btn btn-primary'>Edit</a>
+    <form class='mt-2 d-inline' action='/admin/posts/delete' method='post'>
+      <input type='hidden' name='postId' value='{{_id}}' />
+      <input class='btn btn-danger' type='submit' value='Delete' />
+    </form>
+  </div>
+</div>
+{{/each}}
 {{else}}
-  <p>No posts found</p>
+<p>No posts found</p>
 {{/if}}
