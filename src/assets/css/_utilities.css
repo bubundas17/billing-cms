@@ -14,18 +14,15 @@
     }
   }
 
-  @media screen and (min-width: 1440px) {
-    .main-content,
-    #nav {
-      @apply ml-56;
-    }
-  }
-
   .sidebar-active {
     @apply left-0;
   }
 
   #slidbar-overlay {
     @apply z-40 transition-colors duration-100 ease-in-out transition-backdrop-filter;
+  }
+
+  body {
+    @apply antialiased lg:flex lg:flex-col lg:min-h-screen bg-gray-50;
   }
 }
