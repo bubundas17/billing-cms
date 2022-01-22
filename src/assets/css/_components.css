@@ -1,6 +1,6 @@
 @layer components {
   .dashboard-summery-item {
-    @apply flex flex-col items-center justify-center p-3 rounded-md md:p-4 sm:flex-row lg:pl-5 lg:py-5;
+    @apply flex flex-col items-center justify-center p-3 rounded-md md:p-4 sm:flex-row lg:pl-5 lg:py-5 shadow-md;
 
     .dashboard-summery-item-icon {
       @apply flex items-center justify-center flex-none w-10 h-10 bg-white rounded-full;
@@ -19,7 +19,7 @@
     }
 
     .card-title {
-      @apply p-2 space-x-2 text-xl;
+      @apply px-4 py-2 space-y-2 text-xl;
     }
 
     .primary {
@@ -27,7 +27,7 @@
     }
 
     .card-body {
-      @apply p-2;
+      @apply px-4 py-2 space-y-2;
     }
   }
 
