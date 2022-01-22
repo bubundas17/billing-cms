@@ -20,6 +20,7 @@ module.exports = {
       padding: {
         0.5: '2px',
       },
+      transitionProperty: { 'backdrop-filter': 'backdrop-filter' },
     },
     screens: {
       sm: '640px',

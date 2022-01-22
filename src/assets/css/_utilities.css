@@ -7,4 +7,25 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  @media screen and (max-width: 1440px) {
+    .sidebar {
+      @apply z-50 transition-all duration-100 ease-in-out -left-56;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    .main-content,
+    #nav {
+      @apply ml-56;
+    }
+  }
+
+  .sidebar-active {
+    @apply left-0;
+  }
+
+  #slidbar-overlay {
+    @apply z-40 transition-colors duration-100 ease-in-out transition-backdrop-filter;
+  }
 }

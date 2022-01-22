@@ -11,9 +11,8 @@
     }
   }
 
-  /* Card Styles*/
   .card {
-    @apply overflow-hidden rounded-md shadow-md border border-gray-200;
+    @apply overflow-hidden border border-gray-200 rounded-md shadow-md;
 
     .flat {
       @apply border-0 shadow-none;
@@ -24,7 +23,7 @@
     }
 
     .primary {
-      @apply bg-blue-500 text-white text-xl leading-tight font-medium mb-2;
+      @apply mb-2 text-xl font-medium leading-tight text-white bg-blue-500;
     }
 
     .card-body {
@@ -63,7 +62,6 @@
   }
 
   .form-group {
-
     .input-normal {
       @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none;
     }

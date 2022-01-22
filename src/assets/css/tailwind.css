@@ -5,34 +5,3 @@
 
 @import 'tailwindcss/utilities';
 @import './_utilities.css';
-
-@media screen and (max-width: 1440px) {
-  .sidebar {
-    left: -225px;
-    transition: all 0.1s ease-in-out;
-    z-index: 50;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .main-content {
-    margin-left: 225px !important;
-  }
-  #nav{
-    margin-left: 225px !important;
-  }
-}
-
-.sidebar-active {
-  left: 0;
-}
-
-#slidbar-overlay {
-  transition: background-color 0.1s ease-in-out;
-  transition: backdrop-filter 0.1s ease-in-out;
-  z-index: 49;
-}
-
-body {
-  background: #fefefe;
-}

@@ -1,4 +1,4 @@
-import { getOption, setOption } from '@lib/options';
+import { setOption } from '@lib/options';
 import theme from '@lib/theme';
 
 /**
