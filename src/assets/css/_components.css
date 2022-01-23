@@ -1,6 +1,6 @@
 @layer components {
   .dashboard-summery-item {
-    @apply flex flex-col items-center justify-center p-3 rounded-md md:p-4 sm:flex-row lg:pl-5 lg:py-5 shadow-md;
+    @apply flex flex-col items-center justify-center p-3 rounded-md shadow-md md:p-4 sm:flex-row lg:pl-5 lg:py-5;
 
     .dashboard-summery-item-icon {
       @apply flex items-center justify-center flex-none w-10 h-10 bg-white rounded-full;
@@ -44,7 +44,7 @@
     }
 
     .form-control {
-      @apply text-base pl-8 pr-2 border-2 border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;
+      @apply w-full text-base pl-8 pr-2 border-2 border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;
     }
 
     .form-input-icon {
