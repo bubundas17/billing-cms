@@ -13,10 +13,13 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen antialiased">
+
   {{> navigation }}
 
   {{{ body }}}
+
+  {{> footer}}
 
   <script>
     const $ = (selector) => document.querySelector(selector);

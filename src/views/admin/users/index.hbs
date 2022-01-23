@@ -1,21 +1,22 @@
-<div class='m-4'>
+<div class='m-4 2xl:ml-60'>
   <div class='text-lg font-bold leading-none tracking-normal text-gray-500'>
     Search Client
   </div>
   <div class='mt-4'>
-    <form class='flex space-x-2' action='#'>
-      <label class='relative flex items-center' for='name'>
+    <form class="space-y-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:space-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      action="#">
+      <label class='form-label' for='name'>
         <div class='form-input-icon'>
           <i class='far fa-user'></i>
         </div>
-        <input type='text' name='name' id='name' class='form-control' placeholder='Name' />
+        <input type='text' name='name' id='name' class=' form-control' placeholder='Name' />
       </label>
 
       <label class='form-label' for='company'>
         <div class='form-input-icon'>
           <i class='far fa-building'></i>
         </div>
-        <input type='text' name='company' id='company' class='form-control' placeholder='Company' />
+        <input type='text' name='company' id='company' class=' form-control' placeholder='Company' />
       </label>
 
       <label class='form-label' for='email'>
@@ -38,6 +39,7 @@
         </div>
         <input type='button' name='phone' id='phone' class='form-search-button' value='Search' />
       </label>
+
     </form>
   </div>
 
