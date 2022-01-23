@@ -1,20 +1,48 @@
 <div class='flex justify-center'>
-  <div class='w-96'>
-    <div class='mt-20 card'>
+  <div class='w-96 '>
+    <div class='mt-20 card w-full'>
       <div class='bg-blue-500 card-title'>
         <h5 class='text-white'>Email Configration</h5>
       </div>
       <div class='card-body'>
         <form action='/admin/settings/email' method='post' class='form-group'>
           <label for=''></label>
-          <label for='site-title' class='inline-block mb-2 text-gray-700 form-label'>Smtp Host</label>
+          <label
+            for='site-title'
+            class='inline-block mb-2 text-gray-700 form-label'
+          >Smtp Host</label>
           <input type='text' class='input-normal' placeholder='SMTP Host' />
-          <label for='site-title' class='inline-block mb-2 text-gray-700 form-label'>SMTP Port</label>
+          <label
+            for='site-title'
+            class='inline-block mb-2 text-gray-700 form-label'
+          >SMTP Port</label>
           <input type='text' class='input-normal' placeholder='port' />
+          <label
+            for='site-title'
+            class='inline-block mb-2 text-gray-700 form-label'
+          >SMTP Username</label>
           <input type='text' class='input-normal' placeholder='Username' />
+          <label
+            for='site-title'
+            class='inline-block mb-2 text-gray-700 form-label'
+          >Password</label>
           <input type='text' class='input-normal' placeholder='Password' />
+          <label
+            for='site-title'
+            class='inline-block mb-2 text-gray-700 form-label'
+          >From Email</label>
           <input type='text' class='input-normal' placeholder='From Email' />
+          <label
+            for='site-title'
+            class='inline-block mb-2 text-gray-700 form-label'
+          >From Name</label>
           <input type='text' class='input-normal' placeholder='From Name' />
+          <div class="flex justify-end">
+            <button
+              class='inline-block px-6 mt-3 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
+            >Save</button>
+          </div>
+
         </form>
       </div>
     </div>
