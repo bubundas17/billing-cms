@@ -23,12 +23,19 @@
     }
 
     .primary {
-      @apply mb-2 text-xl font-medium leading-tight text-white bg-blue-500;
+      @apply text-xl font-medium leading-tight text-white bg-blue-500;
     }
 
     .card-body {
       @apply px-4 py-2 space-y-2;
     }
+  }
+  
+  @media screen and (max-width: 1440px) {
+    .sidebar {
+        @apply z-50 transition-all duration-100 ease-in-out -left-56;
+    }
+
   }
 
   form {
