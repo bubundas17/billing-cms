@@ -1,23 +1,68 @@
-<div class='mx-auto mt-3 rw'>
-  <div class='px-3 py-4 card'>
-    <h1 class='text-center'>Sign In</h1>
-    <hr />
-    <form class='row g-3' action='/auth/signin' method='post'>
-      <div class='col-12'>
-        <label for='email' class='form-label'>Email</label>
-        <input type='email' class='form-control {{errorInput errors "email"}}' id='email' name='email'
-          value='{{email}}' />
-        {{errorMessage errors 'email'}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billing CMS Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel='stylesheet' href='/assets/css/styles.css' />
+</head>
+
+<body class="flex items-center justify-center h-screen antialiased bg-bluesh">
+
+  <div class="bg-white w-125 h-162.5 shadow-md shadow-blue-200">
+    <div class="flex flex-col items-center justify-center w-full h-full">
+      <div class="flex flex-col items-center">
+        <h3 class="text-3xl text-blue-500">QDASH</h3>
+        <span class="mt-10 text-lg font-bold text-gray-400">Client Login</span>
       </div>
-      <div class='col-12'>
-        <label for='password' class='form-label'>Password</label>
-        <input type='password' class='form-control {{errorInput errors "password"}}' id='password' name='password'
-          value='{{password}}' />
-        {{errorMessage errors 'password'}}
+
+      <form class="mt-2 space-y-2" action="/auth/signin" method="post">
+        <label class="relative flex items-center" for="username">
+          <div class="absolute mx-2 text-gray-400">
+            <i class="fas fa-user"></i>
+          </div>
+          <input
+            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border  rounded-md w-72 focus:outline-none"
+            type="text" placeholder="Username" value="{{email}}" name="email" />
+        </label>
+        <span class="-mt-1">{{errorMessage errors 'email'}}</span>
+
+        <label class="relative flex items-center" for="password">
+          <div class="absolute mx-2 text-gray-400">
+            <i class="fas fa-lock"></i>
+          </div>
+          <input
+            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border  rounded-md w-72 focus:outline-none"
+            type="password" placeholder="Password" value="{{password}}" name="password" />
+        </label>
+        <span class="-mt-1">{{errorMessage errors 'password'}}</span>
+
+        <button class="flex items-center justify-center px-2 py-2 space-x-2 bg-blue-500 rounded-md w-72" type="submit">
+          <div class="text-white">
+            <i class="fas fa-sign-in-alt"></i>
+          </div>
+          <span class="text-sm font-bold text-white">Login</span>
+        </button>
+
+        <div class="flex justify-between">
+          <label class="flex items-center space-x-2" for="rememberMe">
+            <input class="flex items-center" type="checkbox" name="rememberMe" id="rememberMe" />
+            <span class="flex items-center text-sm text-gray-500">Remember Me</span>
+          </label>
+
+          <a class="text-sm text-gray-500" href="#">Forgot Password?</a>
+        </div>
+      </form>
+
+      <div class="mt-10 text-sm">
+        <span class="text-gray-400">Don't have an account? <a class="font-medium" href="#">Register</a></span>
       </div>
-      <div class='col-12'>
-        <button type='submit' class='btn btn-primary'>Sign in</button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
+
+</body>

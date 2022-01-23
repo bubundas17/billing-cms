@@ -13,6 +13,7 @@ import pluginDriver from '@lib/plugin-driver';
 export const getSignUp = (req, res) => {
   res.render('auth/signup', {
     pathName: 'signup',
+    layout: false,
   });
 };
 
@@ -25,6 +26,7 @@ export const getSignUp = (req, res) => {
 export const getSignIn = (req, res) => {
   res.render('auth/signin', {
     pathName: 'signin',
+    layout: false,
   });
 };
 
@@ -50,6 +52,7 @@ export const postSignUp = async (req, res, next) => {
         confirmPassword,
         errors: mappedErrors(errors.array()),
         pathName: 'signup',
+        layout: false,
       });
     }
 
@@ -70,15 +73,19 @@ export const postSignUp = async (req, res, next) => {
  */
 export const postSignIn = async (req, res, next) => {
   const { email, password } = req.body;
+
+  console.log(email, password);
+
   const errors = validationResult(req);
   await pluginDriver.executeHook('onSignIn', { email, password });
   if (errors.isEmpty()) return next();
   pluginDriver.executeHook('onSignInError', errors);
-  res.render('auth/signin', {
+  return res.render('auth/signin', {
     pathName: 'signin',
     email,
     password,
     errors: mappedErrors(errors.array()),
+    layout: false,
   });
 };
 

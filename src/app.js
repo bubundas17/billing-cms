@@ -37,8 +37,8 @@ app.set('view engine', 'hbs');
 app.set('views', join(__dirname, 'views'));
 
 app.use('/assets', express.static(join(__dirname, 'assets')));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   session({
