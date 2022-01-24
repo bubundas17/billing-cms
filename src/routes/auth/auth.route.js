@@ -6,6 +6,7 @@ import {
   getSignIn,
   getSignUp,
   getSignOut,
+  getResetPassword,
   postSignIn,
   postSignUp,
 } from '@controllers';
@@ -22,6 +23,12 @@ class AuthRoute {
     this.router.get('/signup', ensureLoggedOut({ redirectTo: '/' }), getSignUp);
 
     this.router.get('/signin', ensureLoggedOut({ redirectTo: '/' }), getSignIn);
+
+    this.router.get(
+      '/reset-password',
+      ensureLoggedOut({ redirectTo: '/' }),
+      getResetPassword,
+    );
 
     this.router.post(
       '/signup',

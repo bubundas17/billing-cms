@@ -31,6 +31,19 @@ export const getSignIn = (req, res) => {
 };
 
 /**
+ * @description Render the sign in page
+ *
+ * @param {object} req
+ * @param {object} res
+ */
+export const getResetPassword = (req, res) => {
+  res.render('auth/reset-password', {
+    pathName: 'reset-password',
+    layout: false,
+  });
+};
+
+/**
  * @description Sign up a new user
  *
  * @param {object} req

@@ -1,40 +1,86 @@
-<div class='mx-auto mt-3 rw'>
-  <div class='px-3 py-4 card'>
-    <h1 class='text-center'>Sign Up</h1>
-    <hr />
-    <form class='row g-3' action='/auth/signup' method='post'>
-      <div class='col-md-6'>
-        <label for='name' class='form-label'>Name</label>
-        <input type='text' class='form-control {{errorInput errors "name"}}' id='name' name='name' value='{{name}}' />
-        {{errorMessage errors 'name'}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration | Billing CMS Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel='stylesheet' href='/assets/css/styles.css' />
+</head>
+
+<body class="flex items-center justify-center h-screen antialiased bg-bluesh">
+
+  <div class="bg-white w-11/12 py-10 sm:py-0 sm:w-125 sm:h-162.5 shadow-md shadow-blue-200 rounded-lg">
+    <div class="flex flex-col items-center justify-center h-full m-auto sm:w-full">
+      <div class="flex flex-col items-center">
+        <h3 class="text-3xl text-blue-500">QDASH</h3>
+        <span class="mt-10 text-lg font-bold text-gray-400">Registration</span>
       </div>
-      <div class='col-md-6'>
-        <label for='email' class='form-label'>Email</label>
-        <input type='email' class='form-control {{errorInput errors "email"}}' id='email' name='email'
-          value='{{email}}' />
-        {{errorMessage errors 'email'}}
+
+      <form class="mt-2 space-y-2" action="/auth/signin" method="post">
+        <label class="relative flex items-center" for="username">
+          <div class="absolute mx-2 text-gray-400">
+            <i class="fas fa-user"></i>
+          </div>
+          <input
+            class="{{errorInput errors 'username'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
+            type="text" placeholder="Username" value="{{username}}" name="username" />
+        </label>
+        <span class="-mt-1">{{errorMessage errors 'username'}}</span>
+
+        <label class="relative flex items-center" for="email">
+          <div class="absolute mx-2 text-gray-400">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <input
+            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
+            type="text" placeholder="Email" value="{{email}}" name="email" />
+        </label>
+        <span class="-mt-1">{{errorMessage errors 'email'}}</span>
+
+        <label class="relative flex items-center" for="password">
+          <div class="absolute mx-2 text-gray-400">
+            <i class="fas fa-lock"></i>
+          </div>
+          <input
+            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
+            type="password" placeholder="Password" value="{{password}}" name="password" />
+        </label>
+        <span class="-mt-1">{{errorMessage errors 'password'}}</span>
+
+        <label class="relative flex items-center" for="repeatPassword">
+          <div class="absolute mx-2 text-gray-400">
+            <i class="fas fa-lock"></i>
+          </div>
+          <input
+            class="{{errorInput errors 'repeatPassword'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
+            type="repeatPassword" placeholder="Repeat Password" value="{{repeatPassword}}" name="repeatPassword" />
+        </label>
+        <span class="-mt-1">{{errorMessage errors 'repeatPassword'}}</span>
+
+        <button class="flex items-center justify-center w-full px-2 py-2 space-x-2 bg-blue-500 rounded-md sm:w-72"
+          type="submit">
+          <div class="text-white">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <span class="text-sm font-bold text-white">Register</span>
+        </button>
+
+        <div class="flex justify-between">
+          <span class="flex items-center text-xs text-gray-500">By clicking Register you agree to the
+            <span class="ml-1 font-medium">Terms ofService</span>
+          </span>
+        </div>
+      </form>
+
+      <div class="mt-10 text-sm">
+        <span class="text-gray-400">Already have an account? <a class="font-medium" href="#">Login</a></span>
       </div>
-      <div class='col-md-6'>
-        <label for='password' class='form-label'>Password</label>
-        <input type='password' class='form-control {{errorInput errors "password"}}' id='password' name='password'
-          value='{{password}}' />
-        {{errorMessage errors 'password'}}
-      </div>
-      <div class='col-md-6'>
-        <label for='confirmPassword' class='form-label'>Confirm password</label>
-        <input type='password' class='form-control {{errorInput errors "confirmPassword"}}' id='confirmPassword'
-          name='confirmPassword' value='{{confirmPassword}}' />
-        {{errorMessage errors 'confirmPassword'}}
-      </div>
-      <div class='col-12'>
-        <label for='address' class='form-label'>Address</label>
-        <textarea class='form-control {{errorInput errors "address"}}' id='address' rows='3'
-          name='address'>{{address}}</textarea>
-        {{errorMessage errors 'address'}}
-      </div>
-      <div class='col-12'>
-        <button type='submit' class='btn btn-primary'>Sign up</button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
+
+</body>
