@@ -14,8 +14,8 @@
 
 <body class="flex items-center justify-center h-screen antialiased bg-bluesh">
 
-  <div class="bg-white w-125 h-162.5 shadow-md shadow-blue-200">
-    <div class="flex flex-col items-center justify-center w-full h-full">
+  <div class="bg-white w-11/12 py-10 sm:py-0 sm:w-125 sm:h-162.5 shadow-md shadow-blue-200">
+    <div class="flex flex-col items-center justify-center h-full m-auto sm:w-full">
       <div class="flex flex-col items-center">
         <h3 class="text-3xl text-blue-500">QDASH</h3>
         <span class="mt-10 text-lg font-bold text-gray-400">Client Login</span>
@@ -27,7 +27,7 @@
             <i class="fas fa-user"></i>
           </div>
           <input
-            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border  rounded-md w-72 focus:outline-none"
+            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
             type="text" placeholder="Username" value="{{email}}" name="email" />
         </label>
         <span class="-mt-1">{{errorMessage errors 'email'}}</span>
@@ -37,12 +37,13 @@
             <i class="fas fa-lock"></i>
           </div>
           <input
-            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border  rounded-md w-72 focus:outline-none"
+            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
             type="password" placeholder="Password" value="{{password}}" name="password" />
         </label>
         <span class="-mt-1">{{errorMessage errors 'password'}}</span>
 
-        <button class="flex items-center justify-center px-2 py-2 space-x-2 bg-blue-500 rounded-md w-72" type="submit">
+        <button class="flex items-center justify-center w-full px-2 py-2 space-x-2 bg-blue-500 rounded-md sm:w-72"
+          type="submit">
           <div class="text-white">
             <i class="fas fa-sign-in-alt"></i>
           </div>
