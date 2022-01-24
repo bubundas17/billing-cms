@@ -30,12 +30,11 @@
       @apply px-4 py-2 space-y-2;
     }
   }
-  
+
   @media screen and (max-width: 1440px) {
     .sidebar {
-        @apply z-50 transition-all duration-100 ease-in-out -left-56;
+      @apply z-50 transition-all duration-100 ease-in-out -left-56;
     }
-
   }
 
   form {
@@ -48,7 +47,7 @@
     }
 
     .form-input-icon {
-      @apply absolute px-2 text-gray-300;
+      @apply absolute px-2 text-gray-400;
     }
 
     .form-search-button {

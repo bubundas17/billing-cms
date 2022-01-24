@@ -20,6 +20,7 @@ module.exports = {
       },
       width: {
         15: '3.75rem',
+        75: '18.75rem',
         125: '31.25rem',
       },
       padding: {
@@ -35,4 +36,5 @@ module.exports = {
       '2xl': '1440px',
     },
   },
+  plugins: [require('@tailwindcss/forms')],
 };

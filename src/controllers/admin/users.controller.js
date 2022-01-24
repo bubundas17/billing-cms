@@ -9,3 +9,9 @@ export const getClients = (req, res) => {
     pathName: 'Users',
   });
 };
+
+export const getClientDetails = (req, res) => {
+  res.render('admin/users/details', {
+    pathName: 'User Details',
+  });
+};
