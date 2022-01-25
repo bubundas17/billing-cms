@@ -20,26 +20,114 @@
 
         <h4 class="mt-4 text-base font-medium tracking-normal text-gray-600">Update Profile</h4>
         <div class="w-full mt-2 bg-gray-100 rounded">
-            <button class="px-6 py-1.5 text-sm">Summary</button>
-            <button class="px-6 py-1.5 text-sm text-white bg-blue-600 rounded-md">Profile</button>
-            <button class="px-6 py-1.5 text-sm ">Users</button>
-            <button class="px-6 py-1.5 text-sm ">Contacts</button>
-            <button class="px-6 py-1.5 text-sm ">Services</button>
-            <button class="px-6 py-1.5 text-sm ">Billable Items</button>
-            <button class="px-6 py-1.5 text-sm ">Invoices</button>
-            <button class="px-6 py-1.5 text-sm ">Quotes</button>
-            <button class="px-6 py-1.5 text-sm ">Transactions</button>
-            <button class="px-6 py-1.5 text-sm ">Tickets</button>
-            <button class="px-6 py-1.5 text-sm ">Emails</button>
-            <button class="px-6 py-1.5 text-sm ">Notes</button>
+            <button class="px-6 py-2 text-sm">Summary</button>
+            <button class="px-6 py-2 text-sm text-white bg-blue-600 rounded-md">Profile</button>
+            <button class="px-6 py-2 text-sm ">Users</button>
+            <button class="px-6 py-2 text-sm ">Contacts</button>
+            <button class="px-6 py-2 text-sm ">Services</button>
+            <button class="px-6 py-2 text-sm ">Billable Items</button>
+            <button class="px-6 py-2 text-sm ">Invoices</button>
+            <button class="px-6 py-2 text-sm ">Quotes</button>
+            <button class="px-6 py-2 text-sm ">Transactions</button>
+            <button class="px-6 py-2 text-sm ">Tickets</button>
+            <button class="px-6 py-2 text-sm ">Emails</button>
+            <button class="px-6 py-2 text-sm ">Notes</button>
         </div>
 
-        <div class="w-full mt-2 bg-gray-100">
-            <form class="px-4 py-2" action="#">
-                <label class="form-label" for="firstName">
-                    <span>First Name</span>
-                    <input class="form-control w-75" type="text" />
-                </label>
+        <div class="w-full mt-2 overflow-hidden bg-gray-100 rounded-md">
+            <form class="grid grid-cols-2 px-6 py-2" action="#">
+                <div class="space-y-2">
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">First Name</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Last Name</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Company</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Email Address</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Phone Number</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Language</span>
+                        <select
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;">
+                            <option value="English">English</option>
+                            <option value="Hindi">Hindi</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Address</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">City</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">State</span>
+                        <select
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;">
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Postcode</span>
+                        <input
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;"
+                            type="text" />
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Country</span>
+                        <select
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;">
+                            <option value="India">India</option>
+                        </select>
+                    </label>
+
+                    <label class="form-label" for="name">
+                        <span class="font-normal tracking-tight text-gray-500 text-tiny w-28">Currency</span>
+                        <select
+                            class="w-72 text-base px-2 border  border-gray-200 focus:outline-none py-1.5 rounded-md text-gray-400;">
+                            <option value="USD">USD</option>
+                        </select>
+                    </label>
+                </div>
             </form>
         </div>
     </div>
