@@ -1,5 +1,5 @@
 import { getOption, setOption } from '@lib/options';
-
+import nodemailer from 'nodemailer';
 // import enums
 import settings from '@enums/settings.enum';
 /**
@@ -61,4 +61,40 @@ export const postEmailSettings = async (req, res) => {
   await setOption(settings.EMAIL_ENABLE_SSL, emailEnableSsl);
   await setOption(settings.EMAIL_PROVIDER, emailProvider);
   res.redirect('/admin/settings/email');
+};
+
+// test if the SMTP server is working without sending email
+export const postTestEmailSettings = async (req, res) => {
+  const {
+    emailHost,
+    emailPort,
+    emailUsername,
+    emailPassword,
+    emailFromAddress,
+    emailFromName,
+    emailEnableSsl,
+    emailProvider,
+  } = req.body;
+  const transporter = nodemailer.createTransport({
+    host: emailHost,
+    port: emailPort,
+    secure: emailEnableSsl,
+    auth: {
+      user: emailUsername,
+      pass: emailPassword,
+    },
+  });
+  const mailOptions = {
+    from: `${emailFromName} <${emailFromAddress}>`,
+    to: emailUsername,
+    subject: 'Test Email',
+    text: 'This is a test email',
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      res.json({ error: true, message: error.message });
+    } else {
+      res.json({ error: false, message: info.response });
+    }
+  });
 };

@@ -83,3 +83,8 @@ export const signInValidator = [
     .withMessage('Password must be at least 6 characters long')
     .bail(),
 ];
+
+export const generalSettingsValidator = [
+  body('siteTitle').trim().notEmpty().withMessage('Site title is required'),
+  body('urlPrifix').trim().notEmpty().withMessage('Url prifix is required'),
+];
