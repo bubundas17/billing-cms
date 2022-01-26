@@ -19,10 +19,18 @@
   }
 
   #slidbar-overlay {
-    @apply z-40 transition-colors duration-100 ease-in-out transition-backdrop-filter;
+    @apply z-40 transition duration-100 ease-in-out;
   }
 
   body {
     @apply antialiased lg:flex lg:flex-col lg:min-h-screen bg-gray-50;
+  }
+
+  input:checked ~ .dot {
+    transform: translateX(100%);
+  }
+
+  input:checked ~ .line {
+    @apply bg-blue-500;
   }
 }
