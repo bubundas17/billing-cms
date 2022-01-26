@@ -14,7 +14,8 @@
 
 <body class="flex items-center justify-center h-screen antialiased bg-bluesh">
 
-  <div class="bg-white w-full mx-2 py-10 sm:py-0 sm:w-125 sm:h-162.5 shadow-md shadow-blue-200 rounded-lg">
+  <div class="relative bg-white w-full mx-2 py-10 sm:py-0 sm:w-125 sm:h-162.5 shadow-md shadow-blue-200 rounded-lg">
+    <div class="absolute bg-blue-500 blur"></div>
     <div class="flex flex-col items-center justify-center h-full m-auto sm:w-full">
       <div class="flex flex-col items-center">
         <h3 class="text-3xl text-blue-500">QDASH</h3>
@@ -27,7 +28,7 @@
             <i class="fas fa-user"></i>
           </div>
           <input
-            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
+            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none border-gray-200"
             type="text" placeholder="Username" value="{{email}}" name="email" />
         </label>
         <span class="-mt-1">{{errorMessage errors 'email'}}</span>
@@ -37,7 +38,7 @@
             <i class="fas fa-lock"></i>
           </div>
           <input
-            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none"
+            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none border-gray-200"
             type="password" placeholder="Password" value="{{password}}" name="password" />
         </label>
         <span class="-mt-1">{{errorMessage errors 'password'}}</span>
