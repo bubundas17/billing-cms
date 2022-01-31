@@ -1,88 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+<div
+  class='card card--no-border display-center__box display-center__box--drop-shadow'
+>
+  <div class='display-center__content display-center__content--center'>
+    <div>
+      <h3 class='display-center__title'>QDASH</h3>
+      <span class='display-center__sub-text'>Registration</span>
+    </div>
+    <form class='display-center__form' action='#'>
+      <label class='display-center__form-label'>
+        <i class='fas fa-user display-center__form-icon'></i>
+        <input
+          type='text'
+          class='form-control display-center__form-input'
+          placeholder='Username'
+        />
+      </label>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Billing CMS Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel='stylesheet' href='/assets/css/styles.css' />
-</head>
+      <label class='display-center__form-label'>
+        <i class='fas fa-lock display-center__form-icon'></i>
+        <input
+          type='email'
+          class='form-control display-center__form-input'
+          placeholder='Email address'
+        />
+      </label>
 
-<body class="flex items-center justify-center h-screen antialiased bg-bluesh">
+      <label class='display-center__form-label'>
+        <i class='fas fa-lock display-center__form-icon'></i>
+        <input
+          type='password'
+          class='form-control display-center__form-input'
+          placeholder='Password'
+        />
+      </label>
 
-  <div class="bg-white w-full mx-2 py-10 sm:py-0 sm:w-125 sm:h-162.5 shadow-md shadow-blue-200 rounded-lg">
-    <div class="flex flex-col items-center justify-center h-full m-auto sm:w-full">
-      <div class="flex flex-col items-center">
-        <h3 class="text-3xl text-blue-500">QDASH</h3>
-        <span class="mt-10 text-lg font-bold text-gray-400">Registration</span>
+      <label class='display-center__form-label'>
+        <i class='fas fa-lock display-center__form-icon'></i>
+        <input
+          type='password'
+          class='form-control display-center__form-input'
+          placeholder='Repeat Password'
+        />
+      </label>
+
+      <button type='submit' class='btn display-center__form-submit-btn'>
+        <i class='fas fa-sign-in-alt display-center__form-submit-btn-icon'></i>
+        <span class='display-center__form-submit-btn-text'>Register</span>
+      </button>
+
+      <div class='mt-1 text-center'>
+        <span class='display-center__extra-text'>
+          By clicking Register you agree to the Terms of Service
+        </span>
       </div>
+    </form>
 
-      <form class="mt-2 space-y-2" action="/auth/signin" method="post">
-        <label class="relative flex items-center" for="username">
-          <div class="absolute mx-2 text-gray-400">
-            <i class="fas fa-user"></i>
-          </div>
-          <input
-            class="{{errorInput errors 'username'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none border-gray-200"
-            type="text" placeholder="Username" value="{{username}}" name="username" />
-        </label>
-        <span class="-mt-1">{{errorMessage errors 'username'}}</span>
-
-        <label class="relative flex items-center" for="email">
-          <div class="absolute mx-2 text-gray-400">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <input
-            class="{{errorInput errors 'email'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none border-gray-200"
-            type="text" placeholder="Email" value="{{email}}" name="email" />
-        </label>
-        <span class="-mt-1">{{errorMessage errors 'email'}}</span>
-
-        <label class="relative flex items-center" for="password">
-          <div class="absolute mx-2 text-gray-400">
-            <i class="fas fa-lock"></i>
-          </div>
-          <input
-            class="{{errorInput errors 'password'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none border-gray-200"
-            type="password" placeholder="Password" value="{{password}}" name="password" />
-        </label>
-        <span class="-mt-1">{{errorMessage errors 'password'}}</span>
-
-        <label class="relative flex items-center" for="repeatPassword">
-          <div class="absolute mx-2 text-gray-400">
-            <i class="fas fa-lock"></i>
-          </div>
-          <input
-            class="{{errorInput errors 'repeatPassword'}} py-2 pl-10 pr-2 text-gray-500 bg-gray-100 border w-full rounded-md sm:w-72 focus:outline-none border-gray-200"
-            type="password" placeholder="Repeat Password" value="{{repeatPassword}}" name="repeatPassword" />
-        </label>
-        <span class="-mt-1">{{errorMessage errors 'repeatPassword'}}</span>
-
-        <button class="flex items-center justify-center w-full px-2 py-2 space-x-2 bg-blue-500 rounded-md sm:w-72"
-          type="submit">
-          <div class="text-white">
-            <i class="fas fa-user-plus"></i>
-          </div>
-          <span class="text-sm font-bold text-white">Register</span>
-        </button>
-
-        <div class="flex justify-between">
-          <span class="flex items-center text-xs text-gray-500">
-            By clicking
-            <span class="mx-1 font-medium">Register</span>
-            you agree to the <span class="mx-1 font-medium">Terms of Service</span>
-          </span>
-        </div>
-      </form>
-
-      <div class="mt-10 text-sm">
-        <span class="text-gray-400">Already have an account? <a class="font-medium" href="#">Login</a></span>
-      </div>
+    <div class='display-center__extra'>
+      Already have an account?
+      <a href='#' class='display-center__extra-link'>
+        Login
+      </a>
     </div>
   </div>
-
-</body>
+</div>

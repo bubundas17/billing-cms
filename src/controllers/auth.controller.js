@@ -13,7 +13,7 @@ import pluginDriver from '@lib/plugin-driver';
 export const getSignUp = (req, res) => {
   res.render('auth/signup', {
     pathName: 'signup',
-    layout: false,
+    layout: 'auth',
   });
 };
 
@@ -26,7 +26,7 @@ export const getSignUp = (req, res) => {
 export const getSignIn = (req, res) => {
   res.render('auth/signin', {
     pathName: 'signin',
-    layout: false,
+    layout: 'auth',
   });
 };
 
@@ -39,7 +39,7 @@ export const getSignIn = (req, res) => {
 export const getResetPassword = (req, res) => {
   res.render('auth/reset-password', {
     pathName: 'reset-password',
-    layout: false,
+    layout: 'auth',
   });
 };
 
@@ -65,7 +65,7 @@ export const postSignUp = async (req, res, next) => {
         confirmPassword,
         errors: mappedErrors(errors.array()),
         pathName: 'signup',
-        layout: false,
+        layout: 'auth',
       });
     }
 
@@ -98,7 +98,7 @@ export const postSignIn = async (req, res, next) => {
     email,
     password,
     errors: mappedErrors(errors.array()),
-    layout: false,
+    layout: 'auth',
   });
 };
 
