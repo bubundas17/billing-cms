@@ -237,89 +237,89 @@
     background-color: $white_solid;
     border-radius: 0.3125rem;
     overflow: auto;
-  }
 
-  &__header {
-    height: 2.5rem;
-    min-height: 2.5rem;
-    max-height: 2.5rem;
-    background-color: $bright_navy_blue;
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-
-    &-icon {
-      height: 0.9375rem;
-      width: 0.9375rem;
-      line-height: 0.9375rem;
-      color: $white;
-      font-size: 0.9375rem;
-    }
-
-    &-name {
-      font-weight: bold;
-      line-height: 1.25rem;
-      color: $white;
-      font-size: 0.9375rem;
-    }
-
-    &-view-all {
-      line-height: 0.8125rem;
-      color: $white;
-      font-size: 0.625rem;
-    }
-  }
-
-  &__content {
-    &-item:not(:last-child) {
-      border-bottom: 1px solid lighten($color: $lilac_blue, $amount: 35);
-    }
-
-    &-icon {
-      width: 1.25rem;
-      height: 1.25rem;
-      border-radius: 50%;
+    &__header {
+      height: 2.5rem;
+      min-height: 2.5rem;
+      max-height: 2.5rem;
+      background-color: $bright_navy_blue;
+      overflow: hidden;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
+      flex-wrap: nowrap;
 
-      i {
+      &-icon {
+        height: 0.9375rem;
+        width: 0.9375rem;
+        line-height: 0.9375rem;
+        color: $white;
+        font-size: 0.9375rem;
+      }
+
+      &-name {
+        font-weight: bold;
+        line-height: 1.25rem;
+        color: $white;
+        font-size: 0.9375rem;
+      }
+
+      &-view-all {
+        line-height: 0.8125rem;
         color: $white;
         font-size: 0.625rem;
       }
-
-      @each $key, $val in $details-box {
-        $bold: map-get($val, 'bold');
-
-        &--#{$key} {
-          background-color: $bold;
-        }
-      }
     }
 
-    &-details {
-      &-name {
-        font-size: 0.75rem;
-        line-height: 1rem;
-        font-weight: 500;
-        color: $annapolis_blue;
+    &__content {
+      &-item:not(:last-child) {
+        border-bottom: 1px solid lighten($color: $lilac_blue, $amount: 35);
       }
 
-      &-info {
-        font-size: 0.75rem;
-        line-height: 1rem;
+      &-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          color: $white;
+          font-size: 0.625rem;
+        }
+
+        @each $key, $val in $details-box {
+          $bold: map-get($val, 'bold');
+
+          &--#{$key} {
+            background-color: $bold;
+          }
+        }
+      }
+
+      &-details {
+        &-name {
+          font-size: 0.75rem;
+          line-height: 1rem;
+          font-weight: 500;
+          color: $annapolis_blue;
+        }
+
+        &-info {
+          font-size: 0.75rem;
+          line-height: 1rem;
+          font-weight: 300;
+          color: $annapolis_blue;
+        }
+      }
+
+      &-time {
+        font-size: 0.625rem;
+        line-height: 0.8125rem;
         font-weight: 300;
         color: $annapolis_blue;
       }
-    }
-
-    &-time {
-      font-size: 0.625rem;
-      line-height: 0.8125rem;
-      font-weight: 300;
-      color: $annapolis_blue;
     }
   }
 }

@@ -246,3 +246,4 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,intellij+all
 yarn.lock
 src/assets/css/styles.css
+*.css.map
