@@ -1,265 +1,140 @@
-<div class='m-4'>
-  <div class='text-lg font-bold leading-none tracking-normal text-gray-500'>
-    Search Client
-  </div>
-  <div class='mt-4'>
-    <form class="space-y-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:space-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-      action="#">
-      <label class='form-label' for='name'>
-        <div class='form-input-icon'>
-          <i class='far fa-user'></i>
+<main class='container-fluid'>
+  <div class='mx-2 my-3'>
+    <h3 class='main-content__title'>Search Client</h3>
+
+    <div>
+      <form
+        class='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-2 client-search-form'
+        action='#'
+      >
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fas fa-user client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Name'
+            />
+          </label>
         </div>
-        <input type='text' name='name' id='name' class='w-full form-control' placeholder='Name' />
-      </label>
 
-      <label class='form-label' for='company'>
-        <div class='form-input-icon'>
-          <i class='far fa-building'></i>
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fas fa-building client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Company'
+            />
+          </label>
         </div>
-        <input type='text' name='company' id='company' class='w-full form-control' placeholder='Company' />
-      </label>
 
-      <label class='form-label' for='email'>
-        <div class='form-input-icon'>
-          <i class='far fa-envelope'></i>
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fas fa-envelope client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Email Address'
+            />
+          </label>
         </div>
-        <input type='email' name='email' id='email' class='w-full form-control' placeholder='Email Address' />
-      </label>
 
-      <label class='form-label' for='phone'>
-        <div class='form-input-icon'>
-          <i class='fas fa-phone'></i>
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fas fa-phone client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Phone No.'
+            />
+          </label>
         </div>
-        <input type='number' name='phone' id='phone' class='w-full form-control' placeholder='Phone No.' />
-      </label>
 
-      <label class='form-label' for='phone'>
-        <div class='form-search-icon'>
-          <i class='fas fa-search'></i>
+        <div class='col'>
+          <button type='submit' class='btn client-search-form__submit-btn'>
+            <i class='fas fa-search client-search-form__submit-btn-icon'></i>
+            <span class='client-search-form__submit-btn-text'>Search</span>
+          </button>
         </div>
-        <input type='button' name='phone' id='phone' class='form-search-button' value='Search' />
-      </label>
+      </form>
 
-    </form>
-  </div>
+      <span class='mt-4 d-block main-content__sub-text'>
+        <span class='main-content__sub-text--strong'>320</span>
+        Search results found. Showing
+        <span class='main-content__sub-text--strong'>1</span>
+        to
+        <span class='main-content__sub-text--strong'>50</span>
+      </span>
 
-  <div class='mt-6'>
-    <div class='user-search-result'>
-      <span class='user-search-result-count'>320</span>
-      Search results found, Showing
-      <span class='user-search-result-count'>1</span>
-      to
-      <span class='user-search-result-count'>50</span>
+      <div class='mt-2 table-responsive'>
+        <table class='table search-result-table'>
+          <thead>
+            <tr>
+              <th scope='col'>ID</th>
+              <th scope='col'>First Name</th>
+              <th scope='col'>Last Name</th>
+              <th scope='col'>Company</th>
+              <th scope='col'>Email Address</th>
+              <th scope='col'>Phone No.</th>
+              <th scope='col'>Services</th>
+              <th scope='col'>Created</th>
+              <th scope='col'>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td class='status--sm'>
+                <span class='badge bg-green'>Active</span>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td class='status--sm'>
+                <span class='badge bg-red'>Closed</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <nav class='d-flex align-items-center justify-content-center'>
+        <ul class='pagination'>
+          <li class='page-item page-item--active'>
+            <a class='page-link page-link--active' href='#' aria-label='Previous'>
+              <span aria-hidden='true'>
+                <i class='fas fa-angle-left'></i>
+              </span>
+            </a>
+          </li>
+          <li class='page-item'><a
+              class='page-link'
+              href='#'
+            >1</a></li>
+          <li class='page-item'><a class='page-link' href='#'>2</a></li>
+          <li class='page-item'><a class='page-link' href='#'>3</a></li>
+          <li class='page-item'>
+            <a class='page-link' href='#' aria-label='Next'>
+              <i class='fas fa-angle-right'></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
-
-  <div class='pb-4 mt-2 overflow-x-scroll lg:no-scrollbar'>
-    <table class='w-full overflow-hidden bg-white divide-y divide-gray-300 rounded-lg table-auto whitespace-nowrap'>
-      <thead class='bg-blue-500'>
-        <tr class='text-left text-white'>
-          <th class='px-4 py-2 text-sm font-semibold'>ID</th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            First Name
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Last Name
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Company
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Email Address
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Phone No.
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Services
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Created
-          </th>
-          <th class='px-4 py-2 text-sm font-semibold'>
-            Status
-          </th>
-        </tr>
-      </thead>
-      <tbody class='bg-gray-100 divide-y'>
-        <tr>
-          <td class='px-4 py-1.5 text-gray-400'>
-            1785
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Amol
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Wale
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Phantom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            amolwale@gmail.coom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            +917856789
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            5/7
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            21-Jan-2021
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            <span class='text-xs text-white bg-green-500 rounded p-0.5'>Active</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td class='px-4 py-1.5 text-gray-400'>
-            1785
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Amol
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Wale
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Phantom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            amolwale@gmail.coom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            +917856789
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            5/7
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            21-Jan-2021
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            <span class='text-xs text-white bg-green-500 rounded p-0.5'>Active</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td class='px-4 py-1.5 text-gray-400'>
-            1785
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Amol
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Wale
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Phantom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            amolwale@gmail.coom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            +917856789
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            5/7
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            21-Jan-2021
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            <span class='text-xs text-white bg-green-500 rounded p-0.5'>Active</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td class='px-4 py-1.5 text-gray-400'>
-            1785
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Amol
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Wale
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Phantom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            amolwale@gmail.coom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            +917856789
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            5/7
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            21-Jan-2021
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            <span class='text-xs text-white bg-green-500 rounded p-0.5'>Active</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td class='px-4 py-1.5 text-gray-400'>
-            1785
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Amol
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Wale
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            Phantom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            amolwale@gmail.coom
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            +917856789
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            5/7
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            21-Jan-2021
-          </td>
-          <td class='px-4 py-1.5 text-gray-400'>
-            <span class='text-xs text-white bg-red-500 rounded p-0.5'>Closed</span>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-
-  <div class='flex items-center justify-center mt-4 space-x-2'>
-    <button class='px-3 py-1 font-bold text-gray-500 bg-gray-100 rounded'>
-      <i class='fas fa-chevron-left'></i>
-    </button>
-    <button class='px-3 py-1 font-bold text-white bg-blue-500 rounded'>
-      1
-    </button>
-    <button class='px-3 py-1 font-medium text-gray-500 bg-gray-100 rounded'>
-      2
-    </button>
-    <button class='px-3 py-1 font-medium text-gray-500 bg-gray-100 rounded'>
-      3
-    </button>
-    <button class='px-3 py-1 font-medium text-gray-500 bg-gray-100 rounded'>
-      4
-    </button>
-    <button class='px-3 py-1 font-medium text-gray-500 bg-gray-100 rounded'>
-      5
-    </button>
-    <button class='px-3 py-1 font-bold text-gray-500 bg-gray-100 rounded'>
-      <i class='fas fa-chevron-right'></i>
-    </button>
-  </div>
-</div>
+</main>

@@ -1,6 +1,8 @@
 // Colors
 @import 'colors';
 
+$table-border-width: 0;
+
 // Bootstrap
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 
@@ -8,6 +10,14 @@
 @import 'variables';
 
 // Customization
+@each $key, $val in $details-box {
+  $bold: map-get($val, 'bold');
+
+  .bg-#{$key} {
+    background-color: $bold;
+  }
+}
+
 .backdrops {
   background-color: rgba($color: #000000, $alpha: 0.2);
   position: fixed;
@@ -146,6 +156,16 @@
     line-height: 1.625rem;
     font-weight: bold;
     color: $annapolis_blue;
+  }
+
+  &__sub-text {
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    color: $annapolis_blue;
+
+    &--strong {
+      font-weight: 500;
+    }
   }
 }
 
@@ -411,142 +431,288 @@
   border: none;
   outline: none;
 
-  .display-center {
-    &__box {
-      width: 31.25rem;
-      height: 40.625rem;
+  &__box {
+    width: 31.25rem;
+    height: 40.625rem;
 
-      &--drop-shadow {
-        filter: drop-shadow(0 0 0.85rem lighten($bright_navy_blue, 40));
-      }
+    &--drop-shadow {
+      filter: drop-shadow(0 0 0.85rem lighten($bright_navy_blue, 40));
     }
+  }
 
-    &__content {
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    &--center {
       display: flex;
-      flex-direction: column;
-
-      &--center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-      }
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
+  }
 
-    &__title {
-      font-size: 2.1875rem;
-      line-height: 2.9375rem;
-      color: $bright_navy_blue;
-      font-weight: 500;
-      text-align: center;
-    }
+  &__title {
+    font-size: 2.1875rem;
+    line-height: 2.9375rem;
+    color: $bright_navy_blue;
+    font-weight: 500;
+    text-align: center;
+  }
 
-    &__sub-text {
-      display: block;
-      margin-top: 2.5rem;
-      margin-bottom: 0.8rem;
-      color: $lilac_blue;
-      font-size: 1.125rem;
-      font-weight: bold;
-      line-height: 1.5rem;
-      text-align: center;
-    }
+  &__sub-text {
+    display: block;
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    color: $lilac_blue;
+    font-size: 1.125rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    text-align: center;
+  }
 
-    &__extra {
-      margin-top: 2.5rem;
-      text-align: center;
-      color: $lilac_blue;
+  &__extra {
+    margin-top: 2.5rem;
+    text-align: center;
+    color: $lilac_blue;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+
+    &-text {
       font-size: 0.75rem;
       line-height: 1rem;
       font-weight: 400;
+      color: $lilac_blue;
+      text-decoration: none;
+      text-align: middle;
+    }
 
-      &-text {
-        font-size: 0.75rem;
-        line-height: 1rem;
-        font-weight: 400;
-        color: $lilac_blue;
-        text-decoration: none;
-        text-align: middle;
-      }
+    &-link {
+      color: $lilac_blue;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  }
 
-      &-link {
-        color: $lilac_blue;
-        text-decoration: none;
-        font-weight: 500;
+  &__form {
+    &-label {
+      display: flex;
+      position: relative;
+      width: 18.75rem;
+      height: 2.5rem;
+      min-width: 18.75rem;
+      min-height: 2.5rem;
+      align-items: center;
+
+      &:not(:first-child) {
+        margin-top: 0.75rem;
       }
     }
 
-    &__form {
-      &-label {
-        display: flex;
-        position: relative;
-        width: 18.75rem;
-        height: 2.5rem;
-        min-width: 18.75rem;
-        min-height: 2.5rem;
-        align-items: center;
+    &-icon {
+      position: absolute;
+      z-index: 1;
+      margin-left: 0.5rem;
+      color: $lilac_blue;
+      line-height: 0.9375rem;
+      font-size: 0.9375rem;
+    }
 
-        &:not(:first-child) {
-          margin-top: 0.75rem;
-        }
+    &-input {
+      position: relative;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      padding-left: 2rem;
+      color: $lilac_blue;
+      background-color: $white_solid;
+      border-color: $lilac_blue;
+
+      &::placeholder {
+        color: $lilac_blue;
+        font-size: 0.9375rem;
+        font-weight: 300;
+        line-height: 1.25rem;
       }
+    }
+
+    &-submit-btn {
+      margin-top: 0.5rem;
+      width: 18.75rem;
+      height: 2.5rem;
+      min-width: 18.75rem;
+      min-height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $bright_navy_blue;
+      border: none;
+      outline: none;
+      border-radius: 0.3125rem;
 
       &-icon {
-        position: absolute;
-        z-index: 1;
+        color: $white;
+        font-size: 1.125rem;
+        line-height: 1.125rem;
+      }
+
+      &-text {
+        color: $white;
         margin-left: 0.5rem;
-        color: $lilac_blue;
-        line-height: 0.9375rem;
         font-size: 0.9375rem;
+        line-height: 1.25rem;
+        font-weight: 500;
       }
+    }
+  }
+}
 
-      &-input {
-        position: relative;
-        z-index: 0;
-        width: 100%;
-        height: 100%;
-        display: block;
-        padding-left: 2rem;
-        color: $lilac_blue;
-        background-color: $white_solid;
-        border-color: $lilac_blue;
+.client-search-form {
+  &__label {
+    display: flex;
+    position: relative;
+    height: 2.5rem;
+    min-width: 12.5rem;
+    min-height: 2.5rem;
+    align-items: center;
+  }
 
-        &::placeholder {
-          color: $lilac_blue;
-          font-size: 0.9375rem;
-          font-weight: 300;
-          line-height: 1.25rem;
-        }
-      }
+  &__icon {
+    position: absolute;
+    z-index: 1;
+    margin-left: 0.5rem;
+    color: $lilac_blue;
+    line-height: 0.9375rem;
+    font-size: 0.9375rem;
+  }
 
-      &-submit-btn {
-        margin-top: 0.5rem;
-        width: 18.75rem;
-        height: 2.5rem;
-        min-width: 18.75rem;
-        min-height: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: $bright_navy_blue;
-        border: none;
-        outline: none;
-        border-radius: 0.3125rem;
+  &__input {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding-left: 2rem;
+    color: $lilac_blue;
+    background-color: $white_solid;
+    border-color: $lilac_blue;
 
-        &-icon {
-          color: $white;
-          font-size: 1.125rem;
-          line-height: 1.125rem;
-        }
+    &::placeholder {
+      color: $lilac_blue;
+      font-size: 0.9375rem;
+      font-weight: 300;
+      line-height: 1.25rem;
+    }
+  }
 
-        &-text {
-          color: $white;
-          margin-left: 0.5rem;
-          font-size: 0.9375rem;
-          line-height: 1.25rem;
-          font-weight: 500;
-        }
-      }
+  &__submit-btn {
+    width: auto;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $bright_navy_blue;
+    border: none;
+    outline: none;
+    border-radius: 0.3125rem;
+
+    &-icon {
+      color: $white;
+      font-size: 1.125rem;
+      line-height: 1.125rem;
+    }
+
+    &-text {
+      color: $white;
+      margin-left: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.search-result-table {
+  border-radius: 0.3125rem;
+  overflow: hidden;
+  th,
+  td {
+    white-space: nowrap;
+  }
+
+  thead {
+    background-color: $bright_navy_blue;
+    height: 2.5rem;
+    max-height: 2.5rem;
+    min-height: 2.5rem;
+
+    th {
+      color: $white;
+      font-size: 0.9375rem;
+      line-height: 1.25rem;
+      font-weight: 400;
+    }
+  }
+
+  tbody {
+    background-color: $white_solid;
+
+    tr {
+      border-bottom: 1px solid lighten($color: $lilac_blue, $amount: 35);
+    }
+
+    td,
+    th {
+      color: $lilac_blue;
+      font-size: 0.9375rem;
+      line-height: 1.25rem;
+      font-weight: 400;
+    }
+  }
+}
+
+.status--sm {
+  span {
+    font-size: 0.625rem;
+    color: $white;
+    font-weight: 400;
+  }
+}
+
+.page {
+  &-link {
+    border: none;
+    outline: none;
+    border-radius: 0.3125rem;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $brilliant_azure;
+      color: $white;
+    }
+
+    &--active {
+      background-color: $brilliant_azure;
+      color: $white;
+    }
+  }
+
+  &-item {
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 0.3125rem;
+
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+
+    &--active {
+      background-color: $brilliant_azure;
+      color: $white;
     }
   }
 }
