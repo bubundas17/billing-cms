@@ -1,187 +1,123 @@
-<div class="flex items-center justify-between px-5 py-5 border-b shadow-sm bg-gray-50" id="nav">
-  <div class="flex items-center space-x-4">
-    <button class="2xl:hidden" id="open-menu-button">
-      <i class="text-lg text-blue-600 fas fa-bars"></i>
-    </button>
-    <div class="text-xl font-semibold text-blue-600 2xl:hidden">QDASH</div>
+<nav class="side-nav">
+  <div class="mx-3 container-fluid side-nav__header">
+    <h5 class="side-nav__title" id="side-nav__title">QDASH</h5>
   </div>
-  <div>
-    {{#if isAuthenticated}}
-    <button class="px-2 py-1.5 flex items-center space-x-2">
-      <div class="flex items-center justify-center w-6 h-6 text-white bg-blue-500 rounded-full">
-        <i class="fas fa-user text-tiny"></i>
+  <div class="m-0 dropdown-divider"></div>
+  <div class="mx-3 mt-4">
+    <form class="container-fluid">
+      <div class="input-group search-box">
+        <span class="bg-white input-group-text border-end-0 search-box__group-text">
+          <i class="fas fa-search search-box__icon"></i>
+        </span>
+        <input type="text" class="form-control border-start-0 fw-light search-box__input" placeholder="Search"
+          aria-label="Search" />
       </div>
-      <span class="text-sm text-blue-500">Yogesh</span>
-      <div class="-mt-1.5 flex items-center text-gray-400">
-        <i class="fas fa-sort-down"></i>
-      </div>
-    </button>
-    {{else}}
-    <div class="flex justify-end space-x-1 lg:space-x-3">
-      <button class="px-2 py-1.5">
-        <span class="text-sm">Sign Up</span>
-      </button>
-      <button class="flex items-center px-2 py-1.5 space-x-3 bg-blue-600 rounded-md">
-        <span class="text-sm text-white">Sign In</span>
-        <i class="text-white fas fa-sign-in-alt"></i>
-      </button>
-    </div>
-    {{/if}}
+    </form>
   </div>
-</div>
-
-<div class="fixed top-0 bottom-0 left-0 right-0 z-10 flex-col w-56 bg-gray-100 shadow-md 2xl:flex sidebar" id="sidenav">
-  <div class="flex items-center px-5 py-6 space-x-4 overflow-auto border-b" style="max-height: 98%">
-    <button class="cursor-pointer 2xl:hidden" id="close-menu-button">
-      <i class="text-lg text-blue-600 fas fa-bars"></i>
-    </button>
-    <div class="text-xl font-semibold tracking-tight text-blue-600">
-      QDASH
-    </div>
-  </div>
-  <div class="max-h-full overflow-auto pb-36">
-    <div class="px-5 py-4">
-      <div class="pb-4">
-        <form action="#">
-          <div class="relative flex items-center">
-            <div class="absolute ml-2">
-              <i class="text-gray-400 fas fa-search"></i>
-            </div>
-            <input
-              class="inline-block w-full py-2.5 pl-8 pr-2 text-tiny font-light leading-none tracking-tight border border-gray-300 rounded shadow text-gray-400 focus:outline-none"
-              type="text" placeholder="Search" v-model="search" />
-          </div>
-        </form>
-      </div>
-
-      <div class="flex flex-col space-y-4">
-        <button class="flex items-center">
-          <div class="flex w-9">
-            <i class="font-bold text-blue-600 fas fa-tachometer-alt"></i>
-          </div>
-          <div class="text-left grow">
-            <a href="/admin/dashboard" class="text-lg font-bold tracking-tight text-blue-600">
-              Dashboard
-            </a>
-          </div>
-        </button>
-
-        <button class="dropdown-btn" v-for="item in filteredItems">
-          <div class="flex items-center mb-3" @click="toggleExpand(item.name)">
-            <div class="flex w-9">
-              <i class="text-gray-600" :class="item.icon"></i>
-            </div>
-            <div class="text-left grow">
-              <span class="text-lg font-semibold tracking-tight text-gray-600">
-                \{{ item.name }}
-              </span>
-            </div>
-            <div>
-              <i class="text-gray-300 fas fa-angle-up" :class="(!item.expanded) ? 'hidden' : '' "></i>
-              <i class="text-gray-300 fas fa-angle-down" :class="(item.expanded) ? 'hidden' : '' "></i>
-            </div>
-          </div>
-
-          <div class="dropdown-item" :class="(!item.expanded) ? 'hidden' : '' ">
-            <div class="flex flex-col space-y-3">
-              <div class="inline-flex" v-for="subitem in item.children">
-                <div class="w-9"></div>
-                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny"
-                  :href="subitem.url">\{{subitem.name}}</a>
+  <div class="mx-3 mt-4">
+    <div class="container-fluid">
+      <ul class="list-unstyled menu-list" id="sidenav-accordion">
+        <li class="list-item list-item--active">
+          <div role="button">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-tachometer-alt list-item__icon"></i>
+                <span class="list-item__name">Dashboard</span>
               </div>
-              {{!-- <div class="inline-flex">
-                <div class="w-9"></div>
-                <a class="font-normal leading-tight tracking-tight text-gray-600 text-tiny" href="/admin/user/new">New
-                  User</a>
-              </div> --}}
             </div>
-
           </div>
-        </button>
-      </div>
+        </li>
+
+        <li class="list-item">
+          <div role="button" data-bs-toggle="collapse" data-bs-target="#usersItem">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-user list-item__icon"></i>
+                <span class="list-item__name">Users</span>
+              </div>
+              <i class="fas fa-chevron-down list-item__indicator"></i>
+            </div>
+          </div>
+          <ul class="collapse list-unstyled list-item__sub-menu-list" id="usersItem"
+            data-bs-parent="#sidenav-accordion">
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+          </ul>
+        </li>
+
+        <li class="list-item">
+          <div role="button" data-bs-toggle="collapse" data-bs-target="#ordersItem">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-shopping-cart list-item__icon"></i>
+                <span class="list-item__name">Orders</span>
+              </div>
+              <i class="fas fa-chevron-down list-item__indicator"></i>
+            </div>
+          </div>
+          <ul class="collapse list-unstyled list-item__sub-menu-list" id="ordersItem"
+            data-bs-parent="#sidenav-accordion">
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+          </ul>
+        </li>
+
+        <li class="list-item">
+          <div role="button" data-bs-toggle="collapse" data-bs-target="#invoiceItem">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-file-alt list-item__icon"></i>
+                <span class="list-item__name">Invoice</span>
+              </div>
+              <i class="fas fa-chevron-down list-item__indicator"></i>
+            </div>
+          </div>
+          <ul class="collapse list-unstyled list-item__sub-menu-list" id="invoiceItem"
+            data-bs-parent="#sidenav-accordion">
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+          </ul>
+        </li>
+
+        <li class="list-item">
+          <div role="button" data-bs-toggle="collapse" data-bs-target="#billingItem">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-receipt list-item__icon"></i>
+                <span class="list-item__name">Billing</span>
+              </div>
+              <i class="fas fa-chevron-down list-item__indicator"></i>
+            </div>
+          </div>
+          <ul class="collapse list-unstyled list-item__sub-menu-list" id="billingItem"
+            data-bs-parent="#sidenav-accordion">
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+          </ul>
+        </li>
+
+        <li class="list-item">
+          <div role="button" data-bs-toggle="collapse" data-bs-target="#ticketsItem">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-envelope list-item__icon"></i>
+                <span class="list-item__name">Tickets</span>
+              </div>
+              <i class="fas fa-chevron-down list-item__indicator"></i>
+            </div>
+          </div>
+          <ul class="collapse list-unstyled list-item__sub-menu-list" id="ticketsItem"
+            data-bs-parent="#sidenav-accordion">
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+            <li class="list-item__sub-menu-item">Hello World</li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
-
-<div class="fixed top-0 hidden w-full h-full backdrop-blur-sm" id="slidbar-overlay"></div>
-
-<script>
-  const navItems = [
-    {
-      name: 'Posts',
-      url: '/admin/posts',
-      icon: 'far fa-copy',
-      expanded: true,
-      children: [
-        {
-          name: 'New Post',
-          url: '/admin/posts/new'
-        },
-        {
-          name: 'All Posts',
-          url: '/admin/posts'
-        }
-      ]
-    },
-    {
-      name: 'Users',
-      url: '/admin/users',
-      icon: 'far fa-user',
-      children: [
-        {
-          name: 'New User',
-          url: '/admin/users/new'
-        },
-        {
-          name: 'All Users',
-          url: '/admin/users'
-        }
-      ]
-    },
-    {
-      name: 'Settings',
-      url: '/admin/settings',
-      icon: 'fas fa-cog',
-      children: [
-        {
-          name: 'General',
-          url: '/admin/settings/general',
-        },
-        {
-          name: 'Email Configration',
-          url: '/admin/settings/email',
-        }
-      ]
-    }
-  ];
-
-  new Vue({
-    el: "#sidenav",
-    data: {
-      items: navItems,
-      search: "",
-    },
-    computed: {
-      filteredItems: function () {
-        var vm = this;
-        return this.items.filter(function (item) {
-          return item.name.toLowerCase().indexOf(vm.search.toLowerCase()) > -1;
-        });
-      }
-    },
-    methods: {
-      toggleExpand: function (title) {
-        var vm = this;
-        this.items = this.items.map(function (item) {
-          if (item.name == title) {
-            item.expanded = !item.expanded;
-          } else {
-            item.expanded = false;
-          }
-          return item;
-        });
-      }
-    }
-  }
-  )
-</script>
+</nav>

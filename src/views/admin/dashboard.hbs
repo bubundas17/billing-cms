@@ -1,4 +1,313 @@
-{{! Orders }}
+<div class="header">
+  <button class="btn header__menu-button ms-3 ps-3">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div></div>
+  <div class="header__actions me-3 pe-3">
+    <button class="btn btn-text">Register</button>
+    <button class="btn btn-bright_navy_blue">
+      <i class="fas fa-sign-in-alt"></i>
+      <span class="ms-2">Login</span>
+    </button>
+  </div>
+</div>
+<div class="m-0 dropdown-divider header__divider"></div>
+
+<main class="container-fluid">
+  <div class="mx-2 my-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-2 g-lg-3">
+      <div class="col">
+        <div class="card details-box details-box--green">
+          <div class="card-body d-flex align-items-center">
+            <div class="details-box__icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="ms-3 d-flex flex-column">
+              <span class="details-box__count">25</span>
+              <span class="details-box__name">New Orders</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card details-box details-box--orange">
+          <div class="card-body d-flex align-items-center">
+            <div class="details-box__icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="ms-3 d-flex flex-column">
+              <span class="details-box__count">64</span>
+              <span class="details-box__name">Re-Orders</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card details-box details-box--purple">
+          <div class="card-body d-flex align-items-center">
+            <div class="details-box__icon">
+              <i class="fas fa-retweet"></i>
+            </div>
+            <div class="ms-3 d-flex flex-column">
+              <span class="details-box__count">39</span>
+              <span class="details-box__name">Due Orders</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card details-box details-box--red">
+          <div class="card-body d-flex align-items-center">
+            <div class="details-box__icon">
+              <i class="fas fa-ban"></i>
+            </div>
+            <div class="ms-3 d-flex flex-column">
+              <span class="details-box__count">45</span>
+              <span class="details-box__name">Cancelled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card details-box details-box--blue">
+          <div class="card-body d-flex align-items-center">
+            <div class="details-box__icon">
+              <i class="fas fa-life-ring"></i>
+            </div>
+            <div class="ms-3 d-flex flex-column">
+              <span class="details-box__count">82</span>
+              <span class="details-box__name">Support Tickets</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <span class="main-content__title">This Week</span>
+      <div class="mt-1 row row-cols-1 row-cols-xl-2 g-2">
+        <div class="col">
+          <div class="card card-info">Graph</div>
+        </div>
+        <div class="col">
+          <div class="card card-info">
+            <div class="px-4 card-info__header">
+              <div>
+                <i class="fas fa-bell card-info__header-icon"></i>
+                <span class="ms-2 card-info__header-name">
+                  Notification
+                </span>
+              </div>
+              <span class="card-info__header-view-all" role="button">
+                View All
+              </span>
+            </div>
+            <div class="px-4 card-info__content">
+              <div class="py-3 d-flex align-items-center justify-content-between card-info__content-item">
+                <div class="d-flex align-items-center">
+                  <div class="card-info__content-icon card-info__content-icon--orange d-none d-sm-flex">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="d-flex ms-sm-4 flex-column">
+                    <span class="card-info__content-details-name">
+                      Admin
+                    </span>
+                    <span class="card-info__content-details-info">
+                      Failed Admin Login Attempt - IP: 103.127.6.83
+                    </span>
+                  </div>
+                </div>
+                <span class="card-info__content-time ms-1">Today</span>
+              </div>
+
+              <div class="py-3 d-flex align-items-center justify-content-between card-info__content-item">
+                <div class="d-flex align-items-center">
+                  <div class="card-info__content-icon card-info__content-icon--blue d-none d-sm-flex">
+                    <i class="fas fa-file-image"></i>
+                  </div>
+                  <div class="d-flex ms-sm-4 flex-column">
+                    <span class="card-info__content-details-name">
+                      Admin
+                    </span>
+                    <span class="card-info__content-details-info">
+                      Created Manual Invoice - Invoice ID: 2 - User ID: 1
+                    </span>
+                  </div>
+                </div>
+                <span class="card-info__content-time ms-1">Yesterday</span>
+              </div>
+
+              <div class="py-3 d-flex align-items-center justify-content-between card-info__content-item">
+                <div class="d-flex align-items-center">
+                  <div class="card-info__content-icon card-info__content-icon--green d-none d-sm-flex">
+                    <i class="fas fa-archive"></i>
+                  </div>
+                  <div class="d-flex ms-sm-4 flex-column">
+                    <span class="card-info__content-details-name">
+                      System
+                    </span>
+                    <span class="card-info__content-details-info">
+                      Admin Password Reset Attempt Successful
+                    </span>
+                  </div>
+                </div>
+                <span class="card-info__content-time">21 Dec 2021</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <span class="main-content__title">Quick Links</span>
+      <div class="mt-1 row row-cols-1 row-cols-xl-2 g-2">
+        <div class="col">
+          <div class="row row-cols-1 row-cols-sm-2 g-2">
+            <div class="col">
+              <div class="px-4 menu menu__item menu__item--active">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="px-4 menu menu__item">
+                <i class="fas fa-user menu__icon"></i>
+                <span class="ms-3 menu__name">Create New Invoice</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-info">
+            <div class="px-4 card-info__header">
+              <div>
+                <i class="fas fa-history card-info__header-icon"></i>
+                <span class="ms-2 card-info__header-name">
+                  Activities
+                </span>
+              </div>
+              <span class="card-info__header-view-all" role="button">
+                View All
+              </span>
+            </div>
+            <div class="px-4 card-info__content">
+              <div class="py-3 d-flex align-items-center justify-content-between card-info__content-item">
+                <div class="d-flex align-items-center">
+                  <div class="card-info__content-icon card-info__content-icon--green d-none d-sm-flex">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="d-flex ms-sm-4 flex-column card-info__content-details-item">
+                    <span class="card-info__content-details-name">
+                      BeastMaster
+                    </span>
+                    <span class="card-info__content-details-info">
+                      Purchased a new domain for 1-year - renewable
+                    </span>
+                  </div>
+                </div>
+                <span class="card-info__content-time ms-1">Today</span>
+              </div>
+
+              <div class="py-3 d-flex align-items-center justify-content-between card-info__content-item">
+                <div class="d-flex align-items-center">
+                  <div class="card-info__content-icon card-info__content-icon--purple d-none d-sm-flex">
+                    <i class="fas fa-retweet"></i>
+                  </div>
+                  <div class="d-flex ms-sm-4 flex-column">
+                    <span class="card-info__content-details-name">
+                      CyberGamer
+                    </span>
+                    <span class="card-info__content-details-info">
+                      Renewed a new 1-year hosting - starter plan
+                    </span>
+                  </div>
+                </div>
+                <span class="card-info__content-time ms-1">Yesterday</span>
+              </div>
+
+              <div class="py-3 d-flex align-items-center justify-content-between card-info__content-item">
+                <div class="d-flex align-items-center">
+                  <div class="card-info__content-icon card-info__content-icon--red d-none d-sm-flex">
+                    <i class="fas fa-ban"></i>
+                  </div>
+                  <div class="d-flex ms-sm-4 flex-column">
+                    <span class="card-info__content-details-name">
+                      SoloQer
+                    </span>
+                    <span class="card-info__content-details-info">
+                      Cancelled a RDP server - monthly plan
+                    </span>
+                  </div>
+                </div>
+                <span class="card-info__content-time ms-1">21 Dec 2021</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{{!-- {{! Orders }}
 <div class='grid grid-cols-2 gap-4 mx-4 mt-4 mb-6 2xl:mr-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
   <div class='bg-green-100 dashboard-summery-item'>
     <div class='flex items-center justify-center flex-none w-10 h-10 bg-white rounded-full'>
@@ -297,4 +606,4 @@
     </div>
   </div>
 </div>
-{{! End Quick Link }}
+{{! End Quick Link }} --}}
