@@ -169,6 +169,17 @@ $table-border-width: 0;
   }
 }
 
+.top-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: $white;
+}
+
 .header {
   height: 5.28125rem;
   min-height: 5.28125rem;
@@ -728,6 +739,10 @@ $table-border-width: 0;
     display: none;
   }
 
+  .top-bar {
+    position: relative;
+  }
+
   .main-content {
     margin-left: 0;
     margin-bottom: 0;
@@ -745,6 +760,7 @@ $table-border-width: 0;
     width: 100%;
     height: auto;
     display: flex;
+    -ms-flex-direction: column;
     flex-direction: column;
     justify-content: center;
     padding-top: 1rem;
