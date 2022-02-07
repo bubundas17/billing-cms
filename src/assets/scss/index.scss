@@ -54,6 +54,15 @@ $table-border-width: 0;
   }
 }
 
+.custom-base-text {
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+
+  &-lilac_blue {
+    color: $lilac_blue;
+  }
+}
+
 .btn {
   &-bright_navy_blue {
     @include button-variant($bright_navy_blue, $bright_navy_blue);
@@ -453,6 +462,7 @@ $table-border-width: 0;
 
   &__content {
     display: flex;
+    -ms-flex-direction: column;
     flex-direction: column;
 
     &--center {
