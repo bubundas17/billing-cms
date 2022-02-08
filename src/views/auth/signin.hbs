@@ -6,19 +6,21 @@
       <h3 class='display-center__title'>QDASH</h3>
       <span class='display-center__sub-text'>Client Login</span>
     </div>
-    <form class='display-center__form' action='#'>
+    <form class='display-center__form' action='/auth/signin' method="post">
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
         <input
           type='text'
           class='form-control display-center__form-input'
           placeholder='Username'
+          name="email"
         />
       </label>
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
         <input
           type='password'
+          name="password"
           class='form-control display-center__form-input'
           placeholder='Password'
         />
