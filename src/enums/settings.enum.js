@@ -12,6 +12,12 @@ const settings = {
     cachable: true,
     type: String,
   },
+  ADMIN_EMAIL: {
+    name: 'admin_email',
+    defaultValue: '',
+    cachable: true,
+    type: String,
+  },
 
   // Email Settings
   EMAIL_HOST: {
