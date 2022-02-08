@@ -1,0 +1,22 @@
+.side-nav {
+  position: fixed;
+  width: 14.0625rem;
+  top: 0;
+  left: 0;
+  background-color: $white_solid;
+  height: 100%;
+  z-index: 2;
+
+  &__header {
+    height: 5.28125rem;
+    min-height: 5.28125rem;
+    max-height: 5.28125rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    color: $bright_navy_blue;
+    font-size: $font-size-base * 2.1875;
+  }
+}

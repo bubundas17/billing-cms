@@ -1,0 +1,14 @@
+.btn {
+  &-bright_navy_blue {
+    @include button-variant($bright_navy_blue, $bright_navy_blue);
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+  }
+
+  &-text {
+    border: none;
+    outline: none;
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+  }
+}

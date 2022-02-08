@@ -28,7 +28,63 @@
         <button type="button" class="btn btn-profile">Users</button>
     </div>
 
-    <div class="rounded client-details">
-       
+    <div class='mt-2 table-responsive'>
+        <table class='table search-result-table'>
+            <thead>
+                <tr>
+                    <th scope='col'>ID</th>
+                    <th scope='col'>Services/Products</th>
+                    <th scope='col'>Amount</th>
+                    <th scope='col'>Billing Cycle</th>
+                    <th scope='col'>Signup Date</th>
+                    <th scope='col'>Next Due Date</th>
+                    <th scope='col'>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Mark</td>
+                    <td class='status--sm'>
+                        <span class='badge bg-green'>Active</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Mark</td>
+                    <td class='status--sm'>
+                        <span class='badge bg-red'>Closed</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row" data-masonry='{"percentPosition": true }'>
+            <div class="col">
+                <div class="card card-info">
+                    <div class="px-4 card-info__header d-flex align-items-center justify-content-center">
+                        <div>
+                            <span class="card-info__header-name">
+                                Client Information
+                            </span>
+                        </div>
+                    </div>
+                    <div class="px-4 card-info__content">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">World</div>
+        </div>
     </div>
 </div>
