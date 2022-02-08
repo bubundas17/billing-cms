@@ -174,8 +174,10 @@ class Theme {
 
   async registerThemeEngine(app) {
     app.use(async (req, res, next) => {
-      let currentTheme = await theme.getCurrentTheme();
+      const currentTheme = await theme.getCurrentTheme();
+
       res.locals.siteTitle = await getOption('siteTitle');
+
       res.load = async (file, options = {}) => {
         const doc = await theme.render(file, { ...options, ...res.locals });
         return res.send(doc);
@@ -184,14 +186,12 @@ class Theme {
       res.locals.currentThemeDir = await theme.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
 
-      res.title = async (title) => {
-        res.locals.title = title;
-      };
+      res.title = (title) => (res.locals.title = title);
 
       next();
     });
 
-    let currentTheme = await theme.getCurrentTheme();
+    const currentTheme = await theme.getCurrentTheme();
     app.use(
       currentTheme.themeBaseUri,
       express.static(currentTheme.publicFolderPath),

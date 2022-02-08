@@ -1,120 +1,167 @@
-<nav class="side-nav">
-  <div class="mx-3 container-fluid side-nav__header">
-    <h5 class="side-nav__title" id="side-nav__title">QDASH</h5>
+<nav class='side-nav'>
+  <div class='mx-3 container-fluid side-nav__header'>
+    <h5 class='side-nav__title' id='side-nav__title'>QDASH</h5>
   </div>
-  <div class="m-0 dropdown-divider"></div>
-  <div class="mx-3 mt-4">
-    <form class="container-fluid">
-      <div class="input-group search-box">
-        <span class="bg-white input-group-text border-end-0 search-box__group-text">
-          <i class="fas fa-search search-box__icon"></i>
+  <div class='m-0 dropdown-divider'></div>
+  <div class='mx-3 mt-4'>
+    <form class='container-fluid'>
+      <div class='input-group search-box'>
+        <span
+          class='bg-white input-group-text border-end-0 search-box__group-text'
+        >
+          <i class='fas fa-search search-box__icon'></i>
         </span>
-        <input type="text" class="form-control border-start-0 fw-light search-box__input" placeholder="Search"
-          aria-label="Search" />
+        <input
+          type='text'
+          class='form-control border-start-0 fw-light search-box__input'
+          placeholder='Search'
+          aria-label='Search'
+        />
       </div>
     </form>
   </div>
-  <div class="mx-3 mt-4">
-    <div class="container-fluid">
-      <ul class="list-unstyled menu-list" id="sidenav-accordion">
-        <li class="list-item list-item--active">
-          <div role="button">
-            <div class="d-flex justify-content-between align-items-center">
+  <div class='mx-3 mt-4'>
+    <div class='container-fluid'>
+      <ul class='list-unstyled menu-list' id='sidenav-accordion'>
+        <li class='list-item list-item--active'>
+          <div role='button'>
+            <div class='d-flex justify-content-between align-items-center'>
               <div>
-                <i class="fas fa-tachometer-alt list-item__icon"></i>
-                <a class="list-item__name" href="/admin/users/">Dashboard</a>
+                <i class='fas fa-tachometer-alt list-item__icon'></i>
+                <a class='list-item__name' href='/admin/dashboard'>Dashboard</a>
               </div>
             </div>
           </div>
         </li>
 
-        <li class="list-item">
-          <div role="button" data-bs-toggle="collapse" data-bs-target="#usersItem">
-            <div class="d-flex justify-content-between align-items-center">
+        <li class='list-item'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#usersItem'
+          >
+            <div class='d-flex justify-content-between align-items-center'>
               <div>
-                <i class="fas fa-user list-item__icon"></i>
-                <span class="list-item__name">Users</span>
+                <i class='fas fa-user list-item__icon'></i>
+                <span class='list-item__name'>Users</span>
               </div>
-              <i class="fas fa-chevron-down list-item__indicator"></i>
+              <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class="collapse list-unstyled list-item__sub-menu-list" id="usersItem"
-            data-bs-parent="#sidenav-accordion">
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='usersItem'
+            data-bs-parent='#sidenav-accordion'
+          >
+            <li class='list-item__sub-menu-item'>
+              <a class='' href='/admin/users/profile'>Profile</a>
+            </li>
+            <li class='list-item__sub-menu-item'>
+              <a href='/admin/users/summary'>
+                Summary
+              </a>
+            </li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
         </li>
 
-        <li class="list-item">
-          <div role="button" data-bs-toggle="collapse" data-bs-target="#ordersItem">
-            <div class="d-flex justify-content-between align-items-center">
+        <li class='list-item'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#ordersItem'
+          >
+            <div class='d-flex justify-content-between align-items-center'>
               <div>
-                <i class="fas fa-shopping-cart list-item__icon"></i>
-                <span class="list-item__name">Orders</span>
+                <i class='fas fa-shopping-cart list-item__icon'></i>
+                <span class='list-item__name'>Orders</span>
               </div>
-              <i class="fas fa-chevron-down list-item__indicator"></i>
+              <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class="collapse list-unstyled list-item__sub-menu-list" id="ordersItem"
-            data-bs-parent="#sidenav-accordion">
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='ordersItem'
+            data-bs-parent='#sidenav-accordion'
+          >
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
         </li>
 
-        <li class="list-item">
-          <div role="button" data-bs-toggle="collapse" data-bs-target="#invoiceItem">
-            <div class="d-flex justify-content-between align-items-center">
+        <li class='list-item'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#invoiceItem'
+          >
+            <div class='d-flex justify-content-between align-items-center'>
               <div>
-                <i class="fas fa-file-alt list-item__icon"></i>
-                <span class="list-item__name">Invoice</span>
+                <i class='fas fa-file-alt list-item__icon'></i>
+                <span class='list-item__name'>Invoice</span>
               </div>
-              <i class="fas fa-chevron-down list-item__indicator"></i>
+              <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class="collapse list-unstyled list-item__sub-menu-list" id="invoiceItem"
-            data-bs-parent="#sidenav-accordion">
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='invoiceItem'
+            data-bs-parent='#sidenav-accordion'
+          >
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
         </li>
 
-        <li class="list-item">
-          <div role="button" data-bs-toggle="collapse" data-bs-target="#billingItem">
-            <div class="d-flex justify-content-between align-items-center">
+        <li class='list-item'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#billingItem'
+          >
+            <div class='d-flex justify-content-between align-items-center'>
               <div>
-                <i class="fas fa-receipt list-item__icon"></i>
-                <span class="list-item__name">Billing</span>
+                <i class='fas fa-receipt list-item__icon'></i>
+                <span class='list-item__name'>Billing</span>
               </div>
-              <i class="fas fa-chevron-down list-item__indicator"></i>
+              <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class="collapse list-unstyled list-item__sub-menu-list" id="billingItem"
-            data-bs-parent="#sidenav-accordion">
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='billingItem'
+            data-bs-parent='#sidenav-accordion'
+          >
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
         </li>
 
-        <li class="list-item">
-          <div role="button" data-bs-toggle="collapse" data-bs-target="#ticketsItem">
-            <div class="d-flex justify-content-between align-items-center">
+        <li class='list-item'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#ticketsItem'
+          >
+            <div class='d-flex justify-content-between align-items-center'>
               <div>
-                <i class="fas fa-envelope list-item__icon"></i>
-                <span class="list-item__name">Tickets</span>
+                <i class='fas fa-envelope list-item__icon'></i>
+                <span class='list-item__name'>Tickets</span>
               </div>
-              <i class="fas fa-chevron-down list-item__indicator"></i>
+              <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class="collapse list-unstyled list-item__sub-menu-list" id="ticketsItem"
-            data-bs-parent="#sidenav-accordion">
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
-            <li class="list-item__sub-menu-item">Hello World</li>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='ticketsItem'
+            data-bs-parent='#sidenav-accordion'
+          >
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
+            <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
         </li>
       </ul>
