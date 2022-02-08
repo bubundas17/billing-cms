@@ -1,4 +1,10 @@
+// // catch all unhandled errors
+// process.on('unhandledRejection', (err) => {
+//   console.error(err);
+// });
+
 import 'module-alias/register';
+import 'reflect-metadata';
 
 import { join } from 'path';
 
