@@ -21,8 +21,6 @@ export class Ticket {
   replies: Reply[];
 }
 
-const TicketModel = getModelForClass(Ticket, {
+export default getModelForClass(Ticket, {
   schemaOptions: { timestamps: true },
 });
-
-export default TicketModel;

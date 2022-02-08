@@ -11,8 +11,6 @@ export class Option {
   cachable: boolean;
 }
 
-const OptionModel = getModelForClass(Option, {
+export default getModelForClass(Option, {
   schemaOptions: { timestamps: true },
 });
-
-export default OptionModel;

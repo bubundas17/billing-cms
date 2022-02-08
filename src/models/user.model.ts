@@ -3,10 +3,10 @@ import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
 
 enum UserRole {
-  'admin',
-  'super-admin',
-  'sells-operater',
-  'banned',
+  ADMIN = 'admin',
+  SUPER_ADMIN = 'super-admin',
+  SELLS_OPERATOR = 'sells-operater',
+  BANNED = 'banned',
 }
 
 @pre<User>('save', async function (next) {
@@ -50,8 +50,6 @@ export class User {
   }
 }
 
-const UserModel = getModelForClass(User, {
+export default getModelForClass(User, {
   schemaOptions: { timestamps: true },
 });
-
-export default UserModel;
