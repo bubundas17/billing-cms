@@ -34,6 +34,7 @@ export default function (passport) {
     try {
       const user = await User.findById(id);
       if (!user) return done(null, false);
+      // @ts-ignore
       const { password, ...rest } = user._doc;
       done(null, rest);
     } catch (error) {

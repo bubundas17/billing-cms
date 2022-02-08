@@ -11,7 +11,7 @@
     // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
 
     /* Language and Environment */
-    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "target": "ES5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "lib": [
       "ES2018",
       "ESNext.AsyncIterable"
@@ -101,7 +101,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "baseUrl": "./src",
-    "allowJs": true,
     "paths": {
       "@": ["src/*"],
       "@controllers/*": ["./src/controllers/*"],
@@ -114,5 +113,5 @@
       "@enums/*": ["./src/enums/*"]
     }
   },
-  "exclude": ["node_modules", "dist", "themes", "plugins"]
+  "exclude": ["node_modules", "dist", "themes", "plugins", "assets", "views"]
 }
