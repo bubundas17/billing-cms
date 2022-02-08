@@ -1,4 +1,4 @@
-import { getClients, getClientDetails } from '@controllers';
+import { getClients, getClientProfile, getClientSummary } from '@controllers';
 import BaseRoute from '@routes/base.route';
 
 class ClientsRoute extends BaseRoute {
@@ -9,7 +9,8 @@ class ClientsRoute extends BaseRoute {
 
   init() {
     this.router.get('/', getClients);
-    this.router.get('/details', getClientDetails);
+    this.router.get('/profile', getClientProfile);
+    this.router.get('/summary', getClientSummary);
   }
 }
 

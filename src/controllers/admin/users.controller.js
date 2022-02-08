@@ -10,8 +10,13 @@ export const getClients = (req, res) => {
   });
 };
 
-export const getClientDetails = (req, res) => {
-  res.render('admin/users/details', {
+export const getClientProfile = (req, res) => {
+  res.render('admin/users/profile', {
     pathName: 'User Details',
   });
 };
+
+export const getClientSummary = (req, res) =>
+  res.render('admin/users/summary', {
+    pathName: 'User Summary',
+  });
