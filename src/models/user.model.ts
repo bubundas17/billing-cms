@@ -2,6 +2,13 @@ import { compare, hash } from 'bcrypt';
 import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
 
+enum UserRole {
+  'admin',
+  'super-admin',
+  'sells-operater',
+  'banned',
+}
+
 @pre<User>('save', async function (next) {
   try {
     if (!this.isModified('password')) return next();
@@ -11,32 +18,31 @@ import { getModelForClass, pre, prop } from '@typegoose/typegoose';
     next(error);
   }
 })
-class User {
-  @prop({ required: true, unique: true, type: String })
+export class User {
+  @prop({ required: true, unique: true })
   name: string;
 
-  @prop({ required: true, unique: true, lowercase: true, type: String })
+  @prop({ required: true, unique: true, lowercase: true })
   email: string;
 
-  @prop({ required: true, type: String })
+  @prop({ required: true })
   password: string;
 
-  @prop({ required: true, default: false, type: String })
+  @prop({ required: true, default: false })
   address: string;
 
-  @prop({ required: true, default: false, type: Boolean })
+  @prop({ required: true, default: false })
   isAdmin: boolean;
 
   @prop({
     required: true,
     type: [String],
-    enum: ['admin', 'super-admin', 'sells-operater', 'banned'],
+    enum: [UserRole],
   })
   roles: string[];
 
-  async isValidPassword(password: string): Promise<string> {
+  async isValidPassword(password: string): Promise<boolean | never> {
     try {
-      // @ts-ignore
       return await compare(password, this.password);
     } catch (error) {
       throw new createError.InternalServerError(error.message);
