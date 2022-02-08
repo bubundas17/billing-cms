@@ -18,3 +18,15 @@
     background-color: $bold;
   }
 }
+
+.h-15 {
+  min-height: 15rem;
+  max-height: 15rem;
+  height: 15rem;
+}
+
+.h-2\.5 {
+  height: 2.5rem;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+}

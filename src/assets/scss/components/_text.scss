@@ -3,6 +3,10 @@
   line-height: 1.25rem;
 
   &-lilac_blue {
-    color: $lilac_blue;
+    color: $lilac_blue !important;
   }
+}
+
+.fw-500 {
+  font-weight: 500;
 }

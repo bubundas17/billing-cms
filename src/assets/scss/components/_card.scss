@@ -4,9 +4,6 @@
   }
 
   &-info {
-    min-height: 15rem;
-    max-height: 15rem;
-    height: 15rem;
     border: none;
     outline: none;
     background-color: $white_solid;
@@ -14,9 +11,6 @@
     overflow: auto;
 
     &__header {
-      height: 2.5rem;
-      min-height: 2.5rem;
-      max-height: 2.5rem;
       background-color: $bright_navy_blue;
       overflow: hidden;
       display: flex;
