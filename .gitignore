@@ -247,3 +247,4 @@ dist
 yarn.lock
 src/assets/css/
 *.css.map
+*.css

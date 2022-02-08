@@ -1,4 +1,4 @@
-import 'module-alias/register'
+import 'module-alias/register';
 import { join } from 'path';
 
 import express from 'express';
@@ -80,13 +80,13 @@ app.use((req, res, next) => {
 
 app.use(routes);
 mongoose
-// @ts-ignore
+  // @ts-ignore
   .connect(env.MONGO_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-// @ts-ignore
+    // @ts-ignore
     app.listen(env.PORT, () =>
-// @ts-ignore
+      // @ts-ignore
       console.log(`Server started on port ${env.PORT}`),
     );
   })
