@@ -1,4 +1,5 @@
 import 'module-alias/register';
+
 import { join } from 'path';
 
 import express from 'express';
@@ -73,7 +74,9 @@ app.use(passport.session());
 passportHelper(passport);
 
 app.use((req, res, next) => {
+  // @ts-ignore
   res.locals.user = req.user;
+  // @ts-ignore
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });
