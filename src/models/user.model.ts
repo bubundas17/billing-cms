@@ -36,6 +36,7 @@ class User {
 
   async isValidPassword(password: string): Promise<string> {
     try {
+      // @ts-ignore
       return await compare(password, this.password);
     } catch (error) {
       throw new createError.InternalServerError(error.message);
