@@ -14,7 +14,7 @@
     "prepare": "husky install",
     "build:scss": "cross-env NODE_ENV=production sass -w ./src/assets/scss/index.scss ./src/assets/css/styles.css",
     "watch:scss": "sass -w ./src/assets/scss/index.scss ./src/assets/css/styles.css",
-    "dev": "concurrently -c \"bold.yellow,bold.cyan\" -n \"App,CSS\" \"nodemon\" \"npm run watch:scss\"",
+    "dev": "concurrently -c \"bold.yellow,bold.cyan\" -n \"App,CSS\" \"tsnd --respawn ./src/app.ts\" \"npm run watch:scss\"",
     "build": "npm run build:css && babel ./src -d ./dist --delete-dir-on-start --copy-files",
     "start": "node ./dist/app.js"
   },
@@ -61,7 +61,6 @@
     "lint-staged": "^12.1.4",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "sass": "^1.49.0",
     "ts-node-dev": "^1.1.8",
@@ -83,7 +82,6 @@
     "mongoose": "^6.0.15",
     "nodemailer": "^6.7.2",
     "passport": "^0.5.0",
-    "passport-local": "^1.0.0",
-    "ts-node": "^10.5.0"
+    "passport-local": "^1.0.0"
   }
 }
