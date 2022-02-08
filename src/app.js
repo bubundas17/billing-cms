@@ -73,9 +73,8 @@ app.use(routes);
 
 mongoose
   .connect(env.MONGO_URI)
-  .then(async () => {
+  .then(() => {
     console.log('Connected to MongoDB');
-
     app.listen(env.PORT, () =>
       console.log(`Server started on port ${env.PORT}`),
     );
