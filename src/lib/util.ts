@@ -5,7 +5,7 @@ import { access, lstat, readdir, readFile, cp, rm } from 'fs/promises';
 // TODO - Never return empty strings, nulls or undefined from this class methods, always throw errors
 
 class Util {
-  async readDir(...path: string[]): Promise<string[] | never> {
+  static async readDir(...path: string[]): Promise<string[] | never> {
     try {
       return await readdir(join(...path), 'utf-8');
     } catch (_) {
@@ -13,7 +13,7 @@ class Util {
     }
   }
 
-  async readFile(...path: string[]): Promise<string | never> {
+  static async readFile(...path: string[]): Promise<string | never> {
     try {
       return await readFile(join(...path), 'utf-8');
     } catch (_) {
@@ -21,7 +21,7 @@ class Util {
     }
   }
 
-  async isDir(...path: string[]): Promise<boolean> {
+  static async isDir(...path: string[]): Promise<boolean> {
     try {
       const state = await lstat(join(...path));
       return state.isDirectory();
@@ -30,7 +30,7 @@ class Util {
     }
   }
 
-  async isFile(...path: string[]): Promise<boolean> {
+  static async isFile(...path: string[]): Promise<boolean> {
     try {
       const isDir = await this.isDir(...path);
       return isDir ? false : true;
@@ -39,7 +39,7 @@ class Util {
     }
   }
 
-  parseJsonToObject(str: string): object {
+  static parseJsonToObject(str: string): object {
     try {
       return JSON.parse(str);
     } catch (error) {
@@ -47,7 +47,7 @@ class Util {
     }
   }
 
-  async isDirOrFileExists(...path: string[]): Promise<boolean> {
+  static async isDirOrFileExists(...path: string[]): Promise<boolean> {
     try {
       await access(join(...path));
       return true;
@@ -56,7 +56,7 @@ class Util {
     }
   }
 
-  generateRandomString(length: number): string {
+  static generateRandomString(length: number): string {
     length = typeof length === 'number' ? length : 5;
     const characters =
       '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -69,7 +69,7 @@ class Util {
     return str;
   }
 
-  async copyFileAndFolder({
+  static async copyFileAndFolder({
     from,
     to,
   }: {
@@ -84,7 +84,7 @@ class Util {
     }
   }
 
-  async deleteFileAndFolder(...path: string[]): Promise<boolean> {
+  static async deleteFileAndFolder(...path: string[]): Promise<boolean> {
     try {
       await rm(join(...path), { recursive: true });
       return true;
@@ -94,4 +94,4 @@ class Util {
   }
 }
 
-export default new Util();
+export default Util;
