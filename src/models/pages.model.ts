@@ -1,5 +1,6 @@
 import { getModelForClass, prop } from '@typegoose/typegoose';
 
+import { User } from './user.model';
 import { Status } from './posts.model';
 
 export class Pages {

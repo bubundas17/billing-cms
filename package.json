@@ -16,7 +16,7 @@
     "copy-files": "copyfiles -u 1 ./src/**/*.{css,js,hbs} ./dist",
     "build:scss": "sass ./src/assets/scss/index.scss ./src/assets/css/styles.css",
     "watch:scss": "sass -w ./src/assets/scss/index.scss ./src/assets/css/styles.css",
-    "server": "tsnd --respawn ./src/app.ts",
+    "server": "tsnd --respawn --transpile-only ./src/app.ts",
     "dev": "concurrently -k -c \"bold.yellow,bold.cyan\" -n \"App,SCSS\" \"npm:server\" \"npm:watch:scss\"",
     "build": "npm run clean && npm run build:scss && tsc && npm run copy-files",
     "start": "node ./dist/app.js"
