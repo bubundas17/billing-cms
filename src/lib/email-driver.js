@@ -1,9 +1,10 @@
 import nodemailer from 'nodemailer';
+
 import settingsEnum from '@enums/settings.enum';
-import { getOption, setOption } from '@lib/options';
+import { getOption } from '@lib/options';
 import User from '@models/user.model';
 
-class EmailDriver {
+export class EmailDriver {
   constructor(config) {
     this.config = config;
   }

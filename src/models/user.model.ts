@@ -39,7 +39,7 @@ export class User {
     type: [String],
     enum: [UserRole],
   })
-  roles: string[];
+  roles: UserRole[];
 
   async isValidPassword(password: string): Promise<boolean | never> {
     try {

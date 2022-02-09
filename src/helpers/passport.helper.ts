@@ -1,6 +1,5 @@
 import { Strategy as LocalStrategy } from 'passport-local';
 
-// @ts-ignore
 import User from '@models/user.model';
 
 export default function (passport) {
@@ -34,9 +33,7 @@ export default function (passport) {
     try {
       const user = await User.findById(id);
       if (!user) return done(null, false);
-      // @ts-ignore
-      const { password, ...rest } = user._doc;
-      done(null, rest);
+      done(null, user);
     } catch (error) {
       done(error);
     }

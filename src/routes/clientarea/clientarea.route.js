@@ -5,7 +5,9 @@ class Clientarea extends BaseRoute {
     super('/clientarea');
     this.init();
   }
-  init() {}
+  init() {
+    // TODO - initialize
+  }
 }
 
 export default Clientarea;

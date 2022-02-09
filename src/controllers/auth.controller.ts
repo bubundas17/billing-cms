@@ -1,60 +1,40 @@
 import { validationResult } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
 
- // @ts-ignore
-import User from '@models/user.model';
- // @ts-ignore
+import UserModel from '@models/user.model';
 import mappedErrors from '@utils/mapped-errors';
- // @ts-ignore
 import pluginDriver from '@lib/plugin-driver';
 
-/**
- * @description Render the sign up page
- *
- * @param {object} req
- * @param {object} res
- */
-export const getSignUp = (req, res) => {
+// Render the sign up page
+export const getSignUp = (_req: Request, res: Response) => {
   res.render('auth/signup', {
     pathName: 'signup',
     layout: 'auth',
   });
 };
 
-/**
- * @description Render the sign in page
- *
- * @param {object} req
- * @param {object} res
- */
-export const getSignIn = (req, res) => {
+// Render the sign in page
+export const getSignIn = (_req: Request, res: Response) => {
   res.render('auth/signin', {
     pathName: 'signin',
     layout: 'auth',
   });
 };
 
-/**
- * @description Render the sign in page
- *
- * @param {object} req
- * @param {object} res
- */
-export const getResetPassword = (req, res) => {
+// Render the sign in page
+export const getResetPassword = (_req: Request, res: Response) => {
   res.render('auth/reset-password', {
     pathName: 'reset-password',
     layout: 'auth',
   });
 };
 
-/**
- * @description Sign up a new user
- *
- * @param {object} req
- * @param {object} res
- * @param {Function} next
- * @returns {Promise}
- */
-export const postSignUp = async (req, res, next) => {
+// Sign up a new user
+export const postSignUp = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const { name, email, address, password, confirmPassword } = req.body;
 
   try {
@@ -72,7 +52,7 @@ export const postSignUp = async (req, res, next) => {
       });
     }
 
-    const user = new User({ name, email, password, address });
+    const user = new UserModel({ name, email, password, address });
     await user.save();
     res.redirect('/auth/signin');
   } catch (error) {
@@ -80,21 +60,22 @@ export const postSignUp = async (req, res, next) => {
   }
 };
 
-/**
- * @description Sign in a user
- *
- * @param {object} req
- * @param {object} res
- * @param {Function} next
- */
-export const postSignIn = async (req, res, next) => {
+// Sign in a user
+export const postSignIn = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const { email, password } = req.body;
 
   console.log(email, password);
 
   const errors = validationResult(req);
+  // @ts-ignore
   await pluginDriver.executeHook('onSignIn', { email, password });
+  // @ts-ignore
   if (errors.isEmpty()) return next();
+  // @ts-ignore
   pluginDriver.executeHook('onSignInError', errors);
   return res.render('auth/signin', {
     pathName: 'signin',
@@ -105,14 +86,8 @@ export const postSignIn = async (req, res, next) => {
   });
 };
 
-/**
- * @description Sign out a signed in user
- *
- * @param {object} req
- * @param {object} res
- * @param {Function} next
- */
-export const getSignOut = (req, res) => {
+// Sign out a signed in user
+export const getSignOut = (req: Request, res: Response) => {
   req.logout();
   res.redirect('/auth/signin');
 };

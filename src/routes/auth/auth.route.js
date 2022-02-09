@@ -9,7 +9,7 @@ import {
   getResetPassword,
   postSignIn,
   postSignUp,
-} from '@controllers';
+} from '@controllers/index';
 import { signUpValidator, signInValidator } from '@utils/validator';
 
 class AuthRoute {

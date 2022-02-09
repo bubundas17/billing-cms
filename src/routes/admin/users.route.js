@@ -1,4 +1,8 @@
-import { getClients, getClientProfile, getClientSummary } from '@controllers';
+import {
+  getClients,
+  getClientProfile,
+  getClientSummary,
+} from '@controllers/index';
 import BaseRoute from '@routes/base.route';
 
 class ClientsRoute extends BaseRoute {

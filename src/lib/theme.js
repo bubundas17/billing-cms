@@ -173,7 +173,7 @@ class Theme {
   }
 
   async registerThemeEngine(app) {
-    app.use(async (req, res, next) => {
+    app.use(async (_req, res, next) => {
       let currentTheme = await theme.getCurrentTheme();
       res.locals.siteTitle = await getOption('siteTitle');
       res.load = async (file, options = {}) => {

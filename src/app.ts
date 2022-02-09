@@ -11,19 +11,13 @@ import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
-// @ts-ignore
+
 import env from '@configs/env.config';
-// @ts-ignore
-import routes from '@routes';
-// @ts-ignore
-import { get4xx, get5xx } from '@controllers';
-// @ts-ignore
+import routes from '@routes/index';
+import { get4xx, get5xx } from '@controllers/index';
 import handlebarsHelpers from '@helpers/handlebars-helpers';
-// @ts-ignore
 import passportHelper from '@helpers/passport.helper';
-// @ts-ignore
 import flash from '@helpers/flash.helper';
-// @ts-ignore
 import theme from '@lib/theme';
 
 // TODO - Add proper error handling and logging to the console
@@ -51,17 +45,14 @@ app.use(
   session({
     resave: false,
     saveUninitialized: false,
-    // @ts-ignore
     secret: env.SESSION_SECRET,
     store: new MongoStore({
-      // @ts-ignore
       mongoUrl: env.MONGO_URI,
     }),
   }),
 );
 
 app.use(flash);
-// @ts-ignore
 if (env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 theme.registerThemeEngine(app).then(() => {
@@ -74,9 +65,7 @@ app.use(passport.session());
 passportHelper(passport);
 
 app.use((req, res, next) => {
-  // @ts-ignore
   res.locals.user = req.user;
-  // @ts-ignore
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });

@@ -7,7 +7,7 @@ class TicketRoute extends BaseRoute {
   }
 
   init() {
-    this.router.get('/', (req, res) => {
+    this.router.get('/', (_req, res) => {
       res.send('Hello World!');
     });
   }

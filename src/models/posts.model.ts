@@ -34,7 +34,7 @@ export class Posts {
   @prop({ required: true, ref: () => User })
   lastEditedBy: Ref<User>;
 
-  @prop({ default: 'draft', enum: Status })
+  @prop({ default: Status.DRAFT, enum: Status })
   status: Status;
 }
 

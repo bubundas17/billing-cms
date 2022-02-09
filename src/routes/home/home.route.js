@@ -6,7 +6,7 @@ class HomeRoute extends BaseRoute {
     this.init();
   }
   init() {
-    this.router.get('/', (req, res) => {
+    this.router.get('/', (_req, res) => {
       res.load('index', { data: 'Test Data' });
     });
   }

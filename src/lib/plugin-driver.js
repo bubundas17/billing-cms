@@ -100,6 +100,7 @@ class PluginDriver {
       if (plugin.active || plugin.name === pluginName) {
         let pluginPath = join(plugin.baseDir, this.hooksFileName);
         if (fs.existsSync(pluginPath)) {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           const funcs = require(pluginPath);
           if (
             typeof funcs === 'object' &&
