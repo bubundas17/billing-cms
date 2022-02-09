@@ -22,7 +22,7 @@
     "start": "node ./dist/app.js"
   },
   "lint-staged": {
-    "*.js": [
+    "*{.js,.ts}": [
       "npm run lint:fix",
       "git add --all"
     ]

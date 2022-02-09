@@ -8,7 +8,7 @@ import Mail from 'nodemailer/lib/mailer';
 export class EmailDriver {
   config: any;
   transporter: nodemailer.Transporter;
-  
+
   constructor(config) {
     this.config = config;
   }
@@ -22,7 +22,7 @@ export class EmailDriver {
     // check email connection
     const testEmail: Mail.Options = {
       from: this.config.from,
-      to: await getOption(settingsEnum.ADMIN_EMAIL) as string,
+      to: (await getOption(settingsEnum.ADMIN_EMAIL)) as string,
       subject: 'Test email',
       text: 'This is a test email',
     };

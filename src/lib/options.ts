@@ -20,7 +20,7 @@ function getKeyValue(key) {
  * @returns {Promise<string|null>}
  */
 export const getOption = async (key) => {
-  let keyvalue = getKeyValue(key);
+  const keyvalue = getKeyValue(key);
 
   if (options[keyvalue]) {
     return options[keyvalue];
@@ -46,7 +46,7 @@ export const getOption = async (key) => {
  * @returns {Promise<string>}
  */
 export const setOption = async (key, value, ops = { cachable: true }) => {
-  let keyvalue = getKeyValue(key);
+  const keyvalue = getKeyValue(key);
 
   if (ops.cachable) {
     options[keyvalue] = value;
@@ -66,7 +66,7 @@ export const setOption = async (key, value, ops = { cachable: true }) => {
  * @returns {Promise<boolean>}
  */
 export const deleteOption = async (key) => {
-  let keyvalue = getKeyValue(key);
+  const keyvalue = getKeyValue(key);
   try {
     await optionModel.deleteOne({ name: keyvalue });
     return true;
