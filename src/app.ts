@@ -2,7 +2,7 @@ import 'module-alias/register';
 import 'reflect-metadata';
 import { join } from 'path';
 import express from 'express';
-import mongoose from 'mongoose';
+import { connect } from 'mongoose';
 import Handlebars from 'handlebars';
 import { create } from 'express-handlebars';
 import morgan from 'morgan';
@@ -70,18 +70,19 @@ app.use((req, res, next) => {
 });
 
 app.use(routes);
-mongoose
-  // @ts-ignore
-  .connect(env.MONGO_URI)
-  .then(() => {
+
+const bootstrap = async () => {
+  try {
+    await connect(env.MONGO_URI);
     console.log('Connected to MongoDB');
-    // @ts-ignore
+
     app.listen(env.PORT, () =>
-      // @ts-ignore
       console.log(`Server started on port ${env.PORT}`),
     );
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error(error);
     process.exit(1);
-  });
+  }
+};
+
+bootstrap();
