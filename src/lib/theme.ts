@@ -19,12 +19,14 @@ const glob = promisify(globAsync);
 // TODO - Create perfect res.load method that will load a theme file and pass it to the template
 
 class Theme {
+  hbs: any
+  metadata: object
   constructor() {
     this.hbs = Handlebars;
     this.metadata = {};
   }
 
-  getFileName(file, ext = '') {
+  getFileName(file: string, ext = '') {
     return basename(file, ext);
   }
 
