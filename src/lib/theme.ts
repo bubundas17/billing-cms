@@ -2,7 +2,7 @@ import { promisify } from 'util';
 import { join, basename } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
-import express from 'express';
+import express, { Express } from 'express';
 import globAsync from 'glob';
 import Handlebars from 'handlebars';
 
@@ -19,14 +19,15 @@ const glob = promisify(globAsync);
 // TODO - Create perfect res.load method that will load a theme file and pass it to the template
 
 class Theme {
-  hbs: any
-  metadata: object
+  private hbs: typeof Handlebars;
+  metadata: object;
+
   constructor() {
     this.hbs = Handlebars;
     this.metadata = {};
   }
 
-  getFileName(file: string, ext = '') {
+  getFileName(file: string, ext = ''): string {
     return basename(file, ext);
   }
 
@@ -120,15 +121,18 @@ class Theme {
     }
   }
 
-  async removeTheme(name) {
+  async removeTheme(name: string): Promise<boolean> {
     try {
-      if (typeof name !== 'string' && name.trim() !== '')
-        throw new Error('Invalid theme name');
+      if (typeof name !== 'string') throw new Error('Invalid theme name');
+
+      name = name.trim();
       const currentActiveTheme = await getOption('is-active-theme');
-      if (currentActiveTheme === name.trim())
-        throw new Error(`You can not uninstall enabled theme ${name.trim()}`);
+      if (currentActiveTheme === name)
+        throw new Error(`You can not uninstall enabled theme ${name}`);
+
       const isDone = await deleteOption('is-active-theme');
       if (!isDone) throw new Error('Theme not found');
+
       await rm(join(cwd(), 'themes', name), { recursive: true });
       return true;
     } catch (_) {
@@ -136,7 +140,7 @@ class Theme {
     }
   }
 
-  async isThemeAvailable(themeName) {
+  async isThemeAvailable(themeName: string) {
     try {
       const themes = await this.allThemes();
       const isAvailable = themes.find((t) => t.path === themeName);
@@ -174,10 +178,12 @@ class Theme {
     return result;
   }
 
-  async registerThemeEngine(app) {
+  async registerThemeEngine(app: Express) {
     app.use(async (_req, res, next) => {
-      let currentTheme = await theme.getCurrentTheme();
+      const currentTheme = await theme.getCurrentTheme();
+
       res.locals.siteTitle = await getOption('siteTitle');
+
       res.load = async (file, options = {}) => {
         const doc = await theme.render(file, { ...options, ...res.locals });
         return res.send(doc);
@@ -186,14 +192,13 @@ class Theme {
       res.locals.currentThemeDir = await theme.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
 
-      res.title = async (title) => {
-        res.locals.title = title;
-      };
+      res.title = async (title: string) => (res.locals.title = title);
 
       next();
     });
 
-    let currentTheme = await theme.getCurrentTheme();
+    const currentTheme = await theme.getCurrentTheme();
+
     app.use(
       currentTheme.themeBaseUri,
       express.static(currentTheme.publicFolderPath),

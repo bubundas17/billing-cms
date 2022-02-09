@@ -4,7 +4,6 @@ import fs from 'fs';
 
 import directoryScanner from '@utils/directory-scanner';
 import { getOption, setOption } from '@lib/options';
-import { type } from 'os';
 
 type PluginInfo = {
   name: string;
@@ -31,45 +30,38 @@ class PluginDriver {
     this.pluginMetaFileName = 'plugin.json';
   }
 
-  /**
-   * @description Read Plugins from the plugins directory and return an array of plugin objects
-   * @returns {Promise}
-   */
+  // Read Plugins from the plugins directory and return an array of plugin objects
   async getPluginList() {
-    // read the plugins directory
     const pluginList = directoryScanner(
       cwd() + '/plugins/*/' + this.pluginMetaFileName,
     );
-    let plugins: PluginProperties[] = [];
-    for (let plugin of pluginList) {
-      let pluginName = this.getPluginNameFromPath(plugin);
-      let info = await this.getPluginInfo(pluginName);
+
+    const plugins: PluginProperties[] = [];
+
+    for (const plugin of pluginList) {
+      const pluginName = this.getPluginNameFromPath(plugin);
+      const info = await this.getPluginInfo(pluginName);
       plugins.push(info);
     }
     return plugins;
   }
 
-  /**
-   * @description Read Plugin info from the plugin.json file
-   * @param {string} pluginName
-   * @returns {Object}
-   */
-
+  // Read Plugin info from the plugin.json file
   async getPluginInfo(pluginName: string): Promise<PluginProperties> {
-    // read the plugin.json file
-    let pluginPath = join(
+    const pluginPath = join(
       cwd(),
       'plugins',
       pluginName,
       this.pluginMetaFileName,
     );
-    let pluginInfo: PluginInfo = JSON.parse(
+
+    const pluginInfo: PluginInfo = JSON.parse(
       fs.readFileSync(pluginPath, 'utf8'),
     );
-    // check if a plugin is active
-    let active = await getOption('is-active-plugin:' + pluginName);
-    // console.log(active);
-    let isActive = active === 'true';
+
+    const active = await getOption('is-active-plugin:' + pluginName);
+    const isActive = active === 'true';
+
     return {
       name: pluginName,
       baseDir: join(cwd(), 'plugins', pluginName),
@@ -78,52 +70,40 @@ class PluginDriver {
     } as PluginProperties;
   }
 
-  /**
-   * @description Activate a Plugin
-   * @param {string} pluginName
-   * @returns {Promise}
-   */
+  //Activate a Plugin
   async activatePlugin(pluginName: string) {
-    // activate the plugin
     await setOption('is-active-plugin:' + pluginName, 'true');
-    // run the activate script
     await this.executeHook('onActive', {}, pluginName);
   }
 
-  /**
-   * @description Deactivate a Plugin
-   * @param {string} pluginName
-   * @returns {Promise}
-   */
-  async deactivatePlugin(pluginName) {
-    // deactivate the plugin
+  // Deactivate a Plugin
+  async deactivatePlugin(pluginName: string) {
     await setOption('is-active-plugin:' + pluginName, 'false');
-    // run the deactivate hook
     await this.executeHook('onDeactivate', {}, pluginName);
   }
 
   /**
    * @description Execute a Plugin Hook
-   * @param {string} hookName
-   * @param {object} context
-   * @param {string} pluginName - optional
-   * @returns {Promise}
-   * @example
+   *  @example
    * await pluginDriver.executeHook('onActive');
    * await pluginDriver.executeHook('onActive', { test: 'test' });
    * await pluginDriver.executeHook('onActive', { test: 'test' }, 'test-plugin');
    */
-  async executeHook(hookName: string, context: object, pluginName: string): Promise<void> {
+  async executeHook(
+    hookName: string,
+    context: object,
+    pluginName?: string,
+  ): Promise<void> {
     let plugins = await this.getPluginList();
     if (pluginName) {
       plugins = plugins.filter((plugin) => plugin.name === pluginName);
     }
-    for (let plugin of plugins) {
+    for (const plugin of plugins) {
       if (plugin.active || plugin.name === pluginName) {
-        let pluginPath = join(plugin.baseDir, this.hooksFileName);
+        const pluginPath = join(plugin.baseDir, this.hooksFileName);
+
         if (fs.existsSync(pluginPath)) {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          const funcs = require(pluginPath);
+          const funcs = import(pluginPath);
           if (
             typeof funcs === 'object' &&
             funcs[hookName] &&
@@ -135,11 +115,10 @@ class PluginDriver {
       }
     }
   }
-  getPluginNameFromPath(pluginPath: string): string {
-    // get the plugin name from the plugin path /Users/bubun/Projects/billing-cms/plugins/hello-world/plugin.json => hello-world
 
-    let path = pluginPath.split('/');
-    let pluginName = path[path.length - 2];
+  getPluginNameFromPath(pluginPath: string): string {
+    const path = pluginPath.split('/');
+    const pluginName = path[path.length - 2];
     return pluginName;
   }
 }
