@@ -1,5 +1,9 @@
 declare namespace Express {
-  export interface Request {
+  interface Request {
     flash: (type: string, message: string) => void;
+  }
+
+  interface Response {
+    load: (view: string, data?: object) => void;
   }
 }
