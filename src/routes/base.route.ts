@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
 class BaseRoute {
-  constructor(baseUrl) {
+  router: Router;
+
+  constructor(public baseUrl: string) {
     this.router = Router();
     this.baseUrl = baseUrl;
   }

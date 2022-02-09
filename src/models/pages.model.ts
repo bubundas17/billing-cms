@@ -1,7 +1,7 @@
 import { getModelForClass, prop } from '@typegoose/typegoose';
 
-import { User } from './user.model';
-import { Status } from './posts.model';
+import { User } from '@models/user.model';
+import { Status } from '@enums/status.enum';
 
 export class Pages {
   @prop({ required: true })

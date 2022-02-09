@@ -1,13 +1,8 @@
 import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 
-import { Category } from './category.model';
-import { User } from './user.model';
-
-export enum Status {
-  DRAFT = 'draft',
-  PUBLISHED = 'published',
-  TRASH = 'trash',
-}
+import Status from '@enums/status.enum';
+import { Category } from '@models/category.model';
+import { User } from '@models/user.model';
 
 export class Posts {
   @prop({ required: true })
@@ -35,7 +30,7 @@ export class Posts {
   lastEditedBy: Ref<User>;
 
   @prop({ default: Status.DRAFT, enum: Status })
-  status: Status;
+  status: string;
 }
 
 export default getModelForClass(Posts, { schemaOptions: { timestamps: true } });
