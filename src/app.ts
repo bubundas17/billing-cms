@@ -23,66 +23,77 @@ import theme from '@lib/theme';
 // TODO - Reduce the amount of code in this file
 // TODO - Create perfect theme.registerThemeEngine method that will register a theme engine, you can use app.set to register the engine
 
-const hbs = create({
-  extname: 'hbs',
-  handlebars: Handlebars,
-  defaultLayout: 'main',
-  helpers: handlebarsHelpers,
-});
+class App {
+  hbs = create({
+    extname: 'hbs',
+    handlebars: Handlebars,
+    defaultLayout: 'main',
+    helpers: handlebarsHelpers,
+  });
 
-const app = express();
-
-app.engine('hbs', hbs.engine);
-app.set('view engine', 'hbs');
-app.set('views', join(__dirname, 'views'));
-
-app.use('/assets', express.static(join(__dirname, 'assets')));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: env.SESSION_SECRET,
-    store: new MongoStore({
-      mongoUrl: env.MONGO_URI,
-    }),
-  }),
-);
-
-app.use(flash);
-if (env.NODE_ENV === 'development') app.use(morgan('dev'));
-
-theme.registerThemeEngine(app).then(() => {
-  app.use(get4xx);
-  app.use(get5xx);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
-passportHelper(passport);
-
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  res.locals.isAuthenticated = req.isAuthenticated();
-  next();
-});
-
-app.use(routes);
-
-const bootstrap = async () => {
-  try {
-    await connect(env.MONGO_URI);
-    console.log('Connected to MongoDB');
-
-    app.listen(env.PORT, () =>
-      console.log(`Server started on port ${env.PORT}`),
-    );
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
+  constructor(private app = express()) {
+    this.initialize();
   }
-};
 
-bootstrap();
+  private async initialize() {
+    await this.connectToDB();
+    this.listen();
+    this.setViewEngine();
+    await this.initializeMiddlewares();
+  }
+
+  private async initializeMiddlewares() {
+    this.app.use('/assets', express.static(join(__dirname, 'assets')));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser());
+    this.app.use(
+      session({
+        resave: false,
+        saveUninitialized: false,
+        secret: env.SESSION_SECRET,
+        store: new MongoStore({
+          mongoUrl: env.MONGO_URI,
+        }),
+      }),
+    );
+
+    this.app.use(flash);
+    if (env.NODE_ENV === 'development') this.app.use(morgan('dev'));
+
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
+    passportHelper(passport);
+
+    await theme.registerThemeEngine(this.app);
+
+    this.app.use((req, res, next) => {
+      res.locals.user = req.user;
+      res.locals.isAuthenticated = req.isAuthenticated();
+      next();
+    });
+
+    this.app.use(routes);
+    this.app.use(get4xx);
+    this.app.use(get5xx);
+  }
+
+  private setViewEngine() {
+    this.app.engine('hbs', this.hbs.engine);
+    this.app.set('view engine', 'hbs');
+    this.app.set('views', join(__dirname, 'views'));
+  }
+
+  private async connectToDB() {
+    await connect(env.MONGO_URI);
+    console.log('Connected to Database');
+  }
+
+  private listen() {
+    this.app.listen(env.PORT, () =>
+      console.log(`App started on port ${env.PORT}`),
+    );
+  }
+}
+
+new App();

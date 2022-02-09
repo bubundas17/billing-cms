@@ -1,5 +1,6 @@
 import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
-import { User } from './user.model';
+
+import { User } from '@models/user.model';
 
 export class Category {
   @prop({ required: true })
