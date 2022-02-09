@@ -5,7 +5,7 @@ import { access, lstat, readdir, readFile, cp, rm } from 'fs/promises';
 // TODO - Never return empty strings, nulls or undefined from this class methods, always throw errors
 
 class Util {
-  async readDir(...path) {
+  async readDir(...path: string[]): Promise<string[] | never> {
     try {
       return await readdir(join(...path), 'utf-8');
     } catch (_) {
@@ -13,7 +13,7 @@ class Util {
     }
   }
 
-  async readFile(...path) {
+  async readFile(...path: string[]): Promise<string | never> {
     try {
       return await readFile(join(...path), 'utf-8');
     } catch (_) {
@@ -21,7 +21,7 @@ class Util {
     }
   }
 
-  async isDir(...path) {
+  async isDir(...path: string[]): Promise<boolean> {
     try {
       const state = await lstat(join(...path));
       return state.isDirectory();
@@ -30,7 +30,7 @@ class Util {
     }
   }
 
-  async isFile(...path) {
+  async isFile(...path: string[]): Promise<boolean> {
     try {
       const isDir = await this.isDir(...path);
       return isDir ? false : true;
@@ -39,7 +39,7 @@ class Util {
     }
   }
 
-  parseJsonToObject(str) {
+  parseJsonToObject(str: string): object {
     try {
       return JSON.parse(str);
     } catch (error) {
@@ -47,7 +47,7 @@ class Util {
     }
   }
 
-  async isDirOrFileExists(...path) {
+  async isDirOrFileExists(...path: string[]): Promise<boolean> {
     try {
       await access(join(...path));
       return true;
@@ -56,7 +56,7 @@ class Util {
     }
   }
 
-  generateRandomString(length) {
+  generateRandomString(length: number): string {
     length = typeof length === 'number' ? length : 5;
     const characters =
       '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -69,7 +69,13 @@ class Util {
     return str;
   }
 
-  async copyFileAndFolder({ from, to }) {
+  async copyFileAndFolder({
+    from,
+    to,
+  }: {
+    from: string[];
+    to: string[];
+  }): Promise<boolean> {
     try {
       await cp(join(...from), join(...to), { recursive: true });
       return true;
@@ -78,7 +84,7 @@ class Util {
     }
   }
 
-  async deleteFileAndFolder(...path) {
+  async deleteFileAndFolder(...path: string[]): Promise<boolean> {
     try {
       await rm(join(...path), { recursive: true });
       return true;
@@ -88,5 +94,4 @@ class Util {
   }
 }
 
-const util = new Util();
-module.exports = util;
+export default new Util();
