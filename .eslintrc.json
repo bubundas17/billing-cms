@@ -40,5 +40,13 @@
       }
     }
   },
-  "ignorePatterns": ["node_modules", "dist", "themes", "plugins"]
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "themes",
+    "plugins",
+    "assets",
+    "views",
+    "typings"
+  ]
 }

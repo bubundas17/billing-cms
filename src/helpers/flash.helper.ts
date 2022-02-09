@@ -1,16 +1,7 @@
-/**
- * @description Flash message helper
- *
- * @param {object} req
- * @param {object} res
- * @param {function} next
- */
+import { NextFunction, Request, Response } from 'express';
 
-export default (req, res, next) => {
-  /**
-   * @param {string} type
-   * @param {string} message
-   */
+// Flash message helper
+export default (req: Request, res: Response, next: NextFunction) => {
   req.flash = (type, message) => {
     /*
      * type: 'success', 'info', 'warning', 'danger'
@@ -25,5 +16,6 @@ export default (req, res, next) => {
       },
     );
   };
+
   next();
 };
