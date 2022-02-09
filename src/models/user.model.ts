@@ -2,12 +2,7 @@ import { compare, hash } from 'bcrypt';
 import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
 
-enum UserRole {
-  ADMIN = 'admin',
-  SUPER_ADMIN = 'super-admin',
-  SELLS_OPERATOR = 'sells-operater',
-  BANNED = 'banned',
-}
+import UserRole from '@enums/user-role.enum';
 
 @pre<User>('save', async function (next) {
   try {
@@ -39,7 +34,7 @@ export class User {
     type: [String],
     enum: [UserRole],
   })
-  roles: UserRole[];
+  roles: string[];
 
   async isValidPassword(password: string): Promise<boolean | never> {
     try {
