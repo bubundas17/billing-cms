@@ -1,6 +1,5 @@
 import 'module-alias/register';
 import 'reflect-metadata';
-
 import { join } from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
