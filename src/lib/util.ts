@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, basename } from 'path';
 import { access, lstat, readdir, readFile, cp, rm } from 'fs/promises';
 
 // TODO - Add proper error handling
@@ -91,6 +91,10 @@ class Util {
     } catch (_) {
       return false;
     }
+  }
+
+  static getFileName(file: string, ext = ''): string {
+    return basename(file, ext);
   }
 }
 
