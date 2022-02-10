@@ -8,8 +8,10 @@ $table-border-width: 0;
 // Variables
 @import 'variables';
 
+// Utilities
 @import 'utilities';
 
+// Components
 @import 'components/button';
 @import 'components/card';
 @import 'components/text';
