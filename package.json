@@ -22,22 +22,23 @@
     "start": "node ./dist/app.js"
   },
   "lint-staged": {
-    "*.js": [
+    "*{.js,.ts}": [
       "npm run lint:fix",
       "git add --all"
     ]
   },
   "_moduleAliases": {
-    "@": "./src",
-    "@controllers": "./src/controllers",
-    "@models": "./src/models",
-    "@routes": "./src/routes",
-    "@helpers": "./src/helpers",
-    "@configs": "./src/configs",
-    "@utils": "./src/utils",
-    "@lib": "./src/lib",
-    "@enums": "./src/enums",
-    "@services": "./src/services"
+    "@": "./dist",
+    "@controllers": "./dist/controllers",
+    "@models": "./dist/models",
+    "@routes": "./dist/routes",
+    "@helpers": "./dist/helpers",
+    "@configs": "./dist/configs",
+    "@utils": "./dist/utils",
+    "@lib": "./dist/lib",
+    "@enums": "./dist/enums",
+    "@services": "./dist/services",
+    "@core": "./dist/core"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

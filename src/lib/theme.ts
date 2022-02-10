@@ -50,14 +50,14 @@ class Theme {
     return partials;
   }
 
-  async getTemplate(filePath, options = {}) {
+  async getTemplate(filePath: string, options = {}) {
     const theme = await this.getCurrentTheme();
     const fileData = await util.readFile(theme.absulutePath, filePath);
     const template = this.compileTemplate(fileData, options);
     return template;
   }
 
-  async render(filePath, context = {}, options = {}) {
+  async render(filePath: string, context = {}, options = {}) {
     const partials = await this.getPartials();
     const template = await this.getTemplate(`${filePath}.hbs`, options);
     const layoutTemplate = await this.getTemplate('layouts/main.hbs', options);
@@ -70,15 +70,25 @@ class Theme {
     return html;
   }
 
-  compileTemplate(template, options = {}) {
+  private compileTemplate(
+    template: string,
+    options: RuntimeOptions = {},
+  ): HandlebarsTemplateDelegate {
     return this.hbs.compile(template, options);
   }
 
-  precompileTemplate(template, options = {}) {
+  private precompileTemplate(
+    template: string,
+    options: RuntimeOptions = {},
+  ): TemplateSpecification {
     return this.hbs.precompile(template, options);
   }
 
-  renderTemplate(template, context = {}, options = {}) {
+  renderTemplate(
+    template: HandlebarsTemplateDelegate,
+    context: object = {},
+    options: RuntimeOptions = {},
+  ) {
     return template(context, options).trim();
   }
 
@@ -156,7 +166,7 @@ class Theme {
   }
 
   // get theme folder path
-  async getThemePath(name) {
+  async getThemePath(name: string) {
     const themeFolderPath = join(cwd(), 'themes', name);
 
     if (!(await util.isDir(cwd(), 'themes', name)))

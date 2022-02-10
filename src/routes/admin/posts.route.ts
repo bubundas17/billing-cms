@@ -7,8 +7,8 @@ import {
   getEditPost,
   postDeletePost,
   postUpdatePost,
-} from '../../controllers';
-import BaseRoute from '../base.route';
+} from '@controllers/index';
+import BaseRoute from '@routes/base.route';
 
 class PostsRoute extends BaseRoute {
   constructor() {
