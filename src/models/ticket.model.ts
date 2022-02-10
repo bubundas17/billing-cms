@@ -6,7 +6,7 @@ export class Reply {
   @prop()
   body: string;
 
-  @prop({ ref: () => User })
+  @prop({ ref: () => 'User' })
   postedBy: Ref<User>;
 }
 

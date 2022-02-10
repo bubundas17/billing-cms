@@ -3,6 +3,7 @@ import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
 
 import UserRole from '@enums/user-role.enum';
+import { Document } from 'mongoose';
 
 @pre<User>('save', async function (next) {
   try {
@@ -13,7 +14,7 @@ import UserRole from '@enums/user-role.enum';
     next(error);
   }
 })
-export class User {
+export class UserSchema {
   @prop({ required: true, unique: true })
   name: string;
 
@@ -45,6 +46,8 @@ export class User {
   }
 }
 
-export default getModelForClass(User, {
+export type User = UserSchema & Document;
+
+export default getModelForClass(UserSchema, {
   schemaOptions: { timestamps: true },
 });
