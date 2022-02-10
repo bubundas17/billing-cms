@@ -6,7 +6,7 @@ import User from '@models/user.model';
 import Mail from 'nodemailer/lib/mailer';
 
 export class EmailDriver {
-  config: unknown;
+  config: any;
   transporter: nodemailer.Transporter;
 
   constructor(config) {

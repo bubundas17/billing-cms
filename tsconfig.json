@@ -114,6 +114,7 @@
       "@lib/*": ["./src/lib/*"],
       "@enums/*": ["./src/enums/*"],
       "@services/*": ["./src/services/*"],
+      "@core/*": ["./src/core/*"],
     }
   },
   "exclude": [

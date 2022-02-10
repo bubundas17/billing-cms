@@ -8,7 +8,6 @@ type EmailProps = {
   to: User;
 };
 
-
 class EmailSender {
   agenda: Agenda;
   AGENDA_JOB_KEY = 'send_email';
