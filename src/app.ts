@@ -95,6 +95,7 @@ class App {
     this.app.listen(env.PORT, () =>
       console.log(`App started on port ${env.PORT}`),
     );
+    emailSender.init();
     emailSender.processEmails();
   }
 }

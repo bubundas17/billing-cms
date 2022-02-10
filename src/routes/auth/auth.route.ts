@@ -8,6 +8,7 @@ import {
   getResetPassword,
   postSignIn,
   postSignUp,
+  postResetPassword,
 } from '@controllers/index';
 import { signUpValidator, signInValidator } from '@utils/validator';
 import BaseRoute from '@routes/base.route';
@@ -28,6 +29,8 @@ class AuthRoute extends BaseRoute {
       ensureLoggedOut({ redirectTo: '/' }),
       getResetPassword,
     );
+
+    this.router.post('/reset-password', postResetPassword);
 
     this.router.post(
       '/signup',

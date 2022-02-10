@@ -1,9 +1,9 @@
 import { compare, hash } from 'bcrypt';
 import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
+import { Document } from 'mongoose';
 
 import UserRole from '@enums/user-role.enum';
-import { Document } from 'mongoose';
 
 @pre<User>('save', async function (next) {
   try {
