@@ -1,8 +1,10 @@
 import { Strategy as LocalStrategy } from 'passport-local';
+import { ObjectId } from 'mongoose';
+import { PassportStatic } from 'passport';
 
-import User from '@models/user.model';
+import UserModel from '@models/user.model';
 
-export default function (passport) {
+export default function (passport: PassportStatic) {
   passport.use(
     new LocalStrategy(
       {
@@ -11,7 +13,7 @@ export default function (passport) {
       },
       async (email, password, done) => {
         try {
-          const user = await User.findOne({ email });
+          const user = await UserModel.findOne({ email });
           if (!user)
             return done(null, false, {
               message: `User with email ${email} not found.`,
@@ -29,9 +31,10 @@ export default function (passport) {
 
   passport.serializeUser((user, done) => done(null, user.id));
 
-  passport.deserializeUser(async (id, done) => {
+  passport.deserializeUser(async (id: ObjectId, done) => {
     try {
-      const user = await User.findById(id);
+      const user = await UserModel.findById(id);
+
       if (!user) return done(null, false);
       done(null, user);
     } catch (error) {
