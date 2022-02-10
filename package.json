@@ -36,7 +36,9 @@
     "@configs": "./dist/configs",
     "@utils": "./dist/utils",
     "@lib": "./dist/lib",
-    "@enums": "./dist/enums"
+    "@enums": "./dist/enums",
+    "@services": "./dist/services",
+    "@core": "./dist/core"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -73,6 +75,7 @@
   },
   "dependencies": {
     "@typegoose/typegoose": "^9.6.2",
+    "agenda": "^4.2.1",
     "bcrypt": "^5.0.1",
     "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^4.6.0",
@@ -85,6 +88,7 @@
     "glob": "^7.2.0",
     "handlebars": "^4.7.7",
     "http-errors": "^1.8.1",
+    "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "mongoose": "^6.2.1",
     "morgan": "^1.10.0",

@@ -29,6 +29,9 @@ export const getResetPassword = (_req: Request, res: Response) => {
   });
 };
 
+// post Password reset link
+// export const postResetPassword = async (_req: Request, _res: Response) => {}; // TODO: Implement
+
 // Sign up a new user
 export const postSignUp = async (
   req: Request,

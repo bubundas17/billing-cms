@@ -1,7 +1,7 @@
 import optionModel from '@models/option.model';
 
 const options: {
-  [key: string]: any;
+  [key: string]: unknown;
 } = {};
 
 function getKeyValue(key) {
