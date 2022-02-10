@@ -11,7 +11,7 @@ type EmailProps = {
 class EmailSender {
   agenda: Agenda;
   AGENDA_JOB_KEY = 'send_email';
-  constructor() {
+  init() {
     this.agenda = new Agenda({ mongo: mongoose.connection.db });
   }
 
@@ -19,7 +19,7 @@ class EmailSender {
     this.agenda.define(this.AGENDA_JOB_KEY, (job, done) => {
       const props = job.attrs.data as EmailProps;
       // log
-      console.log(props);
+      console.log('frem send Mail function', props);
       done();
     });
     await this.agenda.start();

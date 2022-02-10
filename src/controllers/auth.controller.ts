@@ -5,6 +5,7 @@ import UserModel from '@models/user.model';
 import mappedErrors from '@utils/mapped-errors';
 import pluginDriver from '@lib/plugin-driver';
 
+import UserApi from '@core/api/users.api';
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
   res.render('auth/signup', {
@@ -30,7 +31,17 @@ export const getResetPassword = (_req: Request, res: Response) => {
 };
 
 // post Password reset link
-// export const postResetPassword = async (_req: Request, _res: Response) => {}; // TODO: Implement
+export const postResetPassword = async (req: Request, res: Response) => {
+  const email = req.body.email;
+  const user = await UserApi.getUserByEmail(email);
+  if (!user) {
+    req.flash('error', 'User not found');
+    return res.redirect('/auth/reset-password');
+  }
+  await UserApi.sendPasswordResetLink(user);
+  req.flash('success', 'Password Reset link Sent!');
+  return res.redirect('/auth/reset-password');
+};
 
 // Sign up a new user
 export const postSignUp = async (

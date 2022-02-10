@@ -14,6 +14,7 @@ import UserRole from '@enums/user-role.enum';
   }
 })
 export class User {
+  _id: string;
   @prop({ required: true, unique: true })
   name: string;
 

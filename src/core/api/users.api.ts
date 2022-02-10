@@ -12,17 +12,25 @@ export class UserApi {
     return await UserModel.findOne({ email });
   }
 
-  static async getUserById(id: string): Promise<User | null> {
-    return await UserModel.findById(id);
+  static async getUserById(id: string) {
+    return await UserModel.findById(id).lean();
   }
 
   static async getUserByUsername(username: string): Promise<User | null> {
     return await UserModel.findOne({ username });
   }
 
+  // Change password
+  static async changePassword(user: User, password: string): Promise<boolean> {
+    if (!user) {
+      return false;
+    }
+    await UserModel.findByIdAndUpdate(user._id, { $set: { password } });
+    return true;
+  }
+
   // send Password Reset Link
-  static async sendPasswordResetLink(email: string): Promise<boolean> {
-    const user = await UserModel.findOne({ email });
+  static async sendPasswordResetLink(user: User): Promise<boolean> {
     if (!user) {
       return false;
     }
@@ -34,9 +42,9 @@ export class UserApi {
       env.JWT_SECRET,
       { expiresIn: '24h' },
     );
-    const resetLink = `${getOption(
+    const resetLink = `${await getOption(
       settingsEnum.URL_PREFIX,
-    )}/reset-password/${token}`;
+    )}reset-password/?token=${token}`;
 
     await emailSender.sendEmail(user, EmailTemplates.RESET_PASSWORD, {
       resetLink,
