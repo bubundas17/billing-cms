@@ -1,5 +1,5 @@
 import { promisify } from 'util';
-import { join, basename } from 'path';
+import { join } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
 import express, { Express } from 'express';
@@ -20,18 +20,14 @@ const glob = promisify(globAsync);
 
 class Theme {
   private hbs: typeof Handlebars;
-  metadata: object;
+  private metadata: object;
 
   constructor() {
     this.hbs = Handlebars;
     this.metadata = {};
   }
 
-  getFileName(file: string, ext = ''): string {
-    return basename(file, ext);
-  }
-
-  async getPartials() {
+  private async getPartials() {
     const theme = await this.getCurrentTheme();
 
     const dirs = await glob('**/*.hbs', {
@@ -43,21 +39,21 @@ class Theme {
       const fileData = await util.readFile(theme.partialsFolderPath, current);
       const template = this.compileTemplate(fileData);
       const _prev = await prev;
-      _prev[this.getFileName(current, '.hbs')] = this.renderTemplate(template);
+      _prev[util.getFileName(current, '.hbs')] = this.renderTemplate(template);
       return prev;
     }, Promise.resolve({}));
 
     return partials;
   }
 
-  async getTemplate(filePath: string, options = {}) {
+  private async getTemplate(filePath: string, options = {}) {
     const theme = await this.getCurrentTheme();
     const fileData = await util.readFile(theme.absulutePath, filePath);
     const template = this.compileTemplate(fileData, options);
     return template;
   }
 
-  async render(filePath: string, context = {}, options = {}) {
+  private async render(filePath: string, context = {}, options = {}) {
     const partials = await this.getPartials();
     const template = await this.getTemplate(`${filePath}.hbs`, options);
     const layoutTemplate = await this.getTemplate('layouts/main.hbs', options);
@@ -84,7 +80,7 @@ class Theme {
     return this.hbs.precompile(template, options);
   }
 
-  renderTemplate(
+  private renderTemplate(
     template: HandlebarsTemplateDelegate,
     context: object = {},
     options: RuntimeOptions = {},

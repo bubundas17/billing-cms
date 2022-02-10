@@ -16,7 +16,7 @@
     "copy-files": "copyfiles -u 1 ./src/**/*.{css,js,hbs} ./dist",
     "build:scss": "sass ./src/assets/scss/index.scss ./src/assets/css/styles.css",
     "watch:scss": "sass -w ./src/assets/scss/index.scss ./src/assets/css/styles.css",
-    "server": "tsnd --respawn --transpile-only ./src/app.ts",
+    "server": "tsnd --respawn --transpile-only --exit-child --watch src ./src/app.ts",
     "dev": "concurrently -k -c \"bold.yellow,bold.cyan\" -n \"App,SCSS\" \"npm:server\" \"npm:watch:scss\"",
     "build": "npm run clean && npm run build:scss && tsc && npm run copy-files",
     "start": "node ./dist/app.js"
@@ -69,7 +69,6 @@
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "sass": "^1.49.0",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.5"
   },
   "dependencies": {
@@ -92,6 +91,7 @@
     "nodemailer": "^6.7.2",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "ts-node-dev": "^1.1.8"
   }
 }

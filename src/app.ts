@@ -24,7 +24,7 @@ import theme from '@lib/theme';
 // TODO - Create perfect theme.registerThemeEngine method that will register a theme engine, you can use app.set to register the engine
 
 class App {
-  hbs = create({
+  private hbs = create({
     extname: 'hbs',
     handlebars: Handlebars,
     defaultLayout: 'main',
