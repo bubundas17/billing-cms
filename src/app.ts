@@ -19,6 +19,8 @@ import passportHelper from '@helpers/passport.helper';
 import flash from '@helpers/flash.helper';
 import theme from '@lib/theme';
 
+import emailSender from '@services/email.sender.service';
+
 // TODO - Add proper error handling and logging to the console
 // TODO - Reduce the amount of code in this file
 // TODO - Create perfect theme.registerThemeEngine method that will register a theme engine, you can use app.set to register the engine
@@ -79,6 +81,8 @@ const bootstrap = async () => {
     app.listen(env.PORT, () =>
       console.log(`Server started on port ${env.PORT}`),
     );
+    // Process Email Queue
+    emailSender.processEmails();
   } catch (error) {
     console.error(error);
     process.exit(1);

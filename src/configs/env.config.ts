@@ -5,6 +5,7 @@ interface Env {
   PORT: number;
   MONGO_URI: string;
   SESSION_SECRET: string;
+  JWT_SECRET: string;
 }
 
 const env = envSchema<Env>({
@@ -22,6 +23,7 @@ const env = envSchema<Env>({
         type: 'string',
         default: 'mongodb://localhost:27017/test',
       },
+      JWT_SECRET: { type: 'string', default: 'secret' },
       SESSION_SECRET: { type: 'string', default: 'secret' },
     },
   },
