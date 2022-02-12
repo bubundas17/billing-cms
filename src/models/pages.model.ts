@@ -2,8 +2,9 @@ import { getModelForClass, prop } from '@typegoose/typegoose';
 
 import { User } from '@models/user.model';
 import { Status } from '@enums/status.enum';
+import BaseModel from '@models/base.model';
 
-export class Pages {
+export class Pages extends BaseModel {
   @prop({ required: true })
   title: string;
 

@@ -1,8 +1,9 @@
 import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 
 import { User } from '@models/user.model';
+import BaseModel from '@models/base.model';
 
-export class Category {
+export class Category extends BaseModel {
   @prop({ required: true })
   name: string;
 

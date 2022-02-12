@@ -1,9 +1,9 @@
 import { compare, hash } from 'bcrypt';
 import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
-import { Document } from 'mongoose';
 
 import UserRole from '@enums/user-role.enum';
+import BaseModel from '@models/base.model';
 
 @pre<User>('save', async function (next) {
   try {
@@ -14,7 +14,7 @@ import UserRole from '@enums/user-role.enum';
     next(error);
   }
 })
-export class UserSchema {
+export class User extends BaseModel {
   @prop({ required: true, unique: true })
   name: string;
 
@@ -46,8 +46,6 @@ export class UserSchema {
   }
 }
 
-export type User = UserSchema & Document;
-
-export default getModelForClass(UserSchema, {
+export default getModelForClass(User, {
   schemaOptions: { timestamps: true },
 });

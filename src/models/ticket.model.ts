@@ -1,6 +1,7 @@
 import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 
 import { User } from '@models/user.model';
+import BaseModel from '@models/base.model';
 
 export class Reply {
   @prop()
@@ -10,7 +11,7 @@ export class Reply {
   postedBy: Ref<User>;
 }
 
-export class Ticket {
+export class Ticket extends BaseModel {
   @prop({ required: true })
   title: string;
 
