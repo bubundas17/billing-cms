@@ -10,7 +10,6 @@ import {
   postSignUp,
   postResetPassword,
 } from '@controllers/index';
-import { signUpValidator, signInValidator } from '@utils/validator';
 import BaseRoute from '@routes/base.route';
 
 class AuthRoute extends BaseRoute {
@@ -35,14 +34,12 @@ class AuthRoute extends BaseRoute {
     this.router.post(
       '/signup',
       ensureLoggedOut({ redirectTo: '/' }),
-      signUpValidator,
       postSignUp,
     );
 
     this.router.post(
       '/signin',
       ensureLoggedOut({ redirectTo: '/' }),
-      signInValidator,
       postSignIn,
       passport.authenticate('local', {
         successReturnToOrRedirect: '/',
