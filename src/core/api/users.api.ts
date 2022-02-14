@@ -6,6 +6,7 @@ import { getOption } from '@lib/options';
 import settingsEnum from '@enums/settings.enum';
 import emailSender from '@services/email.sender.service';
 import EmailTemplates from '@enums/email_templates.enum';
+import { hash } from 'bcrypt';
 
 export class UserApi {
   static async getUserByEmail(email: string): Promise<User | null> {
@@ -25,9 +26,15 @@ export class UserApi {
     if (!user) {
       return false;
     }
-    await UserModel.findByIdAndUpdate(user._id, { $set: { password } });
+    const newPassword = await hash(password, 10);
+    await UserModel.findByIdAndUpdate(user._id, {
+      $set: { password: newPassword },
+    });
     return true;
   }
+
+  // Create New user
+  // static async createUser(
 
   // send Password Reset Link
   static async sendPasswordResetLink(user: User): Promise<boolean> {
@@ -44,13 +51,25 @@ export class UserApi {
     );
     const resetLink = `${await getOption(
       settingsEnum.URL_PREFIX,
-    )}reset-password/?token=${token}`;
+    )}auth/reset-password/?token=${token}`;
 
     await emailSender.sendEmail(user, EmailTemplates.RESET_PASSWORD, {
       subject: 'Reset your password',
       info: { passwordResetLink: resetLink },
     });
     return true;
+  }
+
+  // read password reset token
+  static async readPasswordResetToken(token: string): Promise<User | null> {
+    try {
+      const decoded = jwt.verify(token, env.JWT_SECRET);
+      if (decoded.action === 'resetPassword') {
+        return await UserModel.findById(decoded.id).lean();
+      }
+    } catch (error) {
+      return null;
+    }
   }
 
   // generate password reset token

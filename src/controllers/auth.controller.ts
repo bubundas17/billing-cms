@@ -6,6 +6,8 @@ import mappedErrors from '@utils/mapped-errors';
 import pluginDriver from '@lib/plugin-driver';
 
 import UserApi from '@core/api/users.api';
+import EmailTemplates from '@enums/email_templates.enum';
+import emailSenderService from '@services/email.sender.service';
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
   res.render('auth/signup', {
@@ -23,7 +25,28 @@ export const getSignIn = (_req: Request, res: Response) => {
 };
 
 // Render the sign in page
-export const getResetPassword = (_req: Request, res: Response) => {
+export const getResetPassword = async (req: Request, res: Response) => {
+  if (req.query.token) {
+    const userinfo = await UserApi.readPasswordResetToken(
+      req.query.token as string,
+    );
+    if (userinfo) {
+      res.render('auth/reset-password', {
+        pathName: 'reset-password',
+        layout: 'auth',
+        action: 'reset',
+        userinfo,
+      });
+    } else {
+      res.render('auth/reset-password', {
+        pathName: 'reset-password',
+        layout: 'auth',
+        action: 'reset',
+        userinfo: false,
+      });
+    }
+    return;
+  }
   res.render('auth/reset-password', {
     pathName: 'reset-password',
     layout: 'auth',
@@ -32,6 +55,29 @@ export const getResetPassword = (_req: Request, res: Response) => {
 
 // post Password reset link
 export const postResetPassword = async (req: Request, res: Response) => {
+  if (req.query.token) {
+    const userinfo = await UserApi.readPasswordResetToken(
+      req.query.token as string,
+    );
+    if (userinfo) {
+      // update password
+      await UserApi.changePassword(userinfo, req.body.password);
+      req.flash('success', 'Password Successfully Changed');
+      await emailSenderService.sendEmail(
+        userinfo,
+        EmailTemplates.CHANGED_PASSWORD,
+        {
+          subject: 'Your Password Has Beeen Changed',
+          info: {},
+        },
+      );
+      // login
+      return res.redirect('/auth/login');
+    } else {
+      return res.redirect('/auth/reset-password');
+    }
+    return;
+  }
   const email = req.body.email;
   const user = await UserApi.getUserByEmail(email);
   if (!user) {
@@ -65,7 +111,6 @@ export const postSignUp = async (
         layout: 'auth',
       });
     }
-
     const user = new UserModel({ name, email, password, address });
     await user.save();
     res.redirect('/auth/signin');

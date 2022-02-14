@@ -1,6 +1,6 @@
-import { compare, hash } from 'bcrypt';
 import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
+import { hash, compare } from 'bcrypt';
 
 import UserRole from '@enums/user-role.enum';
 import BaseModel from '@models/base.model';
