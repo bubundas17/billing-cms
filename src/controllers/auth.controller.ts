@@ -1,8 +1,6 @@
-import { validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
 
 import UserModel from '@models/user.model';
-import mappedErrors from '@utils/mapped-errors';
 import pluginDriver from '@lib/plugin-driver';
 
 import UserApi from '@core/api/users.api';
@@ -95,22 +93,9 @@ export const postSignUp = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const { name, email, address, password, confirmPassword } = req.body;
+  const { name, email, address, password } = req.body;
 
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.render('auth/signup', {
-        name,
-        email,
-        address,
-        password,
-        confirmPassword,
-        errors: mappedErrors(errors.array()),
-        pathName: 'signup',
-        layout: 'auth',
-      });
-    }
     const user = new UserModel({ name, email, password, address });
     await user.save();
     res.redirect('/auth/signin');
@@ -123,24 +108,20 @@ export const postSignUp = async (
 export const postSignIn = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   const { email, password } = req.body;
 
-  console.log(email, password);
-
-  const errors = validationResult(req);
   // @ts-ignore
   await pluginDriver.executeHook('onSignIn', { email, password });
-  // @ts-ignore
-  if (errors.isEmpty()) return next();
+
   // @ts-ignore
   pluginDriver.executeHook('onSignInError', errors);
+
   return res.render('auth/signin', {
     pathName: 'signin',
     email,
     password,
-    errors: mappedErrors(errors.array()),
     layout: 'auth',
   });
 };

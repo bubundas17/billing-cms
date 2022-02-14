@@ -96,6 +96,10 @@ class Util {
   static getFileName(file: string, ext = ''): string {
     return basename(file, ext);
   }
+
+  static handleError(error: Error) {
+    throw error;
+  }
 }
 
 export default Util;
