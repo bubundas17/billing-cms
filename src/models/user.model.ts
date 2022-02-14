@@ -3,6 +3,7 @@ import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
 
 import UserRole from '@enums/user-role.enum';
+import BaseModel from '@models/base.model';
 
 @pre<User>('save', async function (next) {
   try {
@@ -13,8 +14,7 @@ import UserRole from '@enums/user-role.enum';
     next(error);
   }
 })
-export class User {
-  _id: string;
+export class User extends BaseModel {
   @prop({ required: true, unique: true })
   name: string;
 

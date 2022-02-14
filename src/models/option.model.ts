@@ -1,6 +1,8 @@
 import { getModelForClass, prop } from '@typegoose/typegoose';
 
-export class Option {
+import BaseModel from '@models/base.model';
+
+export class Option extends BaseModel {
   @prop({ required: true, index: true })
   name: string;
 

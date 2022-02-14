@@ -1,5 +1,5 @@
 import { promisify } from 'util';
-import { join } from 'path';
+import { join, parse } from 'path';
 import { cwd } from 'process';
 import { rm } from 'fs/promises';
 import express, { Express } from 'express';
@@ -54,10 +54,21 @@ class Theme {
   }
 
   private async render(filePath: string, context = {}, options = {}) {
+    const { name, dir, ext } = parse(filePath);
+    if (ext === '' || ext === '.hbs') filePath = `${dir}/${name}.hbs`;
+    if (ext !== '' && ext !== '.hbs')
+      throw new Error('Invalid file extension, only .hbs is allowed');
+
+    console.log(filePath);
+
     const partials = await this.getPartials();
-    const template = await this.getTemplate(`${filePath}.hbs`, options);
+    const template = await this.getTemplate(filePath, options);
     const layoutTemplate = await this.getTemplate('layouts/main.hbs', options);
-    let html = this.renderTemplate(template, context, options);
+    let html = this.renderTemplate(
+      template,
+      { ...context },
+      { ...options, partials },
+    );
     html = this.renderTemplate(
       layoutTemplate,
       { ...context, body: html },
