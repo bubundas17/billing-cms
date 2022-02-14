@@ -9,6 +9,7 @@ import { isEmpty } from 'class-validator';
 
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
+import env from '@configs/env.config';
 
 const glob = promisify(globAsync);
 
@@ -55,8 +56,10 @@ class Theme {
   private async getTemplate(filePath: string, options = {}) {
     try {
       const theme = await this.getCurrentTheme();
-      const fileData = await util.readFile(theme.absulutePath, filePath);
-      await this.readFile(theme.absulutePath, filePath); // cache
+      const fileData = await this.readFileAndCache(
+        theme.absulutePath,
+        filePath,
+      );
       const template = this.compileTemplate(fileData, options);
       return template;
     } catch (error) {
@@ -64,12 +67,20 @@ class Theme {
     }
   }
 
-  private async readFile(...path: string[]) {
+  private async readFileAndCache(...path: string[]): Promise<string | never> {
     const filePath = join(...path);
+    const cache = this.fsCache;
 
-    this.fsCache[filePath]
-      ? this.fsCache[filePath]
-      : (this.fsCache[filePath] = await util.readFile(filePath));
+    if (env.NODE_ENV === 'production') {
+      if (cache[filePath]) {
+        return cache[filePath];
+      } else {
+        cache[filePath] = await util.readFile(filePath);
+        return cache[filePath];
+      }
+    } else {
+      return await util.readFile(filePath);
+    }
   }
 
   async render(filePath: string, context = {}, options = {}) {
