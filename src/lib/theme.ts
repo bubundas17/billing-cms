@@ -21,11 +21,11 @@ const glob = promisify(globAsync);
 
 class Theme {
   private hbs: typeof Handlebars;
-  private cache: object;
+  private fsCache: object;
 
   constructor() {
     this.hbs = Handlebars;
-    this.cache = {};
+    this.fsCache = {};
   }
 
   private async getPartials() {
@@ -56,11 +56,20 @@ class Theme {
     try {
       const theme = await this.getCurrentTheme();
       const fileData = await util.readFile(theme.absulutePath, filePath);
+      await this.readFile(theme.absulutePath, filePath); // cache
       const template = this.compileTemplate(fileData, options);
       return template;
     } catch (error) {
       util.handleError(error);
     }
+  }
+
+  private async readFile(...path: string[]) {
+    const filePath = join(...path);
+
+    this.fsCache[filePath]
+      ? this.fsCache[filePath]
+      : (this.fsCache[filePath] = await util.readFile(filePath));
   }
 
   async render(filePath: string, context = {}, options = {}) {
