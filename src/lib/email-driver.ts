@@ -44,7 +44,8 @@ export class EmailDriver {
       from: `${env.SMTP_FROM_NAME} <${env.SMTP_FROM_EMAIL}>`,
       to: to,
       subject: subject,
-      text: body,
+      html: body,
+      // text: body,
     };
     const info = await this.transporter.sendMail(email);
     return info;

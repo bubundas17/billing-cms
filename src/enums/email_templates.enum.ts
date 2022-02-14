@@ -1,8 +1,8 @@
 enum EmailTemplates {
   WELCOME = 'welcome',
-  VERIFY_EMAIL = 'verify_email',
-  RESET_PASSWORD = 'reset_password',
-  CHANGE_PASSWORD = 'change_password',
+  VERIFY_EMAIL = 'verify-email',
+  RESET_PASSWORD = 'reset-password',
+  CHANGE_PASSWORD = 'change-password',
 }
 
 export default EmailTemplates;

@@ -53,7 +53,7 @@ class Theme {
     return template;
   }
 
-  private async render(filePath: string, context = {}, options = {}) {
+  async render(filePath: string, context = {}, options = {}) {
     const { name, dir, ext } = parse(filePath);
     if (ext === '' || ext === '.hbs') filePath = `${dir}/${name}.hbs`;
     if (ext !== '' && ext !== '.hbs')

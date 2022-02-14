@@ -47,7 +47,8 @@ export class UserApi {
     )}reset-password/?token=${token}`;
 
     await emailSender.sendEmail(user, EmailTemplates.RESET_PASSWORD, {
-      resetLink,
+      subject: 'Reset your password',
+      info: { passwordResetLink: resetLink },
     });
     return true;
   }
