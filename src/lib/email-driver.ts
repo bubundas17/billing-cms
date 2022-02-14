@@ -2,20 +2,28 @@ import nodemailer from 'nodemailer';
 
 import settingsEnum from '@enums/settings.enum';
 import { getOption } from '@lib/options';
-import User from '@models/user.model';
 import Mail from 'nodemailer/lib/mailer';
+import env from '@configs/env.config';
+
+export type EmailConfig = {
+  host: string;
+  port: number;
+  secure: boolean;
+  auth: {
+    user: string;
+    pass: string;
+  };
+};
 
 export class EmailDriver {
   config: any;
   transporter: nodemailer.Transporter;
 
-  constructor(config) {
-    this.config = config;
-  }
-
-  async init() {
+  async init(config: EmailConfig) {
     // check email config
-    this.transporter = nodemailer.createTransport(this.config);
+    // log email config
+    console.log('Email Driver Config:', config);
+    this.transporter = nodemailer.createTransport(config);
   }
 
   async testConnection() {
@@ -30,16 +38,17 @@ export class EmailDriver {
     return info;
   }
 
-  async sendEmail(userId) {
+  async sendEmail(to: string, subject: string, body: string) {
     // send email to user
-    const user = await User.findById(userId);
     const email = {
-      from: this.config.from,
-      to: user.email,
-      subject: 'Welcome to the app',
-      text: 'Your account has been successfully created',
+      from: `${env.SMTP_FROM_NAME} <${env.SMTP_FROM_EMAIL}>`,
+      to: to,
+      subject: subject,
+      text: body,
     };
     const info = await this.transporter.sendMail(email);
     return info;
   }
 }
+
+export default new EmailDriver();

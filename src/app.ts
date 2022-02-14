@@ -20,6 +20,7 @@ import flash from '@helpers/flash.helper';
 import theme from '@lib/theme';
 
 import emailSender from '@services/email.sender.service';
+import emailDriver, { EmailConfig } from '@lib/email-driver';
 
 // TODO - Add proper error handling and logging to the console
 // TODO - Reduce the amount of code in this file
@@ -96,6 +97,15 @@ class App {
       console.log(`App started on port ${env.PORT}`),
     );
     emailSender.init();
+    emailDriver.init({
+      host: env.SMTP_HOST,
+      port: env.SMTP_PORT,
+      secure: env.SMTP_SECURE,
+      auth: {
+        user: env.SMTP_USERNAME,
+        pass: env.SMTP_PASSWORD,
+      },
+    } as EmailConfig);
     emailSender.processEmails();
   }
 }
