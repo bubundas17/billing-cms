@@ -5,6 +5,7 @@ import { rm } from 'fs/promises';
 import express, { Express } from 'express';
 import globAsync from 'glob';
 import Handlebars from 'handlebars';
+import { isEmpty } from 'class-validator';
 
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
@@ -20,61 +21,80 @@ const glob = promisify(globAsync);
 
 class Theme {
   private hbs: typeof Handlebars;
-  private metadata: object;
+  private cache: object;
 
   constructor() {
     this.hbs = Handlebars;
-    this.metadata = {};
+    this.cache = {};
   }
 
   private async getPartials() {
-    const theme = await this.getCurrentTheme();
+    try {
+      const theme = await this.getCurrentTheme();
 
-    const dirs = await glob('**/*.hbs', {
-      cwd: join(cwd(), 'themes', theme.path, 'partials'),
-      follow: true,
-    });
+      const dirs = await glob('**/*.hbs', {
+        cwd: join(cwd(), 'themes', theme.path, 'partials'),
+        follow: true,
+      });
 
-    const partials = await dirs.reduce(async (prev, current) => {
-      const fileData = await util.readFile(theme.partialsFolderPath, current);
-      const template = this.compileTemplate(fileData);
-      const _prev = await prev;
-      _prev[util.getFileName(current, '.hbs')] = this.renderTemplate(template);
-      return prev;
-    }, Promise.resolve({}));
+      const partials = await dirs.reduce(async (prev, current) => {
+        const fileData = await util.readFile(theme.partialsFolderPath, current);
+        const template = this.compileTemplate(fileData);
+        const _prev = await prev;
+        _prev[util.getFileName(current, '.hbs')] =
+          this.renderTemplate(template);
+        return prev;
+      }, Promise.resolve({}));
 
-    return partials;
+      return partials;
+    } catch (error) {
+      util.handleError(error);
+    }
   }
 
   private async getTemplate(filePath: string, options = {}) {
-    const theme = await this.getCurrentTheme();
-    const fileData = await util.readFile(theme.absulutePath, filePath);
-    const template = this.compileTemplate(fileData, options);
-    return template;
+    try {
+      const theme = await this.getCurrentTheme();
+      const fileData = await util.readFile(theme.absulutePath, filePath);
+      const template = this.compileTemplate(fileData, options);
+      return template;
+    } catch (error) {
+      util.handleError(error);
+    }
   }
 
-  private async render(filePath: string, context = {}, options = {}) {
-    const { name, dir, ext } = parse(filePath);
-    if (ext === '' || ext === '.hbs') filePath = `${dir}/${name}.hbs`;
-    if (ext !== '' && ext !== '.hbs')
-      throw new Error('Invalid file extension, only .hbs is allowed');
+  async render(filePath: string, context = {}, options = {}) {
+    try {
+      if (isEmpty(filePath)) throw new Error('File path must not be empty');
 
-    console.log(filePath);
+      const { name, dir, ext } = parse(filePath);
+      if (isEmpty(ext) || ext === '.hbs') filePath = `${dir}/${name}.hbs`;
+      if (!isEmpty(ext) && ext !== '.hbs')
+        throw new Error('Invalid file extension, only .hbs is allowed');
 
-    const partials = await this.getPartials();
-    const template = await this.getTemplate(filePath, options);
-    const layoutTemplate = await this.getTemplate('layouts/main.hbs', options);
-    let html = this.renderTemplate(
-      template,
-      { ...context },
-      { ...options, partials },
-    );
-    html = this.renderTemplate(
-      layoutTemplate,
-      { ...context, body: html },
-      { partials },
-    );
-    return html;
+      const partials = await this.getPartials();
+      const template = await this.getTemplate(filePath, options);
+
+      const layoutTemplate = await this.getTemplate(
+        'layouts/main.hbs',
+        options,
+      );
+
+      let html = this.renderTemplate(
+        template,
+        { ...context },
+        { ...options, partials },
+      );
+      html = this.renderTemplate(
+        layoutTemplate,
+        { ...context, body: html },
+        { partials },
+      );
+
+      return html;
+    } catch (error) {
+      util.handleError(error);
+    }
   }
 
   private compileTemplate(
@@ -199,8 +219,6 @@ class Theme {
     app.use(async (_req, res, next) => {
       const currentTheme = await theme.getCurrentTheme();
 
-      res.locals.siteTitle = await getOption('siteTitle');
-
       res.load = async (file, options = {}) => {
         const doc = await theme.render(file, { ...options, ...res.locals });
         return res.send(doc);
@@ -208,8 +226,6 @@ class Theme {
 
       res.locals.currentThemeDir = await theme.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
-
-      res.title = async (title: string) => (res.locals.title = title);
 
       next();
     });
