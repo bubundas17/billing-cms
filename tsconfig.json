@@ -114,7 +114,8 @@
       "@enums/*": ["./src/enums/*"],
       "@services/*": ["./src/services/*"],
       "@core/*": ["./src/core/*"],
-      "@dto/*": ["./src/dto/*"]
+      "@dto/*": ["./src/dto/*"],
+      "@decorators/*": ["./src/decorators/*"]
     }
   },
   "exclude": [
