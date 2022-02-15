@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 
-import UserModel from '@models/user.model';
+import UserModel, { User } from '@models/user.model';
 import pluginDriver from '@lib/plugin-driver';
 
 import UserApi from '@core/api/users.api';
 import EmailTemplates from '@enums/email_templates.enum';
 import emailSenderService from '@services/email.sender.service';
+import { validate } from 'class-validator';
+
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
   res.render('auth/signup', {
@@ -74,7 +76,6 @@ export const postResetPassword = async (req: Request, res: Response) => {
     } else {
       return res.redirect('/auth/reset-password');
     }
-    return;
   }
   const email = req.body.email;
   const user = await UserApi.getUserByEmail(email);
@@ -96,10 +97,19 @@ export const postSignUp = async (
   const { name, email, address, password } = req.body;
 
   try {
-    const user = new UserModel({ name, email, password, address });
+    const newUser = new User({ name, email, address, password });
+    const errors = await validate(newUser);
+    if (errors.length > 0) {
+      return res.send(errors);
+    }
+
+    const user = new UserModel(newUser);
     await user.save();
+
     res.redirect('/auth/signin');
   } catch (error) {
+    // console.log('error', error);
+
     next(error);
   }
 };
