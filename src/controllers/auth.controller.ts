@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { plainToInstance } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
 
 import UserModel from '@models/user.model';
@@ -8,8 +9,8 @@ import UserApi from '@core/api/users.api';
 import EmailTemplates from '@enums/email_templates.enum';
 import emailSenderService from '@services/email.sender.service';
 import CreateUserDto from '@dto/create-user.dto';
-import { plainToInstance } from 'class-transformer';
 import mappedErrors from '@utils/mapped-errors';
+import SignInUserDto from '@dto/signin-user.dto';
 
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
@@ -100,11 +101,29 @@ export const postSignUp = async (
   try {
     const userInput = plainToInstance(CreateUserDto, req.body);
 
-    let errors: ValidationError[] | Record<string, string> = (await validate(
+    let errors: ValidationError[] | Record<string, string> = await validate(
       userInput,
-    )) as ValidationError[];
+    );
     if (errors.length > 0) {
-      errors = mappedErrors(errors) as Record<string, string>;
+      errors = mappedErrors(errors);
+      return res.render('auth/signup', {
+        pathName: 'signup',
+        layout: 'auth',
+        errors,
+        userInput,
+      });
+    }
+
+    errors = {};
+    const emailUser = await UserModel.findOne({ email: userInput.email });
+    const usernameUser = await UserModel.findOne({
+      username: userInput.username,
+    });
+
+    if (emailUser) errors.email = 'Email already in used';
+    if (usernameUser) errors.username = 'Username already in used';
+
+    if (Object.keys(errors).length > 0) {
       return res.render('auth/signup', {
         pathName: 'signup',
         layout: 'auth',
@@ -128,20 +147,24 @@ export const postSignIn = async (
   res: Response,
   _next: NextFunction,
 ) => {
-  const { email, password } = req.body;
+  const userInput = plainToInstance(SignInUserDto, req.body);
 
-  // @ts-ignore
-  await pluginDriver.executeHook('onSignIn', { email, password });
+  const errors: ValidationError[] | Record<string, string> = await validate(
+    userInput,
+  );
 
-  // @ts-ignore
-  pluginDriver.executeHook('onSignInError', errors);
+  await pluginDriver.executeHook('onSignIn', userInput);
+  await pluginDriver.executeHook('onSignInError', errors);
 
-  return res.render('auth/signin', {
+  const options: Record<string, unknown> = {
     pathName: 'signin',
-    email,
-    password,
+    userInput,
     layout: 'auth',
-  });
+  };
+
+  if (errors.length > 0) options.errors = mappedErrors(errors);
+
+  return res.render('auth/signin', options);
 };
 
 // Sign out a signed in user

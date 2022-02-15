@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "es5",
     "lib": ["ES2018", "ESNext.AsyncIterable"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -9,14 +9,15 @@
     "moduleResolution": "node",
     "typeRoots": ["typings"],
     "outDir": "./dist",
-    "importHelpers": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
     "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
       "@models/*": ["./src/models/*"],
