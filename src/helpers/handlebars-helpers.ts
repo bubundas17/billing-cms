@@ -20,9 +20,10 @@ handlebarsHelpers.errorMessage = function (
 ): string | Handlebars.SafeString {
   if (typeof errors !== 'object') return '';
   const keys = Object.keys(errors);
+
   if (keys.indexOf(type) > -1) {
     return new Handlebars.SafeString(
-      `<div class="invalid-feedback">${Handlebars.escapeExpression(
+      `<div class="invalid-feedback" style="display: block !important;">${Handlebars.escapeExpression(
         errors[type],
       )}</div>`,
     );

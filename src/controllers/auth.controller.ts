@@ -1,12 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
+import { validate, ValidationError } from 'class-validator';
 
-import UserModel, { User } from '@models/user.model';
+import UserModel from '@models/user.model';
 import pluginDriver from '@lib/plugin-driver';
 
 import UserApi from '@core/api/users.api';
 import EmailTemplates from '@enums/email_templates.enum';
 import emailSenderService from '@services/email.sender.service';
-import { validate } from 'class-validator';
+import CreateUserDto from '@dto/create-user.dto';
+import { plainToInstance } from 'class-transformer';
+import mappedErrors from '@utils/mapped-errors';
 
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
@@ -94,22 +97,27 @@ export const postSignUp = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const { name, email, address, password } = req.body;
-
   try {
-    const newUser = new User({ name, email, address, password });
-    const errors = await validate(newUser);
+    const userInput = plainToInstance(CreateUserDto, req.body);
+
+    let errors: ValidationError[] | Record<string, string> = (await validate(
+      userInput,
+    )) as ValidationError[];
     if (errors.length > 0) {
-      return res.send(errors);
+      errors = mappedErrors(errors) as Record<string, string>;
+      return res.render('auth/signup', {
+        pathName: 'signup',
+        layout: 'auth',
+        errors,
+        userInput,
+      });
     }
 
-    const user = new UserModel(newUser);
+    const user = new UserModel(userInput);
     await user.save();
 
-    res.redirect('/auth/signin');
+    return res.redirect('/auth/signin');
   } catch (error) {
-    // console.log('error', error);
-
     next(error);
   }
 };

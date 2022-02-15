@@ -7,24 +7,41 @@
     <form class='display-center__form' action='/auth/signup' method="post">
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input type='text' name="name" class='form-control display-center__form-input' placeholder='Name' />
+        <input type='text' name="name" class='form-control display-center__form-input  {{errorInput errors "name"}}'
+          placeholder='Name' value="{{userInput.name}}" />
       </label>
+      {{errorMessage errors "name"}}
+
+      <label class='display-center__form-label'>
+        <i class='fas fa-circle-user display-center__form-icon'></i>
+        <input type='text' name="username"
+          class='form-control display-center__form-input {{errorInput errors "username"}}' placeholder='Username'
+          value="{{userInput.username}}" />
+      </label>
+      {{errorMessage errors "username"}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-envelope display-center__form-icon'></i>
-        <input type='email' name="email" class='form-control display-center__form-input' placeholder='Email address' />
+        <input type='email' name="email" class='form-control display-center__form-input {{errorInput errors "email"}}'
+          placeholder='Email address' value="{{userInput.email}}" />
       </label>
+      {{errorMessage errors "email"}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input type='password' name="password" class='form-control display-center__form-input' placeholder='Password' />
+        <input type='password' name="password"
+          class='form-control display-center__form-input {{errorInput errors "password"}}' placeholder='Password'
+          value="{{userInput.password}}" />
       </label>
+      {{errorMessage errors "password"}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input type='password' name="repeatPassword" class='form-control display-center__form-input'
-          placeholder='Repeat Password' />
+        <input type='password' name="repeatPassword"
+          class='form-control display-center__form-input {{errorInput errors "repeatPassword"}}'
+          placeholder='Repeat Password' value="{{userInput.repeatPassword}}" />
       </label>
+      {{errorMessage errors "repeatPassword"}}
 
       <button type='submit' class='btn display-center__form-submit-btn'>
         <i class='fas fa-sign-in-alt display-center__form-submit-btn-icon'></i>

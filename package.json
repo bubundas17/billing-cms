@@ -37,7 +37,8 @@
     "@lib": "./src/lib",
     "@enums": "./src/enums",
     "@services": "./src/services",
-    "@core": "./src/core"
+    "@core": "./src/core",
+    "@dto": "./src/dto"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -77,6 +78,7 @@
     "@typegoose/typegoose": "^9.6.2",
     "agenda": "^4.2.1",
     "bcrypt": "^5.0.1",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^4.6.0",
