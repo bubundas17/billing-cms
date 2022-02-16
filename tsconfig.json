@@ -17,7 +17,17 @@
     "skipLibCheck": true,
     "importHelpers": true,
     "strict": true,
-    "strictPropertyInitialization": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
       "@models/*": ["./src/models/*"],
@@ -30,7 +40,8 @@
       "@services/*": ["./src/services/*"],
       "@core/*": ["./src/core/*"],
       "@dto/*": ["./src/dto/*"],
-      "@decorators/*": ["./src/decorators/*"]
+      "@decorators/*": ["./src/decorators/*"],
+      "@exceptions/*": ["./src/exceptions/*"]
     }
   },
   "exclude": [

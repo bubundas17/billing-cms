@@ -10,13 +10,13 @@ import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
+import flash from 'connect-flash';
 
 import env from '@configs/env.config';
 import routes from '@routes/index';
 import { get4xx, get5xx } from '@controllers/index';
 import handlebarsHelpers from '@helpers/handlebars-helpers';
 import passportHelper from '@helpers/passport.helper';
-import flash from '@helpers/flash.helper';
 import theme from '@lib/theme';
 
 import emailSender from '@services/email.sender.service';
@@ -61,7 +61,7 @@ class App {
       }),
     );
 
-    this.app.use(flash);
+    this.app.use(flash());
     if (env.NODE_ENV === 'development') this.app.use(morgan('dev'));
 
     this.app.use(passport.initialize());

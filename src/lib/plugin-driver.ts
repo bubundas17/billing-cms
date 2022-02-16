@@ -103,7 +103,7 @@ class PluginDriver {
         const pluginPath = join(plugin.baseDir, this.hooksFileName);
 
         if (fs.existsSync(pluginPath)) {
-          const funcs = import(pluginPath);
+          const funcs = await import(pluginPath);
           if (
             typeof funcs === 'object' &&
             funcs[hookName] &&

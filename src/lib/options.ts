@@ -4,10 +4,10 @@ const options: {
   [key: string]: unknown;
 } = {};
 
-function getKeyValue(key) {
+function getKeyValue(key: string | { [key: string]: unknown }) {
   let keyvalue = '';
   if (typeof key === 'object') {
-    keyvalue = key.name.toLowerCase();
+    keyvalue = String(key.name).toLowerCase();
   } else {
     keyvalue = key.toLowerCase();
   }
@@ -15,11 +15,7 @@ function getKeyValue(key) {
   return keyvalue;
 }
 
-/**
- * @param {string} key
- * @returns {Promise<string|null>}
- */
-export const getOption = async (key) => {
+export const getOption = async (key: string | { [key: string]: unknown }) => {
   const keyvalue = getKeyValue(key);
 
   if (options[keyvalue]) {
@@ -39,13 +35,11 @@ export const getOption = async (key) => {
   return option.value;
 };
 
-/**
- * @param {string} key
- * @param {string} value
- * @param {object} options
- * @returns {Promise<string>}
- */
-export const setOption = async (key, value, ops = { cachable: true }) => {
+export const setOption = async (
+  key: string | { [key: string]: string },
+  value: string,
+  ops = { cachable: true },
+) => {
   const keyvalue = getKeyValue(key);
 
   if (ops.cachable) {
@@ -59,14 +53,11 @@ export const setOption = async (key, value, ops = { cachable: true }) => {
   return value;
 };
 
-/**
- * @description Delete option
- *
- * @param {string} key
- * @returns {Promise<boolean>}
- */
-export const deleteOption = async (key) => {
+export const deleteOption = async (
+  key: string | { [key: string]: unknown },
+) => {
   const keyvalue = getKeyValue(key);
+
   try {
     await optionModel.deleteOne({ name: keyvalue });
     return true;

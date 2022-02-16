@@ -4,13 +4,15 @@ import { hash, compare } from 'bcrypt';
 
 import UserRole from '@enums/user-role.enum';
 import BaseModel from '@models/base.model';
+import HttpException from '@exceptions/HttpException';
 
 @pre<User>('save', async function (next) {
   try {
     if (!this.isModified('password')) return next();
     this.password = await hash(this.password, 12);
     next();
-  } catch (error) {
+  } catch (err) {
+    const error = err as HttpException;
     next(error);
   }
 })
@@ -44,7 +46,8 @@ export class User extends BaseModel {
   async isValidPassword(password: string): Promise<boolean | never> {
     try {
       return await compare(password, this.password);
-    } catch (error) {
+    } catch (err) {
+      const error = err as HttpException;
       throw new createError.InternalServerError(error.message);
     }
   }

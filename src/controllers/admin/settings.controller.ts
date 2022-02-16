@@ -64,7 +64,7 @@ export const postEmailSettings = async (_req: Request, res: Response) => {
 };
 
 // test if the SMTP server is working without sending email
-export const postTestEmailSettings = async (req, res) => {
+export const postTestEmailSettings = async (req: Request, res: Response) => {
   const {
     emailHost,
     emailPort,

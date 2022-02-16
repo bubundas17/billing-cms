@@ -13,10 +13,11 @@ export type EmailConfig = {
     user: string;
     pass: string;
   };
+  from: string;
 };
 
 export class EmailDriver {
-  config: any;
+  config: EmailConfig;
   transporter: nodemailer.Transporter;
 
   async init(config: EmailConfig) {

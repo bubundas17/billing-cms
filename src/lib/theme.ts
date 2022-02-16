@@ -10,6 +10,7 @@ import { isEmpty } from 'class-validator';
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 import env from '@configs/env.config';
+import HttpException from '@exceptions/HttpException';
 
 const glob = promisify(globAsync);
 
@@ -45,11 +46,11 @@ class Theme {
         _prev[util.getFileName(current, '.hbs')] =
           this.renderTemplate(template);
         return prev;
-      }, Promise.resolve({}));
+      }, Promise.resolve<{ [key: string]: unknown }>({}));
 
       return partials;
     } catch (error) {
-      util.handleError(error);
+      util.handleError(error as HttpException);
     }
   }
 
@@ -63,7 +64,7 @@ class Theme {
       const template = this.compileTemplate(fileData, options);
       return template;
     } catch (error) {
-      util.handleError(error);
+      util.handleError(error as HttpException);
     }
   }
 

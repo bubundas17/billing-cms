@@ -1,14 +1,14 @@
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { hash } from 'bcrypt';
+
 import UserModel, { User } from '@models/user.model';
 import env from '@configs/env.config';
-import jwt from 'jsonwebtoken';
-
 import { getOption } from '@lib/options';
 import settingsEnum from '@enums/settings.enum';
 import emailSender from '@services/email.sender.service';
 import EmailTemplates from '@enums/email_templates.enum';
-import { hash } from 'bcrypt';
 
-export class UserApi {
+class UserApi {
   static async getUserByEmail(email: string): Promise<User | null> {
     return await UserModel.findOne({ email });
   }
@@ -32,9 +32,6 @@ export class UserApi {
     });
     return true;
   }
-
-  // Create New user
-  // static async createUser(
 
   // send Password Reset Link
   static async sendPasswordResetLink(user: User): Promise<boolean> {
@@ -63,7 +60,7 @@ export class UserApi {
   // read password reset token
   static async readPasswordResetToken(token: string): Promise<User | null> {
     try {
-      const decoded = jwt.verify(token, env.JWT_SECRET);
+      const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
       if (decoded.action === 'resetPassword') {
         return await UserModel.findById(decoded.id).lean();
       }
@@ -71,8 +68,6 @@ export class UserApi {
       return null;
     }
   }
-
-  // generate password reset token
 }
 
 Object.freeze(UserApi);

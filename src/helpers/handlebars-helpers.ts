@@ -15,7 +15,7 @@ handlebarsHelpers.errorInput = function (errors: object, type: string): string {
 
 // Returns form input error message if form input not valid
 handlebarsHelpers.errorMessage = function (
-  errors: object,
+  errors: Record<string, string>,
   type: string,
 ): string | Handlebars.SafeString {
   if (typeof errors !== 'object') return '';
