@@ -135,6 +135,8 @@ export const postSignUp = async (
     const user = new UserModel(userInput);
     await user.save();
 
+    req.flash('success', 'You are now registered and can log in');
+
     return res.redirect('/auth/signin');
   } catch (error) {
     next(error);

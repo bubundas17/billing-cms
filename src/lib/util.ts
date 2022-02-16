@@ -97,9 +97,9 @@ class Util {
     return basename(file, ext);
   }
 
-  static handleError(error: Error) {
+  static handleError = (error: Error) => {
     throw error;
-  }
+  };
 }
 
 export default Util;

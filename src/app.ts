@@ -73,8 +73,9 @@ class App {
     this.app.use((req, res, next) => {
       res.locals.user = req.user;
       res.locals.isAuthenticated = req.isAuthenticated();
-      res.locals.flash = req.flash();
-      console.log(res.locals.flash);
+      res.locals.errors = req.flash('error');
+      res.locals.success = req.flash('success');
+      res.locals.info = req.flash('info');
       next();
     });
 

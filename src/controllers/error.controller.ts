@@ -9,6 +9,8 @@ export const get4xx = (_req: Request, _res: Response, next: NextFunction) => {
 
 // Render 5xx page (internal server error)
 export const get5xx: ErrorRequestHandler = (error, _req, res, _next) => {
+  console.log(error);
+
   const { status = 500, message = 'Something went wrong' } = error;
   return res.status(status).render('error', { message, status });
 };

@@ -65,7 +65,7 @@ class Theme {
   private async getTemplate(
     filePath: string,
     options = {},
-  ): Promise<HandlebarsTemplateDelegate | undefined> {
+  ): Promise<HandlebarsTemplateDelegate | undefined | void> {
     try {
       const theme = await this.getCurrentTheme();
       const fileData = await this.readFileAndCache(
