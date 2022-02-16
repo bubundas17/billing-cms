@@ -10,17 +10,24 @@ export default function (passport: PassportStatic) {
       {
         usernameField: 'email',
         passwordField: 'password',
+        passReqToCallback: true,
       },
-      async (email, password, done) => {
+      async (req, email, password, done) => {
+        const e = 'Password or Username incorrect';
+
         try {
           const user = await UserModel.findOne({ email });
-          if (!user)
-            return done(null, false, {
-              message: `User with email ${email} not found.`,
-            });
+          if (!user) {
+            req.flash('error', e);
+            return done(null, false);
+          }
           const isValidPassword = await user.isValidPassword(password);
-          if (!isValidPassword)
-            return done(null, false, { message: 'Incorrect password.' });
+          console.log('isValidPassword', isValidPassword);
+
+          if (!isValidPassword) {
+            req.flash('error', e);
+            return done(null, false);
+          }
           done(null, user);
         } catch (error) {
           done(error);

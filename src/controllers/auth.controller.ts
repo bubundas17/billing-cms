@@ -164,7 +164,7 @@ export const postSignIn = async (
 
   if (errors.length > 0) options.errors = mappedErrors(errors);
 
-  return res.render('auth/signin', options);
+  return res.render('auth/signin', { ...options, message: req.flash() });
 };
 
 // Sign out a signed in user

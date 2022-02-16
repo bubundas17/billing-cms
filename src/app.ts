@@ -52,8 +52,8 @@ class App {
     this.app.use(cookieParser());
     this.app.use(
       session({
-        resave: false,
-        saveUninitialized: false,
+        resave: true,
+        saveUninitialized: true,
         secret: env.SESSION_SECRET,
         store: new MongoStore({
           mongoUrl: env.MONGO_URI,
@@ -73,6 +73,8 @@ class App {
     this.app.use((req, res, next) => {
       res.locals.user = req.user;
       res.locals.isAuthenticated = req.isAuthenticated();
+      res.locals.flash = req.flash();
+      console.log(res.locals.flash);
       next();
     });
 

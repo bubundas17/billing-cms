@@ -1,24 +1,37 @@
-<div class='card card--no-border display-center__box display-center__box--drop-shadow'>
+<div
+  class='card card--no-border display-center__box display-center__box--drop-shadow'
+>
   <div class='display-center__content display-center__content--center'>
     <div>
       <h3 class='display-center__title'>QDASH</h3>
       <span class='display-center__sub-text'>Client Login</span>
     </div>
-    <form class='display-center__form' action='/auth/signin' method="post">
+    <form class='display-center__form' action='/auth/signin' method='post'>
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input type='text' class='form-control display-center__form-input {{errorInput errors "email"}}'
-          placeholder='Username' name="email" value="{{userInput.email}}" />
+        <input
+          type='text'
+          class='form-control display-center__form-input
+            {{errorInput errors "email"}}'
+          placeholder='Username'
+          name='email'
+          value='{{userInput.email}}'
+        />
       </label>
-      {{errorMessage errors "email"}}
+      {{errorMessage errors 'email'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input type='password' name="password"
-          class='form-control display-center__form-input {{errorInput errors "password"}}' placeholder='Password'
-          value="{{userInput.password}}" />
+        <input
+          type='password'
+          name='password'
+          class='form-control display-center__form-input
+            {{errorInput errors "password"}}'
+          placeholder='Password'
+          value='{{userInput.password}}'
+        />
       </label>
-      {{errorMessage errors "password"}}
+      {{errorMessage errors 'password'}}
 
       <button type='submit' class='btn display-center__form-submit-btn'>
         <i class='fas fa-sign-in-alt display-center__form-submit-btn-icon'></i>
@@ -27,12 +40,21 @@
 
       <div class='mt-1 d-flex align-items-center justify-content-between'>
         <div class='form-check d-flex justify-space-between align-items-center'>
-          <input class='form-check-input me-1' type='checkbox' value='' id='flexCheckDefault' />
-          <label class='form-check-label display-center__extra-text' for='flexCheckDefault'>
+          <input
+            class='form-check-input me-1'
+            type='checkbox'
+            value=''
+            id='flexCheckDefault'
+          />
+          <label
+            class='form-check-label display-center__extra-text'
+            for='flexCheckDefault'
+          >
             Remember Me
           </label>
         </div>
-        <a href='/auth/reset-password' class='display-center__extra-text'>Forgot Password?</a>
+        <a href='/auth/reset-password' class='display-center__extra-text'>Forgot
+          Password?</a>
       </div>
     </form>
 

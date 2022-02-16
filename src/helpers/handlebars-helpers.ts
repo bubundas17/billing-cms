@@ -3,7 +3,10 @@ import Handlebars from 'handlebars';
 const handlebarsHelpers: Record<string, unknown> = {};
 
 // Returns form input invalid class if form input not valid
-handlebarsHelpers.errorInput = function (errors: object, type: string): string {
+handlebarsHelpers.errorInput = function (
+  errors: object,
+  type: string,
+): string | undefined {
   if (typeof errors !== 'object') return;
   const keys = Object.keys(errors);
   if (keys.indexOf(type) > -1) {
@@ -17,7 +20,7 @@ handlebarsHelpers.errorInput = function (errors: object, type: string): string {
 handlebarsHelpers.errorMessage = function (
   errors: Record<string, string>,
   type: string,
-): string | Handlebars.SafeString {
+): string | Handlebars.SafeString | undefined | void {
   if (typeof errors !== 'object') return '';
   const keys = Object.keys(errors);
 
@@ -34,8 +37,12 @@ handlebarsHelpers.errorMessage = function (
 handlebarsHelpers.activeClass = function (
   path: string,
   currentPath: string,
-): string | undefined {
+): string | void {
   if (path === currentPath) return 'active';
+};
+
+handlebarsHelpers.json = function (context: object) {
+  return JSON.stringify(context);
 };
 
 export default handlebarsHelpers;
