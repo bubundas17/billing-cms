@@ -1,4 +1,3 @@
-import passport from 'passport';
 import { ensureLoggedIn, ensureLoggedOut } from 'connect-ensure-login';
 
 import {
@@ -7,6 +6,7 @@ import {
   getSignOut,
   getResetPassword,
   postSignUp,
+  postSignIn,
   postResetPassword,
 } from '@controllers/index';
 import BaseRoute from '@routes/base.route';
@@ -39,11 +39,7 @@ class AuthRoute extends BaseRoute {
     this.router.post(
       '/signin',
       ensureLoggedOut({ redirectTo: '/' }),
-      passport.authenticate('local', {
-        successReturnToOrRedirect: '/',
-        failureRedirect: '/auth/signin',
-        failureFlash: true,
-      }),
+      postSignIn,
     );
 
     this.router.get(

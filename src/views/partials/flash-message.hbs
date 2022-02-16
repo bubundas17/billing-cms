@@ -1,5 +1,5 @@
-{{#if errors}}
-  {{#each errors}}
+{{#if _errors}}
+  {{#each _errors}}
     <div class='alert alert-danger'>
       <strong>Error!</strong>
       {{this}}
@@ -7,8 +7,8 @@
   {{/each}}
 {{/if}}
 
-{{#if success}}
-  {{#each success}}
+{{#if _success}}
+  {{#each _success}}
     <div class='alert alert-success'>
       <strong>Success!</strong>
       {{this}}
@@ -16,8 +16,8 @@
   {{/each}}
 {{/if}}
 
-{{#if info}}
-  {{#each info}}
+{{#if _info}}
+  {{#each _info}}
     <div class='alert alert-info'>
       <strong>Info!</strong>
       {{this}}

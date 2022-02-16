@@ -11,6 +11,7 @@ import emailSenderService from '@services/email.sender.service';
 import CreateUserDto from '@dto/create-user.dto';
 import mappedErrors from '@utils/mapped-errors';
 import SignInUserDto from '@dto/signin-user.dto';
+import passport from 'passport';
 
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
@@ -164,9 +165,16 @@ export const postSignIn = async (
     layout: 'auth',
   };
 
-  if (errors.length > 0) options.errors = mappedErrors(errors);
+  if (errors.length > 0) {
+    options.errors = mappedErrors(errors);
+    return res.render('auth/signin', { ...options });
+  }
 
-  return res.render('auth/signin', { ...options, message: req.flash() });
+  passport.authenticate('local', {
+    successReturnToOrRedirect: '/',
+    failureRedirect: '/auth/signin',
+    failureFlash: true,
+  })(req, res, _next);
 };
 
 // Sign out a signed in user
