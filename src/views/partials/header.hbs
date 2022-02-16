@@ -5,11 +5,17 @@
     </button>
     <div></div>
     <div class='header__actions me-3 pe-3'>
-      <a role='button' href='/auth/signup' class='btn btn-text'>Register</a>
-      <a role='button' href='/auth/signin' class='btn btn--bright_navy_blue'>
-        <i class='fas fa-sign-in-alt'></i>
-        <span class='ms-2'>Login</span>
-      </a>
+      {{#if isAuthenticated}}
+        <a role='button' href='/auth/logout' class='btn btn--bright_navy_blue'>
+          Logout
+        </a>
+      {{else}}
+        <a role='button' href='/auth/signup' class='btn btn-text'>Register</a>
+        <a role='button' href='/auth/signin' class='btn btn--bright_navy_blue'>
+          <i class='fas fa-sign-in-alt'></i>
+          <span class='ms-2'>Login</span>
+        </a>
+      {{/if}}
     </div>
   </div>
   <div class='m-0 dropdown-divider header__divider'></div>
