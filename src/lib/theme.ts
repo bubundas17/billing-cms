@@ -10,7 +10,6 @@ import { isEmpty } from 'class-validator';
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 import env from '@configs/env.config';
-import HttpException from '@exceptions/HttpException';
 
 const glob = promisify(globAsync);
 
@@ -21,9 +20,18 @@ const glob = promisify(globAsync);
 // TODO - Reduce the amount of code in this file
 // TODO - Create perfect res.load method that will load a theme file and pass it to the template
 
+type ThemeType = {
+  path: string;
+  absulutePath: string;
+  publicFolderPath: string;
+  partialsFolderPath: string;
+  themeBaseUri: string;
+  active: boolean;
+};
+
 class Theme {
   private hbs: typeof Handlebars;
-  private fsCache: object;
+  private fsCache: { [key: string]: string };
 
   constructor() {
     this.hbs = Handlebars;
@@ -50,11 +58,14 @@ class Theme {
 
       return partials;
     } catch (error) {
-      util.handleError(error as HttpException);
+      util.handleError(error as Error);
     }
   }
 
-  private async getTemplate(filePath: string, options = {}) {
+  private async getTemplate(
+    filePath: string,
+    options = {},
+  ): Promise<HandlebarsTemplateDelegate | undefined> {
     try {
       const theme = await this.getCurrentTheme();
       const fileData = await this.readFileAndCache(
@@ -64,7 +75,7 @@ class Theme {
       const template = this.compileTemplate(fileData, options);
       return template;
     } catch (error) {
-      util.handleError(error as HttpException);
+      util.handleError(error as Error);
     }
   }
 
@@ -93,13 +104,18 @@ class Theme {
       if (!isEmpty(ext) && ext !== '.hbs')
         throw new Error('Invalid file extension, only .hbs is allowed');
 
-      const partials = await this.getPartials();
-      const template = await this.getTemplate(filePath, options);
+      const partials = (await this.getPartials()) as {
+        [key: string]: HandlebarsTemplateDelegate;
+      };
+      const template = (await this.getTemplate(
+        filePath,
+        options,
+      )) as HandlebarsTemplateDelegate;
 
-      const layoutTemplate = await this.getTemplate(
+      const layoutTemplate = (await this.getTemplate(
         'layouts/main.hbs',
         options,
-      );
+      )) as HandlebarsTemplateDelegate;
 
       let html = this.renderTemplate(
         template,
@@ -114,7 +130,7 @@ class Theme {
 
       return html;
     } catch (error) {
-      util.handleError(error);
+      util.handleError(error as Error);
     }
   }
 
@@ -140,7 +156,7 @@ class Theme {
     return template(context, options).trim();
   }
 
-  async allThemes() {
+  async allThemes(): Promise<Array<ThemeType>> {
     try {
       const themeFileAndFolders = await glob('*', { cwd: `${cwd()}/themes` });
       const themes = themeFileAndFolders.map(async (path) => {
@@ -173,7 +189,7 @@ class Theme {
         }
       });
 
-      return Promise.all(themes);
+      return Promise.all(themes) as Promise<Array<ThemeType>>;
     } catch (_) {
       return [];
     }
@@ -210,7 +226,7 @@ class Theme {
   }
 
   async getEnabledTheme() {
-    return await getOption('is-active-theme');
+    return (await getOption('is-active-theme')) as Promise<string>;
   }
 
   // get theme folder path
@@ -226,7 +242,7 @@ class Theme {
   // get current active theme
   async getCurrentTheme() {
     const themes = await this.allThemes();
-    return themes.find((t) => t.active);
+    return themes.find((t) => t.active) as ThemeType;
   }
 
   // get current theme path
