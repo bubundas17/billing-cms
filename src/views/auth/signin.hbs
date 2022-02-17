@@ -15,10 +15,10 @@
         <input
           type='text'
           class='form-control display-center__form-input
-            {{errorInput errors "email"}}'
+            {{errorInput errors "username"}}'
           placeholder='Username'
-          name='email'
-          value='{{userInput.email}}'
+          name='username'
+          value='{{userInput.username}}'
         />
       </label>
       {{errorMessage errors 'email'}}
@@ -56,14 +56,15 @@
             Remember Me
           </label>
         </div>
-        <a href='/auth/reset-password' class='display-center__extra-text'>Forgot
-          Password?</a>
+        <a href='/auth/reset-password' class='display-center__extra-text'>
+          Forgot Password?
+        </a>
       </div>
     </form>
 
     <div class='display-center__extra'>
       Don't have an account?
-      <a href='#' class='display-center__extra-link'>Register</a>
+      <a href='/auth/signup' class='display-center__extra-link'>Register</a>
     </div>
   </div>
 </div>

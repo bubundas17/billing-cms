@@ -8,14 +8,16 @@ export default function (passport: PassportStatic) {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'email',
+        usernameField: 'username',
         passwordField: 'password',
       },
       async (email, password, done) => {
         const e = 'Password or Username incorrect';
 
         try {
-          const user = await UserModel.findOne({ email });
+          const user = await UserModel.findOne({
+            $or: [{ email }, { username: email }],
+          });
           if (!user) return done(null, false, { message: e });
 
           const isValidPassword = await user.isValidPassword(password);

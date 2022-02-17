@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
+import passport from 'passport';
 
 import UserModel from '@models/user.model';
 import pluginDriver from '@lib/plugin-driver';
@@ -11,7 +12,6 @@ import emailSenderService from '@services/email.sender.service';
 import CreateUserDto from '@dto/create-user.dto';
 import mappedErrors from '@utils/mapped-errors';
 import SignInUserDto from '@dto/signin-user.dto';
-import passport from 'passport';
 
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
