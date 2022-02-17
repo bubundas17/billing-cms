@@ -5,10 +5,7 @@
   <form class='row row-cols-1 row-cols-xl-2 g-2 client-details-form' action='#'>
     <label class='client-details-form__label'>
       <i class='fas fa-user client-details-form__icon'></i>
-      <select
-        class='form-select client-details-form__input'
-        aria-label='Default select example'
-      >
+      <select class='form-select client-details-form__input' aria-label='Default select example'>
         <option selected>Amol Wale #1785</option>
         <option value='1'>Amol Wale #1785</option>
         <option value='2'>Amol Wale #1785</option>
@@ -21,25 +18,16 @@
     </button>
   </form>
 
-  <span
-    class='mt-4 d-block main-content__sub-text main-content__sub-text--strong'
-  >
+  <span class='mt-4 d-block main-content__sub-text main-content__sub-text--strong'>
     Update Profile
   </span>
 
   <div class='mt-2 btn-group btn-profile-group' role='group'>
-    <a
-      role='button'
-      class='btn btn-profile text-decoration-none'
-      href='/admin/users/summary'
-    >
+    <a role='button' class='btn btn-profile text-decoration-none' href='/admin/users/summary'>
       Summary
     </a>
-    <a
-      role='button'
-      class='btn btn-profile text-decoration-none btn--bright_navy_blue rounded'
-      href='/admin/users/profile'
-    >
+    <a role='button' class='btn btn-profile text-decoration-none btn--bright_navy_blue rounded'
+      href='/admin/users/profile'>
       Profile
     </a>
     <a role='button' href='#/admin/users/profile' class='btn btn-profile'>
@@ -52,217 +40,146 @@
       <div class='mt-2 row row-cols-1 row-cols-md-2 g-2'>
         <div class='px-4 py-2'>
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='full-name'
               class='custom-base-text custom-base-text-lilac_blue col-auto col-form-label text-nowrap'
-              style='width: 8.5rem;'
-            >
-              First Name
+              style='width: 8.5rem;'>
+              Full Name
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='full-name'
+                value="{{user.name}}" style='width: 100%;' />
             </div>
           </div>
 
-          <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+          {{!-- <div class='mb-3 row'>
+            <label for='inputPassword'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Last Name
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='password' class='form-control custom-base-text custom-base-text-lilac_blue'
+                id='inputPassword' style='width: 100%;' />
             </div>
-          </div>
+          </div> --}}
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='company-name'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Company
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='company-name'
+                value="{{user.company}}" style='width: 100%;' />
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
-              class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+            <label for='email' class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+              style='width: 8.5rem;'>
               Email Address
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='email'
+                value="{{user.email}}" style='width: 100%;' />
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='phone-number'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Phone Number
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='number' class='form-control custom-base-text custom-base-text-lilac_blue' id='phone-number'
+                value="{{user.phone}}" style='width: 100%;' />
             </div>
           </div>
 
-          <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+          {{!-- <div class='mb-3 row'>
+            <label for='inputPassword'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Language
             </label>
             <div class='col-12 col-md-8'>
-              <select
-                class='form-select custom-base-text custom-base-text-lilac_blue'
-                style='width: 100%;'
-              >
+              <select class='form-select custom-base-text custom-base-text-lilac_blue' style='width: 100%;'>
                 <option value='english'>English</option>
               </select>
             </div>
-          </div>
+          </div> --}}
         </div>
         <div class='px-4 py-2'>
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='address'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Address
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='address'
+                value="{{user.address}}" style='width: 100%;' />
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
-              class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+            <label for='city' class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+              style='width: 8.5rem;'>
               City
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='city' value="{{user.city}}" placeholder="City" 
+                style='width: 100%;' />
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
-              class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+            <label for='state' class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+              style='width: 8.5rem;'>
               State
             </label>
             <div class='col-12 col-md-8'>
-              <select
-                class='form-select custom-base-text custom-base-text-lilac_blue'
-                style='width: 100%;'
-              >
+              <select id="state" class='form-select custom-base-text custom-base-text-lilac_blue' style='width: 100%;'>
                 <option value='maharashtra'>Maharashtra</option>
               </select>
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='zip-code'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
-              Postcode
+              style='width: 8.5rem;'>
+              Zip Code
             </label>
             <div class='col-12 col-md-8'>
-              <input
-                type='password'
-                class='form-control custom-base-text custom-base-text-lilac_blue'
-                id='inputPassword'
-                style='width: 100%;'
-              />
+              <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' placeholder="#####"
+                id='zip-code' style='width: 100%;' />
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='inputPassword'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Country
             </label>
             <div class='col-12 col-md-8'>
-              <select
-                class='form-select custom-base-text custom-base-text-lilac_blue'
-                style='width: 100%;'
-              >
+              <select class='form-select custom-base-text custom-base-text-lilac_blue' style='width: 100%;'>
                 <option value='india'>India</option>
               </select>
             </div>
           </div>
 
           <div class='mb-3 row'>
-            <label
-              for='inputPassword'
+            <label for='inputPassword'
               class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-              style='width: 8.5rem;'
-            >
+              style='width: 8.5rem;'>
               Currency
             </label>
             <div class='col-12 col-md-8'>
-              <select
-                class='form-select custom-base-text custom-base-text-lilac_blue'
-                style='width: 100%;'
-              >
+              <select class='form-select custom-base-text custom-base-text-lilac_blue' style='width: 100%;'>
                 <option value='USD'>USD</option>
               </select>
             </div>
@@ -273,116 +190,65 @@
       <div class='row row-cols-1 g-2'>
         <div class='px-4'>
           <div class='mb-3 row'>
-            <div
-              class='col-auto custom-base-text custom-base-text-lilac_blue text-nowrap'
-              style='width: 8.5rem;'
-            >
+            <div class='col-auto custom-base-text custom-base-text-lilac_blue text-nowrap' style='width: 8.5rem;'>
               Settings
             </div>
 
             <div class='col'>
               <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Late Fees
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Overdue Notices
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Tax Exempt
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Late Fees
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Overdue Notices
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Late Fees
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Overdue Notices
                   </label>
                 </div>
                 <div class='form-check form-switch'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    id='flexSwitchCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
-                    for='flexSwitchCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+                    for='flexSwitchCheckDefault'>
                     Tax Exempt
                   </label>
                 </div>
@@ -393,54 +259,27 @@
 
         <div class='px-4'>
           <div class='mb-3 row'>
-            <div
-              class='col-auto custom-base-text custom-base-text-lilac_blue text-nowrap'
-              style='width: 8.5rem;'
-            >
+            <div class='col-auto custom-base-text custom-base-text-lilac_blue text-nowrap' style='width: 8.5rem;'>
               Email Notificaiton
             </div>
 
             <div class='col'>
               <div class='row row-cols-1'>
                 <div class='form-check'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    value=''
-                    id='flexCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue'
-                    for='flexCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue' for='flexCheckDefault'>
                     General Emails - All account related emails
                   </label>
                 </div>
                 <div class='form-check'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    value=''
-                    id='flexCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue'
-                    for='flexCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue' for='flexCheckDefault'>
                     Invoice Emails - New invoices, reminders, overdue notices
                   </label>
                 </div>
                 <div class='form-check'>
-                  <input
-                    class='form-check-input'
-                    type='checkbox'
-                    value=''
-                    id='flexCheckDefault'
-                  />
-                  <label
-                    class='form-check-label custom-base-text custom-base-text-lilac_blue'
-                    for='flexCheckDefault'
-                  >
+                  <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault' />
+                  <label class='form-check-label custom-base-text custom-base-text-lilac_blue' for='flexCheckDefault'>
                     Support Emails - Receive a copy of all support ticket
                     communications
                   </label>

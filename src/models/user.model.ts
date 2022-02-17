@@ -23,13 +23,16 @@ export class User extends BaseModel {
   @prop({ required: true, unique: true })
   username: string;
 
+  phone: string;
+
+  company: string;
+
   @prop({ required: true, unique: true, lowercase: true })
   email: string;
 
   @prop({ required: true })
   password: string;
 
-  @prop({ required: false })
   address: string;
 
   @prop({ default: false })
