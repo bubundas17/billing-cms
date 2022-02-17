@@ -34,21 +34,17 @@ export const getSignIn = (_req: Request, res: Response) => {
 export const getResetPassword = async (req: Request, res: Response) => {
   const tokenQuery = plainToInstance(JwtTokenDto, req.query);
 
-  // let errors: ValidationError[] | Record<string, string> = await validate(
-  //   tokenQuery,
-  // );
-
-  // if (errors.length > 0) {
-  //   errors = mappedErrors(errors);
-  //   return res.render('auth/reset-password', {
-  //     pathName: 'reset-password',
-  //     layout: 'auth',
-  //     action: 'reset',
-  //     userinfo: false,
-  //   });
-  // }
-
   if (tokenQuery.token) {
+    const errors = await validate(tokenQuery);
+
+    if (errors.length > 0) {
+      return res.render('auth/reset-password', {
+        pathName: 'reset-password',
+        layout: 'auth',
+        action: 'reset',
+      });
+    }
+
     const userinfo = await UserApi.readPasswordResetToken(tokenQuery.token);
     if (userinfo) {
       res.render('auth/reset-password', {
@@ -65,12 +61,12 @@ export const getResetPassword = async (req: Request, res: Response) => {
         userinfo: false,
       });
     }
-    return;
+  } else {
+    res.render('auth/reset-password', {
+      pathName: 'reset-password',
+      layout: 'auth',
+    });
   }
-  res.render('auth/reset-password', {
-    pathName: 'reset-password',
-    layout: 'auth',
-  });
 };
 
 // post Password reset link

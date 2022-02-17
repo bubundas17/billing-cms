@@ -48,7 +48,7 @@ class UserApi {
     );
     const resetLink = `${await getOption(
       settingsEnum.URL_PREFIX,
-    )}auth/reset-password/?token=${token}`;
+    )}/auth/reset-password/?token=${token}`;
 
     await emailSender.sendEmail(user, EmailTemplates.RESET_PASSWORD, {
       subject: 'Reset your password',

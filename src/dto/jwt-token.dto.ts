@@ -1,7 +1,7 @@
 import { IsJWT } from 'class-validator';
 
 class JwtTokenDto {
-  @IsJWT({ message: 'Token is not correct' })
+  @IsJWT()
   token: string;
 }
 

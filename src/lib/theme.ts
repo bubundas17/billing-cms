@@ -109,26 +109,38 @@ class Theme {
       const partials = (await this.getPartials()) as {
         [key: string]: HandlebarsTemplateDelegate;
       };
+
+      console.log('partials', partials);
+
       const template = (await this.getTemplate(
         filePath,
         options,
       )) as HandlebarsTemplateDelegate;
+
+      console.log('template', template);
 
       const layoutTemplate = (await this.getTemplate(
         'layouts/main.hbs',
         options,
       )) as HandlebarsTemplateDelegate;
 
+      console.log('layoutTemplate', layoutTemplate);
+
       let html = this.renderTemplate(
         template,
         { ...context },
         { ...options, partials },
       );
+
+      console.log('HTML #1', html);
+
       html = this.renderTemplate(
         layoutTemplate,
         { ...context, body: html },
         { partials },
       );
+
+      console.log('HTML #2', html);
 
       return html;
     } catch (error) {

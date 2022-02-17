@@ -1,6 +1,7 @@
 import { User } from '@models/user.model';
-import { Agenda } from 'agenda/es';
+import { Agenda } from 'agenda';
 import mongoose from 'mongoose';
+
 import emailDriver from '@lib/email-driver';
 import theme from '@lib/theme';
 
@@ -28,9 +29,6 @@ class EmailSender {
         data: props.data,
         user: props.to,
       });
-      // log
-      console.log(rendered);
-
       emailDriver.sendEmail(props.to.email, props.subject, rendered);
       done();
     });
