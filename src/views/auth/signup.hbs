@@ -1,47 +1,76 @@
-<div class='card card--no-border display-center__box display-center__box--drop-shadow'>
+<div
+  class='card card--no-border display-center__box display-center__box--drop-shadow'
+>
   <div class='display-center__content display-center__content--center'>
     <div>
       <h3 class='display-center__title'>QDASH</h3>
       <span class='display-center__sub-text'>Registration</span>
     </div>
-    <form class='display-center__form' action='/auth/signup' method="post">
+    <form class='display-center__form' action='/auth/signup' method='post'>
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input type='text' name="name" class='form-control display-center__form-input  {{errorInput errors "name"}}'
-          placeholder='Name' value="{{userInput.name}}" />
+        <input
+          type='text'
+          name='name'
+          class='form-control display-center__form-input
+            {{errorInput errors "name"}}'
+          placeholder='Name'
+          value='{{userInput.name}}'
+        />
       </label>
-      {{errorMessage errors "name"}}
+      {{errorMessage errors 'name'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-circle-user display-center__form-icon'></i>
-        <input type='text' name="username"
-          class='form-control display-center__form-input {{errorInput errors "username"}}' placeholder='Username'
-          value="{{userInput.username}}" />
+        <input
+          type='text'
+          name='username'
+          class='form-control display-center__form-input
+            {{errorInput errors "username"}}'
+          placeholder='Username'
+          value='{{userInput.username}}'
+        />
       </label>
-      {{errorMessage errors "username"}}
+      {{errorMessage errors 'username'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-envelope display-center__form-icon'></i>
-        <input type='email' name="email" class='form-control display-center__form-input {{errorInput errors "email"}}'
-          placeholder='Email address' value="{{userInput.email}}" />
+        <input
+          type='email'
+          name='email'
+          class='form-control display-center__form-input
+            {{errorInput errors "email"}}'
+          placeholder='Email address'
+          value='{{userInput.email}}'
+        />
       </label>
-      {{errorMessage errors "email"}}
+      {{errorMessage errors 'email'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input type='password' name="password"
-          class='form-control display-center__form-input {{errorInput errors "password"}}' placeholder='Password'
-          value="{{userInput.password}}" />
+        <input
+          type='password'
+          name='password'
+          class='form-control display-center__form-input
+            {{errorInput errors "password"}}'
+          placeholder='Password'
+          value='{{userInput.password}}'
+        />
       </label>
-      {{errorMessage errors "password"}}
+      {{errorMessage errors 'password'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input type='password' name="repeatPassword"
-          class='form-control display-center__form-input {{errorInput errors "repeatPassword"}}'
-          placeholder='Repeat Password' value="{{userInput.repeatPassword}}" />
+        <input
+          type='password'
+          name='repeatPassword'
+          class='form-control display-center__form-input
+            {{errorInput errors "repeatPassword"}}'
+          placeholder='Repeat Password'
+          value='{{userInput.repeatPassword}}'
+        />
       </label>
-      {{errorMessage errors "repeatPassword"}}
+      {{errorMessage errors 'repeatPassword'}}
 
       <button type='submit' class='btn display-center__form-submit-btn'>
         <i class='fas fa-sign-in-alt display-center__form-submit-btn-icon'></i>
@@ -57,7 +86,7 @@
 
     <div class='display-center__extra'>
       Already have an account?
-      <a href='#' class='display-center__extra-link'>
+      <a href='/auth/signin' class='display-center__extra-link'>
         Login
       </a>
     </div>
