@@ -29,6 +29,8 @@ class EmailSender {
         user: props.to,
       });
       // log
+      console.log(rendered);
+
       emailDriver.sendEmail(props.to.email, props.subject, rendered);
       done();
     });

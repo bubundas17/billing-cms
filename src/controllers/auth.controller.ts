@@ -12,6 +12,7 @@ import emailSenderService from '@services/email.sender.service';
 import CreateUserDto from '@dto/create-user.dto';
 import mappedErrors from '@utils/mapped-errors';
 import SignInUserDto from '@dto/signin-user.dto';
+import JwtTokenDto from '@dto/jwt-token.dto';
 
 // Render the sign up page
 export const getSignUp = (_req: Request, res: Response) => {
@@ -31,10 +32,24 @@ export const getSignIn = (_req: Request, res: Response) => {
 
 // Render the sign in page
 export const getResetPassword = async (req: Request, res: Response) => {
-  if (req.query.token) {
-    const userinfo = await UserApi.readPasswordResetToken(
-      req.query.token as string,
-    );
+  const tokenQuery = plainToInstance(JwtTokenDto, req.query);
+
+  // let errors: ValidationError[] | Record<string, string> = await validate(
+  //   tokenQuery,
+  // );
+
+  // if (errors.length > 0) {
+  //   errors = mappedErrors(errors);
+  //   return res.render('auth/reset-password', {
+  //     pathName: 'reset-password',
+  //     layout: 'auth',
+  //     action: 'reset',
+  //     userinfo: false,
+  //   });
+  // }
+
+  if (tokenQuery.token) {
+    const userinfo = await UserApi.readPasswordResetToken(tokenQuery.token);
     if (userinfo) {
       res.render('auth/reset-password', {
         pathName: 'reset-password',

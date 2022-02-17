@@ -96,6 +96,8 @@ class Theme {
   }
 
   async render(filePath: string, context = {}, options = {}) {
+    console.log(filePath);
+
     try {
       if (isEmpty(filePath)) throw new Error('File path must not be empty');
 

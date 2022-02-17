@@ -58,7 +58,9 @@ class UserApi {
   }
 
   // read password reset token
-  static async readPasswordResetToken(token: string): Promise<User | null> {
+  static async readPasswordResetToken(
+    token: string,
+  ): Promise<User | null | undefined> {
     try {
       const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
       if (decoded.action === 'resetPassword') {
