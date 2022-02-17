@@ -66,9 +66,24 @@ class UserApi {
       if (decoded.action === 'resetPassword') {
         return await UserModel.findById(decoded.id).lean();
       }
+      return null;
     } catch (error) {
       return null;
     }
+  }
+
+  // Search users
+  static async searchUsers(
+    _query = '',
+    page = 1,
+    perPage = 50,
+  ): Promise<Array<User>> {
+    // const regex = new RegExp(query, 'i');
+    return await UserModel.find()
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .lean();
   }
 }
 

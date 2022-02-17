@@ -3,51 +3,33 @@
     <h3 class='main-content__title'>Search Client</h3>
 
     <div>
-      <form
-        class='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-2 client-search-form'
-        action='#'
-      >
+      <form class='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-2 client-search-form'
+        action='#'>
         <div class='col'>
           <label class='client-search-form__label'>
             <i class='fas fa-user client-search-form__icon'></i>
-            <input
-              type='text'
-              class='form-control client-search-form__input'
-              placeholder='Name'
-            />
+            <input type='text' class='form-control client-search-form__input' placeholder='Name' />
           </label>
         </div>
 
         <div class='col'>
           <label class='client-search-form__label'>
             <i class='fas fa-building client-search-form__icon'></i>
-            <input
-              type='text'
-              class='form-control client-search-form__input'
-              placeholder='Company'
-            />
+            <input type='text' class='form-control client-search-form__input' placeholder='Company' />
           </label>
         </div>
 
         <div class='col'>
           <label class='client-search-form__label'>
             <i class='fas fa-envelope client-search-form__icon'></i>
-            <input
-              type='text'
-              class='form-control client-search-form__input'
-              placeholder='Email Address'
-            />
+            <input type='text' class='form-control client-search-form__input' placeholder='Email Address' />
           </label>
         </div>
 
         <div class='col'>
           <label class='client-search-form__label'>
             <i class='fas fa-phone client-search-form__icon'></i>
-            <input
-              type='text'
-              class='form-control client-search-form__input'
-              placeholder='Phone No.'
-            />
+            <input type='text' class='form-control client-search-form__input' placeholder='Phone No.' />
           </label>
         </div>
 
@@ -70,33 +52,31 @@
       <div class='mt-2 table-responsive'>
         <table class='table search-result-table'>
           <thead>
+
             <tr>
               <th scope='col'>ID</th>
-              <th scope='col'>First Name</th>
-              <th scope='col'>Last Name</th>
+              <th scope='col'>Name</th>
               <th scope='col'>Company</th>
               <th scope='col'>Email Address</th>
               <th scope='col'>Phone No.</th>
-              <th scope='col'>Services</th>
-              <th scope='col'>Created</th>
-              <th scope='col'>Status</th>
+              <th scope='col'>Actions</th>
             </tr>
+
           </thead>
           <tbody>
+            {{#each users}}
             <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td class='status--sm'>
-                <span class='badge bg-green'>Active</span>
-              </td>
+                <td>1</td>
+                <td>{{ this.name }}</td>
+                <td>Otto</td>
+                <td>{{ this.email }}</td>
+                <td>{{ this.phone }}</td> 
+                <td><a href="/admin/users/{{this._id}}"><button class="btn btn-primary btn-small">Edit</button></a></td> 
             </tr>
-            <tr>
+
+            {{/each}}
+
+            {{! <tr>
               <td>2</td>
               <td>Mark</td>
               <td>Otto</td>
@@ -108,7 +88,7 @@
               <td class='status--sm'>
                 <span class='badge bg-red'>Closed</span>
               </td>
-            </tr>
+            </tr> }}
           </tbody>
         </table>
       </div>
@@ -116,11 +96,7 @@
       <nav class='d-flex align-items-center justify-content-center'>
         <ul class='pagination'>
           <li class='page-item page-item--active'>
-            <a
-              class='page-link page-link--active'
-              href='#'
-              aria-label='Previous'
-            >
+            <a class='page-link page-link--active' href='#' aria-label='Previous'>
               <span aria-hidden='true'>
                 <i class='fas fa-angle-left'></i>
               </span>
