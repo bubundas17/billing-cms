@@ -58,6 +58,9 @@ class App {
         store: new MongoStore({
           mongoUrl: env.MONGO_URI,
         }),
+        cookie: {
+          maxAge: 60000,
+        },
       }),
     );
 
