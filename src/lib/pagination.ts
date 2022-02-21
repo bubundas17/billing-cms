@@ -25,11 +25,11 @@ export default (req: Request, totalPages = 10) => {
     const nextPageNo = currentPage >= totalPages ? totalPages : currentPage + 1;
 
     pagesElement.push({
-      text: '<img src="/icons/arrow-left.svg" alt="prev"><img src="/icons/arrow-left-white.svg" alt="prev">',
+      text: "<i class='fas fa-angle-left'></i>", //'<img src="/icons/arrow-left.svg" alt="prev"><img src="/icons/arrow-left-white.svg" alt="prev">',
       classes:
         backPageNo == currentPage
-          ? ' disabled dual-image-switch-on-hover'
-          : ' dual-image-switch-on-hover',
+          ? ' disabled' /*' disabled dual-image-switch-on-hover'*/
+          : '' /*' dual-image-switch-on-hover'*/,
       url:
         req.baseUrl +
         '?' +
@@ -42,7 +42,7 @@ export default (req: Request, totalPages = 10) => {
     for (let i = startPage; i < endPage; i++) {
       pagesElement.push({
         text: i,
-        classes: i == currentPage ? ' disabled active' : '',
+        classes: i == currentPage ? ' disabled page-link--active' : '',
         url:
           req.baseUrl +
           '?' +
@@ -54,11 +54,11 @@ export default (req: Request, totalPages = 10) => {
     }
 
     pagesElement.push({
-      text: '<img src="/icons/arrow-right.svg" alt="next"><img src="/icons/arrow-right-white.svg" alt="next">',
+      text: "<i class='fas fa-angle-right'></i>", //'<img src="/icons/arrow-right.svg" alt="next"><img src="/icons/arrow-right-white.svg" alt="next">',
       classes:
         nextPageNo == currentPage
-          ? ' disabled dual-image-switch-on-hover'
-          : ' dual-image-switch-on-hover',
+          ? ' disabled' /*' disabled dual-image-switch-on-hover'*/
+          : '' /*' dual-image-switch-on-hover'*/,
       url:
         req.baseUrl +
         '?' +
