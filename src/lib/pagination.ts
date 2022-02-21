@@ -1,4 +1,7 @@
+import { URLSearchParams } from 'url';
+
 import { Request } from 'express';
+
 export default (req: Request, totalPages = 10) => {
   const perPage = 5;
   let currentPage = Number(req.query.page) || 1;
