@@ -7,6 +7,9 @@ import { getOption } from '@lib/options';
 import settingsEnum from '@enums/settings.enum';
 import emailSender from '@services/email-sender.service';
 import EmailTemplates from '@enums/email_templates.enum';
+import { DocumentType } from '@typegoose/typegoose';
+import { BeAnObject } from '@typegoose/typegoose/lib/types';
+import { FilterQuery } from 'mongoose';
 
 class UserApi {
   static async getUserByEmail(email: string): Promise<User | null> {
@@ -74,16 +77,27 @@ class UserApi {
 
   // Search users
   static async searchUsers(
-    _query = '',
+    _query: Record<string, unknown>,
     page = 1,
     perPage = 50,
-  ): Promise<Array<User>> {
+  ): Promise<{ totalPages: number; users: Array<User> }> {
     // const regex = new RegExp(query, 'i');
-    return await UserModel.find()
+    const query: FilterQuery<DocumentType<User, BeAnObject>>[] = [];
+
+    if (_query.name) query.push({ name: _query.name });
+    if (_query.email) query.push({ email: _query.email });
+    if (_query.company) query.push({ company: _query.company });
+    if (_query.phone) query.push({ phone: _query.phone });
+    const totalPages = await UserModel.find(
+      query.length > 0 ? { $or: query } : {},
+    ).count();
+    const users = await UserModel.find(query.length > 0 ? { $or: query } : {})
       .sort({ createdAt: -1 })
       .skip((page - 1) * perPage)
       .limit(perPage)
       .lean();
+
+    return { totalPages: Math.ceil(totalPages / perPage), users };
   }
 }
 

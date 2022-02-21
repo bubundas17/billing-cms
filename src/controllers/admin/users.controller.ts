@@ -1,18 +1,19 @@
 import { Request, Response } from 'express';
-import pagination from '../../lib/pagination';
-import UserApi from '../../core/api/users.api';
 
-// Render dashboard page
+import pagination from '@lib/pagination';
+import UserApi from '@core/api/users.api';
+
 export const getClients = async (req: Request, res: Response) => {
-  const users = await UserApi.searchUsers(
-    String(req.query.q),
+  const searchResult = await UserApi.searchUsers(
+    req.query,
     parseInt(String(req.query.page)),
   );
-  // console.log(users);
+
   res.render('admin/users', {
     pathName: 'Users',
-    users: users,
-    pagination: pagination(req, users.length),
+    users: searchResult.users,
+    searchQuery: req.query,
+    pagination: pagination(req, searchResult.totalPages),
   });
 };
 
