@@ -1,7 +1,7 @@
-import { User } from '@models/user.model';
 import { Agenda } from 'agenda';
 import mongoose from 'mongoose';
 
+import { User } from '@models/user.model';
 import emailDriver from '@lib/email-driver';
 import theme from '@lib/theme';
 
@@ -9,7 +9,7 @@ type EmailProps = {
   template: string;
   data: {
     subject: string;
-    info: any;
+    info: object;
   };
   subject: string;
   to: User;
@@ -25,10 +25,13 @@ class EmailSender {
   async processEmails() {
     this.agenda.define(this.AGENDA_JOB_KEY, async (job, done) => {
       const props = job.attrs.data as EmailProps;
-      const rendered = await theme.render('email-templates/' + props.template, {
-        data: props.data,
-        user: props.to,
-      });
+      const rendered = (await theme.render(
+        'email-templates/' + props.template,
+        {
+          data: props.data,
+          user: props.to,
+        },
+      )) as string;
       emailDriver.sendEmail(props.to.email, props.subject, rendered);
       done();
     });

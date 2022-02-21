@@ -7,7 +7,7 @@ import UserModel, { User } from '@models/user.model';
 import pluginDriver from '@lib/plugin-driver';
 import UserApi from '@core/api/users.api';
 import EmailTemplates from '@enums/email_templates.enum';
-import emailSenderService from '@services/email.sender.service';
+import emailSenderService from '@services/email-sender.service';
 import CreateUserDto from '@dto/create-user.dto';
 import mappedErrors from '@utils/mapped-errors';
 import SignInUserDto from '@dto/signin-user.dto';

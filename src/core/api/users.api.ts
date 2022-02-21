@@ -5,7 +5,7 @@ import UserModel, { User } from '@models/user.model';
 import env from '@configs/env.config';
 import { getOption } from '@lib/options';
 import settingsEnum from '@enums/settings.enum';
-import emailSender from '@services/email.sender.service';
+import emailSender from '@services/email-sender.service';
 import EmailTemplates from '@enums/email_templates.enum';
 
 class UserApi {

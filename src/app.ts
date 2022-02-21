@@ -19,7 +19,7 @@ import handlebarsHelpers from '@helpers/handlebars-helpers';
 import passportHelper from '@helpers/passport.helper';
 import theme from '@lib/theme';
 
-import emailSender from '@services/email.sender.service';
+import emailSender from '@services/email-sender.service';
 import emailDriver, { EmailConfig } from '@lib/email-driver';
 
 // TODO - Add proper error handling and logging to the console
@@ -41,6 +41,7 @@ class App {
   private async initialize() {
     await this.connectToDB();
     this.listen();
+    this.initializeEmailSender();
     this.setViewEngine();
     await this.initializeMiddlewares();
   }
@@ -98,10 +99,7 @@ class App {
     console.log('Connected to Database');
   }
 
-  private listen() {
-    this.app.listen(env.PORT, () =>
-      console.log(`App started on port ${env.PORT}`),
-    );
+  private initializeEmailSender() {
     emailSender.init();
     emailDriver.init({
       host: env.SMTP_HOST,
@@ -113,6 +111,12 @@ class App {
       },
     } as EmailConfig);
     emailSender.processEmails();
+  }
+
+  private listen() {
+    this.app.listen(env.PORT, () =>
+      console.log(`App started on port ${env.PORT}`),
+    );
   }
 }
 
