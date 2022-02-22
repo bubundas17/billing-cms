@@ -1,5 +1,8 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { hash } from 'bcrypt';
+import { DocumentType } from '@typegoose/typegoose';
+import { BeAnObject } from '@typegoose/typegoose/lib/types';
+import { FilterQuery } from 'mongoose';
 
 import UserModel, { User } from '@models/user.model';
 import env from '@configs/env.config';
@@ -7,9 +10,6 @@ import { getOption } from '@lib/options';
 import settingsEnum from '@enums/settings.enum';
 import emailSender from '@services/email-sender.service';
 import EmailTemplates from '@enums/email_templates.enum';
-import { DocumentType } from '@typegoose/typegoose';
-import { BeAnObject } from '@typegoose/typegoose/lib/types';
-import { FilterQuery } from 'mongoose';
 
 class UserApi {
   static async getUserByEmail(email: string): Promise<User | null> {
@@ -88,6 +88,7 @@ class UserApi {
     if (_query.email) query.push({ email: _query.email });
     if (_query.company) query.push({ company: _query.company });
     if (_query.phone) query.push({ phone: _query.phone });
+
     const totalPages = await UserModel.find(
       query.length > 0 ? { $or: query } : {},
     ).count();

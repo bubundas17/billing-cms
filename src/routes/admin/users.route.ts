@@ -15,8 +15,8 @@ class ClientsRoute extends BaseRoute {
   init() {
     this.router.get('/', getClients);
     this.router.get('/profile', getClientProfile);
+    this.router.get('/profile/edit/:id', getEditProfile);
     this.router.get('/summary', getClientSummary);
-    this.router.get('/:id', getEditProfile);
   }
 }
 

@@ -39,12 +39,15 @@ export const getEditPost = async (req: Request, res: Response) => {
   });
 };
 
+// TODO check if post exists & is not null
 // Update post
 export const postUpdatePost = async (req: Request, res: Response) => {
   const postId = req.params.postId;
   const post = await PostsModel.findById(postId);
-  post.title = req.body.title;
-  await post.save();
+  if (post) {
+    post.title = req.body.title;
+    await post.save();
+  }
   res.redirect('/admin/posts');
 };
 

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import pagination from '@lib/pagination';
 import UserApi from '@core/api/users.api';
+import { isValidObjectId } from 'mongoose';
 
 export const getClients = async (req: Request, res: Response) => {
   const searchResult = await UserApi.searchUsers(
@@ -19,10 +20,14 @@ export const getClients = async (req: Request, res: Response) => {
 
 // get edit profile page
 export const getEditProfile = async (req: Request, res: Response) => {
-  const user = await UserApi.getUserById(req.params.id);
+  const isIdValid = isValidObjectId(req.params.id);
+  if (isIdValid) {
+    const user = await UserApi.getUserById(String(req.params.id));
+    console.log(user);
+  }
   res.render('admin/users/profile', {
     pathName: 'User Details',
-    user: user,
+    user: {},
   });
 };
 

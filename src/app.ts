@@ -1,5 +1,6 @@
 import 'module-alias/register';
 import 'reflect-metadata';
+import 'dotenv/config';
 import { join } from 'path';
 import express from 'express';
 import { connect } from 'mongoose';
