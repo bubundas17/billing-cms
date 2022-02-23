@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
+import { isValidObjectId } from 'mongoose';
 
 import pagination from '@lib/pagination';
 import UserApi from '@core/api/users.api';
-import { isValidObjectId } from 'mongoose';
+import UserModel from '@models/user.model';
 
 export const getClients = async (req: Request, res: Response) => {
   const searchResult = await UserApi.searchUsers(
@@ -25,6 +26,7 @@ export const getEditProfile = async (req: Request, res: Response) => {
     const user = await UserApi.getUserById(String(req.params.id));
     console.log(user);
   }
+
   res.render('admin/users/profile', {
     pathName: 'User Details',
     user: {},
@@ -32,10 +34,14 @@ export const getEditProfile = async (req: Request, res: Response) => {
 };
 
 // Render client profile page
-export const getClientProfile = (_req: Request, res: Response) =>
+export const getClientProfile = async (_req: Request, res: Response) => {
+  const user = await UserModel.findOne().lean();
+
   res.render('admin/users/profile', {
     pathName: 'User Details',
+    user,
   });
+};
 
 // Render client summary page
 export const getClientSummary = (_req: Request, res: Response) =>

@@ -13,7 +13,7 @@ import EmailTemplates from '@enums/email_templates.enum';
 
 class UserApi {
   static async getUserByEmail(email: string): Promise<User | null> {
-    return await UserModel.findOne({ email });
+    return await UserModel.findOne({ email }).lean();
   }
 
   static async getUserById(id: string) {
@@ -21,7 +21,7 @@ class UserApi {
   }
 
   static async getUserByUsername(username: string): Promise<User | null> {
-    return await UserModel.findOne({ username });
+    return await UserModel.findOne({ username }).lean();
   }
 
   // Change password

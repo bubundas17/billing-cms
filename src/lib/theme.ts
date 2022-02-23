@@ -283,10 +283,7 @@ class Theme {
 
     const currentTheme = await theme.getCurrentTheme();
 
-    app.use(
-      currentTheme.themeBaseUri,
-      express.static(currentTheme.publicFolderPath),
-    );
+    app.use('/public', express.static(currentTheme.publicFolderPath));
   }
 }
 
