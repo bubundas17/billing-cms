@@ -1,9 +1,9 @@
 import { IsOptional, IsString, MinLength } from 'class-validator';
 
 class SignInUserDto {
-  @IsString({ message: 'Username/Email is not correct' })
+  @IsString({ message: 'Username is not correct' })
   @MinLength(3, {
-    message: 'Username/Email must be at least 3 characters long',
+    message: 'Username must be at least 3 characters long',
   })
   @IsOptional()
   username: string;

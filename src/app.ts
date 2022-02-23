@@ -19,7 +19,6 @@ import { get4xx, get5xx } from '@controllers/index';
 import handlebarsHelpers from '@helpers/handlebars-helpers';
 import passportHelper from '@helpers/passport.helper';
 import theme from '@lib/theme';
-
 import emailSender from '@services/email-sender.service';
 import emailDriver, { EmailConfig } from '@lib/email-driver';
 
