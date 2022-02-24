@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { isValidObjectId } from 'mongoose';
 
+import UserModel from '@models/user.model';
 import pagination from '@lib/pagination';
 import UserApi from '@core/api/users.api';
 
@@ -33,6 +34,30 @@ export const getEditProfile = async (req: Request, res: Response) => {
     pathName: 'User Details',
     user,
   });
+};
+
+export const getUserSearch = async (req: Request, res: Response) => {
+  const term = req.query.term as string;
+  const regex = new RegExp(term, 'i');
+
+  const usersSearchResult = await UserModel.find({ name: regex })
+    .limit(10)
+    .lean();
+
+  let users: Array<{ id: string; label: string }> = [];
+  if (
+    usersSearchResult &&
+    usersSearchResult.length &&
+    usersSearchResult.length > 0
+  ) {
+    users = usersSearchResult.map((user) => {
+      return {
+        id: user._id,
+        label: user.name,
+      };
+    });
+  }
+  return res.json(users);
 };
 
 // Render client profile page
