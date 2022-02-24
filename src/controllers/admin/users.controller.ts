@@ -3,7 +3,6 @@ import { isValidObjectId } from 'mongoose';
 
 import pagination from '@lib/pagination';
 import UserApi from '@core/api/users.api';
-import UserModel from '@models/user.model';
 
 export const getClients = async (req: Request, res: Response) => {
   const searchResult = await UserApi.searchUsers(
@@ -22,26 +21,25 @@ export const getClients = async (req: Request, res: Response) => {
 // get edit profile page
 export const getEditProfile = async (req: Request, res: Response) => {
   const isIdValid = isValidObjectId(req.params.id);
-  if (isIdValid) {
-    const user = await UserApi.getUserById(String(req.params.id));
-    console.log(user);
+
+  if (!isIdValid) {
+    req.flash('error', 'Invalid user id');
+    return res.redirect('/admin/users');
   }
 
-  res.render('admin/users/profile', {
-    pathName: 'User Details',
-    user: {},
-  });
-};
-
-// Render client profile page
-export const getClientProfile = async (_req: Request, res: Response) => {
-  const user = await UserModel.findOne().lean();
+  const user = await UserApi.getUserById(req.params.id);
 
   res.render('admin/users/profile', {
     pathName: 'User Details',
     user,
   });
 };
+
+// Render client profile page
+export const getClientProfile = async (_req: Request, res: Response) =>
+  res.render('admin/users/profile', {
+    pathName: 'User Details',
+  });
 
 // Render client summary page
 export const getClientSummary = (_req: Request, res: Response) =>
