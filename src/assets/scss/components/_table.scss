@@ -1,0 +1,38 @@
+.search-result-table {
+  border-radius: 0.3125rem;
+  overflow: hidden;
+  th,
+  td {
+    white-space: nowrap;
+  }
+
+  thead {
+    background-color: $bright_navy_blue;
+    height: 2.5rem;
+    max-height: 2.5rem;
+    min-height: 2.5rem;
+
+    th {
+      color: $white;
+      font-size: 0.9375rem;
+      line-height: 1.25rem;
+      font-weight: 400;
+    }
+  }
+
+  tbody {
+    background-color: $white_solid;
+
+    tr {
+      border-bottom: 1px solid lighten($color: $lilac_blue, $amount: 35);
+    }
+
+    td,
+    th {
+      color: $lilac_blue;
+      font-size: 0.9375rem;
+      line-height: 1.25rem;
+      font-weight: 400;
+    }
+  }
+}

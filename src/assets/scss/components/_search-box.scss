@@ -1,0 +1,22 @@
+.search-box {
+  &__group-text {
+    border-width: $input-btn-border-width * 2;
+    border-color: lighten($color: $lilac_blue, $amount: 25);
+  }
+
+  &__icon {
+    color: lighten($color: $lilac_blue, $amount: 1);
+  }
+
+  &__input {
+    border-width: $input-btn-border-width * 2;
+    border-color: lighten($color: $lilac_blue, $amount: 25);
+
+    &:focus {
+      box-shadow: none;
+      border-width: $input-btn-border-width * 2;
+      border-color: lighten($color: $lilac_blue, $amount: 25);
+      color: $lilac_blue;
+    }
+  }
+}

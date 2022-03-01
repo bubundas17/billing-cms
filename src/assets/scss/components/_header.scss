@@ -1,0 +1,35 @@
+.top-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: $white;
+}
+
+.header {
+  height: 5.28125rem;
+  min-height: 5.28125rem;
+  max-height: 5.28125rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__menu-button {
+    display: none;
+    color: $bright_navy_blue;
+
+    &:hover,
+    &:focus {
+      color: darken($color: $bright_navy_blue, $amount: 5);
+    }
+  }
+
+  &__actions {
+    button:not(:first-child) {
+      margin-left: $spacer * 0.4;
+    }
+  }
+}

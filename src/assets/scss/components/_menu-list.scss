@@ -1,0 +1,109 @@
+.menu-list {
+  .list-item:not(:first-child) {
+    margin-top: $spacer * 1;
+  }
+}
+
+.list-item {
+  &--active {
+    .list-item__icon,
+    .list-item__name {
+      color: $bright_navy_blue;
+      font-weight: bold;
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-base * 1.125;
+    line-height: $line-height-base;
+    color: $annapolis_blue;
+    width: 1.5rem;
+    min-width: 1.5rem;
+    text-align: center;
+  }
+
+  &__name {
+    font-size: $font-size-base * 1.125;
+    line-height: $line-height-base;
+    color: $annapolis_blue;
+    margin-left: $spacer * 1;
+    text-decoration: none;
+  }
+
+  &__indicator {
+    font-size: 0.9375rem;
+    color: $orchid_whisper;
+    line-height: 0.9375rem;
+  }
+
+  &__sub-menu-list {
+    margin-left: $spacer * 2.8125;
+  }
+
+  &__sub-menu-item {
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    margin-top: $spacer * 0.7;
+    cursor: pointer;
+
+    a {
+      color: $annapolis_blue;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &--active {
+        color: $bright_navy_blue;
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &--active {
+      color: $bright_navy_blue;
+    }
+  }
+}
+
+.menu {
+  &__item {
+    background-color: $white_solid;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    border-radius: 0.3125rem;
+    overflow: hidden;
+
+    &--active,
+    &:hover,
+    &:focus {
+      background-color: $cotton_boll;
+
+      .menu__icon {
+        color: $bright_navy_blue;
+        font-size: 0.9375rem;
+        line-height: 0.9375rem;
+      }
+
+      .menu__name {
+        color: $bright_navy_blue;
+        font-size: 0.9375rem;
+        line-height: 0.9375rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__icon {
+    color: $annapolis_blue;
+    font-size: 0.9375rem;
+    line-height: 0.9375rem;
+  }
+
+  &__name {
+    color: $annapolis_blue;
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+  }
+}

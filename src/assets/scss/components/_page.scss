@@ -1,0 +1,34 @@
+.page {
+  &-link {
+    border: none;
+    outline: none;
+    border-radius: 0.3125rem;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $brilliant_azure;
+      color: $white;
+    }
+
+    &--active {
+      background-color: $brilliant_azure;
+      color: $white;
+    }
+  }
+
+  &-item {
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 0.3125rem;
+
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+
+    &--active {
+      background-color: $brilliant_azure;
+      color: $white;
+    }
+  }
+}
