@@ -1,103 +1,101 @@
-<main class='container-fluid'>
-  <div class='mx-2 my-3'>
-    <h3 class='main-content__title'>Search Client</h3>
+<div class='mx-2 my-3'>
+  <h3 class='main-content__title'>Search Client</h3>
 
-    <div>
-      <form class='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-2 client-search-form'
-        action='/admin/users?' method='get'>
-        <div class='col'>
-          <label class='client-search-form__label'>
-            <i class='fas fa-user client-search-form__icon'></i>
-            <input type='text' class='form-control client-search-form__input' placeholder='Name' name='name'
-              value='{{searchQuery.name}}' />
-          </label>
-        </div>
-
-        <div class='col'>
-          <label class='client-search-form__label'>
-            <i class='fas fa-building client-search-form__icon'></i>
-            <input type='text' class='form-control client-search-form__input' placeholder='Company' name='company'
-              value='{{searchQuery.company}}' />
-          </label>
-        </div>
-
-        <div class='col'>
-          <label class='client-search-form__label'>
-            <i class='fas fa-envelope client-search-form__icon'></i>
-            <input type='text' class='form-control client-search-form__input' placeholder='Email Address' name='email'
-              value='{{searchQuery.email}}' />
-          </label>
-        </div>
-
-        <div class='col'>
-          <label class='client-search-form__label'>
-            <i class='fas fa-phone client-search-form__icon'></i>
-            <input type='text' class='form-control client-search-form__input' placeholder='Phone No.' name='phone'
-              value='{{searchQuery.phone}}' />
-          </label>
-        </div>
-
-        <div class='col'>
-          <button type='submit' class='btn client-search-form__submit-btn'>
-            <i class='fas fa-search client-search-form__submit-btn-icon'></i>
-            <span class='client-search-form__submit-btn-text'>Search</span>
-          </button>
-        </div>
-      </form>
-
-      <span class='mt-4 mb-2 d-block main-content__sub-text'>
-        <span class='main-content__sub-text--strong'>320</span>
-        Search results found. Showing
-        <span class='main-content__sub-text--strong'>1</span>
-        to
-        <span class='main-content__sub-text--strong'>50</span>
-      </span>
-
-      {{> flash-message}}
-
-      <div class='table-responsive'>
-        <table class='table search-result-table'>
-          <thead>
-
-            <tr>
-              <th scope='col'>ID</th>
-              <th scope='col'>Name</th>
-              <th scope='col'>Company</th>
-              <th scope='col'>Email Address</th>
-              <th scope='col'>Phone No.</th>
-              <th scope='col'>Actions</th>
-            </tr>
-
-          </thead>
-          <tbody>
-            {{#each users}}
-            <tr>
-              <td>1</td>
-              <td>{{this.name}}</td>
-              <td>Otto</td>
-              <td>{{this.email}}</td>
-              <td>{{this.phone}}</td>
-              <td>
-                <a href='/admin/users/profile/edit/{{this._id}}'>
-                  <button class='btn btn-primary btn-small'>Edit</button></a>
-              </td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
+  <div>
+    <form class='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-2 client-search-form'
+      action='/admin/users?' method='get'>
+      <div class='col'>
+        <label class='client-search-form__label'>
+          <i class='fas fa-user client-search-form__icon'></i>
+          <input type='text' class='form-control client-search-form__input' placeholder='Name' name='name'
+            value='{{searchQuery.name}}' />
+        </label>
       </div>
 
-      <nav class='d-flex align-items-center justify-content-center'>
-        <ul class='pagination'>
-          {{#each pagination}}
-          <li class='page-item'>
-            <a class='page-link {{this.classes}}' href='{{this.url}}'>
-              {{{this.text}}}
-            </a>
-          </li>
+      <div class='col'>
+        <label class='client-search-form__label'>
+          <i class='fas fa-building client-search-form__icon'></i>
+          <input type='text' class='form-control client-search-form__input' placeholder='Company' name='company'
+            value='{{searchQuery.company}}' />
+        </label>
+      </div>
+
+      <div class='col'>
+        <label class='client-search-form__label'>
+          <i class='fas fa-envelope client-search-form__icon'></i>
+          <input type='text' class='form-control client-search-form__input' placeholder='Email Address' name='email'
+            value='{{searchQuery.email}}' />
+        </label>
+      </div>
+
+      <div class='col'>
+        <label class='client-search-form__label'>
+          <i class='fas fa-phone client-search-form__icon'></i>
+          <input type='text' class='form-control client-search-form__input' placeholder='Phone No.' name='phone'
+            value='{{searchQuery.phone}}' />
+        </label>
+      </div>
+
+      <div class='col'>
+        <button type='submit' class='btn client-search-form__submit-btn'>
+          <i class='fas fa-search client-search-form__submit-btn-icon'></i>
+          <span class='client-search-form__submit-btn-text'>Search</span>
+        </button>
+      </div>
+    </form>
+
+    <span class='mt-4 mb-2 d-block main-content__sub-text'>
+      <span class='main-content__sub-text--strong'>320</span>
+      Search results found. Showing
+      <span class='main-content__sub-text--strong'>1</span>
+      to
+      <span class='main-content__sub-text--strong'>50</span>
+    </span>
+
+    {{> flash-message}}
+
+    <div class='table-responsive'>
+      <table class='table search-result-table'>
+        <thead>
+
+          <tr>
+            <th scope='col'>ID</th>
+            <th scope='col'>Name</th>
+            <th scope='col'>Company</th>
+            <th scope='col'>Email Address</th>
+            <th scope='col'>Phone No.</th>
+            <th scope='col'>Actions</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          {{#each users}}
+          <tr>
+            <td>1</td>
+            <td>{{this.name}}</td>
+            <td>Otto</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>
+              <a href='/admin/users/profile/edit/{{this._id}}'>
+                <button class='btn btn-primary btn-small'>Edit</button></a>
+            </td>
+          </tr>
           {{/each}}
-        </ul>
-      </nav>
+        </tbody>
+      </table>
     </div>
+
+    <nav class='d-flex align-items-center justify-content-center'>
+      <ul class='pagination'>
+        {{#each pagination}}
+        <li class='page-item'>
+          <a class='page-link {{this.classes}}' href='{{this.url}}'>
+            {{{this.text}}}
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </nav>
   </div>
-</main>
+</div>

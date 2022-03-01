@@ -1,4 +1,4 @@
-<div class='container-fluid mb-3'>
+<div class='mb-3'>
   <div class='mx-2 my-3'>
     <span class='main-content__title'>Client Details</span>
   </div>
@@ -14,32 +14,6 @@
       <span class='client-details-form__update-btn-text'>Search</span>
     </button> --}}
   </form>
-
-  <script>
-    $(function () {
-      $('#searchUserInput').autocomplete({
-        source: function (req, res) {
-          $.ajax({
-            url: '/admin/users/search',
-            data: req,
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-              res(data)
-            },
-            error: function (_) { },
-          });
-        },
-        minLenght: 2,
-        select: function (event, ui) {
-          if (ui.item) {
-            $('#searchUserForm').attr('action', `/admin/users/profile/edit/${ui.item.id}`)
-            $('#searchUserForm').submit();
-          }
-        },
-      });
-    });
-  </script>
 
   <span class='mt-4 d-block main-content__sub-text main-content__sub-text--strong'>
     Update Profile
@@ -321,3 +295,29 @@
     </form>
   </div>
 </div>
+
+<script>
+  $(function () {
+    $('#searchUserInput').autocomplete({
+      source: function (req, res) {
+        $.ajax({
+          url: '/admin/users/search',
+          data: req,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            res(data)
+          },
+          error: function (_) { },
+        });
+      },
+      minLenght: 2,
+      select: function (event, ui) {
+        if (ui.item) {
+          $('#searchUserForm').attr('action', `/admin/users/profile/edit/${ui.item.id}`)
+          $('#searchUserForm').submit();
+        }
+      },
+    });
+  });
+</script>
