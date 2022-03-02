@@ -10,8 +10,9 @@
     <form class='display-center__form needs-validation' action='/auth/signin' method='post' novalidate>
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input type='text' class='form-control display-center__form-input' placeholder='Username' name='username'
-          value='{{userInput.username}}' required />
+        <input type='text' class='form-control display-center__form-input
+            {{errorInput errors "username"}}' placeholder='Username' name='username' value='{{userInput.username}}'
+          required />
       </label>
       {{errorMessage errors 'username'}}
 
