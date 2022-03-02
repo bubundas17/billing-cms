@@ -1,6 +1,4 @@
-<div
-  class='card card--no-border display-center__box display-center__box--drop-shadow'
->
+<div class='card card--no-border display-center__box display-center__box--drop-shadow'>
   <div class='display-center__content display-center__content--center'>
 
     {{> flash-message }}
@@ -9,30 +7,18 @@
       <h3 class='display-center__title'>QDASH</h3>
       <span class='display-center__sub-text'>Client Login</span>
     </div>
-    <form class='display-center__form' action='/auth/signin' method='post'>
+    <form class='display-center__form needs-validation' action='/auth/signin' method='post' novalidate>
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input
-          type='text'
-          class='form-control display-center__form-input
-            {{errorInput errors "username"}}'
-          placeholder='Username'
-          name='username'
-          value='{{userInput.username}}'
-        />
+        <input type='text' class='form-control display-center__form-input' placeholder='Username' name='username'
+          value='{{userInput.username}}' required />
       </label>
       {{errorMessage errors 'username'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input
-          type='password'
-          name='password'
-          class='form-control display-center__form-input
-            {{errorInput errors "password"}}'
-          placeholder='Password'
-          value='{{userInput.password}}'
-        />
+        <input type='password' name='password' class='form-control display-center__form-input
+            {{errorInput errors "password"}}' placeholder='Password' value='{{userInput.password}}' required />
       </label>
       {{errorMessage errors 'password'}}
 
@@ -43,16 +29,8 @@
 
       <div class='mt-1 d-flex align-items-center justify-content-between'>
         <div class='form-check d-flex justify-space-between align-items-center'>
-          <input
-            class='form-check-input me-1'
-            type='checkbox'
-            value=''
-            id='flexCheckDefault'
-          />
-          <label
-            class='form-check-label display-center__extra-text'
-            for='flexCheckDefault'
-          >
+          <input class='form-check-input me-1' type='checkbox' value='' id='flexCheckDefault' />
+          <label class='form-check-label display-center__extra-text' for='flexCheckDefault'>
             Remember Me
           </label>
         </div>
