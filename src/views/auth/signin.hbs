@@ -7,13 +7,15 @@
       <h3 class='display-center__title'>QDASH</h3>
       <span class='display-center__sub-text'>Client Login</span>
     </div>
-    <form class='display-center__form needs-validation' action='/auth/signin' method='post' novalidate>
+    <form class='display-center__form' action='/auth/signin' method='post' style="width: 18.75rem;">
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input type='text' class='form-control display-center__form-input
-            {{errorInput errors "username"}}' placeholder='Username' name='username' value='{{userInput.username}}'
-          required />
+        <input type='text' class='form-control display-center__form-input {{errorInput errors "username"}}'
+          placeholder='Username or Email' name='username' value='{{userInput.username}}' required />
       </label>
+      <div id="userNameInputError" class="invalid-feedback d-none">
+        Email address not valid or Username must be at least 3 characters long
+      </div>
       {{errorMessage errors 'username'}}
 
       <label class='display-center__form-label'>
@@ -21,6 +23,9 @@
         <input type='password' name='password' class='form-control display-center__form-input
             {{errorInput errors "password"}}' placeholder='Password' value='{{userInput.password}}' required />
       </label>
+      <div id="passwordInputError" class="invalid-feedback d-none">
+        Password must be at least 6 characters long
+      </div>
       {{errorMessage errors 'password'}}
 
       <button type='submit' class='btn display-center__form-submit-btn'>
@@ -28,7 +33,8 @@
         <span class='display-center__form-submit-btn-text'>Login</span>
       </button>
 
-      <div class='mt-1 d-flex align-items-center justify-content-between'>
+      <div class='mt-1 d-flex align-items-center justify-content-between'
+        style="margin-left: auto; margin-right: auto; width: 100%;">
         <div class='form-check d-flex justify-space-between align-items-center'>
           <input class='form-check-input me-1' type='checkbox' value='' id='flexCheckDefault' />
           <label class='form-check-label display-center__extra-text' for='flexCheckDefault'>
@@ -47,3 +53,49 @@
     </div>
   </div>
 </div>
+
+<script>
+  const usernameInput = document.querySelector('input[name="username"]');
+  const passwordInput = document.querySelector('input[name="password"]');
+  const userNameInputError = document.querySelector('#userNameInputError');
+  const passwordInputError = document.querySelector('#passwordInputError');
+
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+  usernameInput.addEventListener('keyup', (e) => {
+    const inputValue = e.target.value;
+    const isEmail = emailRegex.test(inputValue);
+    const hasSpecialChar = spChars.test(inputValue)
+
+    if (isEmail) {
+      usernameInput.classList.remove('is-invalid');
+      userNameInputError.style.display = 'none';
+      return;
+    }
+
+    if (inputValue.length >= 3 && !hasSpecialChar) {
+      usernameInput.classList.remove('is-invalid');
+      userNameInputError.style.display = 'none';
+      return
+    } else {
+      usernameInput.classList.add('is-invalid');
+      userNameInputError.classList.remove('d-none');
+      userNameInputError.style.display = 'block';
+      return
+    }
+  });
+
+  passwordInput.addEventListener('keyup', e => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length >= 6) {
+      passwordInput.classList.remove('is-invalid');
+      passwordInputError.style.display = 'none';
+    } else {
+      passwordInput.classList.add('is-invalid');
+      passwordInputError.classList.remove('d-none');
+      passwordInputError.style.display = 'block';
+    }
+  })
+</script>
