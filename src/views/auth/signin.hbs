@@ -60,13 +60,14 @@
   const userNameInputError = document.querySelector('#userNameInputError');
   const passwordInputError = document.querySelector('#passwordInputError');
 
-  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
   usernameInput.addEventListener('keyup', (e) => {
     const inputValue = e.target.value;
     const isEmail = emailRegex.test(inputValue);
-    const hasSpecialChar = spChars.test(inputValue)
+    const hasSpecialChar = spChars.test(inputValue);
 
     if (isEmail) {
       usernameInput.classList.remove('is-invalid');
@@ -77,16 +78,16 @@
     if (inputValue.length >= 3 && !hasSpecialChar) {
       usernameInput.classList.remove('is-invalid');
       userNameInputError.style.display = 'none';
-      return
+      return;
     } else {
       usernameInput.classList.add('is-invalid');
       userNameInputError.classList.remove('d-none');
       userNameInputError.style.display = 'block';
-      return
+      return;
     }
   });
 
-  passwordInput.addEventListener('keyup', e => {
+  passwordInput.addEventListener('keyup', (e) => {
     const inputValue = e.target.value;
 
     if (inputValue.length >= 6) {
@@ -97,5 +98,5 @@
       passwordInputError.classList.remove('d-none');
       passwordInputError.style.display = 'block';
     }
-  })
+  });
 </script>

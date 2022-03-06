@@ -1,6 +1,4 @@
-<div
-  class='card card--no-border display-center__box display-center__box--drop-shadow'
->
+<div class='card card--no-border display-center__box display-center__box--drop-shadow'>
   <div class='display-center__content display-center__content--center'>
     <div>
       <h3 class='display-center__title'>QDASH</h3>
@@ -9,67 +7,53 @@
     <form class='display-center__form' action='/auth/signup' method='post'>
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
-        <input
-          type='text'
-          name='name'
-          class='form-control display-center__form-input
-            {{errorInput errors "name"}}'
-          placeholder='Name'
-          value='{{userInput.name}}'
-        />
+        <input type='text' name='name' class='form-control display-center__form-input
+            {{errorInput errors "name"}}' placeholder='Name' value='{{userInput.name}}' required />
       </label>
+      <div id="nameInputError" class="invalid-feedback d-none">
+        Please Enter a valid name (at least 3 characters)
+      </div>
       {{errorMessage errors 'name'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-circle-user display-center__form-icon'></i>
-        <input
-          type='text'
-          name='username'
-          class='form-control display-center__form-input
-            {{errorInput errors "username"}}'
-          placeholder='Username'
-          value='{{userInput.username}}'
-        />
+        <input type='text' name='username' class='form-control display-center__form-input
+            {{errorInput errors "username"}}' placeholder='Username' value='{{userInput.username}}' required />
       </label>
+      <div id="userNameInputError" class="invalid-feedback d-none">
+        Please Enter a valid username (at least 3 characters)
+      </div>
       {{errorMessage errors 'username'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-envelope display-center__form-icon'></i>
-        <input
-          type='email'
-          name='email'
-          class='form-control display-center__form-input
-            {{errorInput errors "email"}}'
-          placeholder='Email address'
-          value='{{userInput.email}}'
-        />
+        <input type='email' name='email' class='form-control display-center__form-input
+            {{errorInput errors "email"}}' placeholder='Email address' value='{{userInput.email}}' required />
       </label>
+      <div id="emailInputError" class="invalid-feedback d-none">
+        Please Enter a valid email address
+      </div>
       {{errorMessage errors 'email'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input
-          type='password'
-          name='password'
-          class='form-control display-center__form-input
-            {{errorInput errors "password"}}'
-          placeholder='Password'
-          value='{{userInput.password}}'
-        />
+        <input type='password' name='password' class='form-control display-center__form-input
+            {{errorInput errors "password"}}' placeholder='Password' value='{{userInput.password}}' required />
       </label>
+      <div id="passwordInputError" class="invalid-feedback d-none">
+        Please Enter a valid password (at least 6 characters)
+      </div>
       {{errorMessage errors 'password'}}
 
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
-        <input
-          type='password'
-          name='repeatPassword'
-          class='form-control display-center__form-input
-            {{errorInput errors "repeatPassword"}}'
-          placeholder='Repeat Password'
-          value='{{userInput.repeatPassword}}'
-        />
+        <input type='password' name='repeatPassword' class='form-control display-center__form-input
+            {{errorInput errors "repeatPassword"}}' placeholder='Repeat Password' value='{{userInput.repeatPassword}}'
+          required />
       </label>
+      <div id="repeatPasswordInputError" class="invalid-feedback d-none">
+        Password do not match
+      </div>
       {{errorMessage errors 'repeatPassword'}}
 
       <button type='submit' class='btn display-center__form-submit-btn'>
@@ -92,3 +76,86 @@
     </div>
   </div>
 </div>
+
+<script>
+  const nameInput = document.querySelector('input[name="name"]');
+  const userNameInput = document.querySelector('input[name="username"]');
+  const emailInput = document.querySelector('input[name="email"]');
+  const passwordInput = document.querySelector('input[name="password"]');
+  const repeatPasswordInput = document.querySelector('input[name="repeatPassword"]');
+  const nameInputError = document.querySelector('#nameInputError');
+  const userNameInputError = document.querySelector('#userNameInputError');
+  const emailInputError = document.querySelector('#emailInputError');
+  const passwordInputError = document.querySelector('#passwordInputError');
+  const repeatPasswordInputError = document.querySelector('#repeatPasswordInputError');
+
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+  nameInput.addEventListener('keyup', (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length >= 3) {
+      nameInput.classList.remove('is-invalid');
+      nameInputError.style.display = 'none';
+    } else {
+      nameInput.classList.add('is-invalid');
+      nameInputError.classList.remove('d-none');
+      nameInputError.style.display = 'block';
+    }
+  });
+
+  userNameInput.addEventListener('keyup', (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length >= 3) {
+      userNameInput.classList.remove('is-invalid');
+      userNameInputError.style.display = 'none';
+    } else {
+      userNameInput.classList.add('is-invalid');
+      userNameInputError.classList.remove('d-none');
+      userNameInputError.style.display = 'block';
+    }
+  });
+
+  emailInput.addEventListener('keyup', (e) => {
+    const inputValue = e.target.value;
+    const isEmail = emailRegex.test(inputValue);
+
+    if (isEmail) {
+      emailInput.classList.remove('is-invalid');
+      emailInputError.style.display = 'none';
+    } else {
+      emailInput.classList.add('is-invalid');
+      emailInputError.classList.remove('d-none');
+      emailInputError.style.display = 'block';
+    }
+  });
+
+  passwordInput.addEventListener('keyup', (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length >= 6) {
+      passwordInput.classList.remove('is-invalid');
+      passwordInputError.style.display = 'none';
+    } else {
+      passwordInput.classList.add('is-invalid');
+      passwordInputError.classList.remove('d-none');
+      passwordInputError.style.display = 'block';
+    }
+  });
+
+  repeatPasswordInput.addEventListener('keyup', (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue === passwordInput.value) {
+      repeatPasswordInput.classList.remove('is-invalid');
+      repeatPasswordInputError.style.display = 'none';
+    } else {
+      repeatPasswordInput.classList.add('is-invalid');
+      repeatPasswordInputError.classList.remove('d-none');
+      repeatPasswordInputError.style.display = 'block';
+    }
+  });
+</script>
