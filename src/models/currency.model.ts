@@ -12,8 +12,10 @@ export class Currency extends BaseModel {
   @prop({ required: true, index: true })
   symbol: string;
 
+  @prop()
   prefix: string;
 
+  @prop()
   suffix: string;
 
   @prop({ required: true, default: false })

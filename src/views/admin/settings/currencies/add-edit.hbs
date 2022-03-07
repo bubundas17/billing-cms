@@ -1,0 +1,146 @@
+<main class='container-fluid'>
+  <div class='mx-2 my-3'>
+    <div class='hstack gap-3 mb-3'>
+      <h3 class='main-content__title inline-block'>
+        {{#if edit}}
+          Update Currency
+        {{else}}
+          Add New Currency
+        {{/if}}
+      </h3>
+    </div>
+
+    <form action='#' method='post'>
+      <div class='mt-2 row row-cols-1 row-cols-md-2 g-2'>
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-colon-sign client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Name'
+              name='name'
+              {{#if edit}}
+                value='{{currency.name}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-coins client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Code'
+              name='code'
+              {{#if edit}}
+                value='{{currency.code}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-at client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Symbol'
+              name='symbol'
+              {{#if edit}}
+                value='{{currency.symbol}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-florin-sign client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Prefix'
+              name='prefix'
+              {{#if edit}}
+                value='{{currency.prefix}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-florin-sign client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Suffix'
+              name='suffix'
+               {{#if edit}}
+                value='{{currency.suffix}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-euro-sign client-search-form__icon'></i>
+            <input
+              type='text'
+              class='form-control client-search-form__input'
+              placeholder='Default currency'
+              name='default'
+               {{#if edit}}
+                checked='{{currency.default}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div class='col'>
+          <label class='client-search-form__label'>
+            <i class='fa-solid fa-percent client-search-form__icon'></i>
+            <input
+              type='number'
+              class='form-control client-search-form__input'
+              placeholder='Conversion rate'
+              name='rate'
+               {{#if edit}}
+                value='{{currency.rate}}'
+              {{/if}}
+            />
+          </label>
+        </div>
+
+        <div
+          class='form-check form-switch'
+          style='display: flex; align-items: center;'
+        >
+          <input
+            class='form-check-input'
+            type='checkbox'
+            id='defaultCurrencySwitchCheck'
+          />
+          <label
+            class='ms-3 form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
+            for='defaultCurrencySwitchCheck'
+          >
+            Default currency
+          </label>
+        </div>
+
+        <div class='col'>
+          <button type='submit' class='btn client-search-form__submit-btn'>
+            <i class='fa-solid fa-plus client-search-form__submit-btn-icon'></i>
+            <span class='client-search-form__submit-btn-text'>Add currency</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
