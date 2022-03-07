@@ -1,5 +1,10 @@
-<div class="container-fluid">
-    <h1>Art</h1>
-    <h1>{{data}}</h1>
-    {{user.name}}
+<div class='container-fluid'>
+  <h1>Art</h1>
+  <h1>{{data}}</h1>
+  {{user.name}}
+  {{#if isAuthenticated}}
+    <h1>OK</h1>
+  {{else}}
+    <h1>Not OK</h1>
+  {{/if}}
 </div>
