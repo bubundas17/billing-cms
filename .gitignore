@@ -246,6 +246,5 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,intellij+all
 yarn.lock
 package-lock.json
-src/assets/css/
-*.css.map
-*.css
+src/assets/css/*.css
+src/assets/css/*.css.map

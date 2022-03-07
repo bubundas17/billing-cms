@@ -1,41 +1,43 @@
 <main class='container-fluid'>
-    <div class='mx-2 my-3'>
-        <div class="hstack gap-3 mb-3">
-            <h3 class='main-content__title inline-block'>Currencies</h3>
-            <a class="ms-auto btn btn-large btn-primary" href="/admin/settings/currencies/new"><i
-                    class="fa-solid fa-plus"></i> <span class="ms-2">Add New</span> </a>
-        </div>
-
-        <div>
-            <div class='table-responsive'>
-                <table class='table search-result-table'>
-                    <thead>
-
-                        <tr>
-                            <th scope='col'>Code</th>
-                            <th scope='col'>Name</th>
-                            <th scope='col'>Ratio</th>
-                            <th scope='col'>Actions</th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        {{#each currencies}}
-                        <tr>
-                            <td>1</td>
-                            <td>{{this.name}}</td>
-                            <td>Otto</td>
-                            <td>{{this.email}}</td>
-                            <td>{{this.phone}}</td>
-                            <td>
-                                <a href='/admin/users/profile/edit/{{this._id}}'>
-                                    <button class='btn btn-primary btn-small'>Edit</button></a>
-                            </td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div class='mx-2 my-3'>
+    <div class='hstack gap-3 mb-3'>
+      <h3 class='main-content__title inline-block'>Currencies</h3>
+      <a
+        class='ms-auto btn btn-large btn-primary'
+        href='/admin/settings/currencies/new'
+      ><i class='fa-solid fa-plus'></i> <span class='ms-2'>Add New</span> </a>
     </div>
+
+    <div>
+      <div class='table-responsive'>
+        <table class='table search-result-table'>
+          <thead>
+
+            <tr>
+              <th scope='col'>Code</th>
+              <th scope='col'>Name</th>
+              <th scope='col'>Ratio</th>
+              <th scope='col'>Actions</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            {{#each currencies}}
+              <tr>
+                <td>1</td>
+                <td>{{this.name}}</td>
+                <td>Otto</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>
+                  <a href='/admin/users/profile/edit/{{this._id}}'>
+                    <button class='btn btn-primary btn-small'>Edit</button></a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </main>
