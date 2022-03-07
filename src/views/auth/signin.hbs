@@ -70,33 +70,22 @@
     const hasSpecialChar = spChars.test(inputValue);
 
     if (isEmail) {
-      usernameInput.classList.remove('is-invalid');
-      userNameInputError.style.display = 'none';
+      validInput(usernameInput, userNameInputError)
       return;
     }
 
     if (inputValue.length >= 3 && !hasSpecialChar) {
-      usernameInput.classList.remove('is-invalid');
-      userNameInputError.style.display = 'none';
+      validInput(usernameInput, userNameInputError)
       return;
     } else {
-      usernameInput.classList.add('is-invalid');
-      userNameInputError.classList.remove('d-none');
-      userNameInputError.style.display = 'block';
+      invalidInput(usernameInput, userNameInputError)
       return;
     }
   });
 
   passwordInput.addEventListener('keyup', (e) => {
-    const inputValue = e.target.value;
-
-    if (inputValue.length >= 6) {
-      passwordInput.classList.remove('is-invalid');
-      passwordInputError.style.display = 'none';
-    } else {
-      passwordInput.classList.add('is-invalid');
-      passwordInputError.classList.remove('d-none');
-      passwordInputError.style.display = 'block';
-    }
+    e.target.value.length >= 6
+      ? validInput(passwordInput, passwordInputError)
+      : invalidInput(passwordInput, passwordInputError)
   });
 </script>

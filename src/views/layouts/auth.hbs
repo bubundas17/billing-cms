@@ -16,4 +16,17 @@
     <main class="display-center">
         {{{body}}}
     </main>
+
+    <script>
+        function validInput(inputEl, inputErrorEl) {
+            inputEl.classList.remove('is-invalid');
+            inputErrorEl.style.display = 'none';
+        }
+
+        function invalidInput(inputEl, inputErrorEl) {
+            inputEl.classList.add('is-invalid');
+            inputErrorEl.classList.remove('d-none');
+            inputErrorEl.style.display = 'block';
+        }
+    </script>
 </body>

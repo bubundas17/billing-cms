@@ -93,81 +93,43 @@
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   nameInput.addEventListener('keyup', (e) => {
-    const inputValue = e.target.value;
-
-    if (inputValue.length >= 3) {
-      nameInput.classList.remove('is-invalid');
-      nameInputError.style.display = 'none';
-    } else {
-      nameInput.classList.add('is-invalid');
-      nameInputError.classList.remove('d-none');
-      nameInputError.style.display = 'block';
-    }
+    e.target.value.length >= 3
+      ? validInput(nameInput, nameInputError)
+      : invalidInput(nameInput, nameInputError)
   });
 
   userNameInput.addEventListener('keyup', (e) => {
-    const inputValue = e.target.value;
-
-    if (inputValue.length >= 3) {
-      userNameInput.classList.remove('is-invalid');
-      userNameInputError.style.display = 'none';
-    } else {
-      userNameInput.classList.add('is-invalid');
-      userNameInputError.classList.remove('d-none');
-      userNameInputError.style.display = 'block';
-    }
+    e.target.value.length >= 3
+      ? validInput(userNameInput, userNameInputError)
+      : invalidInput(userNameInput, userNameInputError)
   });
 
   emailInput.addEventListener('keyup', (e) => {
     const inputValue = e.target.value;
     const isEmail = emailRegex.test(inputValue);
 
-    if (isEmail) {
-      emailInput.classList.remove('is-invalid');
-      emailInputError.style.display = 'none';
-    } else {
-      emailInput.classList.add('is-invalid');
-      emailInputError.classList.remove('d-none');
-      emailInputError.style.display = 'block';
-    }
+    isEmail
+      ? validInput(emailInput, emailInputError)
+      : invalidInput(emailInput, emailInputError)
   });
 
   passwordInput.addEventListener('keyup', (e) => {
-    const inputValue = e.target.value;
-
-    if (inputValue.length >= 6) {
-      passwordInput.classList.remove('is-invalid');
-      passwordInputError.style.display = 'none';
-    } else {
-      passwordInput.classList.add('is-invalid');
-      passwordInputError.classList.remove('d-none');
-      passwordInputError.style.display = 'block';
-    }
+    e.target.value.length >= 6
+      ? validInput(passwordInput, passwordInputError)
+      : invalidInput(passwordInput, passwordInputError)
   });
 
   passwordInput.addEventListener('input', function (e) {
     if (!repeatPasswordInput.value || repeatPasswordInput.value === '') return;
 
-    if (repeatPasswordInput.value === this.value) {
-      repeatPasswordInput.classList.remove('is-invalid');
-      repeatPasswordInputError.style.display = 'none';
-    } else {
-      repeatPasswordInput.classList.add('is-invalid');
-      repeatPasswordInputError.classList.remove('d-none');
-      repeatPasswordInputError.style.display = 'block';
-    }
+    repeatPasswordInput.value === this.value
+      ? validInput(repeatPasswordInput, repeatPasswordInputError)
+      : invalidInput(repeatPasswordInput, repeatPasswordInputError)
   });
 
   repeatPasswordInput.addEventListener('input', function (e) {
-    const inputValue = e.target.value;
-
-    if (inputValue === passwordInput.value) {
-      repeatPasswordInput.classList.remove('is-invalid');
-      repeatPasswordInputError.style.display = 'none';
-    } else {
-      repeatPasswordInput.classList.add('is-invalid');
-      repeatPasswordInputError.classList.remove('d-none');
-      repeatPasswordInputError.style.display = 'block';
-    }
+    e.target.value === passwordInput.value
+      ? validInput(repeatPasswordInput, repeatPasswordInputError)
+      : invalidInput(repeatPasswordInput, repeatPasswordInputError)
   });
 </script>
