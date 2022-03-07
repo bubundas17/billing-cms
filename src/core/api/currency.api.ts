@@ -22,6 +22,10 @@ class CurrencyApi {
       new: true,
     }).lean();
   }
+
+  static async deleteCurrency(id: string): Promise<Currency> {
+    return await CurrencyModel.findByIdAndDelete(id).lean();
+  }
 }
 
 Object.freeze(CurrencyApi);

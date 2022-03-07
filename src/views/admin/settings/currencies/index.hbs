@@ -24,14 +24,29 @@
           <tbody>
             {{#each currencies}}
               <tr>
-                <td>1</td>
+                <td>{{@index}}</td>
                 <td>{{this.name}}</td>
                 <td>Otto</td>
-                <td>{{this.email}}</td>
-                <td>{{this.phone}}</td>
                 <td>
-                  <a href='/admin/users/profile/edit/{{this._id}}'>
-                    <button class='btn btn-primary btn-small'>Edit</button></a>
+                  <a
+                    role='button'
+                    class='btn btn-primary btn-small'
+                    href='/admin/settings/currencies/edit/{{this._id}}'
+                  >
+                    Edit
+                  </a>
+                  <form
+                    action='/admin/settings/currencies/delete'
+                    method='post'
+                    class='d-inline'
+                  >
+                    <input
+                      type='hidden'
+                      name='currencyId'
+                      value='{{this._id}}'
+                    />
+                    <button class='btn btn-danger btn-small'>Delete</button>
+                  </form>
                 </td>
               </tr>
             {{/each}}

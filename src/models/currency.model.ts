@@ -13,13 +13,13 @@ export class Currency extends BaseModel {
   symbol: string;
 
   @prop()
-  prefix: string;
+  prefix?: string;
 
   @prop()
-  suffix: string;
+  suffix?: string;
 
-  @prop({ required: true, default: false })
-  default: boolean; // default currency
+  @prop({ default: false })
+  default?: boolean; // default currency
 
   @prop({ required: true, default: false })
   rate: number; // Conversion rate to default currency

@@ -10,7 +10,13 @@
       </h3>
     </div>
 
-    <form action='#' method='post'>
+    <form  
+    {{#if edit}}
+      action='/admin/settings/currencies/edit/{{currency._id}}'
+    {{else}}
+      action='/admin/settings/currencies/new'
+    {{/if}}
+    method='post'>
       <div class='mt-2 row row-cols-1 row-cols-md-2 g-2'>
         <div class='col'>
           <label class='client-search-form__label'>
@@ -89,28 +95,13 @@
 
         <div class='col'>
           <label class='client-search-form__label'>
-            <i class='fa-solid fa-euro-sign client-search-form__icon'></i>
-            <input
-              type='text'
-              class='form-control client-search-form__input'
-              placeholder='Default currency'
-              name='default'
-               {{#if edit}}
-                checked='{{currency.default}}'
-              {{/if}}
-            />
-          </label>
-        </div>
-
-        <div class='col'>
-          <label class='client-search-form__label'>
             <i class='fa-solid fa-percent client-search-form__icon'></i>
             <input
               type='number'
               class='form-control client-search-form__input'
               placeholder='Conversion rate'
               name='rate'
-               {{#if edit}}
+              {{#if edit}}
                 value='{{currency.rate}}'
               {{/if}}
             />
@@ -124,7 +115,13 @@
           <input
             class='form-check-input'
             type='checkbox'
+            name="default"
             id='defaultCurrencySwitchCheck'
+            {{#if edit}}
+              {{#if currency.default}}
+                checked
+              {{/if}}
+            {{/if}}
           />
           <label
             class='ms-3 form-check-label custom-base-text custom-base-text-lilac_blue text-nowrap'
@@ -136,8 +133,18 @@
 
         <div class='col'>
           <button type='submit' class='btn client-search-form__submit-btn'>
+            {{#if edit}}
+            <i class="fa-solid fa-floppy-disk  client-search-form__submit-btn-icon"></i>
+            {{else}}
             <i class='fa-solid fa-plus client-search-form__submit-btn-icon'></i>
-            <span class='client-search-form__submit-btn-text'>Add currency</span>
+            {{/if}}
+            <span class='client-search-form__submit-btn-text'>
+              {{#if edit}}
+              Update currency
+              {{else}}
+              Add currency
+              {{/if}}
+            </span>
           </button>
         </div>
       </div>
