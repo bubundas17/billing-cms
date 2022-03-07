@@ -145,7 +145,20 @@
     }
   });
 
-  repeatPasswordInput.addEventListener('keyup', (e) => {
+  passwordInput.addEventListener('input', function (e) {
+    if (!repeatPasswordInput.value || repeatPasswordInput.value === '') return;
+
+    if (repeatPasswordInput.value === this.value) {
+      repeatPasswordInput.classList.remove('is-invalid');
+      repeatPasswordInputError.style.display = 'none';
+    } else {
+      repeatPasswordInput.classList.add('is-invalid');
+      repeatPasswordInputError.classList.remove('d-none');
+      repeatPasswordInputError.style.display = 'block';
+    }
+  });
+
+  repeatPasswordInput.addEventListener('input', function (e) {
     const inputValue = e.target.value;
 
     if (inputValue === passwordInput.value) {
