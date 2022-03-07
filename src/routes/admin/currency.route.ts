@@ -16,6 +16,14 @@ class CurrencyRoute extends BaseRoute {
         currencies,
       });
     });
+
+    this.router.get('/new', async (_req, res) => {
+      const currencies = await CurrencyApi.getAllCurrencies();
+
+      res.render('admin/settings/currencies/add', {
+        currencies,
+      });
+    });
   }
 }
 
