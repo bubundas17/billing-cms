@@ -2,7 +2,7 @@ import { getModelForClass, prop } from '@typegoose/typegoose';
 
 import BaseModel from '@models/base.model';
 
-export class Currency extends BaseModel {
+export class Product extends BaseModel {
   @prop({ required: true })
   name: string; // Product name
 
@@ -28,6 +28,6 @@ export class Currency extends BaseModel {
   ];
 }
 
-export default getModelForClass(Currency, {
+export default getModelForClass(Product, {
   schemaOptions: { timestamps: true },
 });
