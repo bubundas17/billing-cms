@@ -31,10 +31,14 @@ export const getEditCurrency = async (req: Request, res: Response) => {
 };
 
 export const postAddCurrency = async (req: Request, res: Response) => {
-  await CurrencyApi.createCurrency({
-    ...req.body,
-    default: req.body.default === 'on',
-  });
+  const defaultCurrency = await CurrencyApi.getDefaultCurrency();
+
+  const bodyObj = { ...req.body };
+  if (!defaultCurrency) {
+    bodyObj.default = true;
+  }
+
+  await CurrencyApi.createCurrency(bodyObj);
   res.redirect('/admin/settings/currencies');
 };
 
@@ -45,7 +49,6 @@ export const postEditCurrency = async (req: Request, res: Response) => {
 
   await CurrencyApi.updateCurrency(id, {
     ...req.body,
-    default: req.body.default === 'on',
   });
 
   res.redirect('/admin/settings/currencies');
@@ -58,6 +61,35 @@ export const postDeleteCurrency = async (req: Request, res: Response) => {
     return res.redirect('/admin/settings/currencies');
 
   await CurrencyApi.deleteCurrency(currencyId);
+
+  res.redirect('/admin/settings/currencies');
+};
+
+export const postUpdateDefaultCurrency = async (
+  req: Request,
+  res: Response,
+) => {
+  const currencyId = req.body.currencyId;
+
+  if (!isValidObjectId(currencyId))
+    return res.redirect('/admin/settings/currencies');
+
+  let currencies = await CurrencyApi.getAllCurrencies();
+  currencies = currencies.filter((currency) => currency._id !== currencyId);
+
+  currencies.forEach(async (currency) => {
+    await CurrencyApi.updateCurrency(
+      currency._id,
+      { default: false },
+      { runValidators: false },
+    );
+  });
+
+  await CurrencyApi.updateCurrency(
+    currencyId,
+    { default: true },
+    { runValidators: false },
+  );
 
   res.redirect('/admin/settings/currencies');
 };
