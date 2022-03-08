@@ -54,15 +54,12 @@ class App {
     this.app.use(cookieParser());
     this.app.use(
       session({
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
         secret: env.SESSION_SECRET,
         store: new MongoStore({
           mongoUrl: env.MONGO_URI,
         }),
-        cookie: {
-          maxAge: 60000,
-        },
       }),
     );
 
