@@ -6,6 +6,7 @@ import {
   postAddCurrency,
   postDeleteCurrency,
   postEditCurrency,
+  postUpdateDefaultCurrency,
 } from '@controllers/admin/currency.controller';
 
 class CurrencyRoute extends BaseRoute {
@@ -22,6 +23,8 @@ class CurrencyRoute extends BaseRoute {
     this.router.route('/edit/:id').get(getEditCurrency).post(postEditCurrency);
 
     this.router.post('/delete', postDeleteCurrency);
+
+    this.router.post('/update-default-currency', postUpdateDefaultCurrency);
   }
 }
 

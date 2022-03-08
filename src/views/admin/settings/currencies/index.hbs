@@ -18,6 +18,7 @@
               <th scope='col'>Name</th>
               <th scope='col'>Ratio</th>
               <th scope='col'>Actions</th>
+              <th scope='col'>Default</th>
             </tr>
 
           </thead>
@@ -35,18 +36,49 @@
                   >
                     Edit
                   </a>
-                  <form
-                    action='/admin/settings/currencies/delete'
-                    method='post'
-                    class='d-inline'
-                  >
-                    <input
-                      type='hidden'
-                      name='currencyId'
-                      value='{{this._id}}'
-                    />
-                    <button class='btn btn-danger btn-small'>Delete</button>
-                  </form>
+                  {{#if this.default}}
+                    <button disabled class='btn btn-danger btn-small'>
+                      Delete
+                    </button>
+                  {{else}}
+                    <form
+                      action='/admin/settings/currencies/delete'
+                      method='post'
+                      class='d-inline'
+                    >
+                      <input
+                        type='hidden'
+                        name='currencyId'
+                        value='{{this._id}}'
+                      />
+                      <button
+                        type='submit'
+                        class='btn btn-danger btn-small'
+                      >Delete</button>
+                    </form>
+                  {{/if}}
+                </td>
+                <td>
+                  {{#if this.default}}
+                    <button class='btn btn-secondary' disabled>
+                      Default currency
+                    </button>
+                  {{else}}
+                    <form
+                      action='/admin/settings/currencies/update-default-currency'
+                      method='post'
+                    >
+                      <input
+                        type='hidden'
+                        name='currencyId'
+                        value='{{this._id}}'
+                      />
+                      <button
+                        class='btn btn-outline-secondary'
+                        type='submit'
+                      >Set as default</button>
+                    </form>
+                  {{/if}}
                 </td>
               </tr>
             {{/each}}

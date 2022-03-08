@@ -1,3 +1,5 @@
+import { QueryOptions } from 'mongoose';
+
 import CurrencyModel, { Currency } from '../../models/currency.model';
 
 class CurrencyApi {
@@ -9,6 +11,10 @@ class CurrencyApi {
     return await CurrencyModel.findById(id).lean();
   }
 
+  static async getDefaultCurrency(): Promise<Currency> {
+    return await CurrencyModel.findOne({ default: true }).lean();
+  }
+
   static async createCurrency(currency: Currency): Promise<Currency> {
     const newCurrency = new CurrencyModel(currency);
     return await newCurrency.save();
@@ -16,10 +22,12 @@ class CurrencyApi {
 
   static async updateCurrency(
     id: string,
-    currency: Currency,
+    currency: Partial<Currency>,
+    options: QueryOptions = {},
   ): Promise<Currency> {
     return await CurrencyModel.findByIdAndUpdate(id, currency, {
       new: true,
+      ...options,
     }).lean();
   }
 
