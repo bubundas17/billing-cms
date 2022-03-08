@@ -4,25 +4,28 @@ import BaseModel from '@models/base.model';
 
 export class Currency extends BaseModel {
   @prop({ required: true })
-  name: string; // Currency name (e.g. USD, EUR, GBP, etc.)
+  name: string; // Product name
 
-  @prop({ required: true, index: true })
-  code: string; // ISO 4217 Currency code (e.g. USD, EUR, GBP, etc.)
-
-  @prop({ required: true, index: true })
-  symbol: string;
+  @prop({ required: true })
+  slug: string; // Product slug, Used for permalink
 
   @prop()
-  prefix: string;
+  description: string; // Product description
 
-  @prop()
-  suffix: string;
-
-  @prop({ required: true, default: false })
-  default: boolean; // default currency
+  // @prop({ required: true, enum: ['product', 'service'] })
+  // productType: string;
 
   @prop({ required: true, default: false })
-  rate: number; // Conversion rate to default currency
+  hidden: boolean; // Is Hidden Product?
+
+  @prop({ required: true })
+  prices: [
+    {
+      duration: number; // Duration in days, 0 for one time
+      price: number; // Price in base currency
+      label: string; // Label for price
+    },
+  ];
 }
 
 export default getModelForClass(Currency, {
