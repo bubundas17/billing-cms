@@ -15,6 +15,10 @@ class CurrencyApi {
     return await CurrencyModel.findOne({ default: true }).lean();
   }
 
+  static async getCurrency(options: object = {}): Promise<Currency> {
+    return await CurrencyModel.findOne(options).lean();
+  }
+
   static async createCurrency(currency: Currency): Promise<Currency> {
     const newCurrency = new CurrencyModel(currency);
     return await newCurrency.save();

@@ -38,6 +38,18 @@ export const postAddCurrency = async (req: Request, res: Response) => {
     bodyObj.default = true;
   }
 
+  const isCurrencyExists = await CurrencyApi.getCurrency({
+    code: bodyObj.code,
+  });
+
+  if (isCurrencyExists) {
+    req.flash('error', 'Currency already exists');
+    return res.render('admin/settings/currencies/add-edit', {
+      currency: bodyObj,
+      _errors: req.flash('error'),
+    });
+  }
+
   await CurrencyApi.createCurrency(bodyObj);
   res.redirect('/admin/settings/currencies');
 };

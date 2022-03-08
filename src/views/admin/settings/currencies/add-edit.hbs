@@ -10,6 +10,8 @@
       </h3>
     </div>
 
+    {{> flash-message }}
+
     <form  
     {{#if edit}}
       action='/admin/settings/currencies/edit/{{currency._id}}'
@@ -26,9 +28,7 @@
               class='form-control client-search-form__input'
               placeholder='Name'
               name='name'
-              {{#if edit}}
-                value='{{currency.name}}'
-              {{/if}}
+              value='{{currency.name}}'
             />
           </label>
         </div>
@@ -41,9 +41,7 @@
               class='form-control client-search-form__input'
               placeholder='Code'
               name='code'
-              {{#if edit}}
-                value='{{currency.code}}'
-              {{/if}}
+              value='{{currency.code}}'
             />
           </label>
         </div>
@@ -56,9 +54,7 @@
               class='form-control client-search-form__input'
               placeholder='Symbol'
               name='symbol'
-              {{#if edit}}
-                value='{{currency.symbol}}'
-              {{/if}}
+              value='{{currency.symbol}}'
             />
           </label>
         </div>
@@ -71,9 +67,7 @@
               class='form-control client-search-form__input'
               placeholder='Prefix'
               name='prefix'
-              {{#if edit}}
-                value='{{currency.prefix}}'
-              {{/if}}
+              value='{{currency.prefix}}'
             />
           </label>
         </div>
@@ -86,9 +80,7 @@
               class='form-control client-search-form__input'
               placeholder='Suffix'
               name='suffix'
-               {{#if edit}}
-                value='{{currency.suffix}}'
-              {{/if}}
+              value='{{currency.suffix}}'
             />
           </label>
         </div>
@@ -101,9 +93,7 @@
               class='form-control client-search-form__input'
               placeholder='Conversion rate'
               name='rate'
-              {{#if edit}}
-                value='{{currency.rate}}'
-              {{/if}}
+              value='{{currency.rate}}'
             />
           </label>
         </div>

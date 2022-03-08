@@ -1,9 +1,17 @@
-import { prop } from '@typegoose/typegoose';
-import { IsString, Matches, IsBoolean, IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsString,
+  Matches,
+  IsBoolean,
+  IsArray,
+  IsNumber,
+  ValidateNested,
+} from 'class-validator';
 
-type Price = {
+class Price {
+  @IsNumber()
   duration: number;
-};
+}
 
 class ProductDto {
   @IsString()
@@ -20,7 +28,8 @@ class ProductDto {
   hidden: boolean;
 
   @IsArray()
-  @prop({ type: [Price] })
+  @ValidateNested({ each: true })
+  @Type(() => Price)
   prices: Price[];
 }
 
