@@ -2,6 +2,17 @@ import { getModelForClass, prop } from '@typegoose/typegoose';
 
 import BaseModel from '@models/base.model';
 
+class Price {
+  @prop()
+  duration: number;
+
+  @prop()
+  price: number;
+
+  @prop()
+  label: string;
+}
+
 export class Product extends BaseModel {
   @prop({ required: true })
   name: string; // Product name
@@ -18,14 +29,8 @@ export class Product extends BaseModel {
   @prop({ required: true, default: false })
   hidden: boolean; // Is Hidden Product?
 
-  @prop({ required: true })
-  prices: [
-    {
-      duration: number; // Duration in days, 0 for one time
-      price: number; // Price in base currency
-      label: string; // Label for price
-    },
-  ];
+  @prop({ required: true, type: [Price] })
+  prices: Price[];
 }
 
 export default getModelForClass(Product, {

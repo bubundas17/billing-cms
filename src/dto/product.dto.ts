@@ -11,8 +11,10 @@ import {
 class Price {
   @IsNumber()
   duration: number;
+
   @IsNumber()
   price: number;
+
   @IsString()
   label: string;
 }
