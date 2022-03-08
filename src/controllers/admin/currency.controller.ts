@@ -86,22 +86,7 @@ export const postUpdateDefaultCurrency = async (
   if (!isValidObjectId(currencyId))
     return res.redirect('/admin/settings/currencies');
 
-  let currencies = await CurrencyApi.getAllCurrencies();
-  currencies = currencies.filter((currency) => currency._id !== currencyId);
-
-  currencies.forEach(async (currency) => {
-    await CurrencyApi.updateCurrency(
-      currency._id,
-      { default: false },
-      { runValidators: false },
-    );
-  });
-
-  await CurrencyApi.updateCurrency(
-    currencyId,
-    { default: true },
-    { runValidators: false },
-  );
+  await CurrencyApi.setDefaultCurrency(currencyId);
 
   res.redirect('/admin/settings/currencies');
 };

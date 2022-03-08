@@ -7,6 +7,14 @@ class CurrencyApi {
     return await CurrencyModel.find({}).lean();
   }
 
+  static async setDefaultCurrency(id: string): Promise<Currency> {
+    await CurrencyModel.updateMany({ default: true }, { default: false });
+    return await CurrencyModel.findOneAndUpdate(
+      { _id: id },
+      { default: true },
+    ).lean();
+  }
+
   static async getCurrencyById(id: string): Promise<Currency> {
     return await CurrencyModel.findById(id).lean();
   }

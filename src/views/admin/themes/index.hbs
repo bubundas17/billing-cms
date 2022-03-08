@@ -1,15 +1,17 @@
-<h1>All Themes</h1>
-{{#each themes}}
-<div class='mt-3 plugin card'>
-  <h2>{{name}}</h2>
-  <p>{{description}}</p>
-  <p>By {{author}}</p>
-  <p>{{#if active}}Enabled{{else}}Disabled{{/if}}</p>
-  <p>{{#if active}}
-    <a href='/admin/themes/{{path}}/remove'>Remove</a>
-    {{else}}
-    <a href='/admin/themes/{{path}}/enable'>Enable</a>
-    {{/if}}
-  </p>
+<div class='mx-2 my-3'>
+  <h1>All Themes</h1>
+  {{#each themes}}
+    <div class='mt-3 plugin card'>
+      <h2>{{name}}</h2>
+      <p>{{description}}</p>
+      <p>By {{author}}</p>
+      <p>{{#if active}}Enabled{{else}}Disabled{{/if}}</p>
+      <p>{{#if active}}
+          <a href='/admin/themes/{{path}}/remove'>Remove</a>
+        {{else}}
+          <a href='/admin/themes/{{path}}/enable'>Enable</a>
+        {{/if}}
+      </p>
+    </div>
+  {{/each}}
 </div>
-{{/each}}
