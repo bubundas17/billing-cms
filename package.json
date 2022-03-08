@@ -39,6 +39,7 @@
     "@services": "./src/services",
     "@core": "./src/core",
     "@dto": "./src/dto",
+    "@middlewares": "./src/middlewares",
     "@decorators": "./src/decorators",
     "@exceptions": "./src/exceptions"
   },

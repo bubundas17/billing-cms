@@ -34,7 +34,9 @@
       "@core/*": ["./src/core/*"],
       "@dto/*": ["./src/dto/*"],
       "@decorators/*": ["./src/decorators/*"],
-      "@exceptions/*": ["./src/exceptions/*"]
+      "@exceptions/*": ["./src/exceptions/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+
     }
   },
   "exclude": [

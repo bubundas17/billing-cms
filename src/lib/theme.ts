@@ -38,7 +38,8 @@ class Theme {
     this.fsCache = {};
   }
 
-  private async getPartials() {
+  private async getPartials(context = {}) {
+    // console.log('ioljh ;oihkljhlkhlkj', context);
     try {
       const theme = await this.getCurrentTheme();
 
@@ -49,10 +50,10 @@ class Theme {
 
       const partials = await dirs.reduce(async (prev, current) => {
         const fileData = await util.readFile(theme.partialsFolderPath, current);
-        const template = this.compileTemplate(fileData);
+        const template = this.compileTemplate(fileData, context);
         const _prev = await prev;
         _prev[util.getFileName(current, '.hbs')] =
-          this.renderTemplate(template);
+          this.renderTemplate(template, { ...context }) || '';
         return prev;
       }, Promise.resolve<{ [key: string]: unknown }>({}));
 
@@ -106,7 +107,7 @@ class Theme {
       if (!isEmpty(ext) && ext !== '.hbs')
         throw new Error('Invalid file extension, only .hbs is allowed');
 
-      const partials = (await this.getPartials()) as {
+      const partials = (await this.getPartials(context)) as {
         [key: string]: HandlebarsTemplateDelegate;
       };
 
@@ -117,7 +118,7 @@ class Theme {
         options,
       )) as HandlebarsTemplateDelegate;
 
-      console.log('template', template);
+      // console.log('template', template);
 
       const layoutTemplate = (await this.getTemplate(
         'layouts/main.hbs',
