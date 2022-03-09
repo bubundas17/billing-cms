@@ -4,7 +4,7 @@ import { hash, compare } from 'bcrypt';
 
 import UserRole from '@enums/user-role.enum';
 import BaseModel from '@models/base.model';
-import HttpException from '@exceptions/HttpException';
+import AppError from '@exceptions/AppError';
 
 @pre<User>('save', async function (next) {
   try {
@@ -12,7 +12,7 @@ import HttpException from '@exceptions/HttpException';
     this.password = await hash(this.password, 12);
     next();
   } catch (err) {
-    const error = err as HttpException;
+    const error = err as AppError;
     next(error);
   }
 })
@@ -50,7 +50,7 @@ export class User extends BaseModel {
     try {
       return await compare(password, this.password);
     } catch (err) {
-      const error = err as HttpException;
+      const error = err as AppError;
       throw new createError.InternalServerError(error.message);
     }
   }

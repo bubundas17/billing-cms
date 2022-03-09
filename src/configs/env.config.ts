@@ -3,7 +3,7 @@ import { cleanEnv, str, port, url, bool } from 'envalid';
 const env = cleanEnv(process.env, {
   NODE_ENV: str(),
   PORT: port(),
-  MONGO_URI: url(),
+  DATABASE_URI: url(),
   SESSION_SECRET: str(),
   JWT_SECRET: str(),
   SMTP_HOST: str(),

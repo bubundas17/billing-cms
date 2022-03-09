@@ -17,7 +17,7 @@ export default function (passport: PassportStatic) {
         try {
           const user = await UserModel.findOne({
             $or: [{ email }, { username: email }],
-          });
+          }).lean();
           if (!user) return done(null, false, { message: e });
 
           const isValidPassword = await user.isValidPassword(password);
@@ -35,7 +35,7 @@ export default function (passport: PassportStatic) {
 
   passport.deserializeUser(async (id: ObjectId, done) => {
     try {
-      const user = await UserModel.findById(id);
+      const user = await UserModel.findById(id).lean();
 
       if (!user) return done(null, false);
       done(null, user);

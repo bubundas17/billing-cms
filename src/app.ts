@@ -42,7 +42,7 @@ class App {
   private async initialize() {
     await this.connectToDB();
     this.listen();
-    this.initializeEmailSender();
+    await this.initializeEmailSender();
     this.setViewEngine();
     await this.initializeMiddlewares();
   }
@@ -58,7 +58,7 @@ class App {
         saveUninitialized: false,
         secret: env.SESSION_SECRET,
         store: new MongoStore({
-          mongoUrl: env.MONGO_URI,
+          mongoUrl: env.DATABASE_URI,
         }),
       }),
     );
@@ -95,13 +95,13 @@ class App {
   }
 
   private async connectToDB() {
-    await connect(env.MONGO_URI);
+    await connect(env.DATABASE_URI);
     console.log('Connected to Database');
   }
 
-  private initializeEmailSender() {
+  private async initializeEmailSender() {
     emailSender.init();
-    emailDriver.init({
+    await emailDriver.init({
       host: env.SMTP_HOST,
       port: env.SMTP_PORT,
       secure: env.SMTP_SECURE,

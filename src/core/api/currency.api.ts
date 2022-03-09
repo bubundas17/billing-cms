@@ -1,6 +1,6 @@
 import { QueryOptions } from 'mongoose';
 
-import CurrencyModel, { Currency } from '../../models/currency.model';
+import CurrencyModel, { Currency } from '@models/currency.model';
 
 class CurrencyApi {
   static async getAllCurrencies(): Promise<Currency[]> {

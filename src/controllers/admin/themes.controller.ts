@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { setOption } from '@lib/options';
 import theme from '@lib/theme';
-import HttpException from '@exceptions/HttpException';
+import AppError from '@exceptions/AppError';
 
 // Get All Themes
 export const getIndex = async (_req: Request, res: Response) => {
@@ -20,7 +20,7 @@ export const getEnableTheme = async (req: Request, res: Response) => {
     await setOption('is-active-theme', themeName);
     res.redirect('/admin/themes');
   } catch (err) {
-    const error = err as HttpException;
+    const error = err as AppError;
     res.status(500).json({
       status: 'error',
       message: 'There was an error enabling the theme',
@@ -37,7 +37,7 @@ export const getDeleteTheme = async (req: Request, res: Response) => {
     await theme.removeTheme(themeName);
     res.redirect('/admin/themes');
   } catch (err) {
-    const error = err as HttpException;
+    const error = err as AppError;
     res.status(500).json({
       status: 'error',
       message: 'There was an error deleting the theme',

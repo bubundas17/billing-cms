@@ -1,4 +1,5 @@
-import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
+
 import CurrencyApi from '@core/api/currency.api';
 
 // TODO: Impliment Get Currency From IP address
@@ -6,9 +7,9 @@ import CurrencyApi from '@core/api/currency.api';
 // TODO: Impliment Get Currency From User Session
 
 export const CurrencySelector = (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction,
+  req: Request,
+  res: Response,
+  next: NextFunction,
 ) => {
   req.getCurrency = async () => {
     const currency = await CurrencyApi.getDefaultCurrency();

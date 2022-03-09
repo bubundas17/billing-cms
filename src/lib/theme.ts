@@ -39,7 +39,6 @@ class Theme {
   }
 
   private async getPartials(context = {}) {
-    // console.log('ioljh ;oihkljhlkhlkj', context);
     try {
       const theme = await this.getCurrentTheme();
 
@@ -97,8 +96,6 @@ class Theme {
   }
 
   async render(filePath: string, context = {}, options = {}) {
-    console.log(filePath);
-
     try {
       if (isEmpty(filePath)) throw new Error('File path must not be empty');
 
@@ -111,21 +108,15 @@ class Theme {
         [key: string]: HandlebarsTemplateDelegate;
       };
 
-      console.log('partials', partials);
-
       const template = (await this.getTemplate(
         filePath,
         options,
       )) as HandlebarsTemplateDelegate;
 
-      // console.log('template', template);
-
       const layoutTemplate = (await this.getTemplate(
         'layouts/main.hbs',
         options,
       )) as HandlebarsTemplateDelegate;
-
-      console.log('layoutTemplate', layoutTemplate);
 
       let html = this.renderTemplate(
         template,
@@ -133,15 +124,11 @@ class Theme {
         { ...options, partials },
       );
 
-      console.log('HTML #1', html);
-
       html = this.renderTemplate(
         layoutTemplate,
         { ...context, body: html },
         { partials },
       );
-
-      console.log('HTML #2', html);
 
       return html;
     } catch (error) {
@@ -269,20 +256,20 @@ class Theme {
 
   async registerThemeEngine(app: Express) {
     app.use(async (_req, res, next) => {
-      const currentTheme = await theme.getCurrentTheme();
+      const currentTheme = await this.getCurrentTheme();
 
       res.load = async (file, options = {}) => {
-        const doc = await theme.render(file, { ...options, ...res.locals });
+        const doc = await this.render(file, { ...options, ...res.locals });
         return res.send(doc);
       };
 
-      res.locals.currentThemeDir = await theme.getCurrentThemePath();
+      res.locals.currentThemeDir = await this.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
 
       next();
     });
 
-    const currentTheme = await theme.getCurrentTheme();
+    const currentTheme = await this.getCurrentTheme();
 
     app.use('/public', express.static(currentTheme.publicFolderPath));
   }
