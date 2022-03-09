@@ -3,10 +3,10 @@ import { getModelForClass, prop } from '@typegoose/typegoose';
 import BaseModel from '@models/base.model';
 
 export class Currency extends BaseModel {
-  @prop({ required: true })
+  @prop({ required: true, unique: true })
   name: string; // Currency name (e.g. USD, EUR, GBP, etc.)
 
-  @prop({ required: true, index: true })
+  @prop({ required: true, index: true, unique: true, uppercase: true })
   code: string; // ISO 4217 Currency code (e.g. USD, EUR, GBP, etc.)
 
   @prop({ required: true, index: true })

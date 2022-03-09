@@ -12,7 +12,7 @@ export const getCurrencies = async (_req: Request, res: Response) => {
 };
 
 export const getAddCurrency = async (_req: Request, res: Response) => {
-  res.render('admin/settings/currencies/add-edit', {});
+  res.render('admin/settings/currencies/add-edit');
 };
 
 export const getEditCurrency = async (req: Request, res: Response) => {
@@ -39,14 +39,16 @@ export const postAddCurrency = async (req: Request, res: Response) => {
   }
 
   const isCurrencyExists = await CurrencyApi.getCurrency({
-    code: bodyObj.code,
+    $or: [{ name: bodyObj.name }, { code: bodyObj.code }],
   });
 
   if (isCurrencyExists) {
     req.flash('error', 'Currency already exists');
+    req.flash('info', 'Change currency name or code');
     return res.render('admin/settings/currencies/add-edit', {
       currency: bodyObj,
       _errors: req.flash('error'),
+      _info: req.flash('info'),
     });
   }
 
@@ -59,9 +61,29 @@ export const postEditCurrency = async (req: Request, res: Response) => {
 
   if (!isValidObjectId(id)) return res.redirect('/admin/settings/currencies');
 
-  await CurrencyApi.updateCurrency(id, {
-    ...req.body,
-  });
+  const currency = await CurrencyApi.getCurrencyById(id);
+
+  if (
+    currency.code !== String(req.body.code).toUpperCase() ||
+    String(currency.name).toLowerCase() !== String(req.body.name).toLowerCase()
+  ) {
+    const currencyExists = await CurrencyApi.getCurrency({
+      $or: [{ name: req.body.name }, { code: req.body.code }],
+    });
+
+    if (currencyExists) {
+      req.flash('error', 'Currency already exists');
+      req.flash('info', 'Change currency name or code');
+      return res.render('admin/settings/currencies/add-edit', {
+        edit: true,
+        currency: req.body,
+        _errors: req.flash('error'),
+        _info: req.flash('info'),
+      });
+    }
+  }
+
+  await CurrencyApi.updateCurrency(id, req.body);
 
   res.redirect('/admin/settings/currencies');
 };
@@ -71,6 +93,15 @@ export const postDeleteCurrency = async (req: Request, res: Response) => {
 
   if (!isValidObjectId(currencyId))
     return res.redirect('/admin/settings/currencies');
+
+  const defaultCurrency = await CurrencyApi.getDefaultCurrency();
+
+  if (defaultCurrency._id.toString() === currencyId) {
+    req.flash('error', 'Cannot delete default currency');
+    console.log('FLASH', req.flash('error'));
+
+    return res.redirect('/admin/settings/currencies');
+  }
 
   await CurrencyApi.deleteCurrency(currencyId);
 

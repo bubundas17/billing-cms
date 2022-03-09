@@ -1,4 +1,5 @@
-import { QueryOptions } from 'mongoose';
+import { QueryOptions, FilterQuery } from 'mongoose';
+import { BeAnObject, DocumentType } from '@typegoose/typegoose/lib/types';
 
 import CurrencyModel, { Currency } from '@models/currency.model';
 
@@ -23,7 +24,9 @@ class CurrencyApi {
     return await CurrencyModel.findOne({ default: true }).lean();
   }
 
-  static async getCurrency(options: object = {}): Promise<Currency> {
+  static async getCurrency(
+    options: FilterQuery<DocumentType<Currency, BeAnObject>> = {},
+  ): Promise<Currency> {
     return await CurrencyModel.findOne(options).lean();
   }
 
