@@ -1,6 +1,5 @@
 import * as express from 'express';
 import CurrencyApi from '@core/api/currency.api';
-import { Currency } from '@models/currency.model';
 
 // TODO: Impliment Get Currency From IP address
 // TODO: Impliment Get Currency From User Preferences
@@ -12,13 +11,7 @@ export const CurrencySelector = (
   next: express.NextFunction,
 ) => {
   req.getCurrency = async () => {
-    const currencies = await CurrencyApi.getAllCurrencies();
-    let currency = currencies.find(
-      (currency: Currency) => currency.default === true,
-    );
-    if (!currency) {
-      currency = currencies[0];
-    }
+    const currency = await CurrencyApi.getDefaultCurrency();
     res.locals.currency = currency;
     return currency;
   };
