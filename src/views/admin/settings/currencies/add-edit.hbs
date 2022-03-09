@@ -1,11 +1,10 @@
 <div class='mx-2 my-3'>
-
-
   {{> flash-message }}
+
   <div class="container-fluid">
     <div class="card card-info">
       <div class="card-info__header">
-        <div class='card-info__header-name h-2.5'>
+        <div class='card-info__header-name h-2.5 d-flex align-items-center'>
           <span class='ms-2 card-info__header-name'>
             {{#if edit}}
             Update Currency: {{ currency.name }}
@@ -16,8 +15,13 @@
         </div>
       </div>
       <div class="card-info__content">
-        <form {{#if edit}} action='/admin/settings/currencies/edit/{{currency._id}}' {{else}}
-          action='/admin/settings/currencies/new' {{/if}} method='post'>
+        <form 
+          {{#if edit}}
+            action='/admin/settings/currencies/edit/{{currency._id}}'
+          {{else}}
+            action='/admin/settings/currencies/new'
+          {{/if}}
+          method='post'>
           <div class='rounded client-details'>
             <div class='mt-2 row row-cols-1 row-cols-md-2 g-2 m-0'>
               <div class='px-4 py-2'>
@@ -28,22 +32,11 @@
                     Name
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' name="name" class='form-control custom-base-text custom-base-text-lilac_blue'
+                    <input type='text' name="name" class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "name"}}'
                       id='name' style='width: 100%;' value='{{currency.name}}' />
+                    {{errorMessage errors 'name'}}
                   </div>
                 </div>
-
-                {{! <div class='mb-3 row'>
-                  <label for='inputPassword'
-                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-                    style='width: 8.5rem;'>
-                    Last Name
-                  </label>
-                  <div class='col-12 col-md-8'>
-                    <input type='password' class='form-control custom-base-text custom-base-text-lilac_blue'
-                      id='inputPassword' style='width: 100%;' />
-                  </div>
-                </div> }}
 
                 <div class='mb-3 row mr-0 pr-0'>
                   <label for='code' name="code"
@@ -52,8 +45,9 @@
                     Code
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' name="code" id='code'
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue  {{errorInput errors "code"}}' name="code" id='code'
                       style='width: 100%;' value='{{currency.code}}' />
+                    {{errorMessage errors 'code'}}
                   </div>
                 </div>
 
@@ -64,35 +58,23 @@
                     Symbol
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='email'
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "symbol"}}' id='symbol' name="symbol"
                       style='width: 100%;' value='{{currency.symbol}}' />
+                    {{errorMessage errors 'symbol'}}
                   </div>
                 </div>
-
-
-                {{! <div class='mb-3 row'>
-                  <label for='inputPassword'
-                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-                    style='width: 8.5rem;'>
-                    Language
-                  </label>
-                  <div class='col-12 col-md-8'>
-                    <select class='form-select custom-base-text custom-base-text-lilac_blue' style='width: 100%;'>
-                      <option value='english'>English</option>
-                    </select>
-                  </div>
-                </div> }}
               </div>
               <div class='px-4 py-2'>
                 <div class='mb-3 row'>
                   <label for='prefix' name="prefix"
-                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue {{errorInput errors "prefix"}}'
                     style='width: 8.5rem;'>
                     Prefix
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='prefix'
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='prefix' name="prefix"
                       style='width: 100%;' value='{{currency.prefix}}' />
+                    {{errorMessage errors 'prefix'}}
                   </div>
                 </div>
 
@@ -103,8 +85,8 @@
                     Suffix
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='suffix'
-                      placeholder='Suffix' style='width: 100%;' value="{{currency.suffix}}" />
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "suffix"}}' id='suffix'  name="suffix" style='width: 100%;' value="{{currency.suffix}}"  />
+                    {{errorMessage errors 'suffix'}}
                   </div>
                 </div>
 
@@ -115,94 +97,31 @@
                     Exchnage Rate
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' name="rate"
-                      value="{{currency.rate}}" placeholder='0.123' id='rate' style='width: 100%;' />
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "rate"}}' name="rate"
+                      value="{{currency.rate}}" id='rate' style='width: 100%;' />
+                      {{errorMessage errors 'rate'}}
                   </div>
                 </div>
-
               </div>
             </div>
 
 
             <div class='row row-cols-1 g-2 m-0'>
               <div class='px-4 pb-4 text-center'>
-                <button type='submit' class='col-auto btn btn--bright_navy_blue'>
-                  <i class='fas fa-save'></i>
-                  <span class='ms-2'>Save Info</span>
-                </button>
+                  <button type='submit' class='col-auto btn btn--bright_navy_blue'>
+                    {{#if edit}}
+                      <i class='fas fa-save'></i>
+                      <span class='ms-2'>Update Info</span>
+                    {{else}}
+                      <i class='fas fa-save'></i>
+                      <span class='ms-2'>Save Info</span>
+                    {{/if}}
+                  </button> 
               </div>
             </div>
           </div>
-          {{!-- <div class='form-group row'>
-            <label class='col-sm-2 col-form-label' for="name">
-              Name
-            </label>
-            <div class="col-sm-10">
-              <input type='text' class='form-control-plaintext' placeholder='US Doller' name='name' id="name"
-                value='{{currency.name}}' />
-            </div>
-
-            <div class='col'>
-              <label class='client-search-form__label'>
-                <i class='fa-solid fa-coins client-search-form__icon'></i>
-                <input type='text' class='form-control client-search-form__input' placeholder='Code' name='code'
-                  value='{{currency.code}}' />
-              </label>
-            </div>
-
-            <div class='col'>
-              <label class='client-search-form__label'>
-                <i class='fa-solid fa-at client-search-form__icon'></i>
-                <input type='text' class='form-control client-search-form__input' placeholder='Symbol' name='symbol'
-                  value='{{currency.symbol}}' />
-              </label>
-            </div>
-
-            <div class='col'>
-              <label class='client-search-form__label'>
-                <i class='fa-solid fa-florin-sign client-search-form__icon'></i>
-                <input type='text' class='form-control client-search-form__input' placeholder='Prefix' name='prefix'
-                  value='{{currency.prefix}}' />
-              </label>
-            </div>
-
-            <div class='col'>
-              <label class='client-search-form__label'>
-                <i class='fa-solid fa-florin-sign client-search-form__icon'></i>
-                <input type='text' class='form-control client-search-form__input' placeholder='Suffix' name='suffix'
-                  value='{{currency.suffix}}' />
-              </label>
-            </div>
-
-            <div class='col'>
-              <label class='client-search-form__label'>
-                <i class='fa-solid fa-percent client-search-form__icon'></i>
-                <input type='number' class='form-control client-search-form__input' placeholder='Conversion rate'
-                  name='rate' value='{{currency.rate}}' />
-              </label>
-            </div>
-
-            <div class='col'>
-              <button type='submit' class='btn client-search-form__submit-btn'>
-                {{#if edit}}
-                <i class="fa-solid fa-floppy-disk  client-search-form__submit-btn-icon"></i>
-                {{else}}
-                <i class='fa-solid fa-plus client-search-form__submit-btn-icon'></i>
-                {{/if}}
-                <span class='client-search-form__submit-btn-text'>
-                  {{#if edit}}
-                  Update currency
-                  {{else}}
-                  Add currency
-                  {{/if}}
-                </span>
-              </button>
-            </div>
-          </div> --}}
         </form>
       </div>
-
     </div>
   </div>
-
 </div>

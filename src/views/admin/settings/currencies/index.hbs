@@ -1,90 +1,90 @@
-  <div class='mx-2 my-3'>
-    <div class='hstack gap-3 mb-3'>
-      <h3 class='main-content__title inline-block'>Currencies</h3>
-      <a
-        class='ms-auto btn btn-large btn-primary'
-        href='/admin/settings/currencies/new'
-      ><i class='fa-solid fa-plus'></i> <span class='ms-2'>Add New</span> </a>
-    </div>
+<div class='mx-2 my-3'>
+  <div class='hstack gap-3 mb-3'>
+    <h3 class='main-content__title inline-block'>Currencies</h3>
+    <a
+      class='ms-auto btn btn-large btn-primary'
+      href='/admin/settings/currencies/new'
+    >
+      <i class='fa-solid fa-plus'></i>
+      <span class='ms-2'>Add New</span>
+    </a>
+  </div>
 
-    {{> flash-message }}
+  {{> flash-message }}
 
-    <div>
-      <div class='table-responsive'>
-        <table class='table search-result-table'>
-          <thead>
+  <div>
+    <div class='table-responsive'>
+      <table class='table search-result-table'>
+        <thead>
+          <tr>
+            <th scope='col'>Code</th>
+            <th scope='col'>Name</th>
+            <th scope='col'>Ratio</th>
+            <th scope='col'>Actions</th>
+            <th scope='col'>Default</th>
+          </tr>
+        </thead>
 
+        <tbody>
+          {{#each currencies}}
             <tr>
-              <th scope='col'>Code</th>
-              <th scope='col'>Name</th>
-              <th scope='col'>Ratio</th>
-              <th scope='col'>Actions</th>
-              <th scope='col'>Default</th>
-            </tr>
-
-          </thead>
-          <tbody>
-            {{#each currencies}}
-              <tr>
-                <td>{{this.code}}</td>
-                <td>{{this.name}}</td>
-                <td>Otto</td>
-                <td>
-                  <a
-                    role='button'
-                    class='btn btn-primary btn-small'
-                    href='/admin/settings/currencies/edit/{{this._id}}'
+              <td>{{this.code}}</td>
+              <td>{{this.name}}</td>
+              <td>Otto</td>
+              <td>
+                <a
+                  role='button'
+                  class='btn btn-primary btn-small'
+                  href='/admin/settings/currencies/edit/{{this._id}}'
+                >
+                  Edit
+                </a>
+                {{#if this.default}}
+                  <button disabled class='btn btn-danger btn-small'>
+                    Delete
+                  </button>
+                {{else}}
+                  <form
+                    action='/admin/settings/currencies/delete'
+                    method='post'
+                    class='d-inline'
                   >
-                    Edit
-                  </a>
-                  {{#if this.default}}
-                    <button disabled class='btn btn-danger btn-small'>
-                      Delete
-                    </button>
-                  {{else}}
-                    <form
-                      action='/admin/settings/currencies/delete'
-                      method='post'
-                      class='d-inline'
-                    >
-                      <input
-                        type='hidden'
-                        name='currencyId'
-                        value='{{this._id}}'
-                      />
-                      <button
-                        type='submit'
-                        class='btn btn-danger btn-small'
-                      >Delete</button>
-                    </form>
-                  {{/if}}
-                </td>
-                <td>
-                  {{#if this.default}}
-                    <button class='btn btn-secondary' disabled>
-                      Default currency
-                    </button>
-                  {{else}}
-                    <form
-                      action='/admin/settings/currencies/update-default-currency'
-                      method='post'
-                    >
-                      <input
-                        type='hidden'
-                        name='currencyId'
-                        value='{{this._id}}'
-                      />
-                      <button
-                        class='btn btn-outline-secondary'
-                        type='submit'
-                      >Set as default</button>
-                    </form>
-                  {{/if}}
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
+                    <input
+                      type='hidden'
+                      name='currencyId'
+                      value='{{this._id}}'
+                    />
+                    <button
+                      type='submit'
+                      class='btn btn-danger btn-small'
+                    >Delete</button>
+                  </form>
+                {{/if}}
+              </td>
+              <td>
+                {{#if this.default}}
+                  <button class='btn btn-secondary' disabled>
+                    Default currency
+                  </button>
+                {{else}}
+                  <form
+                    action='/admin/settings/currencies/update-default-currency'
+                    method='post'
+                  >
+                    <input
+                      type='hidden'
+                      name='currencyId'
+                      value='{{this._id}}'
+                    />
+                    <button class='btn btn-outline-secondary' type='submit'>Set
+                      as default</button>
+                  </form>
+                {{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
