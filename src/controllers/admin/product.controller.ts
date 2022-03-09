@@ -4,16 +4,19 @@ import { validate } from 'class-validator';
 import mappedErrors from '@utils/mapped-errors';
 
 import ProductDto from '@dto/product.dto';
-import { Product } from '@models/products.model';
+import { Product } from '@models/product.model';
 
 import ProductApi from '@core/api/product.api';
 import { isValidObjectId } from 'mongoose';
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   const products = await ProductApi.getAllProducts();
+  // get product groups
+  const productGroups = await ProductApi.getAllProductGroups();
 
   res.render('admin/products/index', {
     products,
+    productGroups,
   });
 };
 
@@ -38,16 +41,13 @@ export const getEditProduct = async (req: Request, res: Response) => {
 
 export const postAddProduct = async (req: Request, res: Response) => {
   const product = plainToInstance(ProductDto, req.body);
-
   const errors = await validate(product);
-
   if (errors.length > 0) {
     return res.render('admin/products/add-edit', {
       errors: mappedErrors(errors),
       product,
     });
   }
-
   await ProductApi.createProduct(product as Product);
 
   res.redirect('/admin/products');

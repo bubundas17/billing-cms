@@ -6,6 +6,7 @@ import {
   IsArray,
   IsNumber,
   ValidateNested,
+  IsMongoId,
 } from 'class-validator';
 
 class Price {
@@ -37,6 +38,9 @@ class ProductDto {
   @ValidateNested({ each: true })
   @Type(() => Price)
   prices: Price[];
+
+  @IsMongoId()
+  group: string;
 }
 
 export default ProductDto;

@@ -1,4 +1,5 @@
-import { getModelForClass, prop } from '@typegoose/typegoose';
+import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
+import { ProductGroup } from './product-group.model';
 
 import BaseModel from '@models/base.model';
 
@@ -31,6 +32,9 @@ export class Product extends BaseModel {
 
   @prop({ required: true, type: [Price] })
   prices: Price[];
+
+  @prop({ required: true, ref: () => ProductGroup })
+  group: Ref<ProductGroup>;
 }
 
 export default getModelForClass(Product, {
