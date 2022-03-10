@@ -1,6 +1,5 @@
-import createError from 'http-errors';
 import { getModelForClass, pre, prop } from '@typegoose/typegoose';
-import { hash, compare } from 'bcrypt';
+import { hash } from 'bcrypt';
 
 import UserRole from '@enums/user-role.enum';
 import BaseModel from '@models/base.model';
@@ -45,15 +44,6 @@ export class User extends BaseModel {
     default: [UserRole.SELLS_OPERATOR],
   })
   roles: string[];
-
-  async isValidPassword(password: string): Promise<boolean | never> {
-    try {
-      return await compare(password, this.password);
-    } catch (err) {
-      const error = err as AppError;
-      throw new createError.InternalServerError(error.message);
-    }
-  }
 }
 
 export default getModelForClass(User, {
