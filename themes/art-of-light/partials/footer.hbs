@@ -1,12 +1,25 @@
 <footer class="px-4 footer">
-    <div>
-        <a href="#" class="footer__link">About</a>
-        <a href="#" class="footer__link">Documentation</a>
-        <a href="#" class="footer__link">Report a Bug</a>
-        <a href="#" class="footer__link">Contact Us</a>
+    <div class="container d-flex justify-content-between">
+        <div>
+            <a href="#" class="footer__link">About</a>
+            <a href="#" class="footer__link">Documentation</a>
+            <a href="#" class="footer__link">Report a Bug</a>
+            <a href="#" class="footer__link">Contact Us</a>
+            <div class="btn-group ms-2">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    {{currency.code}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">USD</a></li>
+                    <li><a class="dropdown-item" href="#">INR</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__des">
+            <span class="footer__highlight">DashBoard © 2021</span> | All Rights
+            Reserved
+        </div>
     </div>
-    <div class="footer__des">
-        <span class="footer__highlight">DashBoard © 2021</span> | All Rights
-        Reserved
-    </div>
+
 </footer>
