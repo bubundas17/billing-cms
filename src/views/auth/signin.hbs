@@ -11,7 +11,7 @@
       <label class='display-center__form-label'>
         <i class='fas fa-user display-center__form-icon'></i>
         <input type='text' class='form-control display-center__form-input {{errorInput errors "username"}}'
-          placeholder='Username or Email' name='username' value='{{userInput.username}}' required />
+          placeholder='Username or Email' name='username' value='{{userInput.username}}' />
       </label>
       <div id="userNameInputError" class="invalid-feedback d-none">
         Email address not valid or Username must be at least 3 characters long
@@ -21,7 +21,7 @@
       <label class='display-center__form-label'>
         <i class='fas fa-lock display-center__form-icon'></i>
         <input type='password' name='password' class='form-control display-center__form-input
-            {{errorInput errors "password"}}' placeholder='Password' value='{{userInput.password}}' required />
+            {{errorInput errors "password"}}' placeholder='Password' value='{{userInput.password}}' />
       </label>
       <div id="passwordInputError" class="invalid-feedback d-none">
         Password must be at least 6 characters long

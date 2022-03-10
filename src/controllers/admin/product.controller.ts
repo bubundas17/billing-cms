@@ -21,7 +21,7 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 };
 
 export const getAddProduct = async (_req: Request, res: Response) => {
-  res.render('admin/products/add-edit', {});
+  res.render('admin/products/add-edit');
 };
 
 export const getEditProduct = async (req: Request, res: Response) => {
@@ -48,7 +48,7 @@ export const postAddProduct = async (req: Request, res: Response) => {
       product,
     });
   }
-  await ProductApi.createProduct(product as Product);
+  await ProductApi.createProduct(product);
 
   res.redirect('/admin/products');
 };

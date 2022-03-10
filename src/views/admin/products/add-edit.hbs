@@ -1,0 +1,126 @@
+<div class='mx-2 my-3'>
+  {{> flash-message }}
+
+  <div class="container-fluid">
+    <div class="card card-info">
+      <div class="card-info__header">
+        <div class='card-info__header-name h-2.5 d-flex align-items-center'>
+          <span class='ms-2 card-info__header-name'>
+            {{#if edit}}
+            Update Product: {{ product.name }}
+            {{else}}
+            Add New Product
+            {{/if}}
+          </span>
+        </div>
+      </div>
+      <div class="card-info__content">
+        <form 
+          {{#if edit}}
+            action='/admin/settings/currencies/edit/{{product._id}}'
+          {{else}}
+            action='/admin/settings/currencies/new'
+          {{/if}}
+          method='post'>
+          <div class='rounded client-details'>
+            <div class='mt-2 row row-cols-1 row-cols-md-2 g-2 m-0'>
+              <div class='px-4 py-2'>
+                <div class='mb-3 row'>
+                  <label for='name'
+                    class='custom-base-text custom-base-text-lilac_blue col-auto col-form-label text-nowrap'
+                    style='width: 8.5rem;'>
+                    Name
+                  </label>
+                  <div class='col-12 col-md-8'>
+                    <input type='text' name="name" class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "name"}}'
+                      id='name' style='width: 100%;' value='{{product.name}}' />
+                    {{errorMessage errors 'name'}}
+                  </div>
+                </div>
+
+                <div class='mb-3 row mr-0 pr-0'>
+                  <label for='code' name="code"
+                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                    style='width: 8.5rem;'>
+                    Code
+                  </label>
+                  <div class='col-12 col-md-8'>
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue  {{errorInput errors "code"}}' name="code" id='code'
+                      style='width: 100%;' value='{{product.code}}' />
+                    {{errorMessage errors 'code'}}
+                  </div>
+                </div>
+
+                <div class='mb-3 row'>
+                  <label for='symbol' name="symbol"
+                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                    style='width: 8.5rem;'>
+                    Symbol
+                  </label>
+                  <div class='col-12 col-md-8'>
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "symbol"}}' id='symbol' name="symbol"
+                      style='width: 100%;' value='{{product.symbol}}' />
+                    {{errorMessage errors 'symbol'}}
+                  </div>
+                </div>
+              </div>
+              <div class='px-4 py-2'>
+                <div class='mb-3 row'>
+                  <label for='prefix' name="prefix"
+                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue {{errorInput errors "prefix"}}'
+                    style='width: 8.5rem;'>
+                    Prefix
+                  </label>
+                  <div class='col-12 col-md-8'>
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='prefix' name="prefix"
+                      style='width: 100%;' value='{{product.prefix}}' />
+                    {{errorMessage errors 'prefix'}}
+                  </div>
+                </div>
+
+                <div class='mb-3 row'>
+                  <label for='suffix' name="suffix"
+                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                    style='width: 8.5rem;'>
+                    Suffix
+                  </label>
+                  <div class='col-12 col-md-8'>
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "suffix"}}' id='suffix'  name="suffix" style='width: 100%;' value="{{product.suffix}}"  />
+                    {{errorMessage errors 'suffix'}}
+                  </div>
+                </div>
+
+                <div class='mb-3 row'>
+                  <label for='rate'
+                    class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                    style='width: 8.5rem;'>
+                    Exchnage Rate
+                  </label>
+                  <div class='col-12 col-md-8'>
+                    <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "rate"}}' name="rate"
+                      value="{{product.rate}}" id='rate' style='width: 100%;' />
+                      {{errorMessage errors 'rate'}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='row row-cols-1 g-2 m-0'>
+              <div class='px-4 pb-4 text-center'>
+                  <button type='submit' class='col-auto btn btn--bright_navy_blue'>
+                    {{#if edit}}
+                      <i class='fas fa-save'></i>
+                      <span class='ms-2'>Update Product</span>
+                    {{else}}
+                      <i class='fas fa-save'></i>
+                      <span class='ms-2'>Save Product</span>
+                    {{/if}}
+                  </button> 
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { isValidObjectId } from 'mongoose';
 import { validate, ValidationError } from 'class-validator';
+import { plainToInstance } from 'class-transformer';
 
 import CurrencyApi from '@core/api/currency.api';
-import { plainToInstance } from 'class-transformer';
 import CurrencyDto from '@dto/currency.dto';
 import mappedErrors from '@utils/mapped-errors';
 

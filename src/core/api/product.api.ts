@@ -2,6 +2,7 @@ import productsModel, { Product } from '@models/product.model';
 import productGroupModel, { ProductGroup } from '@models/product-group.model';
 
 import { QueryOptions } from 'mongoose';
+import ProductDto from '@dto/product.dto';
 
 class ProductApi {
   static async getAllProducts(): Promise<Product[]> {
@@ -16,7 +17,7 @@ class ProductApi {
     return await productsModel.findOne({ default: true }).lean();
   }
 
-  static async createProduct(product: Product): Promise<Product> {
+  static async createProduct(product: ProductDto): Promise<Product> {
     const newProduct = new productsModel(product);
     return await newProduct.save();
   }
