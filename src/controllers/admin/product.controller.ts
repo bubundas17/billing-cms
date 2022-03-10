@@ -4,7 +4,9 @@ import { validate } from 'class-validator';
 import mappedErrors from '@utils/mapped-errors';
 
 import ProductDto from '@dto/product.dto';
+import ProductGroupDto from '@dto/product-group.dto';
 import { Product } from '@models/product.model';
+import { ProductGroup } from '@models/product-group.model';
 
 import ProductApi from '@core/api/product.api';
 import { isValidObjectId } from 'mongoose';
@@ -80,5 +82,44 @@ export const deleteProduct = async (req: Request, res: Response) => {
   const id = req.params.id;
   if (!isValidObjectId(id)) return res.redirect('/admin/products');
   await ProductApi.deleteProduct(id);
+  res.redirect('/admin/products');
+};
+
+export const getAddGroup = async (_req: Request, res: Response) => {
+  return res.render('admin/products/add-edit-group');
+};
+
+export const postAddGroup = async (req: Request, res: Response) => {
+  const group = plainToInstance(ProductGroupDto, req.body);
+  const errors = await validate(group);
+  if (errors.length > 0) {
+    return res.render('admin/products/add-edit-group', {
+      errors: mappedErrors(errors),
+      group,
+    });
+  }
+  await ProductApi.createProductGroup(group as ProductGroup);
+
+  res.redirect('/admin/products');
+};
+
+export const editGroup = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  if (!isValidObjectId(id)) return res.redirect('/admin/products');
+
+  const group = plainToInstance(ProductGroupDto, req.body);
+  const errors = await validate(group);
+
+  if (errors.length > 0) {
+    return res.render('admin/products/add-edit-group', {
+      errors: mappedErrors(errors),
+      group,
+      editGroup: true,
+    });
+  }
+
+  await ProductApi.updateProductGroup(id, group as ProductGroup);
+
   res.redirect('/admin/products');
 };

@@ -1,8 +1,9 @@
 <div class='mx-2 my-3'>
     <div class='hstack gap-3'>
         <h3 class='main-content__title inline-block flex-grow-1'>Products</h3>
-        <a class='ms-auto btn btn-large btn-primary' href='/admin/products/new'><i class='fa-solid fa-plus'></i>
-            <span class='ms-2'>Add New Product</span> </a>
+        {{#if productGroups.length }} <a class='ms-auto btn btn-large btn-primary' href='/admin/products/new'><i
+                class='fa-solid fa-plus'></i>
+            <span class='ms-2'>Add New Product</span> </a>{{/if}}
         <a class='ms-auto btn btn-large btn-primary' href='/admin/products/groups/new'><i class='fa-solid fa-plus'></i>
             <span class='ms-2'>Add New Group</span> </a>
 

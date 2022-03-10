@@ -1,0 +1,106 @@
+<div class='mx-2 my-3'>
+    {{> flash-message }}
+
+    <div class="container-fluid">
+        <div class="card card-info">
+            <div class="card-info__header">
+                <div class='card-info__header-name h-2.5 d-flex align-items-center'>
+                    <span class='ms-2 card-info__header-name'>
+                        {{#if edit}}
+                        Update Product Group: {{ group.name }}
+                        {{else}}
+                        Add New Product Group
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="card-info__content">
+                <form {{#if edit}} action='/admin/products/groups/{{group._id}}' {{else}} action='' {{/if}}
+                    method='post'>
+                    <div class='rounded client-details'>
+                        <div class='mt-2 row row-cols-1 row-cols-md-2 g-2 m-0'>
+                            <div class='px-4 py-2'>
+                                <div class='mb-3 row'>
+                                    <label for='name'
+                                        class='custom-base-text custom-base-text-lilac_blue col-auto col-form-label text-nowrap'
+                                        style='width: 8.5rem;'>
+                                        Name
+                                    </label>
+                                    <div class='col-12 col-md-8'>
+                                        <input type='text' name="name"
+                                            class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "name"}}'
+                                            id='name' style='width: 100%;' value='{{group.name}}' />
+                                        {{errorMessage errors 'name'}}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class='px-4 py-2'>
+
+                                <div class='mb-3 row'>
+                                    <label for='slug' name="slug"
+                                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                                        style='width: 8.5rem;'>
+                                        Slug
+                                    </label>
+                                    <div class='col-12 col-md-8'>
+                                        <input type='text'
+                                            class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "slug"}}'
+                                            id='slug' name="slug" style='width: 100%;' value="{{group.slug}}" />
+                                        {{errorMessage errors 'slug'}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class='mt-2 row row-cols-1 g-2 m-0'>
+                            <div class='px-4 py-2'>
+                                <div class='mb-3 row'>
+                                    <label for='code'
+                                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
+                                        style='width: 8.5rem;'>
+                                        Description
+                                    </label>
+                                    <div class='col-12 col-md-12'>
+                                        <textarea name="description" id="description" rows="10"
+                                            class="form-control">{{group.description}}</textarea>
+                                        {{errorMessage errors 'description'}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class='mt-2 row row-cols-1 g-2 m-0'>
+                            <div class='px-4 py-2'>
+                                <div class='mb-3 row'>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" checked id="hidden">
+                                        <label class="form-check-label" for="hidden">
+                                            Create as Hidden
+                                        </label>
+                                        {{errorMessage errors 'hidden'}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class='row row-cols-1 g-2 m-0'>
+                            <div class='px-4 pb-4 text-center'>
+                                <button type='submit' class='col-auto btn btn--bright_navy_blue'>
+                                    {{#if edit}}
+                                    <i class='fas fa-save'></i>
+                                    <span class='ms-2'>Update Info</span>
+                                    {{else}}
+                                    <i class='fas fa-save'></i>
+                                    <span class='ms-2'>Save Info</span>
+                                    {{/if}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
