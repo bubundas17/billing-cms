@@ -13,19 +13,19 @@ export class ProductGroup extends BaseModel {
   @prop({ required: true })
   description: string;
 
-  @prop({ required: true, ref: () => ProductGroup })
+  @prop({ ref: () => ProductGroup })
   parent: Ref<ProductGroup>;
 
-  @prop({ required: true, ref: () => ProductGroup })
+  @prop({ ref: () => ProductGroup })
   children: Ref<ProductGroup>[];
 
-  @prop({ required: true, default: false })
+  @prop({ default: false })
   hidden: boolean;
 
-  @prop({ required: true, ref: () => User })
+  @prop({ ref: () => User })
   addedBy: Ref<User>;
 
-  @prop({ required: true, ref: () => User })
+  @prop({ ref: () => User })
   lastEditedBy: Ref<User>;
 }
 

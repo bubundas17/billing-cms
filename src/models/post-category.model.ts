@@ -13,16 +13,16 @@ export class PostCategory extends BaseModel {
   @prop({ required: true })
   description: string;
 
-  @prop({ required: true, ref: () => PostCategory })
+  @prop({ ref: () => PostCategory })
   parent: Ref<PostCategory>;
 
-  @prop({ required: true, ref: () => PostCategory })
+  @prop({ ref: () => PostCategory })
   children: Ref<PostCategory>[];
 
-  @prop({ required: true, ref: () => User })
+  @prop({ ref: () => User })
   addedBy: Ref<User>;
 
-  @prop({ required: true, ref: () => User })
+  @prop({ ref: () => User })
   lastEditedBy: Ref<User>;
 }
 
