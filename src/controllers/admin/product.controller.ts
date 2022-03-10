@@ -1,15 +1,14 @@
 import { Request, Response } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import mappedErrors from '@utils/mapped-errors';
+import { isValidObjectId } from 'mongoose';
 
+import mappedErrors from '@utils/mapped-errors';
 import ProductDto from '@dto/product.dto';
 import ProductGroupDto from '@dto/product-group.dto';
 import { Product } from '@models/product.model';
-import { ProductGroup } from '@models/product-group.model';
-
+import productGroupModel, { ProductGroup } from '@models/product-group.model';
 import ProductApi from '@core/api/product.api';
-import { isValidObjectId } from 'mongoose';
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   const products = await ProductApi.getAllProducts();
@@ -42,15 +41,41 @@ export const getEditProduct = async (req: Request, res: Response) => {
 };
 
 export const postAddProduct = async (req: Request, res: Response) => {
-  const product = plainToInstance(ProductDto, req.body);
-  const errors = await validate(product);
+  const group = await productGroupModel.findOne().lean();
+
+  const productInput = plainToInstance(ProductDto, {
+    ...req.body,
+    prices: [
+      {
+        price: req.body.price,
+        label: req.body.label,
+        duration: req.body.duration,
+      },
+    ],
+    group: group?._id.toString(),
+    slug: req.body.name.toLowerCase().replace(/ /g, '-'),
+  });
+
+  const errors = await validate(productInput);
+
+  // const group = await productGroupModel.findOne().lean();
+
+  // const errors = await validate({
+  //   ...productInput,
+  //   group: group?._id,
+  //   slug: Math.random().toString(),
+  // });
+
+  console.log(mappedErrors(errors));
+
   if (errors.length > 0) {
     return res.render('admin/products/add-edit', {
       errors: mappedErrors(errors),
-      product,
+      product: productInput,
     });
   }
-  await ProductApi.createProduct(product);
+
+  await ProductApi.createProduct(productInput);
 
   res.redirect('/admin/products');
 };

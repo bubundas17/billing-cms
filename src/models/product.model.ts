@@ -15,25 +15,25 @@ class Price {
 }
 
 export class Product extends BaseModel {
-  @prop({ required: true })
+  @prop({})
   name: string; // Product name
 
-  @prop({ required: true })
+  @prop({})
   slug: string; // Product slug, Used for permalink
 
   @prop()
   description: string; // Product description
 
-  // @prop({ required: true, enum: ['product', 'service'] })
+  // @prop({  enum: ['product', 'service'] })
   // productType: string;
 
-  @prop({ required: true, default: false })
+  @prop({ default: false })
   hidden: boolean; // Is Hidden Product?
 
-  @prop({ required: true, type: [Price] })
+  @prop({ type: [Price] })
   prices: Price[];
 
-  @prop({ required: true, ref: () => ProductGroup })
+  @prop({ ref: () => ProductGroup })
   group: Ref<ProductGroup>;
 }
 

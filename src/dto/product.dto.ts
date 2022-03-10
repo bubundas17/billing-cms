@@ -7,6 +7,7 @@ import {
   IsNumber,
   ValidateNested,
   IsMongoId,
+  IsOptional,
 } from 'class-validator';
 
 class Price {
@@ -32,7 +33,8 @@ class ProductDto {
   description: string;
 
   @IsBoolean()
-  hidden: boolean;
+  @IsOptional()
+  hidden?: boolean;
 
   @IsArray()
   @ValidateNested({ each: true })
