@@ -93,25 +93,41 @@ export const postEditCurrency = async (req: Request, res: Response) => {
     return res.redirect('/admin/settings/currencies');
   }
 
+  const currencyInput = plainToInstance(CurrencyDto, {
+    ...req.body,
+    rate: req.body.rate * 1,
+  });
+
+  let errors: { [key: string]: string } | ValidationError[];
+  errors = await validate(currencyInput);
+
+  if (errors.length > 0) {
+    return res.render('admin/settings/currencies/add-edit', {
+      edit: true,
+      currency: { ...currencyInput, _id: currency._id },
+      errors: mappedErrors(errors),
+    });
+  }
+
   if (
-    currency.code !== String(req.body.code).toUpperCase() ||
-    String(currency.name).toLowerCase() !== String(req.body.name).toLowerCase()
+    currency.code.toUpperCase() !== String(req.body.code).toUpperCase() ||
+    currency.name.toLowerCase() !== String(req.body.name).toLowerCase()
   ) {
-    const currencyInput = plainToInstance(CurrencyDto, {
-      ...req.body,
-      rate: req.body.rate * 1,
-    });
+    errors = {};
 
-    const errors: { [key: string]: string } = {};
-    const isCurrencyNameExist = await CurrencyApi.getCurrency({
-      name: currencyInput.name,
-    });
-    if (isCurrencyNameExist) errors.name = 'Currency name already exist';
+    if (currencyInput.name.toLowerCase() !== currency.name.toLowerCase()) {
+      const isCurrencyNameExist = await CurrencyApi.getCurrency({
+        name: currencyInput.name,
+      });
+      if (isCurrencyNameExist) errors.name = 'Currency name already exist';
+    }
 
-    const isCurrencyCodeExist = await CurrencyApi.getCurrency({
-      code: currencyInput.code,
-    });
-    if (isCurrencyCodeExist) errors.code = 'Currency code already exist';
+    if (currencyInput.code.toUpperCase() !== currency.code.toUpperCase()) {
+      const isCurrencyCodeExist = await CurrencyApi.getCurrency({
+        code: currencyInput.code,
+      });
+      if (isCurrencyCodeExist) errors.code = 'Currency code already exist';
+    }
 
     if (Object.keys(errors).length > 0) {
       req.flash('error', 'Currency already exists');
@@ -126,7 +142,12 @@ export const postEditCurrency = async (req: Request, res: Response) => {
 
   await CurrencyApi.updateCurrency(id, req.body);
 
-  res.redirect('/admin/settings/currencies');
+  if (
+    currency.code.toUpperCase() !== currencyInput.code.toUpperCase() ||
+    currency.name.toLowerCase() !== currencyInput.name.toLowerCase()
+  )
+    req.flash('success', 'Currency updated successfully');
+  return res.redirect('/admin/settings/currencies');
 };
 
 export const postDeleteCurrency = async (req: Request, res: Response) => {
