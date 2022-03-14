@@ -7,12 +7,11 @@ import mappedErrors from '@utils/mapped-errors';
 import ProductDto from '@dto/product.dto';
 import ProductGroupDto from '@dto/product-group.dto';
 import { Product } from '@models/product.model';
-import productGroupModel, { ProductGroup } from '@models/product-group.model';
+import { ProductGroup } from '@models/product-group.model';
 import ProductApi from '@core/api/product.api';
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   const products = await ProductApi.getAllProducts();
-  // get product groups
   const productGroups = await ProductApi.getAllProductGroups();
 
   res.render('admin/products/index', {
@@ -41,43 +40,40 @@ export const getEditProduct = async (req: Request, res: Response) => {
 };
 
 export const postAddProduct = async (req: Request, res: Response) => {
-  const group = await productGroupModel.findOne().lean();
-
   const productInput = plainToInstance(ProductDto, {
     ...req.body,
-    prices: [
-      {
-        price: req.body.price,
-        label: req.body.label,
-        duration: req.body.duration,
-      },
-    ],
-    group: group?._id.toString(),
-    slug: req.body.name.toLowerCase().replace(/ /g, '-'),
+    group: '622a00966a1a8eadda16cebb',
   });
 
   const errors = await validate(productInput);
 
-  // const group = await productGroupModel.findOne().lean();
-
-  // const errors = await validate({
-  //   ...productInput,
-  //   group: group?._id,
-  //   slug: Math.random().toString(),
-  // });
-
-  console.log(mappedErrors(errors));
-
   if (errors.length > 0) {
-    return res.render('admin/products/add-edit', {
+    return res.status(422).json({
+      status: 'error',
+      data: null,
       errors: mappedErrors(errors),
-      product: productInput,
+      productInput,
     });
   }
 
-  await ProductApi.createProduct(productInput);
+  const createdProduct = await ProductApi.createProduct(req.body);
 
-  res.redirect('/admin/products');
+  if (!createdProduct)
+    return res.status(400).json({
+      status: 'error',
+      data: null,
+      errors: {
+        message: 'Product not created',
+      },
+      productInput,
+    });
+
+  return res.status(201).json({
+    status: 'success',
+    data: {
+      product: createdProduct,
+    },
+  });
 };
 
 export const postEditProduct = async (req: Request, res: Response) => {

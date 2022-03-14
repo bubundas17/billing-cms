@@ -1,7 +1,8 @@
-import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
-import { ProductGroup } from './product-group.model';
+import { getModelForClass, Pre, prop, Ref } from '@typegoose/typegoose';
 
+import { ProductGroup } from '@models/product-group.model';
 import BaseModel from '@models/base.model';
+import slugify from 'slugify';
 
 class Price {
   @prop()
@@ -14,6 +15,16 @@ class Price {
   label: string;
 }
 
+@Pre<Product>('save', function (next) {
+  this.slug = slugify(this.name, {
+    replacement: '-',
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+    trim: true,
+  });
+
+  next();
+})
 export class Product extends BaseModel {
   @prop({})
   name: string; // Product name

@@ -17,7 +17,7 @@
       </div>
       <div class="card-info__content">
         <form name="productForm" {{#if edit}} action='/admin/products/edit/{{product._id}}' {{else}}
-          action='/admin/products/new' {{/if}} method='post'>
+          action='/admin/products/new' {{/if}} method='post' @submit="onSubmitForm">
           <div class='rounded client-details'>
             <div class='mt-2 row row-cols-1 row-cols-xl-2 g-2 m-0'>
               <div class='px-4 py-2'>
@@ -25,12 +25,12 @@
                   <label for='name'
                     class='custom-base-text custom-base-text-lilac_blue col-auto col-form-label text-nowrap'
                     style='width: 8.5rem;'>
-                    \{{name}}
+                    Name
                   </label>
                   <div class='col-12 col-md-8'>
-                    <input type='text' name="name" v-model="name"
+                    <input type='text' name="name" v-model="product.name"
                       class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "name"}}'
-                      id='name' style='width: 100%;' value='{{product.name}}' />
+                      id='name' style='width: 100%;' />
                     {{errorMessage errors 'name'}}
                   </div>
                 </div>
@@ -44,7 +44,7 @@
                   <div class='col-12 col-md-8'>
                     <textarea rows="10" type='text'
                       class='form-control custom-base-text custom-base-text-lilac_blue m-0 {{errorInput errors "description"}}'
-                      name="description" id='description' style='width: 100%;'>{{product.description}}</textarea>
+                      name="description" id='description' style='width: 100%;' v-model="product.description">{{product.description}}</textarea>
                     {{errorMessage errors 'description'}}
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div id="priceInputs">
                   <div v-for="(price, index) in product.prices" :v-key="price.label">
                     <div class='mb-3 row'>
-                      <label for='price-${inputsCount}' name="price-${inputsCount}"
+                      <label for='price' name="price"
                         class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue {{errorInput errors "price"}}'
                         style='width: 8.5rem;'>
                         Price
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class='mb-3 row'>
-                      <label for='label-${inputsCount}' name="label-${inputsCount}"
+                      <label for='label' name="label"
                         class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
                         style='width: 8.5rem;'>
                         Price Label
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class='mb-3 row'>
-                      <label for='duration-${inputsCount}'
+                      <label for='duration'
                         class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
                         style='width: 8.5rem;'>
                         Price Duration
@@ -124,7 +124,6 @@
   Vue.createApp({
     data() {
       return {
-        name: '',
         product: {
           name: '',
           description: '',
@@ -148,105 +147,29 @@
           duration: 0,
         });
       },
+      async onSubmitForm(e) {
+        e.preventDefault();
+        console.log(this.product);
+        
+        const res = await fetch('/admin/products/new', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.product),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          this.errors = data.errors;
+          console.log(this.errors);
+          return;
+        }
+
+        window.location.href = '/admin/products';
+      }
     }
 }).mount("#product-form")
 
 </script>
-
-{{!--
-<script>
-  let priceInputsCount = 1
-
-  function increasePriceCount() {
-    priceInputsCount++;
-  }
-
-  function getInputsCount() {
-    return priceInputsCount;
-  }
-
-
-  function addNewPriceInput(inputsCount) {
-    increasePriceCount()
-
-    return `<div>
-                    <div class='mb-3 row'>
-                      <label for='price-${inputsCount}' name="price-${inputsCount}"
-                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue {{errorInput errors "price"}}'
-                        style='width: 8.5rem;'>
-                        Price ${inputsCount}
-                      </label>
-                      <div class='col-12 col-md-8'>
-                        <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue' id='price-${inputsCount}'
-                          name="price-${inputsCount}" style='width: 100%;' value='{{product.price}}' />
-                        {{errorMessage errors 'price'}}
-                      </div>
-                    </div>
-
-                    <div class='mb-3 row'>
-                      <label for='label-${inputsCount}' name="label-${inputsCount}"
-                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-                        style='width: 8.5rem;'>
-                        Price Label
-                      </label>
-                      <div class='col-12 col-md-8'>
-                        <input type='text'
-                          class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "label"}}'
-                          id='label-${inputsCount}' name="label-${inputsCount}" style='width: 100%;' value="{{product.label}}" />
-                        {{errorMessage errors 'label'}}
-                      </div>
-                    </div>
-
-                    <div class='mb-3 row'>
-                      <label for='duration-${inputsCount}'
-                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-                        style='width: 8.5rem;'>
-                        Price Duration
-                      </label>
-                      <div class='col-12 col-md-8'>
-                        <input type='text'
-                          class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "duration"}}'
-                          name="duration-${inputsCount}" value="{{product.duration}}" id='duration-${inputsCount}' style='width: 100%;' />
-                        {{errorMessage errors 'duration'}}
-                      </div>
-                    </div>
-                  </div>`
-  }
-
-
-  const addEditForm = document.querySelector('form[name="productForm"]');
-
-  const addNewPrice = document.getElementById('addNewPrice');
-  const priceInputs = document.getElementById('priceInputs');
-
-  priceInputs.innerHTML += addNewPriceInput(getInputsCount());
-
-  addNewPrice.addEventListener('click', function () {
-    priceInputs.innerHTML += addNewPriceInput(getInputsCount());
-  });
-
-  addEditForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(addEditForm);
-
-    const prices = [];
-    for (let i = 1; i <= priceInputsCount; i++) {
-      console.log(formData.get('price-' + i));
-      prices.push = {
-        price: formData.get(`price-${i}`),
-        label: formData.get(`label-${i}`),
-        duration: formData.get(`duration-${i}`)
-      }
-    }
-
-    const product = {
-      name: formData.get('name'),
-      description: formData.get('description'),
-      prices
-    }
-
-    console.log(product);
-  });
-
-</script> --}}
