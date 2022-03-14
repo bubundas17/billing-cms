@@ -263,6 +263,11 @@ class Theme {
         return res.send(doc);
       };
 
+      res.title = async (title) => {
+        res.locals.title = title;
+        return res;
+      };
+
       res.locals.currentThemeDir = await this.getCurrentThemePath();
       res.locals.themeBaseUri = currentTheme.themeBaseUri;
 

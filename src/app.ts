@@ -21,7 +21,6 @@ import passportHelper from '@helpers/passport.helper';
 import theme from '@lib/theme';
 import emailSender from '@services/email-sender.service';
 import emailDriver, { EmailConfig } from '@lib/email-driver';
-import { CurrencySelector } from '@middlewares/currency.middleware';
 
 // TODO - Add proper error handling and logging to the console
 // TODO - Reduce the amount of code in this file
@@ -64,7 +63,7 @@ class App {
     );
 
     this.app.use(flash());
-    this.app.use(CurrencySelector);
+    // this.app.use(CurrencySelector);
     if (env.NODE_ENV === 'development') this.app.use(morgan('dev'));
 
     this.app.use(passport.initialize());

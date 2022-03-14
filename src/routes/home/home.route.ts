@@ -1,4 +1,5 @@
 import BaseRoute from '@routes/base.route';
+import { getCurrency } from '@middlewares/currency.middleware';
 
 class HomeRoute extends BaseRoute {
   constructor() {
@@ -7,10 +8,11 @@ class HomeRoute extends BaseRoute {
   }
 
   init() {
-    this.router.get('/', async (req, res) => {
+    this.router.use(getCurrency);
+    this.router.get('/', async (_req, res) => {
       // req.session.test = 'test';
-      await req.getCurrency();
-      res.load('index', { data: 'Test Data' });
+      // res.title('Home Page');
+      res.load('index', { data: 'Test Data', title: 'Home Page' });
     });
   }
 }

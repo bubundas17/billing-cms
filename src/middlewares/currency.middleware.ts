@@ -6,15 +6,12 @@ import CurrencyApi from '@core/api/currency.api';
 // TODO: Impliment Get Currency From User Preferences
 // TODO: Impliment Get Currency From User Session
 
-export const CurrencySelector = (
-  req: Request,
+export const getCurrency = async (
+  _req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  req.getCurrency = async () => {
-    const currency = await CurrencyApi.getDefaultCurrency();
-    res.locals.currency = currency;
-    return currency;
-  };
+  const currency = await CurrencyApi.getDefaultCurrency();
+  res.locals.currency = currency;
   next();
 };
