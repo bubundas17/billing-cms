@@ -23,10 +23,6 @@
       </div>
       <div class="card-info__content">
         <form name="productForm" 
-        {{#if edit}} action='/admin/products/edit/{{product._id}}'
-         {{else}}
-        action='/admin/products/new'
-        {{/if}}
         method='post'
         @submit="onSubmitForm">
           <div class='rounded client-details'>
@@ -134,6 +130,8 @@
 </div>
 
 <script>
+  const _product = {{{ json product }}};
+
   Vue.createApp({
     data() {
       return {
@@ -165,7 +163,7 @@
 
         this.errors = null;
 
-        const res = await fetch('/admin/products/new', {
+        const res = await fetch(this.edit ? '/admin/products/new' : '/admin/products/edit/{{_product._id}}', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -181,6 +179,13 @@
         }
 
         window.location.href = '/admin/products';
+      }
+    },
+    async mounted() {
+      if (_product) {
+        delete _product._id;
+        this.product = _product;
+        this.edit = true;
       }
     }
   }).mount("#product-form")

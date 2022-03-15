@@ -14,8 +14,6 @@ export const getAllProducts = async (_req: Request, res: Response) => {
   const products = await ProductApi.getAllProducts();
   const productGroups = await ProductApi.getAllProductGroups();
 
-  console.log(products);
-
   res.render('admin/products/index', {
     products,
     productGroups,
@@ -101,7 +99,10 @@ export const postEditProduct = async (req: Request, res: Response) => {
 
   await ProductApi.updateProduct(id, product as Product);
 
-  res.redirect('/admin/products');
+  res.status(200).json({
+    status: 'success',
+    data: { product },
+  });
 };
 
 export const deleteProduct = async (req: Request, res: Response) => {
