@@ -14,6 +14,8 @@ export const getAllProducts = async (_req: Request, res: Response) => {
   const products = await ProductApi.getAllProducts();
   const productGroups = await ProductApi.getAllProductGroups();
 
+  console.log(products);
+
   res.render('admin/products/index', {
     products,
     productGroups,
@@ -56,7 +58,10 @@ export const postAddProduct = async (req: Request, res: Response) => {
     });
   }
 
-  const createdProduct = await ProductApi.createProduct(req.body);
+  const createdProduct = await ProductApi.createProduct({
+    ...req.body,
+    group: '622a00966a1a8eadda16cebb',
+  });
 
   if (!createdProduct)
     return res.status(400).json({

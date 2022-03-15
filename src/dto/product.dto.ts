@@ -1,29 +1,24 @@
-import { Type } from 'class-transformer';
 import {
   IsString,
   IsBoolean,
-  IsArray,
-  IsNumber,
   IsMongoId,
   IsOptional,
   IsNotEmpty,
-  ArrayMinSize,
-  IsPositive,
 } from 'class-validator';
 
-class PriceDto {
-  @IsNumber()
-  @IsPositive({ message: 'Duration must be positive' })
-  duration: number;
+// class PriceDto {
+//   @IsNumber()
+//   @IsPositive({ message: 'Duration must be positive' })
+//   duration: number;
 
-  @IsNumber()
-  @IsPositive({ message: 'Price must be positive' })
-  price: number;
+//   @IsNumber()
+//   @IsPositive({ message: 'Price must be positive' })
+//   price: number;
 
-  @IsString()
-  @IsNotEmpty({ message: 'Label is required' })
-  label: string;
-}
+//   @IsString()
+//   @IsNotEmpty({ message: 'Label is required' })
+//   label: string;
+// }
 
 class ProductDto {
   @IsString()
@@ -38,12 +33,12 @@ class ProductDto {
   @IsOptional()
   hidden?: boolean;
 
-  @IsArray()
+  // @IsArray()
+  // @ArrayMinSize(1)
+  // @Type(() => PriceDto)
+  // @IsNotEmpty()
   // @ValidateNested({ each: true })
-  @ArrayMinSize(1)
-  @IsNotEmpty()
-  @Type(() => PriceDto)
-  prices: PriceDto[];
+  // prices: PriceDto[];
 
   @IsMongoId()
   @IsNotEmpty()

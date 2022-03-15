@@ -22,8 +22,13 @@
         </div>
       </div>
       <div class="card-info__content">
-        <form name="productForm" {{#if edit}} action='/admin/products/edit/{{product._id}}' {{else}}
-          action='/admin/products/new' {{/if}} method='post' @submit="onSubmitForm">
+        <form name="productForm" 
+        {{#if edit}} action='/admin/products/edit/{{product._id}}'
+         {{else}}
+        action='/admin/products/new'
+        {{/if}}
+        method='post'
+        @submit="onSubmitForm">
           <div class='rounded client-details'>
             <div class='mt-2 row row-cols-1 row-cols-xl-2 g-2 m-0'>
               <div class='px-4 py-2'>
@@ -157,7 +162,8 @@
       },
       async onSubmitForm(e) {
         e.preventDefault();
-        console.log(this.product);
+
+        this.errors = null;
 
         const res = await fetch('/admin/products/new', {
           method: 'POST',
@@ -171,7 +177,6 @@
 
         if (!res.ok) {
           this.errors = data.errors;
-          console.log(this.errors);
           return;
         }
 

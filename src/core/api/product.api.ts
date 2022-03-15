@@ -6,7 +6,7 @@ import ProductDto from '@dto/product.dto';
 
 class ProductApi {
   static async getAllProducts(): Promise<Product[]> {
-    return await productsModel.find({}).lean();
+    return await productsModel.find({}).populate('group').lean();
   }
 
   static async getProductById(id: string): Promise<Product> {

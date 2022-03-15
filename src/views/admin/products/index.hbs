@@ -38,45 +38,26 @@
                 <thead>
 
                     <tr>
-                        <th scope='col'>Sort</th>
-                        <th scope='col'>Name</th>
+                        <th scope='col'>Product</th>
                         <th scope='col'>Group</th>
-                        <th scope='col'>Actions</th>
+                        <th scope='col'>Description</th>
+                        <th scope="col">Actions</th>
                     </tr>
 
                 </thead>`
-                {{#each currencies}}
+                {{#each products}}
                 <tr>
-                    <td>{{this.code}}</td>
                     <td>{{this.name}}</td>
-                    <td>Otto</td>
+                    <td>{{this.group.name}}</td>
+                    <td>{{this.description}}</td>
                     <td>
-                        <a role='button' class='btn btn-primary btn-small'
-                            href='/admin/settings/currencies/edit/{{this._id}}'>
-                            Edit
+                        <a href="#">
+                           <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                         </a>
-                        {{#if this.default}}
-                        <button disabled class='btn btn-danger btn-small'>
-                            Delete
-                        </button>
-                        {{else}}
-                        <form action='/admin/settings/currencies/delete' method='post' class='d-inline'>
-                            <input type='hidden' name='currencyId' value='{{this._id}}' />
-                            <button type='submit' class='btn btn-danger btn-small'>Delete</button>
+                        <form class="d-inline" action="#" method="post">
+                            <input type="hidden" name="_method" value="{{this._id}}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
-                        {{/if}}
-                    </td>
-                    <td>
-                        {{#if this.default}}
-                        <button class='btn btn-secondary' disabled>
-                            Default currency
-                        </button>
-                        {{else}}
-                        <form action='/admin/settings/currencies/update-default-currency' method='post'>
-                            <input type='hidden' name='currencyId' value='{{this._id}}' />
-                            <button class='btn btn-outline-secondary' type='submit'>Set as default</button>
-                        </form>
-                        {{/if}}
                     </td>
                 </tr>
                 {{/each}}
