@@ -2,6 +2,12 @@
 
   {{> flash-message }}
 
+  <div v-if="this.errors">
+    <div  v-for="error in errors" class="alert alert-danger" role="alert">
+      \{{ error }}
+    </div>
+  </div>
+
   <div class="container-fluid">
     <div class="card card-info">
       <div class="card-info__header">
@@ -137,7 +143,7 @@
             }
           ],
         },
-        errors: {},
+        errors: null,
         edit: false,
       }
     },
