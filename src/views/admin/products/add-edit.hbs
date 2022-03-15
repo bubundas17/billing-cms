@@ -44,14 +44,16 @@
                   <div class='col-12 col-md-8'>
                     <textarea rows="10" type='text'
                       class='form-control custom-base-text custom-base-text-lilac_blue m-0 {{errorInput errors "description"}}'
-                      name="description" id='description' style='width: 100%;' v-model="product.description">{{product.description}}</textarea>
+                      name="description" id='description' style='width: 100%;'
+                      v-model="product.description">{{product.description}}</textarea>
                     {{errorMessage errors 'description'}}
                   </div>
                 </div>
               </div>
               <div class="px-4">
                 <div class="py-2">
-                  <button type="button" id="addNewPrice" class="btn btn-primary" @click="addPrice(0)">Add new price</button>
+                  <button type="button" id="addNewPrice" class="btn btn-primary" @click="addPrice(0)">Add new
+                    price</button>
                 </div>
                 <div id="priceInputs">
                   <div v-for="(price, index) in product.prices" :v-key="price.label">
@@ -150,7 +152,7 @@
       async onSubmitForm(e) {
         e.preventDefault();
         console.log(this.product);
-        
+
         const res = await fetch('/admin/products/new', {
           method: 'POST',
           headers: {
@@ -170,6 +172,6 @@
         window.location.href = '/admin/products';
       }
     }
-}).mount("#product-form")
+  }).mount("#product-form")
 
 </script>

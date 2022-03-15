@@ -1,8 +1,8 @@
 import { getModelForClass, Pre, prop, Ref } from '@typegoose/typegoose';
+import slugify from 'slugify';
 
 import { ProductGroup } from '@models/product-group.model';
 import BaseModel from '@models/base.model';
-import slugify from 'slugify';
 
 class Price {
   @prop()
@@ -26,10 +26,10 @@ class Price {
   next();
 })
 export class Product extends BaseModel {
-  @prop({})
+  @prop()
   name: string; // Product name
 
-  @prop({})
+  @prop()
   slug: string; // Product slug, Used for permalink
 
   @prop()
