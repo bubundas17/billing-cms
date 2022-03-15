@@ -106,10 +106,17 @@ export const postEditProduct = async (req: Request, res: Response) => {
 };
 
 export const deleteProduct = async (req: Request, res: Response) => {
-  const id = req.params.id;
-  if (!isValidObjectId(id)) return res.redirect('/admin/products');
+  const id = req.body.productId;
+  console.log(`id: ${id}`);
+
+  if (!isValidObjectId(id)) {
+    req.flash('error', 'Product not found');
+    return res.status(400).redirect('/admin/products');
+  }
+
   await ProductApi.deleteProduct(id);
-  res.redirect('/admin/products');
+
+  res.status(204).redirect('/admin/products');
 };
 
 export const getAddGroup = async (_req: Request, res: Response) => {

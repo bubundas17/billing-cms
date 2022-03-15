@@ -50,10 +50,10 @@
                     <td>{{this.description}}</td>
                     <td>
                         <a href="/admin/products/{{this._id}}">
-                           <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                           <button class="btn btn-primary btn-sm">Edit</button>
                         </a>
-                        <form class="d-inline" action="#" method="post">
-                            <input type="hidden" name="_method" value="{{this._id}}">
+                        <form class="d-inline" action="/admin/products/delete" method="post">
+                            <input type="hidden" name="productId" value="{{this._id}}">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>

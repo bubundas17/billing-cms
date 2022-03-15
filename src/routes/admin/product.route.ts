@@ -18,10 +18,10 @@ class PostsRoute extends BaseRoute {
 
   init() {
     this.router.route('/').get(getAllProducts);
+    this.router.route('/delete').post(deleteProduct);
     this.router.route('/new').get(getAddProduct).post(postAddProduct);
-    this.router.route('/groups/new').get(getAddGroup).post(postAddGroup);
     this.router.route('/:id').get(getEditProduct).post(postEditProduct);
-    this.router.route('/:id/delete').post(deleteProduct);
+    this.router.route('/groups/new').get(getAddGroup).post(postAddGroup);
   }
 }
 
