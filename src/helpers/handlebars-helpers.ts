@@ -42,6 +42,7 @@ handlebarsHelpers.activeClass = function (
 };
 
 handlebarsHelpers.json = function (context: object) {
+  if (!context) return '{}';
   return JSON.stringify(context);
 };
 

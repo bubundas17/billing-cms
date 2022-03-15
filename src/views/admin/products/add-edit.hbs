@@ -130,7 +130,7 @@
 </div>
 
 <script>
-  const _product = {{{ json product }}};
+  const _product = {{{ json product }}}
 
   Vue.createApp({
     data() {
@@ -163,12 +163,14 @@
 
         this.errors = null;
 
-        const res = await fetch(this.edit ? '/admin/products/new' : '/admin/products/edit/{{_product._id}}', {
+      const {_id, ...rest} = {...this.product};
+
+        const res = await fetch(this.edit ? '/admin/products/{{this.product._id}}' : '/admin/products/new', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(this.product),
+          body: JSON.stringify(rest),
         });
 
         const data = await res.json();
@@ -182,8 +184,8 @@
       }
     },
     async mounted() {
-      if (_product) {
-        delete _product._id;
+      this.edit = false;
+      if (Object.keys(_product).length > 0) {
         this.product = _product;
         this.edit = true;
       }
