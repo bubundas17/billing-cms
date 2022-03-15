@@ -42,7 +42,7 @@ export const getEditProduct = async (req: Request, res: Response) => {
 export const postAddProduct = async (req: Request, res: Response) => {
   const productInput = plainToInstance(ProductDto, {
     ...req.body,
-    group: '622a00966a1a8eadda16cebb',
+    group: '622a00966a1a8eadda16cebb', // TODO: remove hardcoded id
   });
 
   const errors = await validate(productInput);
@@ -107,7 +107,6 @@ export const postEditProduct = async (req: Request, res: Response) => {
 
 export const deleteProduct = async (req: Request, res: Response) => {
   const id = req.body.productId;
-  console.log(`id: ${id}`);
 
   if (!isValidObjectId(id)) {
     req.flash('error', 'Product not found');

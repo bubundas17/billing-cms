@@ -40,8 +40,6 @@ class ProductApi {
   }
 
   static async deleteProduct(id: string): Promise<Product> {
-    console.log('deleteProduct', id);
-
     return await productsModel.findByIdAndDelete(id).lean();
   }
 
