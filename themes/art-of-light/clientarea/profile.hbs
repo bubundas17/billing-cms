@@ -1,0 +1,81 @@
+<div class="container">
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h1 class="cad-title">Edit Profile</h1>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                        type="button" role="tab" aria-controls="profile" aria-selected="true">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link " id="address-tab" data-bs-toggle="tab" data-bs-target="#address"
+                        type="button" role="tab" aria-controls="address" aria-selected="false">Address</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                        type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <form>
+                        <div class="mb-3 mt-2">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="name" class="form-control" id="name" value="{{user.name}}"
+                                aria-describedby="nameHelp">
+                            <div id="nameHelp" class="form-text">Enter your name here</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" value="{{user.email}}"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Enter Your Primary Email</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade " id="address" role="tabpanel" aria-labelledby="address-tab">
+                    <form>
+                        <div class="mb-3 mt-2">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="name" class="form-control" id="name" value="{{user.name}}"
+                                aria-describedby="nameHelp">
+                            <div id="nameHelp" class="form-text">Enter your name here</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address Line 1</label>
+                            <textarea type="address" class="form-control" id="address" value="{{user.email}}"
+                                aria-describedby="addressHelp"></textarea>
+                            <div id="addressHelp" class="form-text">Enter Address Line 1</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address Line 2</label>
+                            <textarea type="address" class="form-control" id="address" value="{{user.email}}"
+                                aria-describedby="addressHelp"></textarea>
+                            <div id="addressHelp" class="form-text">Enter Address Line 2</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="card">
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>

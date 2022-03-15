@@ -1,6 +1,7 @@
 module.exports = {
   init(funcs) {
-    // JavaScript to be fired on all pages
+    // Runs on theme load to initialize the theme.
+    console.log('Theme initialized.');
   },
 };
 

@@ -16,5 +16,5 @@ declare namespace Express {
 }
 
 interface CustomSessionFields {
-  test: string;
+  currency: string;
 }

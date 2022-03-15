@@ -276,7 +276,21 @@ class Theme {
 
     const currentTheme = await this.getCurrentTheme();
 
-    app.use('/public', express.static(currentTheme.publicFolderPath));
+    // check if functions.js file exists
+    const functionsFilePath = join(currentTheme.absulutePath, 'functions.js');
+    if (await util.isFile(functionsFilePath)) {
+      const functions = await import(functionsFilePath);
+
+      if (typeof functions.init === 'function') {
+        functions.init(app);
+      }
+    }
+
+    // Theme static files
+    app.use(
+      currentTheme.themeBaseUri,
+      express.static(currentTheme.publicFolderPath),
+    );
   }
 }
 

@@ -16,6 +16,14 @@ class UserApi {
     return await UserModel.findOne({ email }).lean();
   }
 
+  // Update User Function intended for use in the client area
+  static async updateUserSafe(user: User, data: User): Promise<User | null> {
+    const newUser = await UserModel.findByIdAndUpdate(user._id, data, {
+      runValidators: true,
+    });
+    return newUser;
+  }
+
   static async getUserById(id: string) {
     return await UserModel.findById(id).lean();
   }
