@@ -1,0 +1,11 @@
+{
+  "name": "art-of-light",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "mdb-ui-kit": "^3.11.0",
+    "sass": "^1.49.9"
+  }
+}

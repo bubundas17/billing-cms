@@ -1,4 +1,7 @@
-import { getProfile } from '@controllers/clientarea/profile.controller';
+import {
+  getEmailHistory,
+  getProfile,
+} from '@controllers/clientarea/profile.controller';
 import BaseRoute from '@routes/base.route';
 
 class Profile extends BaseRoute {
@@ -10,6 +13,7 @@ class Profile extends BaseRoute {
   init() {
     // TODO - initialize
     this.router.route('/profile').get(getProfile);
+    this.router.route('/email-history').get(getEmailHistory);
   }
 }
 

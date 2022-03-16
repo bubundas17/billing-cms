@@ -5,7 +5,6 @@ import { User } from '@models/user.model';
 export const getProfile = async (req: Request, res: Response) => {
   const user = await UserApi.getUserById(req.user.id);
   res.load('clientarea/profile', {
-    pathName: 'profile',
     layout: 'clientarea',
     user,
   });
@@ -14,4 +13,12 @@ export const getProfile = async (req: Request, res: Response) => {
 export const postProfile = async (req: Request, res: Response) => {
   await UserApi.updateUserSafe(req.user.id, req.body as User);
   res.redirect('/clientarea/profile');
+};
+
+export const getEmailHistory = async (req: Request, res: Response) => {
+  const user = await UserApi.getUserById(req.user.id);
+  res.load('clientarea/email-history', {
+    layout: 'clientarea',
+    user,
+  });
 };
