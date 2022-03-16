@@ -7,10 +7,11 @@ module.exports = {
     // Runs on theme load to initialize the theme.
     console.log('Theme initialized.');
     // watch public/scss/theme.scss and compile it to public/css/theme.css
-    fs.watch(path.join(__dirname, 'assets/scss/style.scss'), (eventType, filename) => {
+    fs.watch(path.join(__dirname, 'assets/scss/core.scss'), (eventType, filename) => {
       if (eventType === 'change') {
+        console.log('Compiling core.scss...');
         sass.render({
-          file: path.join(__dirname, 'assets/scss/style.scss'),
+          file: path.join(__dirname, 'assets/scss/core.scss'),
           outputStyle: 'compressed',
         }, (err, result) => {
           if (err) {
