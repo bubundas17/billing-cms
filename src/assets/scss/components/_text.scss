@@ -10,3 +10,13 @@
 .fw-500 {
   font-weight: 500;
 }
+
+@each $name, $color in $colors {
+  .text-#{$name} {
+    color: $color !important;
+  }
+
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+}

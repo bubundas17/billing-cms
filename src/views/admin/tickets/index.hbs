@@ -1,0 +1,62 @@
+<div class='my-3'>
+  <h1 class='text-annapolis_blue'>All Tickets</h1>
+  <form action='#'>
+    <div class='input-group mb-3 d-flex'>
+      <button
+        class='btn btn-outline-secondary dropdown-toggle'
+        type='button'
+        data-bs-toggle='dropdown'
+        aria-expanded='false'
+      >Filters</button>
+      <ul class='dropdown-menu'>
+        <li><a class='dropdown-item' href='#'>Your tickets</a></li>
+        <li><a class='dropdown-item' href='#'>Open tickets</a></li>
+        <li><a class='dropdown-item' href='#'>Closed tickets</a></li>
+        <li><hr class='dropdown-divider' /></li>
+        <li><a class='dropdown-item' href='#'>Everything assigned to you</a></li>
+        <li><a class='dropdown-item' href='#'>Everything mentioning you</a></li>
+      </ul>
+      <label class='position-relative' style='flex: 1;' for='search_icon'>
+        <div class='position-absolute top-0 bottom-0 d-flex' style='left: 8px;'>
+          <i class='my-auto fas fa-search'></i>
+        </div>
+        <input
+          id='search_icon'
+          type='text'
+          class='form-control'
+          style='padding-left: 30px;'
+        />
+      </label>
+    </div>
+  </form>
+
+  {{#each tickets}}
+    <a href='#' class='d-block text-decoration-none text-annapolis_blue mb-2'>
+      <div class='card'>
+        <div class='card-body'>
+          <h6
+            class='card-title text-annapolis_blue d-flex align-items-center'
+            style='margin-bottom: -0.25rem;'
+          >
+            {{title}}
+            {{#each labels}}
+              <span
+                class="badge rounded-pill ms-1 {{#if (equal @this 'bug')}}bg-red_mana{{/if}} {{#if (equal @this 'enhancement')}}bg-green_elliott{{/if}}"
+                style='font-size: 10px;'
+              >
+                {{this}}
+              </span>
+            {{/each}}
+          </h6>
+          <p
+            class='card-text text-lilac_blue'
+            style='font-size: 14px; margin-top: 0.12rem;'
+          >
+            #213 opened 19 days ago by darkgl0w
+          </p>
+        </div>
+      </div>
+    </a>
+  {{/each}}
+
+</div>
