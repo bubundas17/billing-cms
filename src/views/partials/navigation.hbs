@@ -6,11 +6,17 @@
   <div class='mx-3 mt-4'>
     <form class='container-fluid'>
       <div class='input-group search-box'>
-        <span class='bg-white input-group-text border-end-0 search-box__group-text'>
+        <span
+          class='bg-white input-group-text border-end-0 search-box__group-text'
+        >
           <i class='fas fa-search search-box__icon'></i>
         </span>
-        <input type='text' class='form-control border-start-0 fw-light search-box__input' placeholder='Search'
-          aria-label='Search' />
+        <input
+          type='text'
+          class='form-control border-start-0 fw-light search-box__input'
+          placeholder='Search'
+          aria-label='Search'
+        />
       </div>
     </form>
   </div>
@@ -29,7 +35,11 @@
         </li>
 
         <li class='list-item'>
-          <div role='button' data-bs-toggle='collapse' data-bs-target='#usersItem'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#usersItem'
+          >
             <div class='d-flex justify-content-between align-items-center'>
               <div>
                 <i class='fas fa-user list-item__icon'></i>
@@ -38,8 +48,11 @@
               <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class='collapse list-unstyled list-item__sub-menu-list' id='usersItem'
-            data-bs-parent='#sidenav-accordion'>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='usersItem'
+            data-bs-parent='#sidenav-accordion'
+          >
             <li class='list-item__sub-menu-item'>
               <a href='/admin/users'>
                 Users List
@@ -56,24 +69,6 @@
           </ul>
         </li>
 
-        {{!-- <li class='list-item'>
-          <div role='button' data-bs-toggle='collapse' data-bs-target='#ordersItem'>
-            <div class='d-flex justify-content-between align-items-center'>
-              <div>
-                <i class='fas fa-shopping-cart list-item__icon'></i>
-                <span class='list-item__name'>Orders</span>
-              </div>
-              <i class='fas fa-chevron-down list-item__indicator'></i>
-            </div>
-          </div>
-          <ul class='collapse list-unstyled list-item__sub-menu-list' id='ordersItem'
-            data-bs-parent='#sidenav-accordion'>
-            <li class='list-item__sub-menu-item'>Hello World</li>
-            <li class='list-item__sub-menu-item'>Hello World</li>
-            <li class='list-item__sub-menu-item'>Hello World</li>
-          </ul>
-        </li> --}}
-
         <li class='list-item'>
           <div role='button' data-bs-toggle='collapse' data-bs-target='#shop'>
             <div class='d-flex justify-content-between align-items-center'>
@@ -84,7 +79,11 @@
               <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class='collapse list-unstyled list-item__sub-menu-list' id='shop' data-bs-parent='#sidenav-accordion'>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='shop'
+            data-bs-parent='#sidenav-accordion'
+          >
             <li class='list-item__sub-menu-item'>
               <a href='/admin/products'>Products</a>
             </li>
@@ -100,25 +99,32 @@
           </ul>
         </li>
 
-        {{!-- <li class='list-item'>
-          <div role='button' data-bs-toggle='collapse' data-bs-target='#invoiceItem'>
+        <li class='list-item'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#invoiceItem'
+          >
             <div class='d-flex justify-content-between align-items-center'>
-              <div>
+              <a href="/admin/ticket" class="text-decoration-none">
                 <i class='fas fa-file-alt list-item__icon'></i>
-                <span class='list-item__name'>Invoice</span>
-              </div>
-              <i class='fas fa-chevron-down list-item__indicator'></i>
+                <span class='list-item__name'>Tickets</span>
+              </a>
+              {{!-- <i class='fas fa-chevron-down list-item__indicator'></i> --}}
             </div>
           </div>
-          <ul class='collapse list-unstyled list-item__sub-menu-list' id='invoiceItem'
-            data-bs-parent='#sidenav-accordion'>
-            <li class='list-item__sub-menu-item'>Hello World</li>
-            <li class='list-item__sub-menu-item'>Hello World</li>
-            <li class='list-item__sub-menu-item'>Hello World</li>
-          </ul>
-        </li> --}}
+          {{!-- <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='invoiceItem'
+            data-bs-parent='#sidenav-accordion'
+          >
+            <li class='list-item__sub-menu-item'>All Tickets</li>
+            <li class='list-item__sub-menu-item'>Open Tickets</li>
+            <li class='list-item__sub-menu-item'>Closed Tickets</li>
+          </ul> --}}
+        </li>
 
-        {{!-- <li class='list-item'>
+        {{! <li class='list-item'>
           <div role='button' data-bs-toggle='collapse' data-bs-target='#billingItem'>
             <div class='d-flex justify-content-between align-items-center'>
               <div>
@@ -134,9 +140,9 @@
             <li class='list-item__sub-menu-item'>Hello World</li>
             <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
-        </li> --}}
+        </li> }}
 
-        {{!-- <li class='list-item'>
+        {{! <li class='list-item'>
           <div role='button' data-bs-toggle='collapse' data-bs-target='#ticketsItem'>
             <div class='d-flex justify-content-between align-items-center'>
               <div>
@@ -152,10 +158,14 @@
             <li class='list-item__sub-menu-item'>Hello World</li>
             <li class='list-item__sub-menu-item'>Hello World</li>
           </ul>
-        </li> --}}
+        </li> }}
 
         <li class='list-item'>
-          <div role='button' data-bs-toggle='collapse' data-bs-target='#settings'>
+          <div
+            role='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#settings'
+          >
             <div class='d-flex justify-content-between align-items-center'>
               <div>
                 <i class='fas fa-cog list-item__icon'></i>
@@ -164,11 +174,21 @@
               <i class='fas fa-chevron-down list-item__indicator'></i>
             </div>
           </div>
-          <ul class='collapse list-unstyled list-item__sub-menu-list' id='settings' data-bs-parent='#sidenav-accordion'>
+          <ul
+            class='collapse list-unstyled list-item__sub-menu-list'
+            id='settings'
+            data-bs-parent='#sidenav-accordion'
+          >
 
-            <li class='list-item__sub-menu-item'><a href='/admin/themes'>Themes</a></li>
-            <li class='list-item__sub-menu-item'><a href='/admin/plugins'>Plugins</a></li>
-            <li class='list-item__sub-menu-item'><a href='/admin/settings/currencies'>Currencies</a></li>
+            <li class='list-item__sub-menu-item'><a
+                href='/admin/themes'
+              >Themes</a></li>
+            <li class='list-item__sub-menu-item'><a
+                href='/admin/plugins'
+              >Plugins</a></li>
+            <li class='list-item__sub-menu-item'><a
+                href='/admin/settings/currencies'
+              >Currencies</a></li>
           </ul>
         </li>
       </ul>

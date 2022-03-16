@@ -46,4 +46,8 @@ handlebarsHelpers.json = function (context: object) {
   return JSON.stringify(context);
 };
 
+handlebarsHelpers.equal = function (value: string, other: string): boolean {
+  return value === other;
+};
+
 export default handlebarsHelpers;
