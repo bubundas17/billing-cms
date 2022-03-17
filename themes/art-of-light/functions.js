@@ -6,7 +6,7 @@ const gulp = require('./gulpfile');
 
 module.exports = {
   init(funcs) {
-    gulp.default();
+    // gulp.default();
     // Runs on theme load to initialize the theme.
     // console.log('Theme initialized.');
     // watch public/scss/theme.scss and compile it to public/css/theme.css
