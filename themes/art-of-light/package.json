@@ -8,5 +8,9 @@
     "jquery": "^3.6.0",
     "mdb-ui-kit": "^3.11.0",
     "sass": "^1.49.9"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0"
   }
 }
