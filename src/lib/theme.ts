@@ -23,6 +23,7 @@ const glob = promisify(globAsync);
 type ThemeType = {
   path: string;
   absulutePath: string;
+  templatesAbsulutePath: string;
   publicFolderPath: string;
   partialsFolderPath: string;
   themeBaseUri: string;
@@ -43,12 +44,13 @@ class Theme {
       const theme = await this.getCurrentTheme();
 
       const dirs = await glob('**/*.hbs', {
-        cwd: join(cwd(), 'themes', theme.path, 'partials'),
+        cwd: theme.partialsFolderPath,
         follow: true,
       });
 
       const partials = await dirs.reduce(async (prev, current) => {
         const fileData = await util.readFile(theme.partialsFolderPath, current);
+        // console.log(current);
         const template = this.compileTemplate(fileData, context);
         const _prev = await prev;
         _prev[util.getFileName(current, '.hbs')] =
@@ -69,7 +71,7 @@ class Theme {
     try {
       const theme = await this.getCurrentTheme();
       const fileData = await this.readFileAndCache(
-        theme.absulutePath,
+        theme.templatesAbsulutePath,
         filePath,
       );
       const template = this.compileTemplate(fileData, options);
@@ -183,8 +185,15 @@ class Theme {
             ...result,
             path,
             absulutePath: join(cwd(), 'themes', path),
+            templatesAbsulutePath: join(cwd(), 'themes', path, 'templates'),
             publicFolderPath: join(cwd(), 'themes', path, 'public'),
-            partialsFolderPath: join(cwd(), 'themes', path, 'partials'),
+            partialsFolderPath: join(
+              cwd(),
+              'themes',
+              path,
+              'templates',
+              'partials',
+            ),
             themeBaseUri: '/themes/' + path,
             active,
           };
