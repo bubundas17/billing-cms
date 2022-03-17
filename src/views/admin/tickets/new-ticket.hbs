@@ -1,19 +1,48 @@
 <div class='my-3 mx-3'>
-  <div class='mb-3'>
-    <label for='exampleFormControlInput1' class='form-label'>Email address</label>
-    <input
-      type='email'
-      class='form-control'
-      id='exampleFormControlInput1'
-      placeholder='name@example.com'
-    />
+  {{> flash-message }}
+  
+  <div>
+    <h1>Create new ticket</h1>
   </div>
-  <div class='mb-3'>
-    <label for='exampleFormControlTextarea1' class='form-label'>Example textarea</label>
-    <textarea
-      class='form-control'
-      id='exampleFormControlTextarea1'
-      rows='3'
-    ></textarea>
-  </div>
+  <form action='/tickets/new-ticket' method='post'>
+    <div class='mb-3'>
+      <label for='ticket-title' class='form-label'>Ticket title</label>
+      <input
+        type='text'
+        class='form-control'
+        id='ticket-title'
+        placeholder='e.g. "How to create a new ticket"'
+        name='title'
+      />
+    </div>
+    <div class='mb-3'>
+      <label for='ticket-description' class='form-label'>
+        Ticket description
+      </label>
+      <textarea
+        class='form-control'
+        id='ticket-description'
+        rows='6'
+        placeholder='e.g. "I need to create a new ticket"'
+        name='body'
+      ></textarea>
+    </div>
+
+    <div class='mb-3'>
+      <select
+        class='form-select'
+        aria-label='Default select example'
+        name='priority'
+      >
+        <option selected>Ticket priority</option>
+        <option value='low'>Low</option>
+        <option value='medium'>Medium</option>
+        <option value='high'>High</option>
+      </select>
+    </div>
+
+    <div class='mb-3'>
+      <button class='btn btn-primary'>Add Ticket</button>
+    </div>
+  </form>
 </div>
