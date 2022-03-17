@@ -80,6 +80,7 @@
   "dependencies": {
     "@typegoose/typegoose": "^9.6.2",
     "agenda": "^4.2.1",
+    "babel-loader": "^8.2.3",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
