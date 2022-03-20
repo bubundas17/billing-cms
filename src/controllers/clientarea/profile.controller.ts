@@ -1,6 +1,7 @@
 import UserApi from '@core/api/users.api';
 import { Request, Response } from 'express';
 import { User } from '@models/user.model';
+import AppError from '@exceptions/AppError';
 
 export const getProfile = async (req: Request, res: Response) => {
   const user = await UserApi.getUserById(req.user.id);
@@ -11,10 +12,15 @@ export const getProfile = async (req: Request, res: Response) => {
 };
 
 export const postProfile = async (req: Request, res: Response) => {
-  console.log(req.body, res.locals.user);
+  try {
+    await UserApi.updateUserSafe(res.locals.user, req.body as User);
 
-  await UserApi.updateUserSafe(res.locals.user, req.body as User);
-  res.redirect('/clientarea/profile');
+    req.flash('success', 'Profile updated successfully');
+    res.redirect('/clientarea/profile');
+  } catch (error) {
+    req.flash('error', (error as AppError)?.message || 'Something went wrong');
+    res.redirect('/clientarea/profile');
+  }
 };
 
 export const getEmailHistory = async (req: Request, res: Response) => {
