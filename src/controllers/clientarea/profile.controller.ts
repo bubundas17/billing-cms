@@ -22,3 +22,15 @@ export const getEmailHistory = async (req: Request, res: Response) => {
     user,
   });
 };
+
+export const getChangePassword = async (_req: Request, res: Response) => {
+  res.load('clientarea/change-password', {
+    layout: 'clientarea',
+  });
+};
+
+export const getSecurityCenter = async (_req: Request, res: Response) => {
+  res.load('clientarea/security-center', {
+    layout: 'clientarea',
+  });
+};

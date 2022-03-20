@@ -42,6 +42,9 @@ module.exports = {
     //   },
     // );
   },
+  beforeRender(context) {
+    // Runs before the page is rendered.
+  }
 };
 
 layouts = {

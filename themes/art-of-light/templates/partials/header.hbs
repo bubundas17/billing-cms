@@ -14,8 +14,17 @@
             <li><a class="dropdown-item" href="/store">Browse All</a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Support
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="new-ticket">
+            <li><a class="dropdown-item" href="/clientarea/tickets/">Tickets</a></li>
+            <li><a class="dropdown-item" href="/clientarea/tickets/new">Open Ticket</a></li>
+          </ul>
+        </li>
       </ul>
-
     </div>
     <div></div>
     <div class='header__actions me-3 pe-3'>
@@ -28,11 +37,14 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/clientarea/profile">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Change Password</a></li>
+            {{!-- <li><a class="dropdown-item" href="/clientarea/change-password">Change Password</a></li> --}}
             <li><a class="dropdown-item" href="/clientarea/email-history">Email History</a></li>
-            <li><a class="dropdown-item" href="#">Security Settings</a></li>
+            <li><a class="dropdown-item" href="/clientarea/security-center">Security Center</a></li>
+            <li><a class="dropdown-item" href="/clientarea/support">Support</a></li>
 
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" href="/auth/signout">Sign Out</a></li>
           </ul>
         </li>
