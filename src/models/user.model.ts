@@ -11,19 +11,20 @@ import AppError from '@exceptions/AppError';
     this.password = await hash(this.password, 12);
     next();
   } catch (err) {
-    const error = err as AppError;
-    next(error);
+    next(err as AppError);
   }
 })
 export class User extends BaseModel {
-  @prop({ required: true, unique: true })
+  @prop({ required: true })
   name: string;
 
   @prop({ required: true, unique: true })
   username: string;
 
+  @prop()
   phone: string;
 
+  @prop()
   company: string;
 
   @prop({ required: true, unique: true, lowercase: true })
@@ -32,13 +33,13 @@ export class User extends BaseModel {
   @prop({ required: true })
   password: string;
 
+  @prop()
   address: string;
 
   @prop({ default: false })
   isAdmin: boolean;
 
   @prop({
-    required: true,
     type: [String],
     enum: [UserRole],
     default: [UserRole.SELLS_OPERATOR],

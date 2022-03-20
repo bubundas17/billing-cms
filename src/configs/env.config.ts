@@ -6,6 +6,7 @@ const env = cleanEnv(process.env, {
   DATABASE_URI: url(),
   SESSION_SECRET: str(),
   JWT_SECRET: str(),
+  DEFAULT_THEME: str(),
   SMTP_HOST: str(),
   SMTP_PORT: port(),
   SMTP_SECURE: bool(),

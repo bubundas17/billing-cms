@@ -11,7 +11,9 @@ export const getProfile = async (req: Request, res: Response) => {
 };
 
 export const postProfile = async (req: Request, res: Response) => {
-  await UserApi.updateUserSafe(req.user.id, req.body as User);
+  console.log(req.body, res.locals.user);
+
+  await UserApi.updateUserSafe(res.locals.user, req.body as User);
   res.redirect('/clientarea/profile');
 };
 

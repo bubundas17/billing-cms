@@ -237,7 +237,11 @@ class Theme {
   }
 
   async getEnabledTheme() {
-    return (await getOption('is-active-theme')) as Promise<string>;
+    const activeTheme = (await getOption('is-active-theme')) as Promise<string>;
+
+    if (!activeTheme) return env.DEFAULT_THEME;
+
+    return activeTheme;
   }
 
   // get theme folder path
