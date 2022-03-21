@@ -15,6 +15,7 @@
             </div>
         </div>
         <div class="table-responsive">
+            {{#if tickets}}
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -28,7 +29,7 @@
                     <tr>
                         <td>
                             <div class="d-flex">
-                                <div class="d-flex flex-column"><a href="ticket-5645645"
+                                <div class="d-flex flex-column"><a href="/clientarea/tickets/{{this._id}}"
                                         class="text-body text-truncate"><span
                                             class="fw-semibold">{{subject}}</span></a><small
                                         class="text-muted">{{createdAt}}</small>
@@ -50,6 +51,11 @@
                     {{/each}}
                 </tbody>
             </table>
+            {{else}}
+            <div class="text-center">
+                <h3>No tickets found</h3>
+            </div>
+            {{/if}}
         </div>
     </div>
 </div>

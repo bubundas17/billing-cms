@@ -37,6 +37,51 @@ export const getChangePassword = async (_req: Request, res: Response) => {
   });
 };
 
+export const postChangePassword = async (req: Request, res: Response) => {
+  const isPasswordMatches = await UserApi.isValidPassword(
+    req.body.currentPassword,
+    res.locals.user.password,
+  );
+
+  if (!isPasswordMatches) {
+    req.flash('error', 'Current password is incorrect');
+    return res.load('clientarea/security-center', {
+      layout: 'clientarea',
+      inputs: req.body,
+      errors: req.flash('error'),
+    });
+  }
+
+  // TODO: Add proper validation
+  if (
+    !req.body.newPassword ||
+    (!req.body.confirmPassword &&
+      req.body.newPassword !== req.body.confirmPassword)
+  ) {
+    req.flash('error', 'Please enter new password');
+    return res.load('clientarea/security-center', {
+      inputs: req.body,
+      errors: req.flash('error'),
+    });
+  }
+
+  const isSuccess = await UserApi.changePassword(
+    res.locals.user,
+    req.body.newPassword,
+  );
+
+  if (!isSuccess) {
+    req.flash('error', 'Something went wrong');
+    return res.load('clientarea/security-center', {
+      inputs: req.body,
+      errors: req.flash('error'),
+    });
+  }
+
+  req.flash('success', 'Password changed successfully');
+  res.redirect('/clientarea/security-center');
+};
+
 export const getSecurityCenter = async (_req: Request, res: Response) => {
   res.load('clientarea/security-center', {
     layout: 'clientarea',

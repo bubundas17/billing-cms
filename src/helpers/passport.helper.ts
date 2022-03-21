@@ -1,23 +1,9 @@
 import { Strategy as LocalStrategy } from 'passport-local';
 import { ObjectId } from 'mongoose';
 import { PassportStatic } from 'passport';
-import { compare } from 'bcrypt';
-import createError from 'http-errors';
 
 import UserModel from '@models/user.model';
-import AppError from '@exceptions/AppError';
-
-async function isValidPassword(
-  password: string,
-  hashedPassword: string,
-): Promise<boolean | never> {
-  try {
-    return await compare(password, hashedPassword);
-  } catch (err) {
-    const error = err as AppError;
-    throw new createError.InternalServerError(error.message);
-  }
-}
+import UserApi from '@core/api/users.api';
 
 export default function (passport: PassportStatic) {
   passport.use(
@@ -35,7 +21,7 @@ export default function (passport: PassportStatic) {
           }).lean();
           if (!user) return done(null, false, { message: e });
 
-          const isPasswordValid = await isValidPassword(
+          const isPasswordValid = await UserApi.isValidPassword(
             password,
             user.password,
           );

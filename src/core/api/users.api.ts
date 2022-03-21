@@ -1,8 +1,9 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 import { DocumentType } from '@typegoose/typegoose';
 import { BeAnObject } from '@typegoose/typegoose/lib/types';
 import { FilterQuery } from 'mongoose';
+import createError from 'http-errors';
 
 import UserModel, { User } from '@models/user.model';
 import env from '@configs/env.config';
@@ -10,6 +11,7 @@ import { getOption } from '@lib/options';
 import settingsEnum from '@enums/settings.enum';
 import emailSender from '@services/email-sender.service';
 import EmailTemplates from '@enums/email_templates.enum';
+import AppError from '@exceptions/AppError';
 
 class UserApi {
   static async getUserByEmail(email: string): Promise<User | null> {
@@ -37,7 +39,7 @@ class UserApi {
     if (!user) {
       return false;
     }
-    const newPassword = await hash(password, 10);
+    const newPassword = await hash(password, 12);
     await UserModel.findByIdAndUpdate(user._id, {
       $set: { password: newPassword },
     });
@@ -107,6 +109,18 @@ class UserApi {
       .lean();
 
     return { totalPages: Math.ceil(totalPages / perPage), users };
+  }
+
+  static async isValidPassword(
+    password: string,
+    hashedPassword: string,
+  ): Promise<boolean | never> {
+    try {
+      return await compare(password, hashedPassword);
+    } catch (err) {
+      const error = err as AppError;
+      throw new createError.InternalServerError(error.message);
+    }
   }
 }
 

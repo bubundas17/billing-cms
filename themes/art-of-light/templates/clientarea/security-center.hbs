@@ -1,240 +1,328 @@
-<div class="container">
-    <div class="my-4">
-        <div class="card">
-            <h5 class="card-header">Change password</h5>
-            <div class="card-body">
-                <form action="" class="form-group">
-                    <div class="row">
+<div class='container'>
+  <div class='mt-4'>
+    {{#if errors}}
+      <svg xmlns='http://www.w3.org/2000/svg' style='display: none;'>
+        <symbol id='check-circle-fill' fill='currentColor' viewBox='0 0 16 16'>
+          <path
+            d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'
+          ></path>
+        </symbol>
+        <symbol id='info-fill' fill='currentColor' viewBox='0 0 16 16'>
+          <path
+            d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'
+          ></path>
+        </symbol>
+        <symbol
+          id='exclamation-triangle-fill'
+          fill='currentColor'
+          viewBox='0 0 16 16'
+        >
+          <path
+            d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'
+          ></path>
+        </symbol>
+      </svg>
+      {{#each errors}}
+        <div class='alert alert-danger d-flex align-items-center' role='alert'>
+          <svg
+            class='bi flex-shrink-0 me-2'
+            width='24'
+            height='24'
+            role='img'
+            aria-label='Danger:'
+          >
+            <use xlink:href='#exclamation-triangle-fill'></use>
+          </svg>
+          <div>
+            {{this}}
+          </div>
+        </div>
+      {{/each}}
+    {{/if}}
+    {{>flash-message}}
+  </div>
+  <div class='mb-4'>
+    <div class='card'>
+      <h5 class='card-header'>Change password</h5>
+      <div class='card-body'>
+        <form
+          action='/clientarea/security-center'
+          method='post'
+          class='form-group'
+        >
+          <div class='row'>
 
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="mb-4 me-3">
-                                    <label for="">Current Password</label>
-                                    <input type="password" class="form-control" name="current_password"
-                                        placeholder="Current Password">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label for="">New Password</label>
-                                <input type="password" class="form-control" name="current_password"
-                                    placeholder="New Password">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label for="">Confirm Password</label>
-                                <input type="password" class="form-control" name="current_password"
-                                    placeholder="Confirm Password">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="col-12 mb-4 text-muted">
-                    <p class="fw-bold mt-2">Requirements:</p>
-                    <ul class="ps-3 mb-0">
-                        <li class="mb-1">
-                            Minimum 8 characters long
-                        </li>
-                        <li class="mb-1">At least one character</li>
-                        <li>At least one number, or symbol</li>
-                    </ul>
+            <div class='col-md-12'>
+              <div class='col-md-6'>
+                <div class='mb-4 me-3'>
+                  <label for='currentPassword'>Current Password</label>
+                  <input
+                    id='currentPassword'
+                    type='password'
+                    class='form-control'
+                    name='currentPassword'
+                    placeholder='Current Password'
+                    value='{{inputs.currentPassword}}'
+                  />
                 </div>
-                <div class="col-12 mt-1">
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='mb-4'>
+                <label for='newPassword'>New Password</label>
+                <input
+                  id='newPassword'
+                  type='password'
+                  class='form-control'
+                  name='newPassword'
+                  placeholder='New Password'
+                  value='{{inputs.newPassword}}'
+                />
+              </div>
+            </div>
+            <div class='col-md-6'>
+              <div class='mb-4'>
+                <label for='confirmPassword'>Confirm Password</label>
+                <input
+                  id='confirmPassword'
+                  type='password'
+                  class='form-control'
+                  name='confirmPassword'
+                  placeholder='Confirm Password'
+                  value='{{inputs.confirmPassword}}'
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class='col-12 mb-4 text-muted'>
+            <p class='fw-bold mt-2'>Requirements:</p>
+            <ul class='ps-3 mb-0'>
+              <li class='mb-1'>
+                Minimum 8 characters long
+              </li>
+              <li class='mb-1'>At least one character</li>
+              <li>At least one number, or symbol</li>
+            </ul>
+          </div>
+          <div class='col-12 mt-1'>
+            <button type='submit' class='btn btn-primary me-2'>Change Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class='my-4'>
+    <div class='card'>
+      <h5 class='card-header'>Two Factor authentication</h5>
+      <div class='card-body'>
+
+        <div class='col-12 mb-4 text-muted'>
+          <p class='fw-bold mt-2'>Two Factor Authentication is not activated
+            yet.</p>
+          <p>Please enable one of the following Tho factor methods to activate
+            Two Step login.</p>
+
+          <div class='d-flex mb-3'>
+            <div class='flex-shrink-0 px-3'>
+              <i class='fa-solid fa-envelope fa-2xl fa-fw'></i>
+            </div>
+
+            <div class='flex-grow-1 row'>
+              <div class='col-9 mb-sm-0 mb-2'>
+                <h6 class='mb-0'>Email OTP</h6>
+                <small class='text-muted'>Requires </small>
+              </div>
+              <div class='col-3 d-flex justify-content-end'>
+                <div class='me-0 form-check form-switch'>
+                  <input
+                    class='form-check-input'
+                    type='checkbox'
+                    id='flexSwitchCheckChecked'
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='d-flex mb-3'>
+            <div class='flex-shrink-0 px-3'>
+              <i class='fa-brands fa-google fa-2xl fa-fw'></i>
+            </div>
+
+            <div class='flex-grow-1 row'>
+              <div class='col-9 mb-sm-0 mb-2'>
+                <h6 class='mb-0'>Google Authenticator (TOTP)</h6>
+                <small class='text-muted'>Enable TOTP</small>
+              </div>
+              <div class='col-3 d-flex justify-content-end'>
+                <div class='me-0 form-check form-switch'>
+                  <input
+                    class='form-check-input'
+                    type='checkbox'
+                    id='flexSwitchCheckChecked'
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='d-flex mb-3'>
+            <div class='flex-shrink-0 px-3'>
+              <i class='fa-brands fa-usb fa-2xl fa-fw'></i>
+            </div>
+
+            <div class='flex-grow-1 row'>
+              <div class='col-9 mb-sm-0 mb-2'>
+                <h6 class='mb-0'>U2F Security Key</h6>
+                <small class='text-muted'>Enable U2F Key</small>
+              </div>
+              <div class='col-3 d-flex justify-content-end'>
+                <div class='me-0 form-check form-switch'>
+                  <input
+                    class='form-check-input'
+                    type='checkbox'
+                    id='flexSwitchCheckChecked'
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        {{! <div class="col-12 mt-1">
                     <button type="submit" class="btn btn-primary me-2">Change Password</button>
-                </div>
-            </div>
-        </div>
+                </div> }}
+      </div>
     </div>
-    <div class="my-4">
-        <div class="card">
-            <h5 class="card-header">Two Factor authentication</h5>
-            <div class="card-body">
+  </div>
 
-                <div class="col-12 mb-4 text-muted">
-                    <p class="fw-bold mt-2">Two Factor Authentication is not activated yet.</p>
-                    <p>Please enable one of the following Tho factor methods to activate Two Step login.</p>
-
-
-                    <div class="d-flex mb-3">
-                        <div class="flex-shrink-0 px-3">
-                            <i class="fa-solid fa-envelope fa-2xl fa-fw"></i>
-                        </div>
-
-                        <div class="flex-grow-1 row">
-                            <div class="col-9 mb-sm-0 mb-2">
-                                <h6 class="mb-0">Email OTP</h6>
-                                <small class="text-muted">Requires </small>
-                            </div>
-                            <div class="col-3 d-flex justify-content-end">
-                                <div class="me-0 form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex mb-3">
-                        <div class="flex-shrink-0 px-3">
-                            <i class="fa-brands fa-google fa-2xl fa-fw"></i>
-                        </div>
-
-                        <div class="flex-grow-1 row">
-                            <div class="col-9 mb-sm-0 mb-2">
-                                <h6 class="mb-0">Google Authenticator (TOTP)</h6>
-                                <small class="text-muted">Enable TOTP</small>
-                            </div>
-                            <div class="col-3 d-flex justify-content-end">
-                                <div class="me-0 form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex mb-3">
-                        <div class="flex-shrink-0 px-3">
-                            <i class="fa-brands fa-usb fa-2xl fa-fw"></i>
-                        </div>
-
-                        <div class="flex-grow-1 row">
-                            <div class="col-9 mb-sm-0 mb-2">
-                                <h6 class="mb-0">U2F Security Key</h6>
-                                <small class="text-muted">Enable U2F Key</small>
-                            </div>
-                            <div class="col-3 d-flex justify-content-end">
-                                <div class="me-0 form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {{!-- <div class="col-12 mt-1">
-                    <button type="submit" class="btn btn-primary me-2">Change Password</button>
-                </div> --}}
-            </div>
+  <div class='card mb-4'>
+    <h5 class='card-header'>Connected Accounts</h5>
+    <div class='card-body'>
+      <p>Connect your account with apps</p>
+      <div class='d-flex mb-3'>
+        <div class='flex-shrink-0'>
+          <i class='fa-brands fa-google fa-2xl fa-fw me-3'></i>
         </div>
-    </div>
-
-    <div class="card mb-4">
-        <h5 class="card-header">Connected Accounts</h5>
-        <div class="card-body">
-            <p>Connect your account with apps</p>
-            <div class="d-flex mb-3">
-                <div class="flex-shrink-0">
-                    <i class="fa-brands fa-google fa-2xl fa-fw me-3"></i>
-                </div>
-                <div class="flex-grow-1 row">
-                    <div class="col-9 mb-sm-0 mb-2">
-                        <h6 class="mb-0">Google</h6>
-                        <small class="text-muted">One click login with Google</small>
-                    </div>
-                    <div class="col-3 text-end d-flex justify-content-end">
-                        <button type="button" class="btn btn-icon btn-label-secondary">
-                            <i class="fa-solid fa-link"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex mb-3">
-                <div class="flex-shrink-0">
-                    <i class="fa-brands fa-facebook fa-2xl fa-fw me-3"></i>
-                </div>
-                <div class="flex-grow-1 row">
-                    <div class="col-9 mb-sm-0 mb-2">
-                        <h6 class="mb-0">Facebook</h6>
-                        <small class="text-muted">One click login with Facebook</small>
-                    </div>
-                    <div class="col-3 text-end d-flex justify-content-end">
-                        <button type="button" class="btn btn-icon btn-primary">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex mb-3">
-                <div class="flex-shrink-0">
-                    <i class="fa-brands fa-github fa-2xl fa-fw me-3"></i>
-                </div>
-                <div class="flex-grow-1 row">
-                    <div class="col-9 mb-sm-0 mb-2">
-                        <h6 class="mb-0">Github</h6>
-                        <small class="text-muted">One click login with Github</small>
-                    </div>
-                    <div class="col-3 text-end d-flex justify-content-end">
-                        <button type="button" class="btn btn-icon btn-primary">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div class='flex-grow-1 row'>
+          <div class='col-9 mb-sm-0 mb-2'>
+            <h6 class='mb-0'>Google</h6>
+            <small class='text-muted'>One click login with Google</small>
+          </div>
+          <div class='col-3 text-end d-flex justify-content-end'>
+            <button type='button' class='btn btn-icon btn-label-secondary'>
+              <i class='fa-solid fa-link'></i>
+            </button>
+          </div>
         </div>
-    </div>
-
-
-    <div class="card mb-4">
-        <h5 class="card-header">Recent Devices</h5>
-        <div class="table-responsive">
-            <table class="table border-top">
-                <thead>
-                    <tr>
-                        <th class="text-truncate">Browser</th>
-                        <th class="text-truncate">Device</th>
-                        <th class="text-truncate">Location</th>
-                        <th class="text-truncate">Recent Activities</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-truncate"><i class="fa-brands fa-windows fa-fw me-3"></i> <span
-                                class="fw-semibold">Chrome on Windows</span></td>
-                        <td class="text-truncate">HP Spectre 360</td>
-                        <td class="text-truncate">Switzerland</td>
-                        <td class="text-truncate">10, July 2021 20:07</td>
-                    </tr>
-                    <tr>
-                        <td class="text-truncate"><i class="fa-brands fa-apple fa-fw me-3"></i> <span
-                                class="fw-semibold">Chrome on iPhone</span></td>
-                        <td class="text-truncate">iPhone 12x</td>
-                        <td class="text-truncate">Australia</td>
-                        <td class="text-truncate">13, July 2021 10:10</td>
-                    </tr>
-                    <tr>
-                        <td class="text-truncate"><i class="fa-brands fa-android fa-fw me-3"></i> <span
-                                class="fw-semibold">Chrome on Android</span></td>
-                        <td class="text-truncate">Oneplus 9 Pro</td>
-                        <td class="text-truncate">Dubai</td>
-                        <td class="text-truncate">14, July 2021 15:15</td>
-                    </tr>
-                    <tr>
-                        <td class="text-truncate"><i class="fa-brands fa-apple fa-fw me-3"></i> <span
-                                class="fw-semibold">Chrome on
-                                MacOS</span></td>
-                        <td class="text-truncate">Apple iMac</td>
-                        <td class="text-truncate">India</td>
-                        <td class="text-truncate">16, July 2021 16:17</td>
-                    </tr>
-                    <tr>
-                        <td class="text-truncate"><i class="fa-brands fa-windows fa-fw me-3"></i> <span
-                                class="fw-semibold">Chrome on Windows</span></td>
-                        <td class="text-truncate">HP Spectre 360</td>
-                        <td class="text-truncate">Switzerland</td>
-                        <td class="text-truncate">20, July 2021 21:01</td>
-                    </tr>
-                    <tr>
-                        <td class="text-truncate border-bottom-0"><i class="fa-brands fa-android fa-fw me-3"></i> <span
-                                class="fw-semibold">Chrome on Android</span></td>
-                        <td class="text-truncate border-bottom-0">Oneplus 9 Pro</td>
-                        <td class="text-truncate border-bottom-0">Dubai</td>
-                        <td class="text-truncate border-bottom-0">21, July 2021 12:22</td>
-                    </tr>
-                </tbody>
-            </table>
+      </div>
+      <div class='d-flex mb-3'>
+        <div class='flex-shrink-0'>
+          <i class='fa-brands fa-facebook fa-2xl fa-fw me-3'></i>
         </div>
+        <div class='flex-grow-1 row'>
+          <div class='col-9 mb-sm-0 mb-2'>
+            <h6 class='mb-0'>Facebook</h6>
+            <small class='text-muted'>One click login with Facebook</small>
+          </div>
+          <div class='col-3 text-end d-flex justify-content-end'>
+            <button type='button' class='btn btn-icon btn-primary'>
+              <i class='fa-solid fa-trash'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class='d-flex mb-3'>
+        <div class='flex-shrink-0'>
+          <i class='fa-brands fa-github fa-2xl fa-fw me-3'></i>
+        </div>
+        <div class='flex-grow-1 row'>
+          <div class='col-9 mb-sm-0 mb-2'>
+            <h6 class='mb-0'>Github</h6>
+            <small class='text-muted'>One click login with Github</small>
+          </div>
+          <div class='col-3 text-end d-flex justify-content-end'>
+            <button type='button' class='btn btn-icon btn-primary'>
+              <i class='fa-solid fa-trash'></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class='card mb-4'>
+    <h5 class='card-header'>Recent Devices</h5>
+    <div class='table-responsive'>
+      <table class='table border-top'>
+        <thead>
+          <tr>
+            <th class='text-truncate'>Browser</th>
+            <th class='text-truncate'>Device</th>
+            <th class='text-truncate'>Location</th>
+            <th class='text-truncate'>Recent Activities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class='text-truncate'><i
+                class='fa-brands fa-windows fa-fw me-3'
+              ></i>
+              <span class='fw-semibold'>Chrome on Windows</span></td>
+            <td class='text-truncate'>HP Spectre 360</td>
+            <td class='text-truncate'>Switzerland</td>
+            <td class='text-truncate'>10, July 2021 20:07</td>
+          </tr>
+          <tr>
+            <td class='text-truncate'><i
+                class='fa-brands fa-apple fa-fw me-3'
+              ></i>
+              <span class='fw-semibold'>Chrome on iPhone</span></td>
+            <td class='text-truncate'>iPhone 12x</td>
+            <td class='text-truncate'>Australia</td>
+            <td class='text-truncate'>13, July 2021 10:10</td>
+          </tr>
+          <tr>
+            <td class='text-truncate'><i
+                class='fa-brands fa-android fa-fw me-3'
+              ></i>
+              <span class='fw-semibold'>Chrome on Android</span></td>
+            <td class='text-truncate'>Oneplus 9 Pro</td>
+            <td class='text-truncate'>Dubai</td>
+            <td class='text-truncate'>14, July 2021 15:15</td>
+          </tr>
+          <tr>
+            <td class='text-truncate'><i
+                class='fa-brands fa-apple fa-fw me-3'
+              ></i>
+              <span class='fw-semibold'>Chrome on MacOS</span></td>
+            <td class='text-truncate'>Apple iMac</td>
+            <td class='text-truncate'>India</td>
+            <td class='text-truncate'>16, July 2021 16:17</td>
+          </tr>
+          <tr>
+            <td class='text-truncate'><i
+                class='fa-brands fa-windows fa-fw me-3'
+              ></i>
+              <span class='fw-semibold'>Chrome on Windows</span></td>
+            <td class='text-truncate'>HP Spectre 360</td>
+            <td class='text-truncate'>Switzerland</td>
+            <td class='text-truncate'>20, July 2021 21:01</td>
+          </tr>
+          <tr>
+            <td class='text-truncate border-bottom-0'><i
+                class='fa-brands fa-android fa-fw me-3'
+              ></i>
+              <span class='fw-semibold'>Chrome on Android</span></td>
+            <td class='text-truncate border-bottom-0'>Oneplus 9 Pro</td>
+            <td class='text-truncate border-bottom-0'>Dubai</td>
+            <td class='text-truncate border-bottom-0'>21, July 2021 12:22</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>
