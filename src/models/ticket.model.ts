@@ -14,6 +14,12 @@ enum TicketPriority {
   High = 'high',
 }
 
+enum TicketType {
+  Support = 'support',
+  Sales = 'sales',
+  Billing = 'billing',
+}
+
 export class Reply {
   @prop()
   body: string;
@@ -24,7 +30,7 @@ export class Reply {
 
 export class Ticket extends BaseModel {
   @prop({ required: true })
-  title: string;
+  subject: string;
 
   @prop({ required: true })
   body: string;
@@ -32,8 +38,14 @@ export class Ticket extends BaseModel {
   @prop({ enum: TicketStatus, default: TicketStatus.Open })
   status: TicketStatus;
 
+  @prop({ enum: TicketType, default: TicketType.Support })
+  type: TicketType;
+
   @prop({ enum: TicketPriority, default: TicketPriority.Low })
   priority: TicketPriority;
+
+  @prop()
+  attachedFile: string;
 
   @prop({ required: true, ref: () => User })
   createdBy: Ref<User>;

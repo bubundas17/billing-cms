@@ -2,6 +2,7 @@ import {
   getNewTicket,
   getTickets,
   getViewTicket,
+  postNewTicket,
 } from '@controllers/clientarea/support.controller';
 import BaseRoute from '@routes/base.route';
 
@@ -12,9 +13,8 @@ class SupportTickets extends BaseRoute {
   }
 
   init() {
-    // TODO - initialize
     this.router.route('/').get(getTickets);
-    this.router.route('/new').get(getNewTicket);
+    this.router.route('/new').get(getNewTicket).post(postNewTicket);
     this.router.route('/:id').get(getViewTicket);
   }
 }

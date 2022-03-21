@@ -50,4 +50,13 @@ handlebarsHelpers.equal = function (value: string, other: string): boolean {
   return value === other;
 };
 
+handlebarsHelpers.select = function (
+  selected: string,
+  options: { fn: (arg0: Record<string, unknown>) => string },
+) {
+  return options
+    .fn(this)
+    .replace(new RegExp(' value="' + selected + '"'), '$& selected="selected"');
+};
+
 export default handlebarsHelpers;
