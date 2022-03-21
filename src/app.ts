@@ -16,7 +16,7 @@ import flash from 'connect-flash';
 import env from '@configs/env.config';
 import routes from '@routes/index';
 import { get4xx, get5xx } from '@controllers/index';
-import handlebarsHelpers from '@helpers/handlebars-helpers';
+import handlebarsHelpers from '@helpers/handlebars.helper';
 import passportHelper from '@helpers/passport.helper';
 import theme from '@lib/theme';
 import emailSender from '@services/email-sender.service';
@@ -62,7 +62,6 @@ class App {
       }),
     );
 
-    this.app.use(flash());
     // this.app.use(CurrencySelector);
     if (env.NODE_ENV === 'development') this.app.use(morgan('dev'));
 
@@ -70,7 +69,7 @@ class App {
     this.app.use(passport.session());
     passportHelper(passport);
 
-    await theme.registerThemeEngine(this.app);
+    this.app.use(flash());
 
     this.app.use((req, res, next) => {
       res.locals.user = req.user;
@@ -81,6 +80,8 @@ class App {
       res.locals.session = req.session;
       next();
     });
+
+    await theme.registerThemeEngine(this.app);
 
     this.app.use(routes);
     this.app.use(get4xx);

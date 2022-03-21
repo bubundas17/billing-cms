@@ -45,6 +45,8 @@ export class User extends BaseModel {
     default: [UserRole.SELLS_OPERATOR],
   })
   roles: string[];
+
+  nameLabel: string;
 }
 
 export default getModelForClass(User, {

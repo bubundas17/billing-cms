@@ -1,90 +1,111 @@
-<div class="container">
-    <div>
-        <div class="card my-4">
-            <div class="card-header border-bottom">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <div class="avatar-wrapper">
-                            <div class="avatar avatar-sm me-3"><span
-                                    class="avatar-initial rounded-circle bg-label-danger">BD</span></div>
-                        </div>
-                        <div class="d-flex flex-column"><span class="fw-semibold">Bubun Das <span
-                                    class="badge rounded-pill bg-label-info">Client</span></span>
-                            <small class="text-muted">twidmore12@bravesites.com</small>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column"><span class="fw-semibold">20/10/2022</span>
-                        <small class="text-muted">10:20 AM</small>
-                    </div>
-                </div>
+<div class='container'>
+  <div>
+    <div class='card my-4'>
+      <div class='card-header border-bottom'>
+        <div class='d-flex justify-content-between'>
+          <div class='d-flex justify-content-start align-items-center'>
+            <div class='avatar-wrapper'>
+              <div class='avatar avatar-sm me-3'><span
+                  class='avatar-initial rounded-circle bg-label-danger'
+                >{{ticket.createdBy.nameLabel}}</span></div>
             </div>
-            <div class="card-body pt-3">
-                <p>Hi,</p>
-                <p>My website abc123.com throwing SSL errors.</p>
-                <p>Please have a look</p>
+            <div class='d-flex flex-column'><span
+                class='fw-semibold'
+              >{{ticket.createdBy.name}}
+                <span
+                  class='badge rounded-pill bg-label-info'
+                >Client</span></span>
+              <small class='text-muted'>{{ticket.createdBy.email}}</small>
             </div>
+          </div>
+          <div class='d-flex flex-column'><span
+              class='fw-semibold'
+            >{{ticket.createdDate}}</span>
+            <small class='text-muted'>{{ticket.createdTime}}</small>
+          </div>
         </div>
-        <div class="card my-4">
-            <div class="card-header border-bottom ">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <div class="avatar-wrapper">
-                            <div class="avatar avatar-sm me-3"><span
-                                    class="avatar-initial rounded-circle bg-label-info">JD</span></div>
-                        </div>
-                        <div class="d-flex flex-column"><span class="fw-semibold">Jhon <span
-                                    class="badge rounded-pill bg-label-danger">Support Staff</span></span>
-                            <small class="text-muted">jhondoe@example.com</small>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column"><span class="fw-semibold">20/10/2022</span>
-                        <small class="text-muted">10:25 AM</small>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body pt-3">
-                <p>Thank you for contacting us</p>
-                <p>I have forowarded your request to our technical team. They Will fox the issue ASAP</p>
-            </div>
-        </div>
-
-        <div class="card my-4">
-            <div class="card-header border-bottom ">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <div class="avatar-wrapper">
-                            <div class="avatar avatar-sm me-3"><span
-                                    class="avatar-initial rounded-circle bg-label-info">JD</span></div>
-                        </div>
-                        <div class="d-flex flex-column"><span class="fw-semibold">Other Jhon <span
-                                    class="badge rounded-pill bg-label-danger">Tech Team</span></span>
-                            <small class="text-muted">otherjhondoe@example.com</small>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column"><span class="fw-semibold">20/10/2022</span>
-                        <small class="text-muted">10:30 AM</small>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body pt-3">
-                <p>Thank you for contacting us</p>
-                <p>I have gone ahead and manually issued a new SSL for your domain.</p>
-            </div>
-        </div>
-
-        <div class="card my-4">
-            <div class="card-header border-bottom ">
-                <h5 class="card-title">Reply</h5>
-            </div>
-            <div class="card-body pt-3">
-                <form action="" class="form-group">
-
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                    <input class="form-control mt-3" type="file" id="formFileMultiple" multiple="">
-                    <a href="#" class="btn btn-primary mt-3">Add Reply</a>
-                </form>
-            </div>
-
-        </div>
+      </div>
+      <div class='card-body pt-3'>
+        {{ticket.body}}
+      </div>
     </div>
+    <div class='card my-4'>
+      <div class='card-header border-bottom'>
+        <div class='d-flex justify-content-between'>
+          <div class='d-flex justify-content-start align-items-center'>
+            <div class='avatar-wrapper'>
+              <div class='avatar avatar-sm me-3'><span
+                  class='avatar-initial rounded-circle bg-label-info'
+                >JD</span></div>
+            </div>
+            <div class='d-flex flex-column'><span class='fw-semibold'>Jhon
+                <span class='badge rounded-pill bg-label-danger'>Support Staff</span></span>
+              <small class='text-muted'>jhondoe@example.com</small>
+            </div>
+          </div>
+          <div class='d-flex flex-column'><span
+              class='fw-semibold'
+            >20/10/2022</span>
+            <small class='text-muted'>10:25 AM</small>
+          </div>
+        </div>
+      </div>
+      <div class='card-body pt-3'>
+        <p>Thank you for contacting us</p>
+        <p>I have forowarded your request to our technical team. They Will fox
+          the issue ASAP</p>
+      </div>
+    </div>
+
+    <div class='card my-4'>
+      <div class='card-header border-bottom'>
+        <div class='d-flex justify-content-between'>
+          <div class='d-flex justify-content-start align-items-center'>
+            <div class='avatar-wrapper'>
+              <div class='avatar avatar-sm me-3'><span
+                  class='avatar-initial rounded-circle bg-label-info'
+                >JD</span></div>
+            </div>
+            <div class='d-flex flex-column'><span class='fw-semibold'>Other Jhon
+                <span class='badge rounded-pill bg-label-danger'>Tech Team</span></span>
+              <small class='text-muted'>otherjhondoe@example.com</small>
+            </div>
+          </div>
+          <div class='d-flex flex-column'><span
+              class='fw-semibold'
+            >20/10/2022</span>
+            <small class='text-muted'>10:30 AM</small>
+          </div>
+        </div>
+      </div>
+      <div class='card-body pt-3'>
+        <p>Thank you for contacting us</p>
+        <p>I have gone ahead and manually issued a new SSL for your domain.</p>
+      </div>
+    </div>
+
+    <div class='card my-4'>
+      <div class='card-header border-bottom'>
+        <h5 class='card-title'>Reply</h5>
+      </div>
+      <div class='card-body pt-3'>
+        <form action='' class='form-group'>
+
+          <textarea
+            class='form-control'
+            id='exampleFormControlTextarea1'
+            rows='5'
+          ></textarea>
+          <input
+            class='form-control mt-3'
+            type='file'
+            id='formFileMultiple'
+            multiple=''
+          />
+          <a href='#' class='btn btn-primary mt-3'>Add Reply</a>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>

@@ -52,6 +52,10 @@ export class Ticket extends BaseModel {
 
   @prop({ type: [Reply] })
   replies: Reply[];
+
+  createdDate: Date | string;
+
+  createdTime: Date | string;
 }
 
 export default getModelForClass(Ticket, {
