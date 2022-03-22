@@ -5,3 +5,7 @@ export const getNameLabel = (name: string): string => {
     .join('')
     .toUpperCase();
 };
+
+export const getUserFirstName = (name: string): string => {
+  return name?.split(' ')?.shift() || '';
+};
