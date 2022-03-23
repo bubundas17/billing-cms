@@ -46,7 +46,7 @@ export class User extends BaseModel {
   })
   roles: string[];
 
-  nameLabel: string;
+  nameLabel?: string;
 }
 
 export default getModelForClass(User, {

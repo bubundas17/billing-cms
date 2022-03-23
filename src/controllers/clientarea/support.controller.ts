@@ -44,34 +44,37 @@ export const postNewTicket = async (req: Request, res: Response) => {
 
 export const getViewTicket = async (req: Request, res: Response) => {
   try {
-    let ticket = await TicketApi.getTicket({
+    const createdTicket = await TicketApi.getTicket({
       createdBy: res.locals.user._id,
       _id: req.params.id,
     });
 
-    if (!ticket) {
+    if (!createdTicket) {
       req.flash('error', 'Ticket not found');
       return res.redirect('/clientarea/tickets');
     }
 
-    ticket = {
-      ...ticket,
-      createdDate: moment(ticket.createdAt).format('DD/MM/YYYY'),
-      createdTime: moment(ticket.createdAt).format('h:mm a'),
+    const ticket = {
+      ...createdTicket,
+      createdDate: moment(createdTicket.createdAt).format('DD/MM/YYYY'),
+      createdTime: moment(createdTicket.createdAt).format('h:mm a'),
       createdBy: {
-        ...(ticket.createdBy as User),
-        nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
+        ...(createdTicket.createdBy as User),
+        nameLabel: getNameLabel((createdTicket?.createdBy as User).name || ''),
       },
-      replies: ticket?.replies?.map((reply: Reply) => ({
+      replies: createdTicket?.replies?.map((reply: Reply) => ({
         ...reply,
         repliedBy: {
           ...(reply.repliedBy as User),
-          nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
+          nameLabel: getNameLabel(
+            (createdTicket?.createdBy as User).name || '',
+          ),
           firstName: getUserFirstName((reply.repliedBy as User).name || ''),
         },
         createdDate: moment(reply.createdAt).format('DD/MM/YYYY'),
         createdTime: moment(reply.createdAt).format('h:mm a'),
       })),
+      isClosed: createdTicket.status === 'closed' ? true : false,
     };
 
     res.load('clientarea/tickets/view', {

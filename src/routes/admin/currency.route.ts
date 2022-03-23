@@ -8,6 +8,7 @@ import {
   postEditCurrency,
   postUpdateDefaultCurrency,
 } from '@controllers/admin/currency.controller';
+import { ensureLoggedIn } from 'connect-ensure-login';
 
 class CurrencyRoute extends BaseRoute {
   constructor() {
@@ -16,15 +17,33 @@ class CurrencyRoute extends BaseRoute {
   }
 
   init() {
-    this.router.get('/', getCurrencies);
+    this.router.get(
+      '/',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      getCurrencies,
+    );
 
-    this.router.route('/new').get(getAddCurrency).post(postAddCurrency);
+    this.router
+      .route('/new')
+      .get(ensureLoggedIn({ redirectTo: '/auth/signin' }), getAddCurrency)
+      .post(ensureLoggedIn({ redirectTo: '/auth/signin' }), postAddCurrency);
 
-    this.router.route('/edit/:id').get(getEditCurrency).post(postEditCurrency);
+    this.router
+      .route('/edit/:id')
+      .get(ensureLoggedIn({ redirectTo: '/auth/signin' }), getEditCurrency)
+      .post(ensureLoggedIn({ redirectTo: '/auth/signin' }), postEditCurrency);
 
-    this.router.post('/delete', postDeleteCurrency);
+    this.router.post(
+      '/delete',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      postDeleteCurrency,
+    );
 
-    this.router.post('/update-default-currency', postUpdateDefaultCurrency);
+    this.router.post(
+      '/update-default-currency',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      postUpdateDefaultCurrency,
+    );
   }
 }
 

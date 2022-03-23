@@ -3,7 +3,7 @@ import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 import { User } from '@models/user.model';
 import BaseModel from '@models/base.model';
 
-enum TicketStatus {
+export enum TicketStatus {
   Open = 'open',
   Closed = 'closed',
   Answerd = 'answerd',
@@ -11,13 +11,13 @@ enum TicketStatus {
   OnProgress = 'on-progress',
 }
 
-enum TicketPriority {
+export enum TicketPriority {
   Low = 'low',
   Medium = 'medium',
   High = 'high',
 }
 
-enum TicketType {
+export enum TicketType {
   Support = 'support',
   Sales = 'sales',
   Billing = 'billing',
@@ -58,10 +58,6 @@ export class Ticket extends BaseModel {
 
   @prop({ type: [Reply] })
   replies?: Reply[];
-
-  createdDate: Date | string;
-
-  createdTime: Date | string;
 }
 
 export default getModelForClass(Ticket, {

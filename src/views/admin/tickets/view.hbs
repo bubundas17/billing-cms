@@ -1,6 +1,6 @@
 <div class='container'>
   <div>
-    <div class="mt-4">
+    <div class='mt-4'>
       <h3>{{ticket.subject}}</h3>
     </div>
     <div class='card mb-4'>
@@ -73,6 +73,17 @@
           method='post'
           class='form-group'
         >
+          <select
+            name='status'
+            class='form-select mb-3'
+            aria-label='Default select example'
+          >
+            <option selected>Open this select menu</option>
+            <option value='open'>Open</option>
+            <option value='closed'>Closed</option>
+            <option value='answerd' selected>Answerd</option>
+            <option value='on-progress'>On Progress</option>
+          </select>
           <textarea
             class='form-control'
             id='body'

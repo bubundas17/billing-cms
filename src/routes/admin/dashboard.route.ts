@@ -1,3 +1,5 @@
+import { ensureLoggedIn } from 'connect-ensure-login';
+
 import { getDashboard } from '@controllers/index';
 import BaseRoute from '@routes/base.route';
 
@@ -8,7 +10,11 @@ class DashboardRoute extends BaseRoute {
   }
 
   init() {
-    this.router.get('/', getDashboard);
+    this.router.get(
+      '/',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      getDashboard,
+    );
   }
 }
 
