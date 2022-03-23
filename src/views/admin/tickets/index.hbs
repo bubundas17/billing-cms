@@ -10,7 +10,7 @@
                     <h5>Support Tickets</h5>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="/clientarea/tickets/new" class="btn btn-primary">New</a>
+                    <a href="/admin/tickets/new" class="btn btn-primary">New</a>
                 </div>
             </div>
         </div>
@@ -28,13 +28,16 @@
                     {{#each tickets}}
                     <tr>
                         <td>
-                            <div class="d-flex">
-                                <div class="d-flex flex-column"><a href="/clientarea/tickets/{{this._id}}"
-                                        class="text-body text-truncate"><span
-                                            class="fw-semibold">{{subject}}</span></a><small
-                                        class="text-muted"> opened {{createdAt}} by {{createdBy.email}}</small>
+                            <a href="/admin/tickets/{{this._id}}">
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column">
+                                        <a href="/admin/tickets/{{this._id}}"
+                                            class="text-body text-truncate"><span
+                                                class="fw-semibold">{{subject}}</span></a><small
+                                            class="text-muted">opened {{createdAt}} by {{createdBy.email}}</small>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </td>
                         <td><span class="badge bg-info">{{status}}</span></td>
                         <td>

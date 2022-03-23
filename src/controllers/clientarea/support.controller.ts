@@ -62,7 +62,7 @@ export const getViewTicket = async (req: Request, res: Response) => {
         ...(ticket.createdBy as User),
         nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
       },
-      replies: ticket.replies.map((reply: Reply) => ({
+      replies: ticket?.replies?.map((reply: Reply) => ({
         ...reply,
         repliedBy: {
           ...(reply.repliedBy as User),

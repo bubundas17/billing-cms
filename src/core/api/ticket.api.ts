@@ -25,7 +25,7 @@ class TicketApi {
     }
     return await TicketModel.findById(id)
       .populate('createdBy')
-      .populate('replies')
+      .populate('replies.repliedBy')
       .lean();
   }
 
@@ -53,7 +53,7 @@ class TicketApi {
 
     if (!ticket) return false;
 
-    ticket.replies.unshift({
+    ticket?.replies?.unshift({
       body: reply,
       repliedBy: user._id,
     });

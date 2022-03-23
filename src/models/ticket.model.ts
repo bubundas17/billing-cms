@@ -6,6 +6,9 @@ import BaseModel from '@models/base.model';
 enum TicketStatus {
   Open = 'open',
   Closed = 'closed',
+  Answerd = 'answerd',
+  ClientReply = 'client-reply',
+  OnProgress = 'on-progress',
 }
 
 enum TicketPriority {
@@ -54,7 +57,7 @@ export class Ticket extends BaseModel {
   createdBy: Ref<User>;
 
   @prop({ type: [Reply] })
-  replies: Reply[];
+  replies?: Reply[];
 
   createdDate: Date | string;
 
