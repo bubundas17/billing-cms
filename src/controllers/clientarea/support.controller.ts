@@ -4,10 +4,13 @@ import moment from 'moment';
 import TicketApi from '@core/api/ticket.api';
 import AppError from '@exceptions/AppError';
 import { User } from '@models/user.model';
-import { getNameLabel } from '@helpers/user.helper';
+import { getNameLabel, getUserFirstName } from '@helpers/user.helper';
+import { Reply } from '@models/ticket.model';
 
 export const getTickets = async (_req: Request, res: Response) => {
-  const tickets = await TicketApi.getTickets();
+  const tickets = await TicketApi.getTickets({
+    createdBy: res.locals.user._id,
+  });
 
   res.load('clientarea/tickets/index', {
     tickets: tickets.map((ticket) => ({
@@ -41,7 +44,10 @@ export const postNewTicket = async (req: Request, res: Response) => {
 
 export const getViewTicket = async (req: Request, res: Response) => {
   try {
-    let ticket = await TicketApi.getTicketById(req.params.id);
+    let ticket = await TicketApi.getTicket({
+      createdBy: res.locals.user._id,
+      _id: req.params.id,
+    });
 
     if (!ticket) {
       req.flash('error', 'Ticket not found');
@@ -56,6 +62,16 @@ export const getViewTicket = async (req: Request, res: Response) => {
         ...(ticket.createdBy as User),
         nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
       },
+      replies: ticket.replies.map((reply: Reply) => ({
+        ...reply,
+        repliedBy: {
+          ...(reply.repliedBy as User),
+          nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
+          firstName: getUserFirstName((reply.repliedBy as User).name || ''),
+        },
+        createdDate: moment(reply.createdAt).format('DD/MM/YYYY'),
+        createdTime: moment(reply.createdAt).format('h:mm a'),
+      })),
     };
 
     res.load('clientarea/tickets/view', {
@@ -64,5 +80,28 @@ export const getViewTicket = async (req: Request, res: Response) => {
   } catch (error) {
     req.flash('error', (error as AppError).message || 'Something went wrong');
     return res.redirect('/clientarea/tickets');
+  }
+};
+
+export const postReplyTicket = async (req: Request, res: Response) => {
+  try {
+    const user: User = res.locals.user;
+
+    const repliedTicket = await TicketApi.ticketReply(
+      user,
+      req.params.id,
+      req.body.body,
+    );
+
+    if (!repliedTicket) {
+      req.flash('error', 'Permission denied');
+      return res.redirect('/clientarea/tickets/' + req.params.id);
+    }
+
+    req.flash('success', 'Reply added successfully');
+    res.status(201).redirect(`/clientarea/tickets/${req.params.id}`);
+  } catch (error) {
+    req.flash('error', (error as AppError).message || 'Something went wrong');
+    return res.redirect(`/clientarea/tickets/${req.params.id}`);
   }
 };

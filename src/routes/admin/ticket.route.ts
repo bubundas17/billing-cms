@@ -1,6 +1,8 @@
 import TicketModel from '@models/ticket.model';
+import TicketApi from '@core/api/ticket.api';
 import BaseRoute from '@routes/base.route';
 import { ensureLoggedIn } from 'connect-ensure-login';
+import moment from 'moment';
 
 class TicketRoute extends BaseRoute {
   constructor() {
@@ -10,11 +12,13 @@ class TicketRoute extends BaseRoute {
 
   init() {
     this.router.get('/', async (_req, res) => {
-      const tickets = await TicketModel.find().lean();
-      console.log(tickets);
+      const tickets = await TicketApi.getTickets();
 
       res.render('admin/tickets', {
-        tickets,
+        tickets: tickets.map((ticket) => ({
+          ...ticket,
+          createdAt: moment(ticket.createdAt).fromNow(),
+        })),
       });
     });
 

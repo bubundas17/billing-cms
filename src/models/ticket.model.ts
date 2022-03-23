@@ -21,11 +21,14 @@ enum TicketType {
 }
 
 export class Reply {
-  @prop()
+  @prop({ trim: true })
   body: string;
 
   @prop({ ref: () => User })
   repliedBy: Ref<User>;
+
+  @prop({ default: Date.now })
+  createdAt?: Date;
 }
 
 export class Ticket extends BaseModel {
