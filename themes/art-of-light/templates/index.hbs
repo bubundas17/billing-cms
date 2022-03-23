@@ -10,5 +10,12 @@
   {{session.test}}
   Name: {{currency.name}} = Code: {{currency.code}}
 
+  <div id="#app1">
+    <div v-scope="{count: 0}">\{{count}}</div>
+  </div>
+  <script>
+    PetiteVue.createApp({
 
+    }).mount('#app1');
+  </script>
 </div>

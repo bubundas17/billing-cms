@@ -1,7 +1,7 @@
 import BaseRoute from '@routes/base.route';
 import { getCurrency } from '@middlewares/currency.middleware';
 
-class HomeRoute extends BaseRoute {
+class CurrencyRoute extends BaseRoute {
   constructor() {
     super('/');
     this.init();
@@ -17,4 +17,4 @@ class HomeRoute extends BaseRoute {
   }
 }
 
-export default HomeRoute;
+export default CurrencyRoute;
