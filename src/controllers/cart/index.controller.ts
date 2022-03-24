@@ -4,3 +4,9 @@ export const getCart = async (_req: Request, res: Response) => {
     title: 'Cart',
   });
 };
+
+export const getCartConfigration = (_req: Request, res: Response) => {
+  res.load('cart/configuration', {
+    title: 'Cart Configuration',
+  });
+};
