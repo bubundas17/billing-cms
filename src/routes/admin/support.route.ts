@@ -27,16 +27,16 @@ class TicketRoute extends BaseRoute {
       .get(ensureLoggedIn({ redirectTo: '/auth/signin' }), getNewTicket)
       .post(ensureLoggedIn({ redirectTo: '/auth/signin' }), postNewTicket);
 
-    this.router.post(
-      '/:id/reply',
-      ensureLoggedIn({ redirectTo: '/auth/signin' }),
-      postReplyTicket,
-    );
-
     this.router.get(
       '/:id',
       ensureLoggedIn({ redirectTo: '/auth/signin' }),
       getViewTicket,
+    );
+
+    this.router.post(
+      '/:id/reply',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      postReplyTicket,
     );
   }
 }
