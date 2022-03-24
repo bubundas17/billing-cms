@@ -86,7 +86,12 @@ export const getViewTicket = async (req: Request, res: Response) => {
     })),
   };
 
-  res.render('admin/tickets/view', { ticket: adminTicket });
+  console.log(adminTicket.status);
+
+  res.render('admin/tickets/view', {
+    ticket: adminTicket,
+    status: 'Open',
+  });
 };
 
 export const postCloseTicket = async (req: Request, res: Response) => {
