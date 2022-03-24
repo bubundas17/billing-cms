@@ -21,7 +21,11 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 };
 
 export const getAddProduct = async (_req: Request, res: Response) => {
-  res.render('admin/products/add-edit');
+  const groups = await ProductApi.getAllProductGroups();
+  res.render('admin/products/add-edit', {
+    groups,
+    product: new ProductDto(),
+  });
 };
 
 export const getEditProduct = async (req: Request, res: Response) => {
@@ -30,12 +34,14 @@ export const getEditProduct = async (req: Request, res: Response) => {
   if (!isValidObjectId(id)) return res.redirect('/admin/products');
 
   const product = await ProductApi.getProductById(id);
+  const groups = await ProductApi.getAllProductGroups();
 
   if (!product) return res.redirect('/admin/products');
 
   res.render('admin/products/add-edit', {
     edit: true,
     product,
+    groups,
   });
 };
 

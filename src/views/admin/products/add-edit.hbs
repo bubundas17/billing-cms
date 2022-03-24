@@ -3,32 +3,30 @@
   {{> flash-message }}
 
   <div v-if="this.errors">
-    <div  v-for="error in errors" class="alert alert-danger" role="alert">
+    <div v-for="error in errors" class="alert alert-danger" role="alert">
       \{{ error }}
     </div>
   </div>
 
   <div class="container-fluid">
-    <div class="card card-info">
-      <div class="card-info__header">
-        <div class='card-info__header-name h-2.5 d-flex align-items-center'>
-          <span class='ms-2 card-info__header-name'>
+    <div class="card ">
+      <div class="card-header">
+        <div class='card-title h-2.5 d-flex align-items-center'>
+          <h5 class='ms-2'>
             {{#if edit}}
             Update Product: {{ product.name }}
             {{else}}
             Add New Product
             {{/if}}
-          </span>
+          </h5>
         </div>
       </div>
-      <div class="card-info__content">
-        <form name="productForm" 
-        method='post'
-        @submit="onSubmitForm">
-          <div class='rounded client-details'>
-            <div class='mt-2 row row-cols-1 row-cols-xl-2 g-2 m-0'>
+      <div class="card-body">
+        <form name="productForm" method='post' @submit="onSubmitForm">
+          <div class='row'>
+            <div class='col-12'>
               <div class='px-4 py-2'>
-                <div class='mb-3 row'>
+                <div class='mb-3'>
                   <label for='name'
                     class='custom-base-text custom-base-text-lilac_blue col-auto col-form-label text-nowrap'
                     style='width: 8.5rem;'>
@@ -42,7 +40,14 @@
                   </div>
                 </div>
 
-                <div class='mb-3 row mr-0 pr-0'>
+                <div class="mb-3">
+                  <label for="defaultSelect" class="form-label">Product Group</label>
+                  <select id="defaultSelect" class="form-select" name="group" v-model="product.group">
+                    <option :value="group._id" v-for="group in groups">\{{group.name}}</option>
+                  </select>
+                </div>
+
+                <div class='mb-3'>
                   <label for='description' name="description"
                     class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
                     style='width: 8.5rem;'>
@@ -57,61 +62,57 @@
                   </div>
                 </div>
               </div>
-              <div class="px-4">
+              <div class="col-12">
+
+                <div id="priceInputs">
+                  <div v-for="(price, index) in product.prices" :v-key="price.label" class="my-5 p-2 bg-light row">
+                    <div class="col-10">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon11">Price</span>
+                        <input type="text" class="form-control" placeholder="Price" aria-label="Price"
+                          v-model="price.price" aria-describedby="basic-addon11">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text {{errorInput errors " price"}}" id="basic-addon11">Label</span>
+                        <input type="text" class="form-control" placeholder="Label" aria-label="Label"
+                          v-model="price.label">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon11">Duration</span>
+                        <input type="text" class="form-control" placeholder="Duration" aria-label="Duration"
+                          v-model="price.duration" type="number">
+                        <span id="basic-default-password2" class="input-group-text cursor-pointer">Days</span>
+                      </div>
+
+                    </div>
+                    <div class="col-2">
+                      <div class="d-flex flex-column">
+                        <button type="button" class="btn btn-danger btn-sm mb-1" @click="moveUp(index)">
+                          <i class="fa-solid fa-arrow-up-long"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm mb-1" @click="remove(index)">
+                          <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm mb-1" @click="moveDown(index)">
+                          <i class="fa-solid fa-down-long"></i>
+                        </button>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </div>
                 <div class="py-2">
                   <button type="button" id="addNewPrice" class="btn btn-primary" @click="addPrice(0)">Add new
                     price</button>
-                </div>
-                <div id="priceInputs">
-                  <div v-for="(price, index) in product.prices" :v-key="price.label">
-                    <div class='mb-3 row'>
-                      <label for='price' name="price"
-                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue {{errorInput errors "price"}}'
-                        style='width: 8.5rem;'>
-                        Price
-                      </label>
-                      <div class='col-12 col-md-8'>
-                        <input type='text' class='form-control custom-base-text custom-base-text-lilac_blue'
-                          v-model="price.price" />
-                        {{errorMessage errors 'price'}}
-                      </div>
-                    </div>
-
-                    <div class='mb-3 row'>
-                      <label for='label' name="label"
-                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-                        style='width: 8.5rem;'>
-                        Price Label
-                      </label>
-                      <div class='col-12 col-md-8'>
-                        <input type='text'
-                          class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "label"}}'
-                          v-model="price.label" />
-                        {{errorMessage errors 'label'}}
-                      </div>
-                    </div>
-
-                    <div class='mb-3 row'>
-                      <label for='duration'
-                        class='col-auto col-form-label text-nowrap custom-base-text custom-base-text-lilac_blue'
-                        style='width: 8.5rem;'>
-                        Price Duration
-                      </label>
-                      <div class='col-12 col-md-8'>
-                        <input type='text'
-                          class='form-control custom-base-text custom-base-text-lilac_blue {{errorInput errors "duration"}}'
-                          v-model="price.duration" style='width: 100%;' />
-                        {{errorMessage errors 'duration'}}
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
 
             <div class='row row-cols-1 g-2 m-0'>
               <div class='px-4 pb-4 text-center'>
-                <button type='submit' class='col-auto btn btn--bright_navy_blue'>
+                <button type='submit' class='col-auto btn bg-primary text-white'>
                   {{#if edit}}
                   <i class='fas fa-save'></i>
                   <span class='ms-2'>Update Product</span>
@@ -131,6 +132,7 @@
 
 <script>
   const _product = {{{ json product }}}
+  const _groups = {{{ json groups }}}
 
   Vue.createApp({
     data() {
@@ -146,6 +148,7 @@
             }
           ],
         },
+        groups: _groups,
         errors: null,
         edit: false,
       }
@@ -158,12 +161,25 @@
           duration: 0,
         });
       },
+      remove(index) {
+        this.product.prices.splice(index, 1);
+      },
+      moveUp(index) {
+        if (index > 0) {
+          this.product.prices.splice(index - 1, 0, this.product.prices.splice(index, 1)[0]);
+        }
+      },
+      moveDown(index) {
+        if (index < this.product.prices.length - 1) {
+          this.product.prices.splice(index + 1, 0, this.product.prices.splice(index, 1)[0]);
+        }
+      },
       async onSubmitForm(e) {
         e.preventDefault();
 
         this.errors = null;
 
-      const {_id, ...rest} = {...this.product};
+        const { _id, ...rest } = { ...this.product };
 
         const res = await fetch(this.edit ? '/admin/products/{{this.product._id}}' : '/admin/products/new', {
           method: 'POST',
