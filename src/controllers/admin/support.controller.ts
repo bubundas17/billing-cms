@@ -64,8 +64,12 @@ export const postReplyTicket = async (req: Request, res: Response) => {
 };
 
 export const getViewTicket = async (req: Request, res: Response) => {
+  // console.log(req.params);
   const ticket = await TicketApi.getTicketById(req.params.id);
-
+  if (!ticket) {
+    req.flash('error', 'Ticket not found');
+    return res.redirect('/admin/tickets');
+  }
   const adminTicket = {
     ...ticket,
     createdDate: moment(ticket?.createdAt).format('DD/MM/YYYY'),

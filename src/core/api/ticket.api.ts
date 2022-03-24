@@ -23,7 +23,7 @@ class TicketApi {
 
   static async getTicketById(id: string) {
     if (!isValidObjectId(id)) {
-      throw new Error('Invalid ticket id');
+      return null;
     }
     return await TicketModel.findById(id)
       .populate('createdBy')
