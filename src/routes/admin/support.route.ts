@@ -7,6 +7,7 @@ import {
   getViewTicket,
   postNewTicket,
   postReplyTicket,
+  postCloseTicket,
 } from '@controllers/admin/support.controller';
 
 class TicketRoute extends BaseRoute {
@@ -26,6 +27,12 @@ class TicketRoute extends BaseRoute {
       .route('/new')
       .get(ensureLoggedIn({ redirectTo: '/auth/signin' }), getNewTicket)
       .post(ensureLoggedIn({ redirectTo: '/auth/signin' }), postNewTicket);
+
+    this.router.post(
+      '/close',
+      ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      postCloseTicket,
+    );
 
     this.router.get(
       '/:id',

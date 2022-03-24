@@ -5,7 +5,7 @@ import TicketApi from '@core/api/ticket.api';
 import { User } from '@models/user.model';
 import { getNameLabel, getUserFirstName } from '@helpers/user.helper';
 import AppError from '@exceptions/AppError';
-import { Reply } from '@models/ticket.model';
+import { Reply, TicketStatus } from '@models/ticket.model';
 
 export const getTickets = async (_req: Request, res: Response) => {
   const tickets = await TicketApi.getTickets();
@@ -47,7 +47,7 @@ export const postReplyTicket = async (req: Request, res: Response) => {
     const repliedTicket = await TicketApi.ticketReply(
       user,
       req.params.id,
-      req.body.body,
+      req.body,
     );
 
     if (!repliedTicket) {
@@ -87,4 +87,30 @@ export const getViewTicket = async (req: Request, res: Response) => {
   };
 
   res.render('admin/tickets/view', { ticket: adminTicket });
+};
+
+export const postCloseTicket = async (req: Request, res: Response) => {
+  try {
+    const ticket = await TicketApi.getTicketById(req.body.ticketId);
+
+    if (!ticket) {
+      req.flash('error', 'Ticket not found');
+      return res.redirect('/admin/tickets');
+    }
+
+    if (ticket.status === TicketStatus.Closed) {
+      req.flash('error', 'Ticket already closed');
+      return res.redirect('/admin/tickets');
+    }
+
+    await TicketApi.ticketReply(res.locals.user, req.body.ticketId, {
+      status: TicketStatus.Closed,
+    });
+
+    req.flash('success', 'Ticket closed successfully');
+    res.redirect('/admin/tickets');
+  } catch (error) {
+    req.flash('error', 'Error closing ticket');
+    res.redirect('/admin/tickets');
+  }
 };

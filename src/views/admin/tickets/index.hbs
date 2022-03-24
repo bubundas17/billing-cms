@@ -44,9 +44,12 @@
                             <div class="d-inline-block"><button class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
                                     data-bs-toggle="dropdown" aria-expanded="false"><i
                                         class="fa-solid fa-ellipsis-vertical"></i></button>
-                                <div class="dropdown-menu dropdown-menu-end" style=""><a
-                                        href="app-user-view-account.html" class="dropdown-item">View</a><a
-                                        href="javascript:;" class="dropdown-item">Close</a>
+                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                    <a href="app-user-view-account.html" class="dropdown-item">View</a>
+                                    <form action="/admin/tickets/close" method="post">
+                                        <input type="hidden" name="ticketId" value="{{this._id}}">
+                                        <button type="submit" class="dropdown-item">Close</button>
+                                    </form>
                                 </div>
                             </div>
                         </td>

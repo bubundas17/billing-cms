@@ -1,8 +1,10 @@
-import TicketModel, { Ticket, TicketStatus } from '@models/ticket.model';
-import { User } from '@models/user.model';
 import { DocumentType } from '@typegoose/typegoose';
 import { BeAnObject } from '@typegoose/typegoose/lib/types';
+import { isNotEmpty } from 'class-validator';
 import { FilterQuery, isValidObjectId } from 'mongoose';
+
+import TicketModel, { Ticket, TicketStatus } from '@models/ticket.model';
+import { User } from '@models/user.model';
 
 class TicketApi {
   static async createTicket(ticket: Ticket): Promise<Ticket> {
@@ -38,7 +40,11 @@ class TicketApi {
       .lean();
   }
 
-  static async ticketReply(user: User, ticketId: string, reply: string) {
+  static async ticketReply(
+    user: User,
+    ticketId: string,
+    reply: { [key: string]: unknown },
+  ) {
     const isAdmin = user.roles.includes('admin');
 
     let ticketStatus = TicketStatus.Open;
@@ -46,7 +52,7 @@ class TicketApi {
 
     if (isAdmin) {
       ticketOptions['_id'] = ticketId;
-      switch (reply) {
+      switch (reply['status']) {
         case TicketStatus.Answerd:
           ticketStatus = TicketStatus.Answerd;
           break;
@@ -55,6 +61,9 @@ class TicketApi {
           break;
         case TicketStatus.OnProgress:
           ticketStatus = TicketStatus.OnProgress;
+          break;
+        case TicketStatus.Open:
+          ticketStatus = TicketStatus.Open;
           break;
         default:
           ticketStatus = TicketStatus.Answerd;
@@ -73,10 +82,11 @@ class TicketApi {
     if (isAdmin || ticket.status !== TicketStatus.Closed)
       ticket.status = ticketStatus;
 
-    ticket?.replies?.unshift({
-      body: reply,
-      repliedBy: user._id,
-    });
+    if (isNotEmpty(reply.body))
+      ticket?.replies?.unshift({
+        body: String(reply.body),
+        repliedBy: user._id,
+      });
 
     await ticket.save();
 
