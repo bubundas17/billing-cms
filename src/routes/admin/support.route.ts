@@ -9,6 +9,7 @@ import {
   postReplyTicket,
   postCloseTicket,
 } from '@controllers/admin/support.controller';
+import { upload } from '@utils/uploader';
 
 class TicketRoute extends BaseRoute {
   constructor() {
@@ -26,7 +27,11 @@ class TicketRoute extends BaseRoute {
     this.router
       .route('/new')
       .get(ensureLoggedIn({ redirectTo: '/auth/signin' }), getNewTicket)
-      .post(ensureLoggedIn({ redirectTo: '/auth/signin' }), postNewTicket);
+      .post(
+        ensureLoggedIn({ redirectTo: '/auth/signin' }),
+        upload.array('file'),
+        postNewTicket,
+      );
 
     this.router.post(
       '/close',
@@ -43,6 +48,7 @@ class TicketRoute extends BaseRoute {
     this.router.post(
       '/:id/reply',
       ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      upload.array('file'),
       postReplyTicket,
     );
   }

@@ -28,7 +28,15 @@ export const postNewTicket = async (req: Request, res: Response) => {
   try {
     const user = res.locals.user;
 
-    await TicketApi.createTicket({ ...req.body, createdBy: user._id });
+    const attachments = (req.files as Express.Multer.File[])?.map(
+      (file) => file.filename,
+    );
+
+    await TicketApi.createTicket({
+      ...req.body,
+      attachedFiles: attachments,
+      createdBy: user._id,
+    });
 
     req.flash('success', 'Ticket created successfully');
     res.redirect('/clientarea/tickets');
@@ -90,11 +98,14 @@ export const postReplyTicket = async (req: Request, res: Response) => {
   try {
     const user: User = res.locals.user;
 
-    const repliedTicket = await TicketApi.ticketReply(
-      user,
-      req.params.id,
-      req.body.body,
+    const attachments = (req.files as Express.Multer.File[])?.map(
+      (file) => file.filename,
     );
+
+    const repliedTicket = await TicketApi.ticketReply(user, req.params.id, {
+      ...req.body.body,
+      attachments,
+    });
 
     if (!repliedTicket) {
       req.flash('error', 'Permission denied');

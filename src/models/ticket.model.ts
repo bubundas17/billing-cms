@@ -30,6 +30,9 @@ export class Reply {
   @prop({ ref: () => User })
   repliedBy: Ref<User>;
 
+  @prop({ type: () => [String] })
+  attachedFiles: string[];
+
   @prop({ default: Date.now })
   createdAt?: Date;
 }
@@ -50,8 +53,8 @@ export class Ticket extends BaseModel {
   @prop({ enum: TicketPriority, default: TicketPriority.Low })
   priority: TicketPriority;
 
-  @prop()
-  attachedFile: string;
+  @prop({ type: () => [String] })
+  attachedFiles: string[];
 
   @prop({ required: true, ref: () => User })
   createdBy: Ref<User>;

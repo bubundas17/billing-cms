@@ -8,6 +8,7 @@ import {
   postReplyTicket,
 } from '@controllers/clientarea/support.controller';
 import BaseRoute from '@routes/base.route';
+import { upload } from '@utils/uploader';
 
 class SupportTickets extends BaseRoute {
   constructor() {
@@ -20,7 +21,10 @@ class SupportTickets extends BaseRoute {
       .route('/')
       .get(ensureLoggedIn({ redirectTo: '/auth/signin' }), getTickets);
 
-    this.router.route('/new').get(getNewTicket).post(postNewTicket);
+    this.router
+      .route('/new')
+      .get(getNewTicket)
+      .post(upload.array('file'), postNewTicket);
 
     this.router
       .route('/:id')
@@ -29,6 +33,7 @@ class SupportTickets extends BaseRoute {
     this.router.post(
       '/:id/reply',
       ensureLoggedIn({ redirectTo: '/auth/signin' }),
+      upload.array('file'),
       postReplyTicket,
     );
   }

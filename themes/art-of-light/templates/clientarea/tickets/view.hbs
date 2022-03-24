@@ -81,6 +81,7 @@
           action='/clientarea/tickets/{{ticket._id}}/reply'
           method='post'
           class='form-group'
+          enctype='multipart/form-data'
         >
           <textarea
             class='form-control'
@@ -92,6 +93,7 @@
             class='form-control mt-3'
             type='file'
             id='formFileMultiple'
+            name='file'
             multiple=''
           />
           <button type='submit' class='btn btn-primary mt-3'>Add Reply</button>

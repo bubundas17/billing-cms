@@ -86,6 +86,7 @@ class TicketApi {
       ticket?.replies?.unshift({
         body: String(reply.body),
         repliedBy: user._id,
+        attachedFiles: reply.attachments as Array<string>,
       });
 
     await ticket.save();

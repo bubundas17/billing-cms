@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, Express } from 'express';
 import moment from 'moment';
 
 import TicketApi from '@core/api/ticket.api';
@@ -24,9 +24,14 @@ export const getNewTicket = async (_req: Request, res: Response) => {
 
 export const postNewTicket = async (req: Request, res: Response) => {
   try {
+    const attachments = (req.files as Express.Multer.File[])?.map(
+      (file) => file.filename,
+    );
+
     await TicketApi.createTicket({
       ...req.body,
       createdBy: res.locals.user,
+      attachedFiles: attachments,
     });
 
     req.flash('success', 'Ticket created successfully');
@@ -44,11 +49,14 @@ export const postReplyTicket = async (req: Request, res: Response) => {
   try {
     const user: User = res.locals.user;
 
-    const repliedTicket = await TicketApi.ticketReply(
-      user,
-      req.params.id,
-      req.body,
+    const attachments = (req.files as Express.Multer.File[])?.map(
+      (file) => file.filename,
     );
+
+    const repliedTicket = await TicketApi.ticketReply(user, req.params.id, {
+      ...req.body,
+      attachments,
+    });
 
     if (!repliedTicket) {
       req.flash('error', 'Permission denied');
@@ -64,7 +72,6 @@ export const postReplyTicket = async (req: Request, res: Response) => {
 };
 
 export const getViewTicket = async (req: Request, res: Response) => {
-  // console.log(req.params);
   const ticket = await TicketApi.getTicketById(req.params.id);
   if (!ticket) {
     req.flash('error', 'Ticket not found');
@@ -90,11 +97,8 @@ export const getViewTicket = async (req: Request, res: Response) => {
     })),
   };
 
-  console.log(adminTicket.status);
-
   res.render('admin/tickets/view', {
     ticket: adminTicket,
-    status: 'Open',
   });
 };
 
