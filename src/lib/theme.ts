@@ -10,6 +10,7 @@ import { isEmpty } from 'class-validator';
 import util from '@lib/util';
 import { deleteOption, getOption } from '@lib/options';
 import env from '@configs/env.config';
+import handlebarsHelper from '@helpers/handlebars.helper';
 
 const glob = promisify(globAsync);
 
@@ -29,6 +30,10 @@ type ThemeType = {
   themeBaseUri: string;
   active: boolean;
 };
+
+interface FunctionObject {
+  [index: string]: (...args: unknown[]) => unknown;
+}
 
 class Theme {
   private hbs: typeof Handlebars;
@@ -50,11 +55,13 @@ class Theme {
 
       const partials = await dirs.reduce(async (prev, current) => {
         const fileData = await util.readFile(theme.partialsFolderPath, current);
-        // console.log(current);
         const template = this.compileTemplate(fileData, context);
+
         const _prev = await prev;
+
         _prev[util.getFileName(current, '.hbs')] =
           this.renderTemplate(template, { ...context }) || '';
+
         return prev;
       }, Promise.resolve<{ [key: string]: unknown }>({}));
 
@@ -97,7 +104,11 @@ class Theme {
     }
   }
 
-  async render(filePath: string, context = {}, options = {}) {
+  async render(
+    filePath: string,
+    context = {},
+    options: { [key: string]: unknown } = {},
+  ) {
     try {
       if (isEmpty(filePath)) throw new Error('File path must not be empty');
 
@@ -120,16 +131,20 @@ class Theme {
         options,
       )) as HandlebarsTemplateDelegate;
 
+      const helpers = { ...(options.helpers as FunctionObject) };
+
+      console.log(helpers);
+
       let html = this.renderTemplate(
         template,
         { ...context },
-        { ...options, partials },
+        { ...options, partials, helpers },
       );
 
       html = this.renderTemplate(
         layoutTemplate,
         { ...context, body: html },
-        { partials },
+        { partials, helpers },
       );
 
       return html;
@@ -272,7 +287,14 @@ class Theme {
       const currentTheme = await this.getCurrentTheme();
 
       res.load = async (file, options = {}) => {
-        const doc = await this.render(file, { ...options, ...res.locals });
+        const doc = await this.render(
+          file,
+          {
+            ...options,
+            ...res.locals,
+          },
+          { helpers: handlebarsHelper },
+        );
         return res.send(doc);
       };
 

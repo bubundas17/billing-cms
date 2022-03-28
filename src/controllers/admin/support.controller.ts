@@ -3,9 +3,8 @@ import moment from 'moment';
 
 import TicketApi from '@core/api/ticket.api';
 import { User } from '@models/user.model';
-import { getNameLabel, getUserFirstName } from '@helpers/user.helper';
 import AppError from '@exceptions/AppError';
-import { Reply, TicketStatus } from '@models/ticket.model';
+import { TicketStatus } from '@models/ticket.model';
 
 export const getTickets = async (_req: Request, res: Response) => {
   const tickets = await TicketApi.getTickets();
@@ -77,28 +76,9 @@ export const getViewTicket = async (req: Request, res: Response) => {
     req.flash('error', 'Ticket not found');
     return res.redirect('/admin/tickets');
   }
-  const adminTicket = {
-    ...ticket,
-    createdDate: moment(ticket?.createdAt).format('DD/MM/YYYY'),
-    createdTime: moment(ticket?.createdAt).format('h:mm a'),
-    createdBy: {
-      ...(ticket?.createdBy as User),
-      nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
-    },
-    replies: ticket?.replies?.map((reply: Reply) => ({
-      ...reply,
-      repliedBy: {
-        ...(reply.repliedBy as User),
-        nameLabel: getNameLabel((ticket?.createdBy as User).name || ''),
-        firstName: getUserFirstName((reply.repliedBy as User).name || ''),
-      },
-      createdDate: moment(reply.createdAt).format('DD/MM/YYYY'),
-      createdTime: moment(reply.createdAt).format('h:mm a'),
-    })),
-  };
 
   res.render('admin/tickets/view', {
-    ticket: adminTicket,
+    ticket,
   });
 };
 

@@ -26,4 +26,5 @@ The plan is to build the functional side before the UI design is ready.
     [ ] Multi Currency Support
 
 [ ] Todo
-    [ ] Add perfect error handler in themes and plugins lib 
+    [ ] Add perfect error handler in themes and plugins lib
+    [ ] Create handlebars helpers methods implementation for client area
