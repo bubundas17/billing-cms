@@ -9,22 +9,16 @@
           <div class='d-flex justify-content-start align-items-center'>
             <div class='avatar-wrapper'>
               <div class='avatar avatar-sm me-3'><span
-                  class='avatar-initial rounded-circle bg-label-danger'
-                >{{ticket.createdBy.nameLabel}}</span></div>
+                  class='avatar-initial rounded-circle bg-label-danger'>{{nameAvatar ticket.createdBy.name}}</span>
+              </div>
             </div>
-            <div class='d-flex flex-column'><span
-                class='fw-semibold'
-              >{{ticket.createdBy.name}}
-                <span
-                  class='badge rounded-pill bg-label-info'
-                >Client</span></span>
+            <div class='d-flex flex-column'><span class='fw-semibold'>{{ticket.createdBy.name}}
+                <span class='badge rounded-pill bg-label-info'>Client</span></span>
               <small class='text-muted'>{{ticket.createdBy.email}}</small>
             </div>
           </div>
-          <div class='d-flex flex-column'><span
-              class='fw-semibold'
-            >{{ticket.createdDate}}</span>
-            <small class='text-muted'>{{ticket.createdTime}}</small>
+          <div class='d-flex flex-column'><span class='fw-semibold'>{{onlyDateFromDate ticket.createdAt}}</span>
+            <small class='text-muted'>{{timeFromDate ticket.createdAt}}</small>
           </div>
         </div>
       </div>
@@ -34,33 +28,28 @@
     </div>
 
     {{#each ticket.replies}}
-      <div class='card my-4'>
-        <div class='card-header border-bottom'>
-          <div class='d-flex justify-content-between'>
-            <div class='d-flex justify-content-start align-items-center'>
-              <div class='avatar-wrapper'>
-                <div class='avatar avatar-sm me-3'><span
-                    class='avatar-initial rounded-circle bg-label-info'
-                  >{{this.repliedBy.nameLabel}}</span></div>
-              </div>
-              <div class='d-flex flex-column'><span
-                  class='fw-semibold'
-                >{{this.repliedBy.firstName}}
-                  <span class='badge rounded-pill bg-label-danger'>Support Staff</span></span>
-                <small class='text-muted'>{{this.repliedBy.email}}</small>
-              </div>
+    <div class='card my-4'>
+      <div class='card-header border-bottom'>
+        <div class='d-flex justify-content-between'>
+          <div class='d-flex justify-content-start align-items-center'>
+            <div class='avatar-wrapper'>
+              <div class='avatar avatar-sm me-3'><span class='avatar-initial rounded-circle bg-label-info'>{{nameAvatar
+                  this.repliedBy.name}}</span></div>
             </div>
-            <div class='d-flex flex-column'><span
-                class='fw-semibold'
-              >{{this.createdDate}}</span>
-              <small class='text-muted'>{{this.createdTime}}</small>
+            <div class='d-flex flex-column'><span class='fw-semibold'>{{firstName this.repliedBy.name}}
+                <span class='badge rounded-pill bg-label-danger'>Support Staff</span></span>
+              <small class='text-muted'>{{this.repliedBy.email}}</small>
             </div>
           </div>
-        </div>
-        <div class='card-body pt-3'>
-          {{this.body}}
+          <div class='d-flex flex-column'><span class='fw-semibold'>{{onlyDateFromDate this.createdAt}}</span>
+            <small class='text-muted'>{{timeFromDate this.createdAt}}</small>
+          </div>
         </div>
       </div>
+      <div class='card-body pt-3'>
+        {{this.body}}
+      </div>
+    </div>
     {{/each}}
 
     <div class='card my-4'>
@@ -68,36 +57,17 @@
         <h5 class='card-title'>Reply</h5>
       </div>
       <div class='card-body pt-3'>
-        <form
-          action='/admin/tickets/{{ticket._id}}/reply'
-          method='post'
-          class='form-group'
-          enctype='multipart/form-data'
-        >
-          <select
-            name='status'
-            class='form-select mb-3'
-            aria-label='Default select example'
-          >
+        <form action='/admin/tickets/{{ticket._id}}/reply' method='post' class='form-group'
+          enctype='multipart/form-data'>
+          <select name='status' class='form-select mb-3' aria-label='Default select example'>
             <option disabled>Open this select menu</option>
             <option value='open'>Open</option>
             <option value='closed'>Closed</option>
             <option value='answerd' selected>Answerd</option>
             <option value='on-progress'>On Progress</option>
           </select>
-          <textarea
-            class='form-control'
-            id='body'
-            rows='5'
-            name='body'
-          ></textarea>
-          <input
-            class='form-control mt-3'
-            type='file'
-            id='formFileMultiple'
-            name='file'
-            multiple=''
-          />
+          <textarea class='form-control' id='body' rows='5' name='body'></textarea>
+          <input class='form-control mt-3' type='file' id='formFileMultiple' name='file' multiple='' />
           <button type='submit' class='btn btn-primary mt-3'>Add Reply</button>
         </form>
       </div>

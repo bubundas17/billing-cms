@@ -4,8 +4,6 @@ import moment from 'moment';
 import TicketApi from '@core/api/ticket.api';
 import AppError from '@exceptions/AppError';
 import { User } from '@models/user.model';
-import { getNameLabel, getUserFirstName } from '@helpers/user.helper';
-import { Reply } from '@models/ticket.model';
 
 export const getTickets = async (_req: Request, res: Response) => {
   const tickets = await TicketApi.getTickets({
@@ -52,38 +50,15 @@ export const postNewTicket = async (req: Request, res: Response) => {
 
 export const getViewTicket = async (req: Request, res: Response) => {
   try {
-    const createdTicket = await TicketApi.getTicket({
+    const ticket = await TicketApi.getTicket({
       createdBy: res.locals.user._id,
       _id: req.params.id,
     });
 
-    if (!createdTicket) {
+    if (!ticket) {
       req.flash('error', 'Ticket not found');
       return res.redirect('/clientarea/tickets');
     }
-
-    const ticket = {
-      ...createdTicket,
-      createdDate: moment(createdTicket.createdAt).format('DD/MM/YYYY'),
-      createdTime: moment(createdTicket.createdAt).format('h:mm a'),
-      createdBy: {
-        ...(createdTicket.createdBy as User),
-        nameLabel: getNameLabel((createdTicket?.createdBy as User).name || ''),
-      },
-      replies: createdTicket?.replies?.map((reply: Reply) => ({
-        ...reply,
-        repliedBy: {
-          ...(reply.repliedBy as User),
-          nameLabel: getNameLabel(
-            (createdTicket?.createdBy as User).name || '',
-          ),
-          firstName: getUserFirstName((reply.repliedBy as User).name || ''),
-        },
-        createdDate: moment(reply.createdAt).format('DD/MM/YYYY'),
-        createdTime: moment(reply.createdAt).format('h:mm a'),
-      })),
-      isClosed: createdTicket.status === 'closed' ? true : false,
-    };
 
     res.load('clientarea/tickets/view', {
       ticket,

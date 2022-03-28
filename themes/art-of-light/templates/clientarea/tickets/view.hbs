@@ -8,23 +8,25 @@
         <div class='d-flex justify-content-between'>
           <div class='d-flex justify-content-start align-items-center'>
             <div class='avatar-wrapper'>
-              <div class='avatar avatar-sm me-3'><span
-                  class='avatar-initial rounded-circle bg-label-danger'
-                >{{ticket.createdBy.nameLabel}}</span></div>
+              <div class='avatar avatar-sm me-3'><span class='avatar-initial rounded-circle bg-label-danger'>
+                  {{!-- {{nameAvatar ticket.createdBy.name}} --}}
+                  {{ticket.createdBy.name}}
+                </span>
+              </div>
             </div>
-            <div class='d-flex flex-column'><span
-                class='fw-semibold'
-              >{{ticket.createdBy.name}}
-                <span
-                  class='badge rounded-pill bg-label-info'
-                >Client</span></span>
+            <div class='d-flex flex-column'><span class='fw-semibold'>{{ticket.createdBy.name}}
+                <span class='badge rounded-pill bg-label-info'>Client</span></span>
               <small class='text-muted'>{{ticket.createdBy.email}}</small>
             </div>
           </div>
-          <div class='d-flex flex-column'><span
-              class='fw-semibold'
-            >{{ticket.createdDate}}</span>
-            <small class='text-muted'>{{ticket.createdTime}}</small>
+          <div class='d-flex flex-column'><span class='fw-semibold'>
+              {{!-- {{onlyDateFromDate ticket.createdAt}} --}}
+              {{ticket.createdAt}}
+            </span>
+            <small class='text-muted'>
+              {{!-- {{timeFromDate ticket.createdAt}} --}}
+              {{ticket.createdAt}}
+            </small>
           </div>
         </div>
       </div>
@@ -34,72 +36,66 @@
     </div>
 
     {{#each ticket.replies}}
-      <div class='card my-4'>
-        <div class='card-header border-bottom'>
-          <div class='d-flex justify-content-between'>
-            <div class='d-flex justify-content-start align-items-center'>
-              <div class='avatar-wrapper'>
-                <div class='avatar avatar-sm me-3'><span
-                    class='avatar-initial rounded-circle bg-label-info'
-                  >{{this.repliedBy.nameLabel}}</span></div>
-              </div>
-              <div class='d-flex flex-column'><span
-                  class='fw-semibold'
-                >{{this.repliedBy.firstName}}
-                  <span class='badge rounded-pill bg-label-danger'>Support Staff</span></span>
-                <small class='text-muted'>{{this.repliedBy.email}}</small>
+    <div class='card my-4'>
+      <div class='card-header border-bottom'>
+        <div class='d-flex justify-content-between'>
+          <div class='d-flex justify-content-start align-items-center'>
+            <div class='avatar-wrapper'>
+              <div class='avatar avatar-sm me-3'>
+                <span class='avatar-initial rounded-circle bg-label-info'>
+                  {{!-- {{nameAvatar ticket.createdBy.name}} --}}
+                  {{ticket.createdBy.name}}
+                </span>
               </div>
             </div>
-            <div class='d-flex flex-column'><span
-                class='fw-semibold'
-              >{{this.createdDate}}</span>
-              <small class='text-muted'>{{this.createdTime}}</small>
+            <div class='d-flex flex-column'>
+              <span class='fw-semibold'>
+                {{!-- {{firstName this.repliedBy.name}} --}}
+                {{this.repliedBy.name}}
+                <span class='badge rounded-pill bg-label-danger'>Support Staff</span>
+              </span>
+              <small class='text-muted'>{{this.repliedBy.email}}</small>
             </div>
           </div>
-        </div>
-        <div class='card-body pt-3'>
-          {{this.body}}
+          <div class='d-flex flex-column'><span class='fw-semibold'>
+              {{!-- {{onlyDateFromDate this.createdAt}} --}}
+              {{this.createdAt}}
+            </span>
+            <small class='text-muted'>
+              {{!-- {{timeFromDate this.createdAt}} --}}
+              {{this.createdAt}}
+            </small>
+          </div>
         </div>
       </div>
+      <div class='card-body pt-3'>
+        {{this.body}}
+      </div>
+    </div>
     {{/each}}
 
     {{#if ticket.isClosed}}
-        <div class='card my-4'>
+    <div class='card my-4'>
       <div class='card-header border-bottom'>
         <h5 class='card-title'>Reply</h5>
       </div>
       <div class='card-body pt-3'>
         <p>This ticket is closed.</p>
       </div>
-    {{else}}
+      {{else}}
       <div class='card my-4'>
-      <div class='card-header border-bottom'>
-        <h5 class='card-title'>Reply</h5>
+        <div class='card-header border-bottom'>
+          <h5 class='card-title'>Reply</h5>
+        </div>
+        <div class='card-body pt-3'>
+          <form action='/clientarea/tickets/{{ticket._id}}/reply' method='post' class='form-group'
+            enctype='multipart/form-data'>
+            <textarea class='form-control' id='body' rows='5' name='body'></textarea>
+            <input class='form-control mt-3' type='file' id='formFileMultiple' name='file' multiple='' />
+            <button type='submit' class='btn btn-primary mt-3'>Add Reply</button>
+          </form>
+        </div>
       </div>
-      <div class='card-body pt-3'>
-        <form
-          action='/clientarea/tickets/{{ticket._id}}/reply'
-          method='post'
-          class='form-group'
-          enctype='multipart/form-data'
-        >
-          <textarea
-            class='form-control'
-            id='body'
-            rows='5'
-            name='body'
-          ></textarea>
-          <input
-            class='form-control mt-3'
-            type='file'
-            id='formFileMultiple'
-            name='file'
-            multiple=''
-          />
-          <button type='submit' class='btn btn-primary mt-3'>Add Reply</button>
-        </form>
-      </div>
+      {{/if}}
     </div>
-    {{/if}}
   </div>
-</div>

@@ -1,4 +1,5 @@
 import Handlebars from 'handlebars';
+import moment from 'moment';
 
 const handlebarsHelpers: Record<string, unknown> = {};
 
@@ -62,6 +63,26 @@ handlebarsHelpers.select = function (
       return !RegExp(t).test(v) ? v : v.replace(t, t + ' selected="selected"');
     })
     .join('\n');
+};
+
+handlebarsHelpers.onlyDateFromDate = function (date: string) {
+  return moment(date).format('DD/MM/YYYY');
+};
+
+handlebarsHelpers.timeFromDate = function (date: string) {
+  return moment(date).format('h:mm a');
+};
+
+handlebarsHelpers.nameAvatar = function (name: string) {
+  return name
+    .split(' ')
+    .map((n) => n.charAt(0))
+    .join('')
+    .toUpperCase();
+};
+
+handlebarsHelpers.firstName = (name: string): string => {
+  return name?.split(' ')?.shift() || '';
 };
 
 export default handlebarsHelpers;
