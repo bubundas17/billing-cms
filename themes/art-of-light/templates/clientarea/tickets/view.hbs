@@ -73,7 +73,7 @@
     </div>
     {{/each}}
 
-    {{#if ticket.isClosed}}
+    {{#statusClosed ticket.status}}
     <div class='card my-4'>
       <div class='card-header border-bottom'>
         <h5 class='card-title'>Reply</h5>
@@ -95,6 +95,6 @@
           </form>
         </div>
       </div>
-      {{/if}}
+      {{/statusClosed}}
     </div>
   </div>

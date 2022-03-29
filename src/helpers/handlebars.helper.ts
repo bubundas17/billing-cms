@@ -87,4 +87,14 @@ handlebarsHelpers.firstName = (name: string): string => {
   return name?.split(' ')?.shift() || '';
 };
 
+handlebarsHelpers.statusClosed = function (
+  value: string,
+  options: {
+    fn: (arg0: Record<string, unknown>) => unknown;
+    inverse: (arg0: Record<string, unknown>) => unknown;
+  },
+): unknown {
+  return value === 'closed' ? options.fn(this) : options.inverse(this);
+};
+
 export default handlebarsHelpers;
