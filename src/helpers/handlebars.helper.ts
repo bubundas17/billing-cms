@@ -74,11 +74,13 @@ handlebarsHelpers.timeFromDate = function (date: string) {
 };
 
 handlebarsHelpers.nameAvatar = function (name: string) {
-  return name
-    .split(' ')
-    .map((n) => n.charAt(0))
-    .join('')
-    .toUpperCase();
+  return (
+    name
+      ?.split(' ')
+      .map((n) => n.charAt(0))
+      .join('')
+      .toUpperCase() || ''
+  );
 };
 
 handlebarsHelpers.firstName = (name: string): string => {

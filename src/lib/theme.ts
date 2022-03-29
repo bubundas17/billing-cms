@@ -133,8 +133,6 @@ class Theme {
 
       const helpers = { ...(options.helpers as FunctionObject) };
 
-      console.log(helpers);
-
       let html = this.renderTemplate(
         template,
         { ...context },

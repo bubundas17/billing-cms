@@ -249,4 +249,9 @@ yarn.lock
 package-lock.json
 src/assets/css/*.css
 src/assets/css/*.css.map
-uploads/*
+uploads/*.png
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.gif
+uploads/*.svg
+uploads/*.webp

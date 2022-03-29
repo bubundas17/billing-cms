@@ -1,17 +1,15 @@
-import { Request } from 'express';
-import multer from 'multer';
 import path from 'path';
 
-const urlSafeFilename = (filename: string) =>
-  filename.replace(/[/\\?%*:|"<>]/g, '-').trim();
+import { Request } from 'express';
+import multer from 'multer';
+import { v4 as uuid } from 'uuid';
 
 const storage = multer.diskStorage({
   destination: function (_req, _file, cb) {
-    cb(null, path.join(process.cwd(), '/uploads'));
+    cb(null, path.join(process.cwd(), '/uploads/'));
   },
   filename: function (_req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + '-' + urlSafeFilename(file.originalname));
+    cb(null, uuid() + path.extname(file.originalname));
   },
 });
 

@@ -78,7 +78,7 @@ export const postReplyTicket = async (req: Request, res: Response) => {
     );
 
     const repliedTicket = await TicketApi.ticketReply(user, req.params.id, {
-      ...req.body.body,
+      ...req.body,
       attachments,
     });
 

@@ -30,6 +30,9 @@
       <div class='card-body pt-3'>
         {{ticket.body}}
       </div>
+      {{#each ticket.attachedFiles}}
+      <img src="/uploads/{{this}}" class="card-img-bottom" alt="{{this}}">
+      {{/each}}
     </div>
 
     {{#each ticket.replies}}
@@ -40,23 +43,23 @@
             <div class='avatar-wrapper'>
               <div class='avatar avatar-sm me-3'>
                 <span class='avatar-initial rounded-circle bg-label-info'>
-                  {{nameAvatar ticket.createdBy.name}}
+                  {{nameAvatar repliedBy.name}}
                 </span>
               </div>
             </div>
             <div class='d-flex flex-column'>
               <span class='fw-semibold'>
-                {{firstName this.repliedBy.name}}
+                {{firstName repliedBy.name}}
                 <span class='badge rounded-pill bg-label-danger'>Support Staff</span>
               </span>
-              <small class='text-muted'>{{this.repliedBy.email}}</small>
+              <small class='text-muted'>{{repliedBy.email}}</small>
             </div>
           </div>
           <div class='d-flex flex-column'><span class='fw-semibold'>
-              {{onlyDateFromDate this.createdAt}}
+              {{onlyDateFromDate createdAt}}
             </span>
             <small class='text-muted'>
-              {{timeFromDate this.createdAt}}
+              {{timeFromDate createdAt}}
             </small>
           </div>
         </div>
@@ -64,6 +67,9 @@
       <div class='card-body pt-3'>
         {{this.body}}
       </div>
+      {{#each attachedFiles}}
+      <img src="/uploads/{{this}}" class="card-img-bottom" alt="{{this}}">
+      {{/each}}
     </div>
     {{/each}}
 

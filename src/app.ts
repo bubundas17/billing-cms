@@ -48,6 +48,7 @@ class App {
 
   private async initializeMiddlewares() {
     this.app.use('/assets', express.static(join(__dirname, 'assets')));
+    this.app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());

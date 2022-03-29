@@ -59,6 +59,7 @@
     "@types/nodemailer": "^6.4.4",
     "@types/passport": "^1.0.7",
     "@types/passport-local": "^1.0.34",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
     "autoprefixer": "^10.4.2",
@@ -110,6 +111,7 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "slugify": "^1.6.5",
-    "ts-node-dev": "^1.1.8"
+    "ts-node-dev": "^1.1.8",
+    "uuid": "^8.3.2"
   }
 }

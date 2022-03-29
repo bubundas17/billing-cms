@@ -25,6 +25,9 @@
       <div class='card-body pt-3'>
         {{ticket.body}}
       </div>
+      {{#each ticket.attachedFiles}}
+      <img src="/uploads/{{this}}" class="card-img-bottom" alt="{{this}}">
+      {{/each}}
     </div>
 
     {{#each ticket.replies}}
@@ -49,6 +52,9 @@
       <div class='card-body pt-3'>
         {{this.body}}
       </div>
+      {{#each attachedFiles}}
+      <img src="/uploads/{{this}}" class="card-img-bottom" alt="{{this}}">
+      {{/each}}
     </div>
     {{/each}}
 
