@@ -24,10 +24,16 @@
       </div>
       <div class='card-body pt-3'>
         {{ticket.body}}
+        {{#if ticket.attachedFiles}}
+          <span class="mt-3 mb-1 d-block text-dark">attached files:</span>
+          {{#each ticket.attachedFiles}}
+            <a href="/uploads/{{this}}" class="text-muted d-block" download>
+              <i class="fa-solid fa-file"></i>
+              {{this}}
+            </a>
+          {{/each}}
+        {{/if}}
       </div>
-      {{#each ticket.attachedFiles}}
-      <img src="/uploads/{{this}}" class="card-img-bottom" alt="{{this}}">
-      {{/each}}
     </div>
 
     {{#each ticket.replies}}
@@ -51,10 +57,16 @@
       </div>
       <div class='card-body pt-3'>
         {{this.body}}
+        {{#if this.attachedFiles}}
+          <span class="mt-3 mb-1 d-block text-dark">attached files:</span>
+          {{#each attachedFiles}}
+            <a href="/uploads/{{this}}" class="text-muted d-block" download>
+              <i class="fa-solid fa-file"></i>
+              {{this}}
+            </a>
+          {{/each}}
+        {{/if}}
       </div>
-      {{#each attachedFiles}}
-      <img src="/uploads/{{this}}" class="card-img-bottom" alt="{{this}}">
-      {{/each}}
     </div>
     {{/each}}
 

@@ -44,7 +44,15 @@ module.exports = {
   },
   beforeRender(context) {
     // Runs before the page is rendered.
-  }
+  },
+  handlebarsHelperes: {
+    upper(str) {
+      return str.toUpperCase();
+    },
+    lower(str) {
+      return str.toLowerCase();
+    },
+  },
 };
 
 layouts = {

@@ -38,6 +38,7 @@ interface FunctionObject {
 class Theme {
   private hbs: typeof Handlebars;
   private fsCache: { [key: string]: string };
+  private helpers: FunctionObject;
 
   constructor() {
     this.hbs = Handlebars;
@@ -291,7 +292,7 @@ class Theme {
             ...options,
             ...res.locals,
           },
-          { helpers: handlebarsHelper },
+          { helpers: { ...this.helpers, ...handlebarsHelper } },
         );
         return res.send(doc);
       };
@@ -316,6 +317,17 @@ class Theme {
 
       if (typeof functions.init === 'function') {
         functions.init(app);
+      }
+
+      if (typeof functions.handlebarsHelperes === 'object') {
+        for (const key in functions.handlebarsHelperes) {
+          if (typeof functions.handlebarsHelperes[key] === 'function') {
+            this.helpers = {
+              ...this.helpers,
+              [key]: functions.handlebarsHelperes[key],
+            };
+          }
+        }
       }
     }
 
