@@ -1,6 +1,5 @@
 import {
   IsString,
-  Matches,
   IsBoolean,
   IsArray,
   IsMongoId,
@@ -11,9 +10,9 @@ class ProductGroupDto {
   @IsString()
   name: string;
 
-  @IsString()
-  @Matches(/^[a-z0-9-]+$/, { message: 'Slug is not correct' })
-  slug: string;
+  // @IsString()
+  // @Matches(/^[a-z0-9-]+$/, { message: 'Slug is not correct' })
+  // slug: string;
 
   @IsString()
   @IsOptional()

@@ -66,7 +66,7 @@ class Theme {
         return prev;
       }, Promise.resolve<{ [key: string]: unknown }>({}));
 
-      return partials;
+      return await partials;
     } catch (error) {
       util.handleError(error as Error);
     }

@@ -9,6 +9,7 @@ class HomeRoute extends BaseRoute {
 
   init() {
     this.router.use(getCurrency);
+
     this.router.get('/', async (_req, res) => {
       // req.session.test = 'test';
       // res.title('Home Page');

@@ -21,6 +21,7 @@ import passportHelper from '@helpers/passport.helper';
 import theme from '@lib/theme';
 import emailSender from '@services/email-sender.service';
 import emailDriver, { EmailConfig } from '@lib/email-driver';
+import ProductApi from '@core/api/product.api';
 
 // TODO - Add proper error handling and logging to the console
 // TODO - Reduce the amount of code in this file
@@ -79,6 +80,12 @@ class App {
       res.locals._success = req.flash('success');
       res.locals._info = req.flash('info');
       res.locals.session = req.session;
+      next();
+    });
+
+    this.app.use(async (_req, res, next) => {
+      const productGroups = await ProductApi.getAllProductGroups();
+      res.locals.productGroups = productGroups;
       next();
     });
 

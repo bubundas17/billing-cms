@@ -7,12 +7,13 @@ import mappedErrors from '@utils/mapped-errors';
 import ProductDto from '@dto/product.dto';
 import ProductGroupDto from '@dto/product-group.dto';
 import { Product } from '@models/product.model';
-import { ProductGroup } from '@models/product-group.model';
 import ProductApi from '@core/api/product.api';
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   const products = await ProductApi.getAllProducts();
   const productGroups = await ProductApi.getAllProductGroups();
+
+  console.log(products);
 
   res.render('admin/products/index', {
     products,
@@ -46,10 +47,7 @@ export const getEditProduct = async (req: Request, res: Response) => {
 };
 
 export const postAddProduct = async (req: Request, res: Response) => {
-  const productInput = plainToInstance(ProductDto, {
-    ...req.body,
-    group: '622a00966a1a8eadda16cebb', // TODO: remove hardcoded id
-  });
+  const productInput = plainToInstance(ProductDto, req.body);
 
   const errors = await validate(productInput);
 
@@ -62,10 +60,7 @@ export const postAddProduct = async (req: Request, res: Response) => {
     });
   }
 
-  const createdProduct = await ProductApi.createProduct({
-    ...req.body,
-    group: '622a00966a1a8eadda16cebb',
-  });
+  const createdProduct = await ProductApi.createProduct(req.body);
 
   if (!createdProduct)
     return res.status(400).json({
@@ -137,7 +132,7 @@ export const postAddGroup = async (req: Request, res: Response) => {
       group,
     });
   }
-  await ProductApi.createProductGroup(group as ProductGroup);
+  await ProductApi.createProductGroup(group);
 
   res.redirect('/admin/products');
 };
@@ -158,7 +153,7 @@ export const editGroup = async (req: Request, res: Response) => {
     });
   }
 
-  await ProductApi.updateProductGroup(id, group as ProductGroup);
+  await ProductApi.updateProductGroup(id, group);
 
   res.redirect('/admin/products');
 };

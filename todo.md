@@ -7,7 +7,7 @@ The plan is to build the functional side before the UI design is ready.
 [ ] Login Signup
     [x] Make Signup Work
     [x] Make Login Work
-    [ ] Forget password
+    [x] Forget password
 
 [ ] Posts
     [ ] All Posts List
@@ -19,8 +19,8 @@ The plan is to build the functional side before the UI design is ready.
     [ ] Add new Page
     [ ] Edit Existing Page
 
-[ ] Tickets
-    [ ] Get List of all tickets from a user.
+[x] Tickets
+    [x] Get List of all tickets from a user.
 
 [ ] Store
     [ ] Multi Currency Support

@@ -7,9 +7,8 @@
       <!--Grid column-->
       <div class='col-md-6'>
         <div class='text-center'>
-          <h1 class='mb-4'><span class='text-warning'>Test </span>Category<br
-            /></h1>
-          <p class='mb-4 pb-2 dark-grey-text'>Test category description here</p>
+          <h1 class='mb-4'><span class='text-warning'>{{productGroup.name}}</h1>
+          <p class='mb-4 pb-2 dark-grey-text'>{{productGroup.description}}</p>
         </div>
 
         <!--  <button type="button" class="btn btn-outline-grey btn-rounded btn-md">Get started</button> -->
@@ -40,33 +39,36 @@
   <div class='container pb-5'>
     <!--Price List-->
     <div class='row'>
-      <div class='col-lg-3 col-md-6'>
-        <div class='card mt-3'>
-          <div class='card-header d-flex justify-content-between'>
-            <h5 class='fw-semibold'>Product 1</h5>
-            <span class='fw-bold'>$10</span>
-          </div>
-          <div class='card-body'>
-            <p>Some Awsome features about this product to justify the awfull
-              cost.</p>
-            <p>Anyway this is what you got.</p>
-          </div>
-          <!-- price select -->
-          <div class='card-footer'>
-            <div class='form-group mb-3'>
-              <label for='exampleFormControlSelect1'>Billing Cycle</label>
-              <select class='form-control' id='exampleFormControlSelect1'>
-                <option>1 month - $10</option>
-                <option>3 month - $25</option>
-                <option>6 month - $50</option>
-                <option>12 month - $100</option>
-              </select>
+      {{#each products}}
+        <div class='col-lg-3 col-md-6'>
+          <div class='card mt-3'>
+            <div class='card-header d-flex justify-content-between'>
+              <h5 class='fw-semibold'>{{name}}</h5>
+              <span class='fw-bold'>$10</span>
             </div>
-            <a type='button' class='btn btn-primary btn-sm text-white' href="/store/products/product-1/configure">Add to cart</a>
+            <div class='card-body'>
+              {{description}}
+            </div>
+            <!-- price select -->
+            <div class='card-footer'>
+              <div class='form-group mb-3'>
+                <label for='exampleFormControlSelect1'>Billing Cycle</label>
+                <select class='form-control' id='exampleFormControlSelect1'>
+                  {{#each prices}}
+                    <option>{{duration}} month - ${{price}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <a
+                type='button'
+                class='btn btn-primary btn-sm text-white'
+                href='/store/products/product-1/configure'
+              >Add to cart</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class='col-lg-3 col-md-6'>
+      {{/each}}
+      {{!-- <div class='col-lg-3 col-md-6'>
         <div class='card mt-3'>
           <div class='card-header d-flex justify-content-between'>
             <h5 class='fw-semibold'>Product 2</h5>
@@ -88,7 +90,11 @@
                 <option>12 month - $100</option>
               </select>
             </div>
-            <a type='button' class='btn btn-primary btn-sm text-white' href="/store/products/product-1/configure">Add to cart</a>
+            <a
+              type='button'
+              class='btn btn-primary btn-sm text-white'
+              href='/store/products/product-1/configure'
+            >Add to cart</a>
           </div>
         </div>
       </div>
@@ -114,11 +120,15 @@
                 <option>12 month - $100</option>
               </select>
             </div>
-            <a type='button' class='btn btn-primary btn-sm text-white' href="/store/products/product-1/configure">Add to cart</a>
+            <a
+              type='button'
+              class='btn btn-primary btn-sm text-white'
+              href='/store/products/product-1/configure'
+            >Add to cart</a>
           </div>
         </div>
       </div>
-      <div class='col-lg-3 col-md-6 '>
+      <div class='col-lg-3 col-md-6'>
         <div class='card mt-3'>
           <div class='card-header d-flex justify-content-between'>
             <h5 class='fw-semibold'>Product 4</h5>
@@ -140,10 +150,14 @@
                 <option>12 month - $100</option>
               </select>
             </div>
-            <a type='button' class='btn btn-primary btn-sm text-white' href="/store/products/product-1/configure">Add to cart</a>
+            <a
+              type='button'
+              class='btn btn-primary btn-sm text-white'
+              href='/store/products/product-1/configure'
+            >Add to cart</a>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   </div>
   <!-- Content -->

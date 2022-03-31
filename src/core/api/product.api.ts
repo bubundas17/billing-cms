@@ -3,10 +3,18 @@ import productGroupModel, { ProductGroup } from '@models/product-group.model';
 
 import { QueryOptions } from 'mongoose';
 import ProductDto from '@dto/product.dto';
+import ProductGroupDto from '@dto/product-group.dto';
 
 class ProductApi {
   static async getAllProducts(): Promise<Product[]> {
     return await productsModel.find({}).populate('group').lean();
+  }
+
+  static async getAllProductsByGroup(groupId: string): Promise<Product[]> {
+    return await productsModel
+      .find({ group: groupId })
+      .populate('group')
+      .lean();
   }
 
   static async getProductById(id: string): Promise<Product> {
@@ -56,7 +64,7 @@ class ProductApi {
   }
 
   static async createProductGroup(
-    productGroup: ProductGroup,
+    productGroup: ProductGroupDto,
   ): Promise<ProductGroup> {
     const newProductGroup = new productGroupModel(productGroup);
     return await newProductGroup.save();
